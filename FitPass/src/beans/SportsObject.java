@@ -3,8 +3,7 @@ package beans;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import enums.ContentType;
-import enums.LocationType;
+import beans.enums.*;
 
 public class SportsObject {
 	private String name;

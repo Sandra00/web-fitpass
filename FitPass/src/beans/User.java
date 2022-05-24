@@ -3,7 +3,7 @@ package beans;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import enums.UserType;
+import beans.enums.*;
 
 
 public class User {
@@ -15,7 +15,7 @@ public class User {
 	private LocalDateTime dateOfBirth;
 	private UserType userType;
 	private List<Training> trainings;
-	private int due; //clanarina
+	private List<Fee> fee;
 	private SportsObject sportsObject;
 	private List<SportsObject> visitedSportsObjects;
 	private int points;
@@ -26,7 +26,7 @@ public class User {
 	}
 
 	public User(String username, String password, String name, String surname, String gender, LocalDateTime dateOfBirth,
-			UserType userType, List<Training> trainings, int due, SportsObject sportsObject,
+			UserType userType, List<Training> trainings, List<Fee> fee, SportsObject sportsObject,
 			List<SportsObject> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
 		this.username = username;
@@ -37,7 +37,7 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		this.userType = userType;
 		this.trainings = trainings;
-		this.due = due;
+		this.fee = fee;
 		this.sportsObject = sportsObject;
 		this.visitedSportsObjects = visitedSportsObjects;
 		this.points = points;
@@ -108,12 +108,12 @@ public class User {
 		this.trainings = trainings;
 	}
 
-	public int getDue() {
-		return due;
+	public List<Fee> getFee() {
+		return fee;
 	}
 
-	public void setDue(int due) {
-		this.due = due;
+	public void setFee(List<Fee> fee) {
+		this.fee = fee;
 	}
 
 	public SportsObject getSportsObject() {

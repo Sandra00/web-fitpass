@@ -1,9 +1,9 @@
 package beans;
 
-import enums.TrainingType;
+import beans.enums.*;
 
 public class Training {
-
+	private int trainingId;
 	private String name;
 	private TrainingType trainingType;
 	private SportsObject sportsObject;
@@ -16,9 +16,10 @@ public class Training {
 		super();
 	}
 
-	public Training(String name, TrainingType trainingType, SportsObject sportsObject, int length, User trainer,
+	public Training(int trainingId, String name, TrainingType trainingType, SportsObject sportsObject, int length, User trainer,
 			String description, String image) {
 		super();
+		this.trainingId = trainingId;
 		this.name = name;
 		this.trainingType = trainingType;
 		this.sportsObject = sportsObject;
@@ -26,6 +27,14 @@ public class Training {
 		this.trainer = trainer;
 		this.description = description;
 		this.image = image;
+	}
+
+	public int getTrainingId() {
+		return trainingId;
+	}
+
+	public void setTrainingId(int trainingId) {
+		this.trainingId = trainingId;
 	}
 
 	public String getName() {

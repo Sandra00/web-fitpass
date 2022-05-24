@@ -1,4 +1,4 @@
-package enums;
+package beans.enums;
 
 public enum UserType {
 	Admin,
