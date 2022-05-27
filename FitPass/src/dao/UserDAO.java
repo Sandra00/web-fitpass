@@ -2,6 +2,7 @@ package dao;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.User;
+import beans.enums.UserType;
 
 public class UserDAO {
 	private List<User> users;
@@ -35,7 +37,8 @@ public class UserDAO {
 	private void loadUsers(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			users = Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class));
+			//users = List.of(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class));
+			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class)));
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -43,5 +46,10 @@ public class UserDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public User newCustomer(User user) {
+		users.add(user);
+		return user;
 	}
 }

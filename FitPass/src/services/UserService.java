@@ -1,8 +1,12 @@
 package services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -53,5 +57,14 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User login(@Context HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("user");
+	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User newCustomer(User user) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.newCustomer(user);
 	}
 }
