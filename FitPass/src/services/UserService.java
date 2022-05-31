@@ -21,9 +21,7 @@ public class UserService {
 	@Context
 	ServletContext ctx;
 	
-	public UserService() {
-		
-	}
+	public UserService() {	}
 	
 	@PostConstruct
 	private void init() {
