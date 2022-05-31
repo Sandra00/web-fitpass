@@ -5,7 +5,7 @@
     "surname": null,
     "gender": null,
     "dateOfBirth": null,
-    "userType": null,
+    "userType": "ADMIN",
     "trainings": null,
     "fee": null,
     "sportsObject": null,

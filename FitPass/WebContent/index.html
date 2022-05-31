@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>FitPass</title>
 </head>
 <body>
-Hello world!!!
+    <div id="app">
+        <form @submit.prevent="getFormValues">
+            <input type="text" v-model="username"><br>
+            <input type="password" v-model="password"><br>
+            <p style="color:red;">{{ error }}</p>
+            <input type="submit" value="Posalji"><br>
+        </form>
+    </div>
+    
+    <!-- Vue and axios scripts -->
+    <script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/login.js" ></script>
 </body>
 </html>

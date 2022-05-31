@@ -35,7 +35,8 @@ public class UserDAO {
 	private void loadUsers(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			users = Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class));
+			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class)));
+			users.add(new User());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
