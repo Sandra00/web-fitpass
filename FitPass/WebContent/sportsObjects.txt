@@ -1,12 +1,25 @@
 [
     {
         "name": "Gym A",
-        "locationType": null,
+        "locationType": "GYM",
         "contentTypes": [
             "PERSONALTRAINING",
             "SAUNA"
         ],
         "status": false,
+        "location": null,
+        "logo": null,
+        "averageGrade": 0.0,
+        "startWorkingHour": null,
+        "endWorkingHour": null
+    },
+    {
+        "name": "Gym B",
+        "locationType": "GYM",
+        "contentTypes": [
+            "PERSONALTRAINING"
+        ],
+        "status": true,
         "location": null,
         "logo": null,
         "averageGrade": 0.0,
