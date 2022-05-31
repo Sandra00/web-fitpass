@@ -4,38 +4,30 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import beans.User;
+import beans.SportsObject;
 
-public class UserDAO {
-	private List<User> users;
+public class SportsObjectDAO {
+	private List<SportsObject> sportsObjects;
 	
-	public UserDAO(String path) {
-		users = new ArrayList<User>();
-		loadUsers(path);
+	public SportsObjectDAO(String path) {
+		sportsObjects = new ArrayList<SportsObject>();
+		loadSportsObjects(path);
 	}
 	
-	
-	public User findUserByUsername(String username) {
-		for(User user : users) {
-			if(user.getUsername().equals(username)) {
-				return user;
-			}
-		}
-		return null;
+	public List<SportsObject> findAll(){
+		return sportsObjects; 
 	}
 	
-	private void loadUsers(String path) {
+	private void loadSportsObjects(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class)));
+			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "sportObjects.txt").toFile(), SportsObject[].class)));
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
