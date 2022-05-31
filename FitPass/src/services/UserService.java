@@ -52,4 +52,10 @@ public class UserService {
 	public User login(@Context HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("user");
 	}
+	
+	@POST
+	@Path("/logout")
+	public void logout(@Context HttpServletRequest request) {
+		request.getSession().invalidate();
+	}
 }

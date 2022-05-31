@@ -15,16 +15,16 @@ const vm = new Vue({
                 }
             )
             .then( response =>{
-                alert("succesful login!");
+                
             })
             .catch( error => {
-                alert("failed login");
+                this.error = 'Wrong username or password!';
             })
         },
-        async getFormValues (submitEvent) {
+        getFormValues (submitEvent) {
             if(this.username && this.password){
-                await this.login();
-                window.location.href = 'landing-page.html';
+                this.login();
+                window.location.href = 'index.html';
             }
             else{
                 this.error = "Please fill the form";
