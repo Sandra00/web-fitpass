@@ -15,7 +15,7 @@ const vm = new Vue({
                 }
             )
             .then( response =>{
-                
+                window.location.href = 'index.html';
             })
             .catch( error => {
                 this.error = 'Wrong username or password!';
@@ -24,7 +24,6 @@ const vm = new Vue({
         getFormValues (submitEvent) {
             if(this.username && this.password){
                 this.login();
-                window.location.href = 'index.html';
             }
             else{
                 this.error = "Please fill the form";

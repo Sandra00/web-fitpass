@@ -38,7 +38,7 @@ public class UserService {
 	public Response login(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		User loggedUser = userDao.findUserByUsername(user.getUsername());
-		if (loggedUser == null) {
+		if (loggedUser == null || (loggedUser != null && !loggedUser.getPassword().equals(user.getPassword()))) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
 		request.getSession().setAttribute("user", loggedUser);
