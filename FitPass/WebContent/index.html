@@ -56,7 +56,11 @@
 				<tr>
 					<td>{{object.name}}</td>
 					<td>{{object.status}}</td>
-					<td>{{object.contentTypes}}</td>
+					<td>
+						<div v-for="content in object.contentTypes"> 
+							<span class="badge bg-success">{{content}}</span>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

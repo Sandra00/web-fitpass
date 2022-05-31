@@ -18,7 +18,7 @@ const vm = new Vue({
                 window.location.href = 'index.html';
             })
             .catch( error => {
-                this.error = 'Wrong username or password!';
+                this.error = 'Pogrešno korisničko ime i/ili lozinka!';
             })
         },
         getFormValues (submitEvent) {
@@ -26,7 +26,7 @@ const vm = new Vue({
                 this.login();
             }
             else{
-                this.error = "Please fill the form";
+                this.error = "Molimo Vas popunite formu u celosti!";
             }
         }
     }
