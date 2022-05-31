@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Gym A",
+        "locationType": null,
+        "contentTypes": [
+            "PERSONALTRAINING",
+            "SAUNA"
+        ],
+        "status": false,
+        "location": null,
+        "logo": null,
+        "averageGrade": 0.0,
+        "startWorkingHour": null,
+        "endWorkingHour": null
+    }
+]

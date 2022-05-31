@@ -14,8 +14,8 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportsObject;
 import dao.SportsObjectDAO;
-import dao.UserDAO;
 
+@Path("/objects")
 public class SportsObjectService {
 	
 	@Context

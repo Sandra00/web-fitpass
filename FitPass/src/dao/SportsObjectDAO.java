@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.SportsObject;
+import beans.enums.ContentType;
 
 public class SportsObjectDAO {
 	private List<SportsObject> sportsObjects;
@@ -27,7 +28,15 @@ public class SportsObjectDAO {
 	private void loadSportsObjects(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "sportObjects.txt").toFile(), SportsObject[].class)));
+			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "sportsObjects.txt").toFile(), SportsObject[].class)));
+			/*SportsObject gymA = new SportsObject();
+			gymA.setName("Gym A");
+			List<ContentType> gymAContents = new ArrayList<>();
+			gymAContents.add(ContentType.PERSONALTRAINING);
+			gymAContents.add(ContentType.SAUNA);
+			gymA.setContentTypes(gymAContents);
+			sportsObjects.add(gymA);*/
+		
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {

@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>FitPass</title>
+	<meta charset="ISO-8859-1">
+	<title>FitPass</title>
 </head>
 <body>
-    <div id="app">
-        <form @submit.prevent="getFormValues">
-            <input type="text" v-model="username"><br>
-            <input type="password" v-model="password"><br>
-            <p style="color:red;">{{ error }}</p>
-            <input type="submit" value="Posalji"><br>
-        </form>
-    </div>
-    
-    <!-- Vue and axios scripts -->
-    <script src="js/vue.js"></script>
-	<script src="js/vue-router.js"></script>
+	<div id="app">
+		<h1>Welcome to FitPass!</h1>
+		<table border="1">
+			<thead>
+			<tr>
+				<th>Ime</th>
+				<th>Status</th>
+				<th>Tip/ovi sadrzaja</th>
+			</tr>
+			</thead>
+			<tbody v-for="object in sportsObjects">
+				<tr>
+					<td>{{object.name}}</td>
+					<td>{{object.status}}</td>
+					<td>{{object.contentTypes}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
-	<script src="js/login.js" ></script>
+	<script src="js/sportsObjects.js"></script>
 </body>
 </html>
