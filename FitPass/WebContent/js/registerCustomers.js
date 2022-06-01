@@ -10,6 +10,9 @@ window.onload = function () {
     },
     methods: {
         async register() {
+			var date = new Date(this.dateOfBirth)
+			var splittedDate = this.dateOfBirth.split('-');
+			date = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
             await axios.post(
                 "rest/register",
                 {

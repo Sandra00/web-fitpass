@@ -45,6 +45,8 @@ public class UserDAO {
 		}
 	}
 	
+
+	
 	public User newCustomer(User user) {
 		users.add(user);
 		return user;
