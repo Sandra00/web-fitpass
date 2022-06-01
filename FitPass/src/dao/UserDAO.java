@@ -44,4 +44,13 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public User newCustomer(User user) {
+		users.add(user);
+		return user;
+	}
+	
+	public List<User> findAll(){
+		return users;
+	}
 }

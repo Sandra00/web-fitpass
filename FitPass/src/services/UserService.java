@@ -58,4 +58,19 @@ public class UserService {
 	public void logout(@Context HttpServletRequest request) {
 		request.getSession().invalidate();
 	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newCustomer(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.findAll().contains(user)) {
+			System.out.println(userDao.findAll());
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+		System.out.println(userDao.findAll());
+		userDao.newCustomer(user);
+		return Response.status(200).build();
+	}
 }
