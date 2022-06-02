@@ -3,7 +3,7 @@ package beans;
 public class Address {
 	private String street;
 	private int number;
-	private String Town;
+	private String town;
 	private int zipcode;
 	
 	public Address() {
@@ -14,7 +14,7 @@ public class Address {
 		super();
 		this.street = street;
 		this.number = number;
-		Town = town;
+		this.town = town;
 		this.zipcode = zipcode;
 	}
 
@@ -35,11 +35,11 @@ public class Address {
 	}
 
 	public String getTown() {
-		return Town;
+		return town;
 	}
 
 	public void setTown(String town) {
-		Town = town;
+		this.town = town;
 	}
 
 	public int getZipcode() {

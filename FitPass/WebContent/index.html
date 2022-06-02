@@ -42,8 +42,19 @@
 	    </nav>
 	</div>
 	
+	
 	<div id="app" class="container">
 		<h1 class="d-flex justify-content-center">Welcome to FitPass!</h1>
+		<div class="nav-item">
+  	
+  	
+  		<input type="text" v-model="nameSearch" id="nameSearch" name="nameSearch" placeholder="Naziv..." style="float:right">
+  		<input type="text" v-model="typeSearch" id="typeSearch" name="typeSearch" placeholder="Tip..." style="float:right">
+  		<input type="text" v-model="locationSearch" id="locationSearch" name="locationSearch" placeholder="Lokacija..." style="float:right" >
+  		<input type="text" v-model="gradeSearch" id="gradeSearch" name="gradeSearch" placeholder="Ocena..." style="float:right">
+  		
+	
+	</div>
 		<table class="table">
 			<thead>
 			<tr>
@@ -52,7 +63,7 @@
 				<th>Tip/ovi sadrzaja</th>
 			</tr>
 			</thead>
-			<tbody v-for="object in sportsObjects">
+			<tbody v-for="object in filteredSportsObjects">
 				<tr>
 					<td>{{object.name}}</td>
 					<td>{{object.status}}</td>
