@@ -1,5 +1,6 @@
 package beans;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class User {
 	private String name;
 	private String surname;
 	private String gender;
-	private LocalDateTime dateOfBirth;
+	private String dateOfBirth;
 	private UserType userType;
 	private List<Training> trainings;
 	private List<Fee> fee;
@@ -25,7 +26,7 @@ public class User {
 		super();
 	}
 
-	public User(String username, String password, String name, String surname, String gender, LocalDateTime dateOfBirth,
+	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
 			UserType userType, List<Training> trainings, List<Fee> fee, SportsObject sportsObject,
 			List<SportsObject> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
@@ -42,6 +43,19 @@ public class User {
 		this.visitedSportsObjects = visitedSportsObjects;
 		this.points = points;
 		this.customerType = customerType;
+	}
+	
+	
+
+	public User(String username, String name, String surname, String gender,
+			String dateOfBirth, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getUsername() {
@@ -84,11 +98,11 @@ public class User {
 		this.gender = gender;
 	}
 
-	public LocalDateTime getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDateTime dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
