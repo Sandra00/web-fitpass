@@ -1,15 +1,24 @@
 [
     {
-        "name": "Gym A",
+        "name": "Gym 1",
         "locationType": "GYM",
         "contentTypes": [
             "PERSONALTRAINING",
             "SAUNA"
         ],
         "status": false,
-        "location": null,
+        "location": {
+        "name":[1,2,3],
+        "latitude":[1,2,3],
+        "address":{
+        "street":"Sutjeska",
+        "number":5,
+        "town":"Novi Sad",
+        "zipcode":21000
+        }
+        },
         "logo": null,
-        "averageGrade": 0.0,
+        "averageGrade": 5.0,
         "startWorkingHour": null,
         "endWorkingHour": null
     },
@@ -20,7 +29,16 @@
             "PERSONALTRAINING"
         ],
         "status": true,
-        "location": null,
+        "location": {
+        "name":[1,2,3],
+        "latitude":[1,2,3],
+        "address":{
+        "street":"Sutjeska",
+        "number":5,
+        "town":"Novi Sad",
+        "zipcode":21000
+        }
+        },
         "logo": null,
         "averageGrade": 0.0,
         "startWorkingHour": "08:00",
