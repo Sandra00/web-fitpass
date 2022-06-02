@@ -1,0 +1,15 @@
+[{
+    "username": "usr123",
+    "password": "pass",
+    "name": null,
+    "surname": null,
+    "gender": null,
+    "dateOfBirth": null,
+    "userType": "ADMIN",
+    "trainings": null,
+    "fee": null,
+    "sportsObject": null,
+    "visitedSportsObjects": null,
+    "points": 0,
+    "customerType": null
+}]

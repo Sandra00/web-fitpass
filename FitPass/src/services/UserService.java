@@ -16,20 +16,15 @@ import beans.User;
 import dao.UserDAO;
 
 @Path("")
-public class LoginService {
+public class UserService {
 	
 	@Context
 	ServletContext ctx;
 	
-	public LoginService() {
-		
-	}
+	public UserService() {	}
 	
 	@PostConstruct
-	// ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
-	public void init() {
-		// Ovaj objekat se instancira vi�e puta u toku rada aplikacije
-		// Inicijalizacija treba da se obavi samo jednom
+	private void init() {
 		if (ctx.getAttribute("userDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("userDAO", new UserDAO(contextPath));
@@ -42,21 +37,12 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.find(user.getUsername(), user.getPassword());
-		if (loggedUser != null) {
+		User loggedUser = userDao.findUserByUsername(user.getUsername());
+		if (loggedUser == null || (loggedUser != null && !loggedUser.getPassword().equals(user.getPassword()))) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
 		request.getSession().setAttribute("user", loggedUser);
 		return Response.status(200).build();
-	}
-	
-	
-	@POST
-	@Path("/logout")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public void logout(@Context HttpServletRequest request) {
-		request.getSession().invalidate();
 	}
 	
 	@GET
@@ -65,5 +51,26 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User login(@Context HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("user");
+	}
+	
+	@POST
+	@Path("/logout")
+	public void logout(@Context HttpServletRequest request) {
+		request.getSession().invalidate();
+	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newCustomer(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.findAll().contains(user)) {
+			System.out.println(userDao.findAll());
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+		System.out.println(userDao.findAll());
+		userDao.newCustomer(user);
+		return Response.status(200).build();
 	}
 }
