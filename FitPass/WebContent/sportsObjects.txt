@@ -19,8 +19,8 @@
         },
         "logo": null,
         "averageGrade": 5.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null
+        "startWorkingHour": "07:00",
+        "endWorkingHour": "13:00"
     },
     {
         "name": "Gym B",

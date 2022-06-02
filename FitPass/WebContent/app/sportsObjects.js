@@ -5,7 +5,9 @@ var app = new Vue({
 		nameSearch:'',
 		typeSearch:'',
 		locationSearch:'',
-		gradeSearch:''
+		gradeSearch:'',
+		sortIndex : null,  //kolona koja se sortira
+		sortDirection: null
 	},
 	mounted(){
 		//axios.get('rest/objects')
@@ -18,7 +20,44 @@ var app = new Vue({
 		
 	},
 	methods: {
-		
+		sortSportObjects(index){
+			if(this.sortIndex === index){
+				switch(this.sortDirection){
+					case null:
+					this.sortDirection = 'asc';
+					break;
+					case 'asc':
+					this.sortDirection = 'desc';
+					break;
+					case 'desc':
+					this.sortDirection = null;
+					break;
+				}
+			}else{
+				this.sortDirection = 'asc';
+			}
+			
+			this.sortIndex = index;
+			
+			
+			if(this.sortIndex == 1){
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+				(rowA, rowB) => {
+					return rowA.name.localeCompare(rowB.name)
+				}
+			)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+				(rowA, rowB) => {
+					return rowB.name.localeCompare(rowA.name)
+				}
+			)
+				}
+				
+			}
+			
+		}
 		
 	},
 	created(){
