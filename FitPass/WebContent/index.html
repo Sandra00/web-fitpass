@@ -69,7 +69,7 @@
 			<tbody v-for="object in filteredSportsObjects">
 				<tr>
 					<td>{{object.name}}</td>
-					<td>{{object.type}}</td>
+					<td>{{object.locationType}}</td>
 					<td>
 						<template v-for="content in object.location.address">
 							{{content}}
