@@ -11,7 +11,7 @@
         "name":[1,2,3],
         "latitude":[1,2,3],
         "address":{
-        "street":"Sutjeska",
+        "street":"Patrijarha Pavla",
         "number":5,
         "town":"Novi Sad",
         "zipcode":21000

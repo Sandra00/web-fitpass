@@ -43,18 +43,49 @@ var app = new Vue({
 			if(this.sortIndex == 1){
 				if(this.sortDirection == 'asc'){
 					this.sportsObjects = this.sportsObjects.sort(
-				(rowA, rowB) => {
-					return rowA.name.localeCompare(rowB.name)
-				}
-			)
+						(rowA, rowB) => {
+						return rowA.name.localeCompare(rowB.name)
+						}
+					)
 				}else{
 					this.sportsObjects = this.sportsObjects.sort(
-				(rowA, rowB) => {
-					return rowB.name.localeCompare(rowA.name)
-				}
-			)
+						(rowA, rowB) => {
+							return rowB.name.localeCompare(rowA.name)
+						}
+					)
 				}
 				
+			}else if(this.sortIndex == 2){
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowA.location.address.street + rowA.location.address.number.toString() + rowA.location.address.town + rowA.location.address.zipcode.toString().toLowerCase()).localeCompare(
+							(rowB.location.address.street + rowB.location.address.number.toString() + rowB.location.address.town + rowB.location.address.zipcode.toString()).toLowerCase())
+						}
+					)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowB.location.address.street + rowB.location.address.number.toString() + rowB.location.address.town + rowB.location.address.zipcode.toString().toLowerCase()).localeCompare(
+							(rowA.location.address.street + rowA.location.address.number.toString() + rowA.location.address.town + rowA.location.address.zipcode.toString()).toLowerCase())
+						}
+					)
+				}
+				
+			}else{  //ovde je 3, samo to jos ima
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowA.averageGrade.toString()).localeCompare(rowB.location.address.number.toString())
+						}
+					)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+							return (rowB.averageGrade.toString()).localeCompare(rowA.location.address.number.toString())
+						}
+					)
+				}
 			}
 			
 		}
