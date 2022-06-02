@@ -47,13 +47,13 @@
 		<h1 class="d-flex justify-content-center">Welcome to FitPass!</h1>
 		<div class="nav-item">
   	
-  	<form id="formaPretraga" style="float:right"> 
-  		<input type="search" id="nameSearch" name="nameSearch" placeholder="Naziv...">
-  		<input type="search" id="typeSearch" name="typeSearch" placeholder="Tip...">
-  		<input type="search" id="loacationSearch" name="locationSearch" placeholder="Lokacija...">
-  		<input type="search" id="gradeSearch" name="gradeSearch" placeholder="Ocena...">
-  		<button class="btn btn-light">Search</button>
-	</form>
+  	
+  		<input type="text" v-model="nameSearch" id="nameSearch" name="nameSearch" placeholder="Naziv...">
+  		<input type="text" v-model="typeSearch" id="typeSearch" name="typeSearch" placeholder="Tip...">
+  		<input type="text" v-model="locationSearch" id="locationSearch" name="locationSearch" placeholder="Lokacija...">
+  		<input type="text" v-model="gradeSearch" id="gradeSearch" name="gradeSearch" placeholder="Ocena...">
+  		
+	
 	</div>
 		<table class="table">
 			<thead>
@@ -63,7 +63,7 @@
 				<th>Tip/ovi sadrzaja</th>
 			</tr>
 			</thead>
-			<tbody v-for="object in sportsObjects">
+			<tbody v-for="object in filteredSportsObjects">
 				<tr>
 					<td>{{object.name}}</td>
 					<td>{{object.status}}</td>
