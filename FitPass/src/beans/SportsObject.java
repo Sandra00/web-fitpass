@@ -1,9 +1,12 @@
 package beans;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import beans.enums.*;
+import util.LocalTimeDeserializer;
 
 public class SportsObject {
 	private String name;
@@ -13,16 +16,16 @@ public class SportsObject {
 	public Location location;
 	public String logo;
 	public double averageGrade;
-	private LocalDateTime startWorkingHour;
-	private LocalDateTime endWorkingHour;
+	private LocalTime startWorkingHour;
+	private LocalTime endWorkingHour;
 	
 	public SportsObject() {
 		super();
 	}
 
 	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
-			Location location, String logo, double averageGrade, LocalDateTime startWorkingHour,
-			LocalDateTime endWorkingHour) {
+			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
+			LocalTime endWorkingHour) {
 		super();
 		this.name = name;
 		this.locationType = locationType;
@@ -90,22 +93,26 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-
-	public LocalDateTime getStartWorkingHour() {
+	// add serializer class 
+	public LocalTime getStartWorkingHour() {
 		return startWorkingHour;
 	}
 
-	public void setStartWorkingHour(LocalDateTime startWorkingHour) {
+	@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setStartWorkingHour(LocalTime startWorkingHour) {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	public LocalDateTime getEndWorkingHour() {
+	// add serializer class 
+	public LocalTime getEndWorkingHour() {
 		return endWorkingHour;
 	}
 
-	public void setEndWorkingHour(LocalDateTime endWorkingHour) {
+	@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setEndWorkingHour(LocalTime endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
 	}
 	
 	
 }
+

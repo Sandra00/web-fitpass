@@ -23,7 +23,7 @@
         "location": null,
         "logo": null,
         "averageGrade": 0.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null
+        "startWorkingHour": "08:00",
+        "endWorkingHour": "22:00"
     }
 ]
