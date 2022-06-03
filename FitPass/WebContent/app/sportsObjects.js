@@ -8,7 +8,8 @@ var app = new Vue({
 		gradeSearch:'',
 		sortIndex : null,  //kolona koja se sortira
 		sortDirection: null,
-		typeFilter: 'allTypes'
+		typeFilter: 'allTypes',
+		openFilter: 'allOpenClosed'
 	},
 	mounted(){
 		//axios.get('rest/objects')
@@ -115,14 +116,18 @@ var app = new Vue({
 	},
 	computed:{
 		filteredSportsObjects:function(){
-			let keep = true;
-			keep = this.sportsObjects.filter((sportsObject) => {
-				return sportsObject.name.toLowerCase().match(this.nameSearch.toLowerCase()) && sportsObject.locationType.toLowerCase().match(this.typeSearch.toLowerCase()) && sportsObject.averageGrade.toString().toLowerCase().match(this.gradeSearch.toLowerCase())
+			
+			return this.sportsObjects.filter((sportsObject) => {
+				let keep = true;
+				keep = sportsObject.name.toLowerCase().match(this.nameSearch.toLowerCase()) && sportsObject.locationType.toLowerCase().match(this.typeSearch.toLowerCase()) && sportsObject.averageGrade.toString().toLowerCase().match(this.gradeSearch.toLowerCase())
 				&& (sportsObject.location.address.street.toLowerCase().match(this.locationSearch.toLowerCase()) ||  sportsObject.location.address.number.toString().toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.town.toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.zipcode.toString().toLowerCase().match(this.locationSearch.toLowerCase()))
 				&& (sportsObject.locationType.match(this.typeFilter) || this.typeFilter==='allTypes');
+				if(this.openFilter == 'opened'){
+					keep = keep && (sportsObject.status==true);
+				}
+				return keep;
 			})
 			
-			return keep;
 		}
 	}
 	
