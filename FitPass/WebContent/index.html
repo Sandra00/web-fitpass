@@ -5,6 +5,9 @@
 	<title>FitPass</title>
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -55,10 +58,29 @@
   		
 	
 	</div>
+	<br/>
+	<br/>
+ 
+<label>Tip</label>
+<select class="btn btn-secondary dropdown-toggle" v-model="typeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <option  class="dropdown-item" style="background-color:white" value="allTypes">Svi</option>
+  <option class="dropdown-item" style="background-color:white" value="GYM">Teretana</option>
+  <option class="dropdown-item" style="background-color:white" value="POOL">Bazen</option>
+  <option class="dropdown-item" style="background-color:white" value="SPORTSCENTER">Sportski centar</option>
+  <option class="dropdown-item" style="background-color:white" value="DANCESTUDIO">Plesni studio</option>
+</select>
+<label>Otvoreni/zatvoreni</label>
+<select class="btn btn-secondary dropdown-toggle" v-model="openFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <option  class="dropdown-item" style="background-color:white" value="allOpenClosed">Svi</option>
+  <option class="dropdown-item" style="background-color:white" value="opened">Otvoreni</option>
+</select>
 		<table class="table">
 			<thead>
 			<tr>
-				<th v-on:click="sortSportObjects(1)">Naziv</th>
+				<th >
+				<label v-on:click="sortSportObjects(1)">Naziv</label>
+				
+</th>
 				<th>Tip</th>
 				<th v-on:click="sortSportObjects(2)">Lokacija</th>
 				<th>Logo</th>
