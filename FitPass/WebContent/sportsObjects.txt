@@ -11,7 +11,7 @@
         "name":[1,2,3],
         "latitude":[1,2,3],
         "address":{
-        "street":"Sutjeska",
+        "street":"Patrijarha Pavla",
         "number":5,
         "town":"Novi Sad",
         "zipcode":21000
@@ -19,8 +19,8 @@
         },
         "logo": null,
         "averageGrade": 5.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null
+        "startWorkingHour": "07:00",
+        "endWorkingHour": "13:00"
     },
     {
         "name": "Gym B",

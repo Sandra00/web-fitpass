@@ -58,20 +58,39 @@
 		<table class="table">
 			<thead>
 			<tr>
-				<th>Ime</th>
-				<th>Status</th>
-				<th>Tip/ovi sadrzaja</th>
+				<th v-on:click="sortSportObjects(1)">Naziv</th>
+				<th>Tip</th>
+				<th v-on:click="sortSportObjects(2)">Lokacija</th>
+				<th>Logo</th>
+				<th v-on:click="sortSportObjects(3)">Prosecna ocena</th>
+				<th>Radno vreme</th>
 			</tr>
 			</thead>
 			<tbody v-for="object in filteredSportsObjects">
 				<tr>
 					<td>{{object.name}}</td>
-					<td>{{object.status}}</td>
+					<td>{{object.locationType}}</td>
 					<td>
+						<template v-for="content in object.location.address">
+							{{content}}
+						</template>
+					</td>
+					<td>{{object.logo}}</td>
+					<td>{{object.averageGrade}}</td>
+					<td>
+						<template v-for="content in object.startWorkingHour">
+							{{content}} :
+						</template>
+							- 
+						<template v-for="content in object.endWorkingHour">
+							{{content}} :
+						</template>
+					</td>
+					<!--  <td>
 						<div v-for="content in object.contentTypes"> 
 							<span class="badge bg-success">{{content}}</span>
 						</div>
-					</td>
+					</td>-->
 				</tr>
 			</tbody>
 		</table>

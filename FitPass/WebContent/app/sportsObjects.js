@@ -5,7 +5,9 @@ var app = new Vue({
 		nameSearch:'',
 		typeSearch:'',
 		locationSearch:'',
-		gradeSearch:''
+		gradeSearch:'',
+		sortIndex : null,  //kolona koja se sortira
+		sortDirection: null
 	},
 	mounted(){
 		//axios.get('rest/objects')
@@ -18,7 +20,75 @@ var app = new Vue({
 		
 	},
 	methods: {
-		
+		sortSportObjects(index){
+			if(this.sortIndex === index){
+				switch(this.sortDirection){
+					case null:
+					this.sortDirection = 'asc';
+					break;
+					case 'asc':
+					this.sortDirection = 'desc';
+					break;
+					case 'desc':
+					this.sortDirection = null;
+					break;
+				}
+			}else{
+				this.sortDirection = 'asc';
+			}
+			
+			this.sortIndex = index;
+			
+			
+			if(this.sortIndex == 1){
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return rowA.name.localeCompare(rowB.name)
+						}
+					)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+							return rowB.name.localeCompare(rowA.name)
+						}
+					)
+				}
+				
+			}else if(this.sortIndex == 2){
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowA.location.address.street + rowA.location.address.number.toString() + rowA.location.address.town + rowA.location.address.zipcode.toString().toLowerCase()).localeCompare(
+							(rowB.location.address.street + rowB.location.address.number.toString() + rowB.location.address.town + rowB.location.address.zipcode.toString()).toLowerCase())
+						}
+					)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowB.location.address.street + rowB.location.address.number.toString() + rowB.location.address.town + rowB.location.address.zipcode.toString().toLowerCase()).localeCompare(
+							(rowA.location.address.street + rowA.location.address.number.toString() + rowA.location.address.town + rowA.location.address.zipcode.toString()).toLowerCase())
+						}
+					)
+				}
+				
+			}else{  //ovde je 3, samo to jos ima
+				if(this.sortDirection == 'asc'){
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+						return (rowA.averageGrade.toString()).localeCompare(rowB.location.address.number.toString())
+						}
+					)
+				}else{
+					this.sportsObjects = this.sportsObjects.sort(
+						(rowA, rowB) => {
+							return (rowB.averageGrade.toString()).localeCompare(rowA.location.address.number.toString())
+						}
+					)
+				}
+			}
+			
+		}
 		
 	},
 	created(){
