@@ -61,19 +61,26 @@
 	<br/>
 	<br/>
  
-<label>Tip</label>
-<select class="btn btn-secondary dropdown-toggle" v-model="typeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div>
+<select class="btn btn-secondary dropdown-toggle" v-model="openFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
+  <option  class="dropdown-item" style="background-color:white" value="allOpenClosed">Svi</option>
+  <option class="dropdown-item" style="background-color:white" value="opened">Otvoreni</option>
+</select>
+ <label style="float:right">Otvoreni/zatvoreni&nbsp&nbsp</label>
+</div>
+<div>
+<select class="btn btn-secondary dropdown-toggle" v-model="typeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
   <option  class="dropdown-item" style="background-color:white" value="allTypes">Svi</option>
   <option class="dropdown-item" style="background-color:white" value="GYM">Teretana</option>
   <option class="dropdown-item" style="background-color:white" value="POOL">Bazen</option>
   <option class="dropdown-item" style="background-color:white" value="SPORTSCENTER">Sportski centar</option>
   <option class="dropdown-item" style="background-color:white" value="DANCESTUDIO">Plesni studio</option>
 </select>
-<label>Otvoreni/zatvoreni</label>
-<select class="btn btn-secondary dropdown-toggle" v-model="openFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <option  class="dropdown-item" style="background-color:white" value="allOpenClosed">Svi</option>
-  <option class="dropdown-item" style="background-color:white" value="opened">Otvoreni</option>
-</select>
+
+<label style="float:right">Tip&nbsp&nbsp</label>
+</div>
+
+
 		<table class="table">
 			<thead>
 			<tr>
