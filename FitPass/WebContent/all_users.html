@@ -6,7 +6,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-		<div id="menu">
+	<div id="menu">
 	    <nav class="navbar navbar-expand-md navbar-light bg-light">
 	        <a class="navbar-brand" href="#">FitPass</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -42,7 +42,7 @@
 	        </div>
 	    </nav>
 	</div>
-	<div id="#app">
+	<div id="app">
 		<table class="table">
 			<thead>
 			<tr>
@@ -58,7 +58,14 @@
 			</thead>
 			<tbody v-for="user in allUsers">
 				<tr>
-					
+					<td>{{user.username}}</td>
+					<td>{{user.password}}</td>
+					<td>{{user.userType}}</td>
+					<td>{{user.name}}</td>
+					<td>{{user.surname}}</td>
+					<td>{{user.gender}}</td>
+					<td>{{user.dateOfBirth}}</td>
+					<td>{{user.points}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -66,6 +73,6 @@
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="app/menu.js"></script>
-	
+	<script src="app/allUsers.js"></script>
 </body>
 </html>
