@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.User;
+import beans.enums.UserType;
 import dao.UserDAO;
 
 @Path("")
@@ -53,10 +56,25 @@ public class UserService {
 		return (User) request.getSession().getAttribute("user");
 	}
 	
+	@GET
+	@Path("/all")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response all(@Context HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		if(user != null && user.getUserType() == UserType.ADMIN) {
+			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+			return Response.ok(userDao.findAll(), MediaType.APPLICATION_JSON).build();
+		}
+		// error 401: not authorized
+		return Response.status(401).build(); 
+	}
+	
 	@POST
 	@Path("/logout")
-	public void logout(@Context HttpServletRequest request) {
+	public Response logout(@Context HttpServletRequest request) {
 		request.getSession().invalidate();
+		return Response.ok().build();
 	}
 	
 	@POST

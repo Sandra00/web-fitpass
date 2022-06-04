@@ -31,6 +31,15 @@ public class UserDAO {
 		}
 		return null;
 	}
+	public List<User> findAll(){
+		return users;
+	}
+	
+	public User newCustomer(User user) {
+		users.add(user);
+		return user;
+	}
+	
 	
 	private void loadUsers(String path) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -45,14 +54,4 @@ public class UserDAO {
 		}
 	}
 	
-
-	
-	public User newCustomer(User user) {
-		users.add(user);
-		return user;
-	}
-	
-	public List<User> findAll(){
-		return users;
-	}
 }
