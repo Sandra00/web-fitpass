@@ -1,11 +1,17 @@
 var menu = new Vue({
 	el: '#menu',
 	data: {
-		username: ''
+		username: '',
+		isAdmin: false
 	},
 	mounted(){
 		axios.get('rest/currentUser')
-		.then((response) => (this.username = response.data.username));
+		.then((response) => {
+			this.username = response.data.username;
+			if(response.data.userType == 'ADMIN'){
+				this.isAdmin = true;
+			}	
+		});
 	},
 	methods:{
 		
