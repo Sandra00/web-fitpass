@@ -42,7 +42,27 @@
 	        </div>
 	    </nav>
 	</div>
-	
+	<div id="#app">
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Korisničko ime</th>
+				<th>Lozinka</th>
+				<th>Tip korisnika</th>
+				<th>Ime</th>
+				<th>Prezime</th>
+				<th>Pol</th>
+				<th>Datum rođenja</th>
+				<th>Poeni</th>
+			</tr>
+			</thead>
+			<tbody v-for="user in allUsers">
+				<tr>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="app/menu.js"></script>
