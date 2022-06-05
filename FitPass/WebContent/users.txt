@@ -11,5 +11,6 @@
     "sportsObject": null,
     "visitedSportsObjects": null,
     "points": 0,
-    "customerType": null
+    "customerType": null,
+    "deleted" : false
 }]

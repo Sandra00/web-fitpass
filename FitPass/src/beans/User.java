@@ -21,6 +21,7 @@ public class User {
 	private List<SportsObject> visitedSportsObjects;
 	private int points;
 	private CustomerType customerType;
+	private boolean isDeleted = false;
 	
 	public User() {
 		super();
@@ -160,6 +161,14 @@ public class User {
 
 	public void setCustomerType(CustomerType customerType) {
 		this.customerType = customerType;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 	
 	
