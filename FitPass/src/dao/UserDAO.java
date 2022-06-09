@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ public class UserDAO {
 	
 	
 	public User findUserByUsername(String username) {
+		System.out.println(username);
 		for(User user : users) {
+			System.out.println(user.getUsername());
 			if(user.getUsername().equals(username)) {
 				return user;
 			}
@@ -46,7 +49,8 @@ public class UserDAO {
 	private void saveUsers(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			mapper.writeValue(Paths.get(path + "users.txt").toFile(), users);
+			mapper.writeValue(Paths.get("users.txt").toFile(), users);
+			System.out.println(users.size());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -59,14 +63,20 @@ public class UserDAO {
 	private void loadUsers(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			System.out.println(path + "users.txt");
-			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "users.txt").toFile(), User[].class)));
+			File file  = Paths.get("users.txt").toFile();
+			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get("users.txt").toFile(), User[].class)));
+			System.out.println(users.size());
+			//System.out.println(Paths.get("users.txt"));
+			System.out.println(file.getPath());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
+			System.out.println("greska1");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
+			System.out.println("greska2");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("greska3");
 		}
 	}
 	
