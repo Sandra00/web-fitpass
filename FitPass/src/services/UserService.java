@@ -48,6 +48,19 @@ public class UserService {
 		return Response.status(200).build();
 	}
 	
+	@POST
+	@Path("/checkExisting")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response checkExisting(String username) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.checkExisting(username)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+	}
+	
 	@GET
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)

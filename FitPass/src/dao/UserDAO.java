@@ -27,10 +27,11 @@ public class UserDAO {
 	
 	
 	public User findUserByUsername(String username) {
-		System.out.println(username);
+		//System.out.println(username);
 		for(User user : users) {
-			System.out.println(user.getUsername());
+			//System.out.println(user.getUsername());
 			if(user.getUsername().equals(username)) {
+				//System.out.println("nasao");
 				return user;
 			}
 		}
@@ -39,6 +40,7 @@ public class UserDAO {
 	public List<User> findAll(){
 		return users;
 	}
+	
 	
 	public User newCustomer(User user) {
 		users.add(user);
@@ -67,7 +69,7 @@ public class UserDAO {
 			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get("users.txt").toFile(), User[].class)));
 			System.out.println(users.size());
 			//System.out.println(Paths.get("users.txt"));
-			System.out.println(file.getPath());
+			//System.out.println(file.getPath());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			System.out.println("greska1");
@@ -80,4 +82,11 @@ public class UserDAO {
 		}
 	}
 	
+	
+	public boolean checkExisting(String username) {
+		for(User u : users) {
+			if(u.getUsername().equals(username)) return true;
+		}
+		return false;
+	}
 }

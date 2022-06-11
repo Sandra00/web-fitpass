@@ -7,11 +7,24 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
+		.center {
+  			margin-left: auto;
+  			margin-right: auto;
+		}
+		.form-signin {
+		  width: 100%;
+		  max-width: 330px;
+		  padding: 15px;
+		  margin: 0 auto;
+		}
+		
+	</style>
 </head>
 <body>
-	<body>
 
-	<div id="menu">
+<div id="menu">
 	    <nav class="navbar navbar-expand-md navbar-light bg-light">
 	        <a class="navbar-brand" href="#">FitPass</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -41,13 +54,76 @@
 	                    <a class="nav-link text-danger" v-if="isAdmin == true" href="all_users.html">Svi korisnici(Admin)</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a class="nav-link" href="profile.html">{{username}}</a>
+	                    <a class="nav-link" href="">{{username}}</a>
 	                </li>
 	            </ul>
 	        </div>
 	    </nav>
 	</div>
 	
+	
+
 	<h1 class="d-flex justify-content-center">Podešavanja profila</h1>
+	<div>
+	<form id="app1" class="form-signin" @submit.prevent="getFormValues">
+		<table>
+			<tr>
+				<td>
+					<label>Korisničko ime:</label>
+				</td>
+				<td>
+				<td>
+					<input type="text" id="username" v-model="username" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Ime:</label>
+				</td>
+				<td>
+				<td>
+					<input type="text" id="name" v-model="name" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Prezime:</label>
+				</td>
+				<td>
+				<td>
+					<input type="text" id="surname" v-model="surname" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Datum rođenja:</label>
+				</td>
+				<td>
+				<td>
+					<input type="date" id="dateOfBirth" v-model="dateOfBirth" class="form-control" placeholder="Datum rodjenja" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Šifra:</label>
+				</td>
+				<td>
+				<td>
+					<input type="text" id="username" v-model="username" class="form-control" required>
+				</td>
+			</tr>
+		</table>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Izmeni</button>
+		<p class="text-danger">
+				 {{ error }}
+		</p>
+		</form>
+	</div>
+	
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/menu.js"></script>
+	<script src="app/allUsers.js"></script>
+	<script src="app/profile.js"></script>
 </body>
 </html>
