@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class SportsObjectDAO {
 	public SportsObjectDAO(String path) {
 		sportsObjects = new ArrayList<SportsObject>();
 		loadSportsObjects(path);
+		System.out.println("udje ovde");
 	}
 	
 	public List<SportsObject> findAll(){
@@ -28,7 +30,9 @@ public class SportsObjectDAO {
 	private void loadSportsObjects(String path) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(path + "sportsObjects.txt").toFile(), SportsObject[].class)));
+			File file  = Paths.get("sportsObjects.txt").toFile();
+			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get("sportsObjects.txt").toFile(), SportsObject[].class)));
+			//System.out.println(file.getAbsolutePath());
 			/*SportsObject gymA = new SportsObject();
 			gymA.setName("Gym A");
 			List<ContentType> gymAContents = new ArrayList<>();
@@ -37,6 +41,23 @@ public class SportsObjectDAO {
 			gymA.setContentTypes(gymAContents);
 			sportsObjects.add(gymA);*/
 		
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+			System.out.println("greska1");
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+			System.out.println("greska2");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("greska3");
+		}
+	}
+	
+	private void saveSportsObjects(String path) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.writeValue(Paths.get("sportsObjects.txt").toFile(), sportsObjects);
+			System.out.println(sportsObjects.size());
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
