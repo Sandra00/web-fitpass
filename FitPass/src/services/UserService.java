@@ -101,7 +101,19 @@ public class UserService {
 			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
 		//System.out.println(userDao.findAll());
-		userDao.newCustomer(user);
+		//userDao.newCustomer(user);
 		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("/editUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editUser(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.editUser(user)) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("nesto bas i ne radi").build();
 	}
 }

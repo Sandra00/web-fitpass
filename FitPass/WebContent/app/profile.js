@@ -26,23 +26,23 @@ window.onload = function() {
 		},
 		methods: {
 			async editProfile(){
-				await axios.post(
-					"rest/checkExisting",
+				axios.post(
+					"rest/editUser",
 					{
+						oldUsername:this.currUser.oldUsername,
 						username: this.username,
                     	name: this.name,
                     	surname: this.surname,
                     	dateOfBirth: this.dateOfBirth,
                     	password: this.password
 					}
-				)
-				.then(error =>{
-					this.error = "jej";
-				})
-				.catch(error => {
-					this.error = "Korisničko ime je zauzeto";
-				})
-				
+					)
+					.then( response =>{
+                this.error = 'Profil je uspešno izmenjen';
+            })
+					.catch( error => {
+                this.error = 'Postoji korisnik sa unetim korisničkim imenom';
+            })
 			},
 			getFormValues (submitEvent) {
             	this.editProfile();

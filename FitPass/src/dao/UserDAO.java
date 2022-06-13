@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.User;
+import beans.enums.UserType;
 
 public class UserDAO {
 	private List<User> users;
@@ -44,6 +45,8 @@ public class UserDAO {
 	
 	public boolean newCustomer(User user) {
 		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.CUSTOMER);
 			users.add(user);
 			return true;
 		}
@@ -91,5 +94,20 @@ public class UserDAO {
 			if(u.getUsername().equals(user.getUsername())) return true;
 		}
 		return false;
+	}
+	
+	public boolean editUser(User user) {
+		if(checkExisting(user)) {
+			return  false;
+		}
+		User userForChange = findUserByUsername(user.getOldUsername());
+		userForChange.setUsername(user.getUsername());
+		userForChange.setOldUsername(user.getUsername());
+		userForChange.setName(user.getName());
+		userForChange.setSurname(user.getSurname());
+		userForChange.setDateOfBirth(user.getGender());
+		userForChange.setPassword(user.getPassword());
+		saveUsers(this.contextPath);
+		return true;
 	}
 }
