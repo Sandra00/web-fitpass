@@ -30,7 +30,7 @@ public class UserService {
 	private void init() {
 		if (ctx.getAttribute("userDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("userDAO", new UserDAO(contextPath));
+			ctx.setAttribute("userDAO", new UserDAO());
 		}
 	}
 	

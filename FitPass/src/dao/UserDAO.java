@@ -1,29 +1,26 @@
 package dao;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.User;
 import beans.enums.UserType;
+import util.PersonalConfig;
+
 
 public class UserDAO {
 	private List<User> users;
-	private String contextPath;
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\users.json";
 	
-	public UserDAO(String path) {
+	public UserDAO() {
 		users = new ArrayList<User>();
-		this.contextPath = path;
-		loadUsers(path);
+		loadUsers();
 	}
 	
 	
@@ -54,11 +51,10 @@ public class UserDAO {
 		return false;
 	}
 	
-	private void saveUsers(String path) {
+	private void saveUsers() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			mapper.writeValue(Paths.get("users.txt").toFile(), users);
-			System.out.println(users.size());
+			mapper.writeValue(Paths.get(pathToFile).toFile(), users);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -68,23 +64,17 @@ public class UserDAO {
 		}
 	}
 	
-	private void loadUsers(String path) {
+	private void loadUsers() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			File file  = Paths.get("users.txt").toFile();
-			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get("users.txt").toFile(), User[].class)));
-			System.out.println(users.size());
-			//System.out.println(Paths.get("users.txt"));
-			//System.out.println(file.getPath());
+
+			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), User[].class)));
 		} catch (JsonParseException e) {
 			e.printStackTrace();
-			System.out.println("greska1");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
-			System.out.println("greska2");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("greska3");
 		}
 	}
 	
