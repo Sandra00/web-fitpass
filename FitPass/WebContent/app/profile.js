@@ -7,7 +7,8 @@ window.onload = function() {
 			name : null,
 			surname : null,
 			dateOfBirth : null,
-			password : null
+			password : null,
+			error: null
 		},
 		mounted(){
 			axios.get('rest/currentUser')
@@ -24,7 +25,28 @@ window.onload = function() {
 		});
 		},
 		methods: {
-			
+			async editProfile(){
+				await axios.post(
+					"rest/checkExisting",
+					{
+						username: this.username,
+                    	name: this.name,
+                    	surname: this.surname,
+                    	dateOfBirth: this.dateOfBirth,
+                    	password: this.password
+					}
+				)
+				.then(error =>{
+					this.error = "jej";
+				})
+				.catch(error => {
+					this.error = "Korisničko ime je zauzeto";
+				})
+				
+			},
+			getFormValues (submitEvent) {
+            	this.editProfile();
+        }
 		}
 	});
 }

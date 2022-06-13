@@ -52,9 +52,9 @@ public class UserService {
 	@Path("/checkExisting")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response checkExisting(String username) {
+	public Response checkExisting(User user) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		if(userDao.checkExisting(username)) {
+		if(userDao.checkExisting(user)) {
 			return Response.status(200).build();
 		}else {
 			return Response.status(400).entity("Invalid username and/or password").build();
@@ -96,11 +96,11 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response newCustomer(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		if(userDao.findAll().contains(user)) {
+		if(!userDao.newCustomer(user)) {
 			System.out.println(userDao.findAll());
-			return Response.status(400).entity("Invalid username and/or password").build();
+			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
-		System.out.println(userDao.findAll());
+		//System.out.println(userDao.findAll());
 		userDao.newCustomer(user);
 		return Response.status(200).build();
 	}

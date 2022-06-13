@@ -42,10 +42,13 @@ public class UserDAO {
 	}
 	
 	
-	public User newCustomer(User user) {
-		users.add(user);
+	public boolean newCustomer(User user) {
+		if(!checkExisting(user)) {
+			users.add(user);
+			return true;
+		}
 		saveUsers(this.contextPath);
-		return user;
+		return false;
 	}
 	
 	private void saveUsers(String path) {
@@ -83,9 +86,9 @@ public class UserDAO {
 	}
 	
 	
-	public boolean checkExisting(String username) {
+	public boolean checkExisting(User user) {
 		for(User u : users) {
-			if(u.getUsername().equals(username)) return true;
+			if(u.getUsername().equals(user.getUsername())) return true;
 		}
 		return false;
 	}
