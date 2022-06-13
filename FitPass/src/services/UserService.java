@@ -48,6 +48,19 @@ public class UserService {
 		return Response.status(200).build();
 	}
 	
+	@POST
+	@Path("/checkExisting")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response checkExisting(User user) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.checkExisting(user)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+	}
+	
 	@GET
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -83,12 +96,24 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response newCustomer(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		if(userDao.findAll().contains(user)) {
+		if(!userDao.newCustomer(user)) {
 			System.out.println(userDao.findAll());
-			return Response.status(400).entity("Invalid username and/or password").build();
+			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
-		System.out.println(userDao.findAll());
-		userDao.newCustomer(user);
+		//System.out.println(userDao.findAll());
+		//userDao.newCustomer(user);
 		return Response.status(200).build();
+	}
+	
+	@POST
+	@Path("/editUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editUser(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		if(userDao.editUser(user)) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("nesto bas i ne radi").build();
 	}
 }

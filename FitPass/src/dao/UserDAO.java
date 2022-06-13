@@ -10,7 +10,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.User;
+import beans.enums.UserType;
 import util.PersonalConfig;
+
 
 public class UserDAO {
 	private List<User> users;
@@ -23,8 +25,11 @@ public class UserDAO {
 	
 	
 	public User findUserByUsername(String username) {
+		//System.out.println(username);
 		for(User user : users) {
+			//System.out.println(user.getUsername());
 			if(user.getUsername().equals(username)) {
+				//System.out.println("nasao");
 				return user;
 			}
 		}
@@ -34,10 +39,16 @@ public class UserDAO {
 		return users;
 	}
 	
-	public User newCustomer(User user) {
-		users.add(user);
-		saveUsers();
-		return user;
+	
+	public boolean newCustomer(User user) {
+		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.CUSTOMER);
+			users.add(user);
+			return true;
+		}
+		saveUsers(this.contextPath);
+		return false;
 	}
 	
 	private void saveUsers() {
@@ -56,6 +67,7 @@ public class UserDAO {
 	private void loadUsers() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
+
 			users = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), User[].class)));
 		} catch (JsonParseException e) {
 			e.printStackTrace();
@@ -66,4 +78,26 @@ public class UserDAO {
 		}
 	}
 	
+	
+	public boolean checkExisting(User user) {
+		for(User u : users) {
+			if(u.getUsername().equals(user.getUsername())) return true;
+		}
+		return false;
+	}
+	
+	public boolean editUser(User user) {
+		if(checkExisting(user)) {
+			return  false;
+		}
+		User userForChange = findUserByUsername(user.getOldUsername());
+		userForChange.setUsername(user.getUsername());
+		userForChange.setOldUsername(user.getUsername());
+		userForChange.setName(user.getName());
+		userForChange.setSurname(user.getSurname());
+		userForChange.setDateOfBirth(user.getGender());
+		userForChange.setPassword(user.getPassword());
+		saveUsers(this.contextPath);
+		return true;
+	}
 }

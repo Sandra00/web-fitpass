@@ -8,6 +8,7 @@ import beans.enums.*;
 
 
 public class User {
+	private String oldUsername;
 	private String username;
 	private String password;
 	private String name;
@@ -27,10 +28,11 @@ public class User {
 		super();
 	}
 
-	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
+	public User(String oldUsername, String username, String password, String name, String surname, String gender, String dateOfBirth,
 			UserType userType, List<Training> trainings, List<Fee> fee, SportsObject sportsObject,
 			List<SportsObject> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
+		this.oldUsername = oldUsername;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -48,9 +50,10 @@ public class User {
 	
 	
 
-	public User(String username, String name, String surname, String gender,
+	public User(String oldUsername, String username, String name, String surname, String gender,
 			String dateOfBirth, String password) {
 		super();
+		this.oldUsername = oldUsername;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -170,6 +173,15 @@ public class User {
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+
+	public String getOldUsername() {
+		return oldUsername;
+	}
+
+	public void setOldUsername(String oldUsername) {
+		this.oldUsername = oldUsername;
+	}
+	
 	
 	
 }

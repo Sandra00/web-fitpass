@@ -28,7 +28,7 @@ window.onload = function () {
                 window.location.href = 'index.html';
             })
             .catch( error => {
-                this.error = 'Postoji korisnik sa datim korisnickim imenom';
+                this.error = 'Postoji korisnik sa unetim korisničkim imenom';
             })
         },
         onChange(event) {
