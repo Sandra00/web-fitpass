@@ -45,9 +45,10 @@ public class UserDAO {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.CUSTOMER);
 			users.add(user);
+			saveUsers();
 			return true;
 		}
-		saveUsers(this.contextPath);
+		saveUsers();
 		return false;
 	}
 	
@@ -97,7 +98,7 @@ public class UserDAO {
 		userForChange.setSurname(user.getSurname());
 		userForChange.setDateOfBirth(user.getGender());
 		userForChange.setPassword(user.getPassword());
-		saveUsers(this.contextPath);
+		saveUsers();
 		return true;
 	}
 }
