@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -97,7 +98,7 @@ public class UserService {
 	public Response newCustomer(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		if(!userDao.newCustomer(user)) {
-			System.out.println(userDao.findAll());
+			//System.out.println(userDao.findAll());
 			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
 		//System.out.println(userDao.findAll());
@@ -115,5 +116,23 @@ public class UserService {
 			return Response.status(200).build();
 		}
 		return Response.status(400).entity("nesto bas i ne radi").build();
+	}
+	
+	@GET
+	@Path("/freeManagers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getFreeManagers(){
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.getFreeManagers();
+	}
+	
+	@POST
+	@Path("/addSportsObject")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addSportsObject(User user) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		userDao.addSportsObject(user);
 	}
 }

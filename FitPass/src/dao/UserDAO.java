@@ -45,9 +45,10 @@ public class UserDAO {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.CUSTOMER);
 			users.add(user);
+			saveUsers();
 			return true;
 		}
-		saveUsers(this.contextPath);
+		saveUsers();
 		return false;
 	}
 	
@@ -97,7 +98,21 @@ public class UserDAO {
 		userForChange.setSurname(user.getSurname());
 		userForChange.setDateOfBirth(user.getGender());
 		userForChange.setPassword(user.getPassword());
-		saveUsers(this.contextPath);
+		saveUsers();
 		return true;
+	}
+	
+	public ArrayList<User> getFreeManagers(){
+		ArrayList<User> managers = new ArrayList<User>();
+		for(User user : users) {
+			if(user.getUserType() == UserType.MANAGER && user.getSportsObject() == null) managers.add(user);
+		}
+		return managers;
+	}
+	
+	public void addSportsObject(User user) {
+		User manager = findUserByUsername(user.getUsername());
+		manager.setSportsObject(user.getSportsObject());
+		saveUsers();
 	}
 }
