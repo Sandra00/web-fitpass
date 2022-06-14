@@ -167,16 +167,6 @@
 			<div class="row">
 				<div class="col"></div>
 				<div class="col">
-					<label>Prosečna ocena</label>
-				</div>
-				<div class="col">
-					<input type="number" id="avgGrade" v-model="avgGrade" class="form-control" placeholder="Prosečna ocena" required>
-				</div>
-				<div class="col"></div>
-			</div>
-			<div class="row">
-				<div class="col"></div>
-				<div class="col">
 					<label>Početak radnog vremena</label>
 				</div>
 				<div class="col">
@@ -201,7 +191,7 @@
 				</div>
 				<div class="col">
 					<select class="btn btn-secondary dropdown-toggle" v-for="manager in managers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
-  						<option  class="dropdown-item" style="background-color:white" value="allOpenClosed">{{name}}{{surname}}</option>
+  						<option  class="dropdown-item" style="background-color:white" value="managers">{{name}}{{surname}}</option>
 					</select>
 				</div>
 				<div class="col"></div>

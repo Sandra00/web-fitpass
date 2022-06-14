@@ -13,11 +13,12 @@ public class SportsObject {
 	private LocationType locationType;
 	private List<ContentType> contentTypes;
 	private boolean status;
-	public Location location;
-	public String logo;
+	private Location location;
+	private String logo;
 	public double averageGrade;
 	private LocalTime startWorkingHour;
 	private LocalTime endWorkingHour;
+	private int gradesCounter;
 	
 	public SportsObject() {
 		super();
@@ -25,7 +26,7 @@ public class SportsObject {
 
 	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
 			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
-			LocalTime endWorkingHour) {
+			LocalTime endWorkingHour, int gradesCounter) {
 		super();
 		this.name = name;
 		this.locationType = locationType;
@@ -36,6 +37,7 @@ public class SportsObject {
 		this.averageGrade = averageGrade;
 		this.startWorkingHour = startWorkingHour;
 		this.endWorkingHour = endWorkingHour;
+		this.gradesCounter = 0;
 	}
 
 	public String getName() {
@@ -106,6 +108,16 @@ public class SportsObject {
 	// add serializer class 
 	public LocalTime getEndWorkingHour() {
 		return endWorkingHour;
+	}
+	
+	
+
+	public int getGradesCounter() {
+		return gradesCounter;
+	}
+
+	public void setGradesCounter(int gradesCounter) {
+		this.gradesCounter = gradesCounter;
 	}
 
 	@JsonDeserialize(using = LocalTimeDeserializer.class)

@@ -13,7 +13,6 @@ window.onload = function () {
 		number:null,
 		town:null,
 		postNumber:null,
-		avgGrade:null,
 		startTime:null,
 		endTime:null,
         error:null,
@@ -44,7 +43,6 @@ window.onload = function () {
 							zipcode:this.postNumber
 						}
 					},
-                    averageGrade: this.avgGrade,
                     startWorkingHour: this.startTime,
                     endWorkingHour: this.endTime
                 }
