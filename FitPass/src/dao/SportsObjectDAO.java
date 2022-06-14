@@ -17,16 +17,16 @@ public class SportsObjectDAO {
 	private List<SportsObject> sportsObjects;
 	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\sports_objects.json";
 	
-	public SportsObjectDAO(String path) {
+	public SportsObjectDAO() {
 		sportsObjects = new ArrayList<SportsObject>();
-		loadSportsObjects(path);
+		loadSportsObjects();
 	}
 	
 	public List<SportsObject> findAll(){
 		return sportsObjects; 
 	}
 	
-	private void loadSportsObjects(String path) {
+	private void loadSportsObjects() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
@@ -47,7 +47,7 @@ public class SportsObjectDAO {
 		}
 	}
 	
-	private void saveSportsObjects(String path) {
+	private void saveSportsObjects() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), sportsObjects);
@@ -58,5 +58,18 @@ public class SportsObjectDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean exists(SportsObject sportsObject) {
+		for(SportsObject so : sportsObjects) {
+			if(so.getName().equals(sportsObject.getName())) return true;
+		}
+		return false;
+	}
+	public boolean newSportObject(SportsObject sportsObject) {
+		if(exists(sportsObject)) return false;
+		sportsObjects.add(sportsObject);
+		saveSportsObjects();
+		return true;
 	}
 }

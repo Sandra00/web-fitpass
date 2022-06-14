@@ -97,7 +97,7 @@ public class UserService {
 	public Response newCustomer(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		if(!userDao.newCustomer(user)) {
-			System.out.println(userDao.findAll());
+			//System.out.println(userDao.findAll());
 			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
 		//System.out.println(userDao.findAll());

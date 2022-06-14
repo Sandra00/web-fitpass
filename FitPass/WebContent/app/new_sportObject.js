@@ -3,37 +3,55 @@
 window.onload = function () {
     const vm = new Vue({
     el: '#app',
-    data() {
-        return {
-            error: ""
-        };
+    data: {
+		name:null,
+		objectType:null,
+		works:false,
+		longitude:null,
+		latitude:null,
+		street:null,
+		number:null,
+		town:null,
+		postNumber:null,
+		avgGrade:null,
+		startTime:null,
+		endTime:null,
+        error:null,
+        managers:[],
+        contents:[]
     },
     methods: {
         async register() {
-			var date = new Date(this.dateOfBirth)
-			var splittedDate = this.dateOfBirth.split('-');
-			date = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
             await axios.post(
-                "rest/register",
+                "rest/objects/register",
                 {
-                    username: this.username,
                     name: this.name,
-                    surname: this.surname,
-                    gender: this.gender,
-                    dateOfBirth: this.dateOfBirth,
-                    password: this.password
+                    locationType: this.objectType,
+                    contentTypes: this.contents,
+                    status:this.works,
+                    location:{
+						longitude:this.longitude,
+						latitude:this.latitude,
+						address:{
+							street:this.street,
+							number:this.number,
+							town:this.town,
+							zipcode:this.postNumber
+						}
+					},
+                    averageGrade: this.avgGrade,
+                    startWorkingHour: this.startTime,
+                    endWorkingHour: this.endTime
                 }
             )
             .then( response =>{
                 window.location.href = 'index.html';
             })
             .catch( error => {
-                this.error = 'Postoji korisnik sa datim korisnickim imenom';
+                this.error = 'Postoji objekat sa unetim nazivom';
             })
         },
-        onChange(event) {
-              let gender = event.target.value;
-          },
+        
         getFormValues (submitEvent) {
             this.register();
         }

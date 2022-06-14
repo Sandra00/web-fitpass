@@ -72,7 +72,7 @@
 					<label>Naziv</label>
 				</div>
 				<div class="col">
-					<input type="text" id="username" v-model="name" class="form-control" placeholder="Naziv" required autofocus>
+					<input type="text" id="name" v-model="name" class="form-control" placeholder="Naziv" required autofocus>
 				</div>
 				<div class="col"></div>
 		</div>
@@ -84,11 +84,10 @@
 				</div>
 				<div class="col">
 					<select class="btn btn-secondary dropdown-toggle" v-model="objectType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
-  						<option  class="dropdown-item" style="background-color:white" value="allOpenClosed">Teretana</option>
-  						<option class="dropdown-item" style="background-color:white" value="opened">Bazen</option>
-  						<option class="dropdown-item" style="background-color:white" value="opened">Sportski centar</option>
-  						<option class="dropdown-item" style="background-color:white" value="opened">Plesni studio</option>
-  						<option class="dropdown-item" style="background-color:white" value="opened">Bazen</option>
+  						<option  class="dropdown-item" style="background-color:white" value="GYM">Teretana</option>
+  						<option class="dropdown-item" style="background-color:white" value="POOL">Bazen</option>
+  						<option class="dropdown-item" style="background-color:white" value="SPORTCENTER">Sportski centar</option>
+  						<option class="dropdown-item" style="background-color:white" value="DANCESTUDIO">Plesni studio</option>
 					</select>
 				</div>
 				<div class="col"></div>
@@ -102,19 +101,19 @@
 				</div>
 				<div class="col">
 					<div class="form-check">
-  						<input class="form-check-input" type="checkbox" value="" id="groupTraining">
+  						<input class="form-check-input" v-model="contents" type="checkbox" value="GROUPTRAINING" id="groupTraining">
   						<label class="form-check-label" for="flexCheckDefault">
     						Grupni treninzi
   						</label>
 						</div>
 					<div class="form-check">
-  						<input class="form-check-input" type="checkbox" value="" id="personalTraining">
+  						<input class="form-check-input" v-model="contents" type="checkbox" value="PERSONALTRAINING" id="personalTraining">
   						<label class="form-check-label" for="flexCheckDefault1">
     						Personalni treninzi
   						</label>
 					</div>
 					<div class="form-check">
-  						<input class="form-check-input" type="checkbox" value="" id="sauna">
+  						<input class="form-check-input" v-model="contents" type="checkbox" value="SAUNA" id="sauna">
   						<label class="form-check-label" for="flexCheckDefault2">
     						Sauna
   						</label>
@@ -129,13 +128,13 @@
 				</div>
 				<div class="col">
 					<div class="form-check">
-  						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  						<input class="form-check-input" v-model="works" v-bind:value="true" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
   						<label class="form-check-label" for="flexRadioDefault1">
     						Radi
   						</label>
 					</div>
 					<div class="form-check">
-  						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  						<input class="form-check-input" v-model="works" v-bind:value="false" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
   						<label class="form-check-label" for="flexRadioDefault2">
   				  			Ne radi
   						</label>
@@ -152,7 +151,7 @@
 			<div class="row">
 				<div class="col"></div>
 				<div class="col"></div>
-				<div class="col"><label><input type="number" id="street" v-model="street" class="form-control" placeholder="Ulica" required></label></div>
+				<div class="col"><label><input type="text" id="street" v-model="street" class="form-control" placeholder="Ulica" required></label></div>
 				<div class="col"><label><input type="number" id="number" v-model="number" class="form-control" placeholder="Broj" required></label></div>
 			</div>
 			<div class="row">
@@ -197,7 +196,7 @@
 					<label>Menadžer</label>
 				</div>
 				<div class="col">
-					<select class="btn btn-secondary dropdown-toggle" v-for="managers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
+					<select class="btn btn-secondary dropdown-toggle" v-for="manager in managers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
   						<option  class="dropdown-item" style="background-color:white" value="allOpenClosed">{{name}}{{surname}}</option>
 					</select>
 				</div>
@@ -226,5 +225,6 @@
 	<script src="js/axios.js"></script>
 	<script src="app/menu.js"></script>
 	<script src="app/allUsers.js"></script>
+	<script src="app/new_sportObject.js"></script>
 </body>
 </html>
