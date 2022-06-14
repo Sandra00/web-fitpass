@@ -1,5 +1,6 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import beans.enums.*;
@@ -141,7 +142,7 @@ public class User {
 	}
 
 	public List<String> getVisitedSportsObjects() {
-		return visitedSportsObjects;
+		return visitedSportsObjects != null ? visitedSportsObjects : new ArrayList<String>();
 	}
 
 	public void setVisitedSportsObjects(List<String> visitedSportsObjects) {

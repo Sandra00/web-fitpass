@@ -49,6 +49,11 @@ public class UserDAO {
 		return userList;
 	}
 	
+	public String findManagersSportsObjectName(String managerUsername) {
+		User manager = findUserByUsername(managerUsername);
+		return manager != null ? manager.getSportsObject() : null;
+	}
+	
 	public boolean newCustomer(User user) {
 		if(!checkExisting(user)) {
 			user.setOldUsername(user.getUsername());

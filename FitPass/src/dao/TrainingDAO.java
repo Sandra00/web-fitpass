@@ -13,7 +13,7 @@ public class TrainingDAO {
 	
 	public TrainingDAO() {
 		trainings = new ArrayList<Training>();
-		Training tr1 = new Training(1, "Trening A", TrainingType.PERSONAL, "Gym 1", 60, "trener", "", "asdasd");
+		Training tr1 = new Training(1, "Trening A", TrainingType.PERSONAL, "Gym 1", 60, "janko", "", "");
 		trainings.add(tr1);
 	}
 	

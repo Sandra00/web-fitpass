@@ -58,8 +58,8 @@ public class SportsObjectService {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
 		User user = (User) request.getSession().getAttribute("user");
 		if(user != null && user.getUserType() == UserType.MANAGER) {
-			String name = user.getSportsObject();
-			return Response.ok(sportsObjectDAO.findByName(name), MediaType.APPLICATION_JSON).build();
+			String sportsObjectName = user.getSportsObject();
+			return Response.ok(sportsObjectDAO.findByName(sportsObjectName), MediaType.APPLICATION_JSON).build();
 		}
 		return Response.status(401).build(); 
 	}
