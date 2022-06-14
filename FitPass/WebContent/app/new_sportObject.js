@@ -20,8 +20,15 @@ window.onload = function () {
         managers:[],
         contents:[]
     },
+    mounted(){
+		axios.get('rest/freeManagers')
+		.then((response) => {
+			this.managers = resonse.data;
+		})
+	},
     methods: {
         async register() {
+			
 			if(this.contents.length == 0){
 				this.noChecked = "Morate odabrati bar jedan sadržaj";
 				return;

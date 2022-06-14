@@ -101,4 +101,12 @@ public class UserDAO {
 		saveUsers();
 		return true;
 	}
+	
+	public ArrayList<User> getFreeManagers(){
+		ArrayList<User> managers = new ArrayList<User>();
+		for(User user : users) {
+			if(user.getUserType() == UserType.MANAGER && user.getSportsObject() == null) managers.add(user);
+		}
+		return managers;
+	}
 }

@@ -4,6 +4,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
 import beans.enums.*;
 import util.LocalTimeDeserializer;
@@ -37,7 +39,7 @@ public class SportsObject {
 		this.averageGrade = averageGrade;
 		this.startWorkingHour = startWorkingHour;
 		this.endWorkingHour = endWorkingHour;
-		this.gradesCounter = 0;
+		this.gradesCounter = gradesCounter;
 	}
 
 	public String getName() {
@@ -95,7 +97,7 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-	// add serializer class 
+	@JsonSerialize(using = LocalTimeSerializer.class)
 	public LocalTime getStartWorkingHour() {
 		return startWorkingHour;
 	}
@@ -105,7 +107,7 @@ public class SportsObject {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	// add serializer class 
+	@JsonSerialize(using = LocalTimeSerializer.class)
 	public LocalTime getEndWorkingHour() {
 		return endWorkingHour;
 	}

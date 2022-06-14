@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -115,5 +116,14 @@ public class UserService {
 			return Response.status(200).build();
 		}
 		return Response.status(400).entity("nesto bas i ne radi").build();
+	}
+	
+	@GET
+	@Path("/freeManagers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getFreeManagers(){
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return userDao.getFreeManagers();
 	}
 }

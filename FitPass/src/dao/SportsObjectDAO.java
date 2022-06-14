@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.SportsObject;
+import beans.User;
 import util.PersonalConfig;
 
 public class SportsObjectDAO {
