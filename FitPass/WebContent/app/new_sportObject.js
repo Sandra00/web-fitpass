@@ -25,7 +25,7 @@ window.onload = function () {
 		axios.get('rest/freeManagers')
 		.then((response) => {
 			this.managers = response.data;
-			this.managerValue = this.managers[0].username;
+			//this.managerValue = this.managers[0].username;
 		})
 	},
     methods: {
@@ -77,6 +77,14 @@ window.onload = function () {
             
             
         },
+        
+        isManagersEmpty: function(){
+			if(this.managers.length == 0){
+				return true;
+			}else{
+				return false;
+			}
+		},
         
         getFormValues (submitEvent) {
             this.register();

@@ -111,11 +111,8 @@ public class UserDAO {
 	}
 	
 	public void addSportsObject(User user) {
-		System.out.println(user.getUsername());
 		User manager = findUserByUsername(user.getUsername());
-		System.out.println(manager.getUsername());
 		manager.setSportsObject(user.getSportsObject());
-		System.out.println(manager.getSportsObject());
 		saveUsers();
 	}
 }
