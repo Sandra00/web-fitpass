@@ -100,8 +100,6 @@ public class UserService {
 			System.out.println(userDao.findAll());
 			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
-		//System.out.println(userDao.findAll());
-		//userDao.newCustomer(user);
 		return Response.status(200).build();
 	}
 	

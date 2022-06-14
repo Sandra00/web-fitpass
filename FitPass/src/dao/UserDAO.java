@@ -37,6 +37,18 @@ public class UserDAO {
 	}
 	
 	
+	public List<User> findUsersVisitedSportsObject(String sportsObjectName) {
+		List<User> userList = new ArrayList<User>();
+		for (User user : users) {
+			for (String sportsObject : user.getVisitedSportsObjects()) {
+				if(sportsObject.equals(sportsObjectName) && !userList.contains(user)) {
+					userList.add(user);
+				}
+			}
+		}
+		return userList;
+	}
+	
 	public boolean newCustomer(User user) {
 		if(!checkExisting(user)) {
 			user.setOldUsername(user.getUsername());
