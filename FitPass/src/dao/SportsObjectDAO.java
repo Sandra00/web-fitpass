@@ -45,7 +45,7 @@ public class SportsObjectDAO {
 			System.out.println("greska1");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
-			System.out.println("greska2");
+			System.out.println("greska2 s");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("greska3");
@@ -58,10 +58,13 @@ public class SportsObjectDAO {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), sportsObjects);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
+			System.out.println("greska 1 upis");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
+			System.out.println("greska 2 upis");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("greska 3 upis");
 		}
 	}
 	

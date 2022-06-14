@@ -18,21 +18,35 @@ window.onload = function () {
         error:null,
         noChecked:null,
         managers:[],
-        contents:[]
+        contents:[],
+        managerValue:null
     },
     mounted(){
 		axios.get('rest/freeManagers')
 		.then((response) => {
-			this.managers = resonse.data;
+			this.managers = response.data;
+			this.managerValue = this.managers[0].username;
 		})
 	},
     methods: {
+		
         async register() {
-			
+			//hour = this.startTime.hour
+			//minute = this.startTime.minute
+			//stringFormat = hour.toString() + ":" + minute.toString()
 			if(this.contents.length == 0){
 				this.noChecked = "Morate odabrati bar jedan sadržaj";
 				return;
 			}
+			
+			await axios.post(
+				"rest/addSportsObject",
+				{
+					username:this.managerValue,
+					sportsObject: this.name
+				}
+			)
+			
             await axios.post(
                 "rest/objects/register",
                 {
@@ -50,8 +64,8 @@ window.onload = function () {
 							zipcode:this.postNumber
 						}
 					},
-                    startWorkingHour: this.startTime,
-                    endWorkingHour: this.endTime
+                    startWorkingHour: null,
+                    endWorkingHour: null
                 }
             )
             .then( response =>{
@@ -60,6 +74,8 @@ window.onload = function () {
             .catch( error => {
                 this.error = 'Postoji objekat sa unetim nazivom';
             })
+            
+            
         },
         
         getFormValues (submitEvent) {

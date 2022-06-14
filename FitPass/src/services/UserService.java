@@ -126,4 +126,13 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return userDao.getFreeManagers();
 	}
+	
+	@POST
+	@Path("/addSportsObject")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addSportsObject(User user) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		userDao.addSportsObject(user);
+	}
 }
