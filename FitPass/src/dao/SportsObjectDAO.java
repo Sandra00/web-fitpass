@@ -30,6 +30,7 @@ public class SportsObjectDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
+			//System.out.println(sportsObjects.size());
 			//System.out.println(file.getAbsolutePath());
 			/*SportsObject gymA = new SportsObject();
 			gymA.setName("Gym A");
@@ -40,10 +41,13 @@ public class SportsObjectDAO {
 			sportsObjects.add(gymA);*/
 		} catch (JsonParseException e) {
 			e.printStackTrace();
+			System.out.println("greska1");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
+			System.out.println("greska2");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("greska3");
 		}
 	}
 	

@@ -44,6 +44,7 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SportsObject> findAllSportsObjects(@Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		//System.out.println(sportsObjectDAO.findAll().size());
 		return sportsObjectDAO.findAll();
 	}
 	

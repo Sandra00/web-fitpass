@@ -5,7 +5,7 @@ window.onload = function () {
     el: '#app',
     data: {
 		name:null,
-		objectType:null,
+		objectType:"GYM",
 		works:false,
 		longitude:null,
 		latitude:null,
@@ -17,11 +17,16 @@ window.onload = function () {
 		startTime:null,
 		endTime:null,
         error:null,
+        noChecked:null,
         managers:[],
         contents:[]
     },
     methods: {
         async register() {
+			if(this.contents.length == 0){
+				this.noChecked = "Morate odabrati bar jedan sadržaj";
+				return;
+			}
             await axios.post(
                 "rest/objects/register",
                 {
