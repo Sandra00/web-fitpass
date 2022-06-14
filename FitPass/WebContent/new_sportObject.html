@@ -93,7 +93,7 @@
 				</div>
 				<div class="col"></div>
 		</div>
-				<div class="col"></div>
+				
 			<div class="row"></div>
 			<div class="row">
 			<div class="col"></div>
@@ -142,7 +142,6 @@
 					</div>
 					</div>
 					<div class="col"></div>
-				</div>
 			</div>
 			<div class="row">
 				<div class="col"></div>
@@ -181,6 +180,7 @@
 					<input type="time" id="startTime" v-model="startTime" class="form-control" placeholder="" required>
 				</div>
 				<div class="col"></div>
+			</div>
 			<div class="row">
 				<div class="col"></div>
 				<div class="col">
@@ -191,14 +191,33 @@
 				</div>
 				<div class="col"></div>
 			</div>
-				
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					<label>Menadžer</label>
+				</div>
+				<div class="col">
+					<select class="btn btn-secondary dropdown-toggle" v-for="managers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
+  						<option  class="dropdown-item" style="background-color:white" value="allOpenClosed">{{name}}{{surname}}</option>
+					</select>
+				</div>
+				<div class="col"></div>
 			</div>
+			
 
-
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Kreiraj</button>
-		<p class="text-danger">
-				 {{ error }}
-		</p>
+		<div class="row">
+			<div class="col"></div>
+			<div class="col"></div>
+			<div class="col">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Kreiraj</button>
+				<p class="text-danger">
+				 	{{ error }}
+				</p>
+			</div>
+			<div class="col"></div>
+			<div class="col"></div>
+		</div>
+		
     </form>
 	</div>
 	
