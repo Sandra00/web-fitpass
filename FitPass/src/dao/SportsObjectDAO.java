@@ -30,7 +30,6 @@ public class SportsObjectDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
-			//System.out.println(file.getAbsolutePath());
 			/*SportsObject gymA = new SportsObject();
 			gymA.setName("Gym A");
 			List<ContentType> gymAContents = new ArrayList<>();

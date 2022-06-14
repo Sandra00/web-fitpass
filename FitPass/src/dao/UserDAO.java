@@ -25,11 +25,8 @@ public class UserDAO {
 	
 	
 	public User findUserByUsername(String username) {
-		//System.out.println(username);
 		for(User user : users) {
-			//System.out.println(user.getUsername());
 			if(user.getUsername().equals(username)) {
-				//System.out.println("nasao");
 				return user;
 			}
 		}
@@ -47,7 +44,7 @@ public class UserDAO {
 			users.add(user);
 			return true;
 		}
-		saveUsers(this.contextPath);
+		saveUsers();
 		return false;
 	}
 	
@@ -97,7 +94,7 @@ public class UserDAO {
 		userForChange.setSurname(user.getSurname());
 		userForChange.setDateOfBirth(user.getGender());
 		userForChange.setPassword(user.getPassword());
-		saveUsers(this.contextPath);
+		saveUsers();
 		return true;
 	}
 }
