@@ -16,13 +16,9 @@ import javax.ws.rs.core.Response;
 
 import beans.SportsObject;
 import beans.User;
-<<<<<<< HEAD
 import beans.enums.UserType;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
-=======
-import dao.SportsObjectDAO;
->>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 import dao.UserDAO;
 
 @Path("/objects")
@@ -38,7 +34,6 @@ public class SportsObjectService {
 	@PostConstruct
 	private void init() {
 		if (ctx.getAttribute("sportsObjectDAO") == null) {
-<<<<<<< HEAD
 			ctx.setAttribute("sportsObjectDAO", new SportsObjectDAO());
 		}
 		if (ctx.getAttribute("trainingDAO") == null) {
@@ -46,10 +41,6 @@ public class SportsObjectService {
 		}
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
-=======
-	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("sportsObjectDAO", new SportsObjectDAO());
->>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 		}
 	}
 	
@@ -64,7 +55,6 @@ public class SportsObjectService {
 		return sportsObjectDAO.findAll();
 	}
 	
-<<<<<<< HEAD
 	@GET
 	@Path("/managed")
 	//@Consumes(MediaType.APPLICATION_JSON)
@@ -107,7 +97,6 @@ public class SportsObjectService {
 		return Response.status(401).build(); 
 	}
 	
-=======
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -122,5 +111,4 @@ public class SportsObjectService {
 		//userDao.newCustomer(user);
 		return Response.status(200).build();
 	}
->>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 }

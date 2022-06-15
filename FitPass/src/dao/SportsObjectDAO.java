@@ -27,7 +27,6 @@ public class SportsObjectDAO {
 		return sportsObjects; 
 	}
 	
-<<<<<<< HEAD
 	public SportsObject findByName(String name) {
 		for (SportsObject sportsObject : sportsObjects) {
 			if(sportsObject.getName().equals(name)) {
@@ -38,17 +37,10 @@ public class SportsObjectDAO {
 	}
 	
 	
-=======
->>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 	private void loadSportsObjects() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
-<<<<<<< HEAD
-=======
-			//System.out.println(sportsObjects.size());
-			//System.out.println(file.getAbsolutePath());
->>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 			/*SportsObject gymA = new SportsObject();
 			gymA.setName("Gym A");
 			List<ContentType> gymAContents = new ArrayList<>();
