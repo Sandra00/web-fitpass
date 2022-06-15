@@ -64,8 +64,8 @@ window.onload = function () {
 							zipcode:this.postNumber
 						}
 					},
-                    startWorkingHour: null,
-                    endWorkingHour: null
+                    startWorkingHour: this.startTime.toLocaleString(),
+                    endWorkingHour: this.endTime.toLocaleString()
                 }
             )
             .then( response =>{

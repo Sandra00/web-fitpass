@@ -18,8 +18,8 @@ public class SportsObject {
 	private Location location;
 	private String logo;
 	public double averageGrade;
-	private LocalTime startWorkingHour;
-	private LocalTime endWorkingHour;
+	private String startWorkingHour;
+	private String endWorkingHour;
 	private int gradesCounter;
 	
 	public SportsObject() {
@@ -27,8 +27,8 @@ public class SportsObject {
 	}
 
 	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
-			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
-			LocalTime endWorkingHour, int gradesCounter) {
+			Location location, String logo, double averageGrade, String startWorkingHour,
+			String endWorkingHour, int gradesCounter) {
 		super();
 		this.name = name;
 		this.locationType = locationType;
@@ -97,18 +97,18 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-	@JsonSerialize(using = LocalTimeSerializer.class)
-	public LocalTime getStartWorkingHour() {
+	//@JsonSerialize(using = LocalTimeSerializer.class)
+	public String getStartWorkingHour() {
 		return startWorkingHour;
 	}
 
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setStartWorkingHour(LocalTime startWorkingHour) {
+	//@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setStartWorkingHour(String startWorkingHour) {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	@JsonSerialize(using = LocalTimeSerializer.class)
-	public LocalTime getEndWorkingHour() {
+	//@JsonSerialize(using = LocalTimeSerializer.class)
+	public String getEndWorkingHour() {
 		return endWorkingHour;
 	}
 	
@@ -122,8 +122,8 @@ public class SportsObject {
 		this.gradesCounter = gradesCounter;
 	}
 
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setEndWorkingHour(LocalTime endWorkingHour) {
+	//@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setEndWorkingHour(String endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
 	}
 	
