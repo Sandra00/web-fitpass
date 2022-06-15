@@ -18,7 +18,11 @@ public class User {
 	private List<Integer> trainings;
 	private List<Fee> fee;
 	private String sportsObject;
+<<<<<<< HEAD
 	private List<String> visitedSportsObjects;
+=======
+	private List<SportsObject> visitedSportsObjects;
+>>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 	private int points;
 	private CustomerType customerType;
 	private boolean isDeleted = false;
@@ -28,8 +32,13 @@ public class User {
 	}
 
 	public User(String oldUsername, String username, String password, String name, String surname, String gender, String dateOfBirth,
+<<<<<<< HEAD
 			UserType userType, List<Integer> trainings, List<Fee> fee, String sportsObject,
 			List<String> visitedSportsObjects, int points, CustomerType customerType) {
+=======
+			UserType userType, List<Training> trainings, List<Fee> fee, String sportsObject,
+			List<SportsObject> visitedSportsObjects, int points, CustomerType customerType) {
+>>>>>>> fe8c60e7fdf9f2b0e9d0a7a5a9e4e0062eb2ed08
 		super();
 		this.oldUsername = oldUsername;
 		this.username = username;

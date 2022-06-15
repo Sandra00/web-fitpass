@@ -4,6 +4,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
 import beans.enums.*;
 import util.LocalTimeDeserializer;
@@ -13,11 +15,12 @@ public class SportsObject {
 	private LocationType locationType;
 	private List<ContentType> contentTypes;
 	private boolean status;
-	public Location location;
-	public String logo;
+	private Location location;
+	private String logo;
 	public double averageGrade;
 	private LocalTime startWorkingHour;
 	private LocalTime endWorkingHour;
+	private int gradesCounter;
 	
 	public SportsObject() {
 		super();
@@ -25,7 +28,7 @@ public class SportsObject {
 
 	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
 			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
-			LocalTime endWorkingHour) {
+			LocalTime endWorkingHour, int gradesCounter) {
 		super();
 		this.name = name;
 		this.locationType = locationType;
@@ -36,6 +39,7 @@ public class SportsObject {
 		this.averageGrade = averageGrade;
 		this.startWorkingHour = startWorkingHour;
 		this.endWorkingHour = endWorkingHour;
+		this.gradesCounter = gradesCounter;
 	}
 
 	public String getName() {
@@ -93,7 +97,7 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-	// add serializer class 
+	@JsonSerialize(using = LocalTimeSerializer.class)
 	public LocalTime getStartWorkingHour() {
 		return startWorkingHour;
 	}
@@ -103,9 +107,19 @@ public class SportsObject {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	// add serializer class 
+	@JsonSerialize(using = LocalTimeSerializer.class)
 	public LocalTime getEndWorkingHour() {
 		return endWorkingHour;
+	}
+	
+	
+
+	public int getGradesCounter() {
+		return gradesCounter;
+	}
+
+	public void setGradesCounter(int gradesCounter) {
+		this.gradesCounter = gradesCounter;
 	}
 
 	@JsonDeserialize(using = LocalTimeDeserializer.class)
