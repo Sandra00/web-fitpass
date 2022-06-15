@@ -1,10 +1,16 @@
 package dao;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import beans.*;
-import beans.enums.TrainingType;
 import util.PersonalConfig;
 
 public class TrainingDAO {
@@ -13,12 +19,41 @@ public class TrainingDAO {
 	
 	public TrainingDAO() {
 		trainings = new ArrayList<Training>();
-		Training tr1 = new Training(1, "Trening A", TrainingType.PERSONAL, "Gym 1", 60, "janko", "", "");
-		trainings.add(tr1);
+		load();
+		//Training tr1 = new Training(1, "Trening A", TrainingType.PERSONAL, "Gym 1", 60, "janko", "", "");
+		//trainings.add(tr1);
 	}
 	
 	public List<Training> findAll(){
 		return trainings;
+	}
+	
+	private int getNewId() {
+		int max = 0;
+		for (Training training : trainings) {
+			if (training.getTrainingId() > max) {
+				max = training.getTrainingId();
+			}
+		}
+		return max + 1;
+	}
+	
+	private boolean exists(int trainingId) {
+		for (Training training : trainings) {
+			if (training.getTrainingId() == trainingId) {
+				return true;
+			} 
+		}
+		return false;
+	}
+	
+	public boolean addNewTraining(Training training) {
+		if (exists(training.getTrainingId())) {
+			return false;
+		}
+		boolean isAdded = trainings.add(training);
+		save();
+		return isAdded;
 	}
 	
 	public List<String> findTrainersBySportsObjects(String sportsObjectName){
@@ -29,5 +64,31 @@ public class TrainingDAO {
 			}
 		}
 		return trainers;
+	}
+	
+	private void load() {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			trainings = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), Training[].class)));
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void save() {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapper.writeValue(Paths.get(pathToFile).toFile(), trainings);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
