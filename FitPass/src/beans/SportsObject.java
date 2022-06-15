@@ -1,19 +1,20 @@
 package beans;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
-import beans.enums.*;
+import beans.enums.LocationType;
 import util.LocalTimeDeserializer;
 
 public class SportsObject {
 	private String name;
 	private LocationType locationType;
-	private List<ContentType> contentTypes;
+	private List<Content> content;
 	private boolean status;
 	private Location location;
 	private String logo;
@@ -26,13 +27,13 @@ public class SportsObject {
 		super();
 	}
 
-	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
+	public SportsObject(String name, LocationType locationType, List<Content> content, boolean status,
 			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
 			LocalTime endWorkingHour, int gradesCounter) {
 		super();
 		this.name = name;
 		this.locationType = locationType;
-		this.contentTypes = contentTypes;
+		this.content = content;
 		this.status = status;
 		this.location = location;
 		this.logo = logo;
@@ -58,12 +59,12 @@ public class SportsObject {
 		this.locationType = locationType;
 	}
 
-	public List<ContentType> getContentTypes() {
-		return contentTypes;
+	public List<Content> getContent() {
+		return content != null ? content : new ArrayList<Content>();
 	}
 
-	public void setContentTypes(List<ContentType> contentTypes) {
-		this.contentTypes = contentTypes;
+	public void setContent(List<Content> content) {
+		this.content = content;
 	}
 
 	public boolean isStatus() {
@@ -112,8 +113,10 @@ public class SportsObject {
 		return endWorkingHour;
 	}
 	
-	
-
+	@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setEndWorkingHour(LocalTime endWorkingHour) {
+		this.endWorkingHour = endWorkingHour;
+	}
 	public int getGradesCounter() {
 		return gradesCounter;
 	}
@@ -121,12 +124,6 @@ public class SportsObject {
 	public void setGradesCounter(int gradesCounter) {
 		this.gradesCounter = gradesCounter;
 	}
-
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setEndWorkingHour(LocalTime endWorkingHour) {
-		this.endWorkingHour = endWorkingHour;
-	}
-	
 	
 }
 

@@ -10,8 +10,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.Content;
 import beans.SportsObject;
-import beans.User;
 import util.PersonalConfig;
 
 public class SportsObjectDAO {
@@ -36,18 +36,38 @@ public class SportsObjectDAO {
 		return null;
 	}
 	
+	public boolean exists(SportsObject sportsObject) {
+		for(SportsObject so : sportsObjects) {
+			if(so.getName().equals(sportsObject.getName())) return true;
+		}
+		return false;
+	}
+	
+	public boolean newSportObject(SportsObject sportsObject) {
+		if(exists(sportsObject)) return false;
+		sportsObjects.add(sportsObject);
+		saveSportsObjects();
+		return true;
+	}
+	
+	public boolean addContents(String sportsObjectName, Content content) {
+		SportsObject sportsObject = findByName(sportsObjectName);
+		for (Content objectContent : sportsObject.getContent()) {
+			if(objectContent.getName().equals(content.getName())) {
+				return false;
+			}
+		}
+		List<Content> contents = sportsObject.getContent();
+		contents.add(content);
+		sportsObject.setContent(contents);
+		saveSportsObjects();
+		return true;
+	}
 	
 	private void loadSportsObjects() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
-			/*SportsObject gymA = new SportsObject();
-			gymA.setName("Gym A");
-			List<ContentType> gymAContents = new ArrayList<>();
-			gymAContents.add(ContentType.PERSONALTRAINING);
-			gymAContents.add(ContentType.SAUNA);
-			gymA.setContentTypes(gymAContents);
-			sportsObjects.add(gymA);*/
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			System.out.println("greska1");
@@ -74,18 +94,5 @@ public class SportsObjectDAO {
 			e.printStackTrace();
 			System.out.println("greska 3 upis");
 		}
-	}
-	
-	public boolean exists(SportsObject sportsObject) {
-		for(SportsObject so : sportsObjects) {
-			if(so.getName().equals(sportsObject.getName())) return true;
-		}
-		return false;
-	}
-	public boolean newSportObject(SportsObject sportsObject) {
-		if(exists(sportsObject)) return false;
-		sportsObjects.add(sportsObject);
-		saveSportsObjects();
-		return true;
 	}
 }

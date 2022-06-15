@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Content;
 import beans.SportsObject;
 import beans.User;
 import beans.enums.UserType;
@@ -51,13 +53,11 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<SportsObject> findAllSportsObjects(@Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		//System.out.println(sportsObjectDAO.findAll().size());
 		return sportsObjectDAO.findAll();
 	}
 	
 	@GET
 	@Path("/managed")
-	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findManagersSportsObject(@Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
@@ -110,5 +110,24 @@ public class SportsObjectService {
 		//System.out.println(userDao.findAll());
 		//userDao.newCustomer(user);
 		return Response.status(200).build();
+	}
+	
+	@PUT
+	@Path("/add_content")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addContent(Content content,@Context HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		if(user != null && user.getUserType() == UserType.MANAGER) {
+			if (sportsObjectDAO.addContents(user.getSportsObject(), content)){
+				return Response.ok().build();
+			}
+			else {
+				// maybe the error code is not appropriate but i could not find a better one
+				return Response.status(400).build(); 
+			}
+		}
+		return Response.status(401).build(); 
 	}
 }

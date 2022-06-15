@@ -1,7 +1,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -30,7 +29,6 @@ public class UserService {
 	@PostConstruct
 	private void init() {
 		if (ctx.getAttribute("userDAO") == null) {
-	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
 	}
