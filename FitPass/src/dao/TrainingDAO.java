@@ -20,8 +20,6 @@ public class TrainingDAO {
 	public TrainingDAO() {
 		trainings = new ArrayList<Training>();
 		load();
-		//Training tr1 = new Training(1, "Trening A", TrainingType.PERSONAL, "Gym 1", 60, "janko", "", "");
-		//trainings.add(tr1);
 	}
 	
 	public List<Training> findAll(){
@@ -47,10 +45,11 @@ public class TrainingDAO {
 		return false;
 	}
 	
-	public boolean addNewTraining(Training training) {
+	public boolean addTraining(Training training) {
 		if (exists(training.getTrainingId())) {
 			return false;
 		}
+		training.setTrainingId(getNewId());
 		boolean isAdded = trainings.add(training);
 		save();
 		return isAdded;
