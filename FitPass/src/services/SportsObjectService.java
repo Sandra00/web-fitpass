@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import beans.Content;
 import beans.SportsObject;
+import beans.Training;
 import beans.User;
 import beans.enums.UserType;
 import dao.SportsObjectDAO;
@@ -122,6 +123,26 @@ public class SportsObjectService {
 		if(user != null && user.getUserType() == UserType.MANAGER) {
 			if (sportsObjectDAO.addContents(user.getSportsObject(), content)){
 				return Response.ok().build();
+			}
+			else {
+				// maybe the error code is not appropriate but i could not find a better one
+				return Response.status(400).build(); 
+			}
+		}
+		return Response.status(401).build(); 
+	}
+	
+	@POST
+	@Path("/add_training")
+	@Consumes(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
+	public Response addTraining(Training training, @Context HttpServletRequest request) {
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		User user = (User) request.getSession().getAttribute("user");
+		if(user != null && user.getUserType() == UserType.MANAGER) {
+			training.setSportsObject(user.getSportsObject());
+			if(trainingDAO.addTraining(training)) {
+				return Response.ok().build();	
 			}
 			else {
 				// maybe the error code is not appropriate but i could not find a better one
