@@ -32,6 +32,15 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
+	public List<User> findUsersByUsername(List<String> usernames){
+		List<User> users = new ArrayList<User>();
+		for(String username : usernames) {
+			users.add(findUserByUsername(username));
+		}
+		return users;
+	}
+	
 	public List<User> findAll(){
 		return users;
 	}

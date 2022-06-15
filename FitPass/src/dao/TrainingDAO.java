@@ -25,7 +25,7 @@ public class TrainingDAO {
 		List<String> trainers = new ArrayList<String>();
 		for (Training training : trainings){
 			if (training.getSportsObject().equals(sportsObjectName) && !trainers.contains(training.getTrainer())) {
-				trainers.add(training.getSportsObject());
+				trainers.add(training.getTrainer());
 			}
 		}
 		return trainers;

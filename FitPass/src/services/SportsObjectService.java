@@ -66,21 +66,21 @@ public class SportsObjectService {
 	
 	@GET
 	@Path("/trainers")
-	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findSportsObjectTrainers(@Context HttpServletRequest request) {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		User user = (User) request.getSession().getAttribute("user");
 		if(user != null && user.getUserType() == UserType.MANAGER) {
 			String name = user.getSportsObject();
-			return Response.ok(trainingDAO.findTrainersBySportsObjects(name), MediaType.APPLICATION_JSON).build();
+			List<String> trainerUsernames = trainingDAO.findTrainersBySportsObjects(name);
+			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+			return Response.ok(userDAO.findUsersByUsername(trainerUsernames), MediaType.APPLICATION_JSON).build();
 		}
 		return Response.status(401).build(); 
 	}
 	
 	@GET
 	@Path("/visited")
-	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findUsersVisited(@Context HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
