@@ -75,6 +75,28 @@ public class UserDAO {
 		return false;
 	}
 	
+	public boolean newManager(User user) {
+		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.MANAGER);
+			users.add(user);
+			saveUsers();
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean newCoach(User user) {
+		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.COACH);
+			users.add(user);
+			saveUsers();
+			return true;
+		}
+		return false;
+	}
+	
 	private void saveUsers() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

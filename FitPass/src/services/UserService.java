@@ -131,4 +131,34 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		userDao.addSportsObject(user);
 	}
+	
+	@POST
+	@Path("/new-coach")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newCoach(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User admin = (User) request.getSession().getAttribute("user");
+		if(admin != null && admin.getUserType() == UserType.ADMIN) {
+			userDao.newCoach(user);
+			return Response.ok().build();
+		}
+		// error 401: not authorized
+		return Response.status(401).build(); 
+	}
+	
+	@POST
+	@Path("/new-manager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newManager(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User admin = (User) request.getSession().getAttribute("user");
+		if(admin != null && admin.getUserType() == UserType.ADMIN) {
+			userDao.newManager(user);
+			return Response.ok().build();
+		}
+		// error 401: not authorized
+		return Response.status(401).build(); 
+	}
 }
