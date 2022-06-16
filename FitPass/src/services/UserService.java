@@ -140,8 +140,10 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin != null && admin.getUserType() == UserType.ADMIN) {
-			userDao.newCoach(user);
-			return Response.ok().build();
+			if (userDao.newCoach(user)) {
+				return Response.ok().build();
+			}
+			return Response.status(409).build(); // 409 - CONFLICT
 		}
 		// error 401: not authorized
 		return Response.status(401).build(); 
@@ -155,8 +157,10 @@ public class UserService {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin != null && admin.getUserType() == UserType.ADMIN) {
-			userDao.newManager(user);
-			return Response.ok().build();
+			if(userDao.newManager(user)) {
+				return Response.ok().build();
+			}
+			return Response.status(409).build(); // 409 - CONFLICT
 		}
 		// error 401: not authorized
 		return Response.status(401).build(); 

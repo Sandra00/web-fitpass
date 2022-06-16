@@ -193,7 +193,7 @@
 					<select v-if="isManagersEmpty() == false" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" v-model="managerValue" aria-haspopup="true" aria-expanded="false" style="float:right">
   						<option  class="dropdown-item" v-for="manager in managers" :value="manager.username" style="background-color:white">{{manager.name}} {{manager.surname}}</option>
 					</select>
-					<button v-if="isManagersEmpty() == true" class="btn btn-lg btn-primary btn-block">Kreiraj menadžera</button>
+					<a href="new_manager.html" v-if="isManagersEmpty() == true" class="btn btn-lg btn-primary btn-block">Kreiraj menadžera</a>
 				</div>
 				<div class="col"></div>
 			</div>
