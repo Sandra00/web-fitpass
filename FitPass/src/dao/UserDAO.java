@@ -133,7 +133,7 @@ public class UserDAO {
 	}
 	
 	public boolean editUser(User user) {
-		if(checkExisting(user)) {
+		if(checkExisting(user) && !user.getUsername().equals(user.getOldUsername())) {
 			return  false;
 		}
 		User userForChange = findUserByUsername(user.getOldUsername());
@@ -141,7 +141,8 @@ public class UserDAO {
 		userForChange.setOldUsername(user.getUsername());
 		userForChange.setName(user.getName());
 		userForChange.setSurname(user.getSurname());
-		userForChange.setDateOfBirth(user.getGender());
+		userForChange.setGender(user.getGender());
+		userForChange.setDateOfBirth(user.getDateOfBirth());
 		userForChange.setPassword(user.getPassword());
 		saveUsers();
 		return true;
