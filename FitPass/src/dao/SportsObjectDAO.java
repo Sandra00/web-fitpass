@@ -28,6 +28,7 @@ public class SportsObjectDAO {
 	}
 	
 	public SportsObject findByName(String name) {
+
 		for (SportsObject sportsObject : sportsObjects) {
 			if(sportsObject.getName().equals(name)) {
 				return sportsObject;
@@ -36,6 +37,7 @@ public class SportsObjectDAO {
 		return null;
 	}
 	
+
 	public boolean exists(SportsObject sportsObject) {
 		for(SportsObject so : sportsObjects) {
 			if(so.getName().equals(sportsObject.getName())) return true;

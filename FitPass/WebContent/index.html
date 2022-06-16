@@ -122,25 +122,26 @@
 					<td>{{object.logo}}</td>
 					<td>{{object.averageGrade}}</td>
 					<td>
-						<template v-for="content in object.startWorkingHour">
-							{{content}} :
-						</template>
-							- 
-						<template v-for="content in object.endWorkingHour">
-							{{content}} :
-						</template>
+						{{object.startWorkingHour}} - {{object.endWorkingHour}}
 					</td>
 					<!--  <td>
 						<div v-for="content in object.contentTypes"> 
 							<span class="badge bg-success">{{content}}</span>
 						</div>
 					</td>-->
+					<td>
+						<a v-bind:href="'showObject.html?name=' +object.name">
+						<button class="btn btn-lg btn-primary btn-block">Prikaži objekat
+						</button>
+						</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
 	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="app/sportsObjects.js"></script>
 	<script src="app/menu.js"></script>

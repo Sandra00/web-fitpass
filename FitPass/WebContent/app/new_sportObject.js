@@ -1,6 +1,4 @@
 
-
-window.onload = function () {
     const vm = new Vue({
     el: '#app',
     data: {
@@ -64,8 +62,8 @@ window.onload = function () {
 							zipcode:this.postNumber
 						}
 					},
-                    startWorkingHour: null,
-                    endWorkingHour: null
+                    startWorkingHour: this.startTime.toLocaleString(),
+                    endWorkingHour: this.endTime.toLocaleString()
                 }
             )
             .then( response =>{
@@ -91,4 +89,3 @@ window.onload = function () {
         }
     }
 });
-}

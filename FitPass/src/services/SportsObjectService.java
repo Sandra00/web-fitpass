@@ -10,12 +10,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 import beans.Content;
+
 import beans.SportsObject;
 import beans.Training;
 import beans.User;
@@ -113,6 +116,28 @@ public class SportsObjectService {
 		return Response.status(200).build();
 	}
 	
+
+	@GET
+	@Path("/showObject")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportsObject setObject(SportsObject so, @Context HttpServletRequest request) {
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		System.out.println("udje ovde");
+		System.out.println(so.getName());
+		request.getSession().setAttribute("object", sportsObjectDAO.findByName(so.getName()));
+		System.out.println(sportsObjectDAO.findByName(so.getName()).getName());
+		return sportsObjectDAO.findByName(so.getName());
+	}
+	
+	@GET
+	@Path("/currentObject")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public SportsObject currentObject( @Context HttpServletRequest request) {
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
+		return sportsObjectDAO.findByName(request.getParameter("name"));
+
 	@PUT
 	@Path("/add_content")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -150,5 +175,6 @@ public class SportsObjectService {
 			}
 		}
 		return Response.status(401).build(); 
+
 	}
 }
