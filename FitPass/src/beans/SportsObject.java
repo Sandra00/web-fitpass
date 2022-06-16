@@ -28,7 +28,7 @@ public class SportsObject {
 	}
 
 
-	public SportsObject(String name, LocationType locationType, List<Content> contentTypes, boolean status,
+	public SportsObject(String name, LocationType locationType, List<Content> content, boolean status,
 			Location location, String logo, double averageGrade, String startWorkingHour,
 			String endWorkingHour, int gradesCounter) {
 
@@ -115,7 +115,6 @@ public class SportsObject {
 		return endWorkingHour;
 	}
 	
-	
 	public int getGradesCounter() {
 		return gradesCounter;
 	}
@@ -129,8 +128,6 @@ public class SportsObject {
 	public void setEndWorkingHour(String endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
 	}
-	
-
 	
 }
 
