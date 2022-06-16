@@ -25,20 +25,43 @@ public class UserDAO {
 	
 	
 	public User findUserByUsername(String username) {
-		//System.out.println(username);
 		for(User user : users) {
-			//System.out.println(user.getUsername());
 			if(user.getUsername().equals(username)) {
-				//System.out.println("nasao");
 				return user;
 			}
 		}
 		return null;
 	}
+	
+	public List<User> findUsersByUsername(List<String> usernames){
+		List<User> users = new ArrayList<User>();
+		for(String username : usernames) {
+			users.add(findUserByUsername(username));
+		}
+		return users;
+	}
+	
 	public List<User> findAll(){
 		return users;
 	}
 	
+	
+	public List<User> findUsersVisitedSportsObject(String sportsObjectName) {
+		List<User> userList = new ArrayList<User>();
+		for (User user : users) {
+			for (String sportsObject : user.getVisitedSportsObjects()) {
+				if(sportsObject.equals(sportsObjectName) && !userList.contains(user)) {
+					userList.add(user);
+				}
+			}
+		}
+		return userList;
+	}
+	
+	public String findManagersSportsObjectName(String managerUsername) {
+		User manager = findUserByUsername(managerUsername);
+		return manager != null ? manager.getSportsObject() : null;
+	}
 	
 	public boolean newCustomer(User user) {
 		if(!checkExisting(user)) {
@@ -49,6 +72,28 @@ public class UserDAO {
 			return true;
 		}
 		saveUsers();
+		return false;
+	}
+	
+	public boolean newManager(User user) {
+		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.MANAGER);
+			users.add(user);
+			saveUsers();
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean newCoach(User user) {
+		if(!checkExisting(user)) {
+			user.setOldUsername(user.getUsername());
+			user.setUserType(UserType.COACH);
+			users.add(user);
+			saveUsers();
+			return true;
+		}
 		return false;
 	}
 	

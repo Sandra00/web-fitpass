@@ -7,7 +7,7 @@ window.onload = function() {
 			isAdmin: false,
 			isManager: false
 		},
-		mounted(){
+		created(){
 			axios.get('rest/currentUser')
 			.then((response) => {
 				this.username = response.data.username;

@@ -1,7 +1,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -30,7 +29,6 @@ public class UserService {
 	@PostConstruct
 	private void init() {
 		if (ctx.getAttribute("userDAO") == null) {
-	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
 	}
@@ -101,8 +99,6 @@ public class UserService {
 			//System.out.println(userDao.findAll());
 			return Response.status(400).entity("Postoji korisnik sa unetim korisničkim imenom").build();
 		}
-		//System.out.println(userDao.findAll());
-		//userDao.newCustomer(user);
 		return Response.status(200).build();
 	}
 	
@@ -134,5 +130,35 @@ public class UserService {
 	public void addSportsObject(User user) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		userDao.addSportsObject(user);
+	}
+	
+	@POST
+	@Path("/new-coach")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newCoach(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User admin = (User) request.getSession().getAttribute("user");
+		if(admin != null && admin.getUserType() == UserType.ADMIN) {
+			userDao.newCoach(user);
+			return Response.ok().build();
+		}
+		// error 401: not authorized
+		return Response.status(401).build(); 
+	}
+	
+	@POST
+	@Path("/new-manager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response newManager(User user, @Context HttpServletRequest request) {
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		User admin = (User) request.getSession().getAttribute("user");
+		if(admin != null && admin.getUserType() == UserType.ADMIN) {
+			userDao.newManager(user);
+			return Response.ok().build();
+		}
+		// error 401: not authorized
+		return Response.status(401).build(); 
 	}
 }
