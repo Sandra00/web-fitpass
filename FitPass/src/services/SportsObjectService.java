@@ -137,7 +137,7 @@ public class SportsObjectService {
 	public SportsObject currentObject( @Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
 		return sportsObjectDAO.findByName(request.getParameter("name"));
-
+	}
 	@PUT
 	@Path("/add_content")
 	@Consumes(MediaType.APPLICATION_JSON)
