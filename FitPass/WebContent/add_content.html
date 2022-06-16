@@ -53,13 +53,13 @@
             <form class="form-signin" @submit.prevent="getFormValues">
                 <h1 class="h3 mb-3 font-weight-normal">Dodaj sadržaj</h1>
                 <input type="text" id="name" v-model="name" class="form-control" placeholder="Naziv" required>
-                <select class="btn btn-secondary dropdown-toggle" v-model="objectType" data-toggle="dropdown">
+                <select class="btn btn-secondary dropdown-toggle" v-model="type" data-toggle="dropdown" required>
 					<option class="dropdown-item" value=PERSONALTRAINING>Personalni trening</option>
 					<option class="dropdown-item" value="GROUPTRAINING">Grupni trening</option>
 					<option class="dropdown-item" value="SAUNA">Sauna</option>
 				</select>
                 <textarea id="description" v-model="description" class="form-control" placeholder="Opis" rows="4"></textarea>
-                <input type="number" id="duration" v-model="dateOfBirth" min="1" max="1000" class="form-control" placeholder="Trajanje" required>
+                <input type="number" id="duration" v-model="duration" min="1" max="1000" class="form-control" placeholder="Trajanje(min)">
                 <button class="btn btn-lg btn-secondary btn-sm">Dodaj sliku</button><br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Kreiraj</button>
                 <p class="text-danger">
@@ -71,6 +71,6 @@
         <script src="js/vue.js"></script>
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
-        <!-- <script src="app/new_coach.js" ></script> --> 
+        <script src="app/add_content.js" ></script> 
     </body>
 </html>

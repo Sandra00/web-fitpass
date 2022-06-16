@@ -141,7 +141,6 @@ public class SportsObjectService {
 	@PUT
 	@Path("/add_content")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Response addContent(Content content,@Context HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
@@ -157,10 +156,9 @@ public class SportsObjectService {
 		return Response.status(401).build(); 
 	}
 	
-	@POST
+	@PUT // changed from POST
 	@Path("/add_training")
 	@Consumes(MediaType.APPLICATION_JSON)
-	//@Produces(MediaType.APPLICATION_JSON)
 	public Response addTraining(Training training, @Context HttpServletRequest request) {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		User user = (User) request.getSession().getAttribute("user");
