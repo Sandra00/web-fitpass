@@ -3,10 +3,9 @@
 window.onload = function () {
     const vm = new Vue({
     el: '#app',
-    data() {
-        return {
-            error: ""
-        };
+    data: {
+        error: null,
+        gender: false
     },
     methods: {
         async register() {
