@@ -28,7 +28,7 @@ public class SportsObject {
 	}
 
 
-	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
+	public SportsObject(String name, LocationType locationType, List<Content> content, boolean status,
 			Location location, String logo, double averageGrade, String startWorkingHour,
 			String endWorkingHour, int gradesCounter) {
 
@@ -115,10 +115,6 @@ public class SportsObject {
 		return endWorkingHour;
 	}
 	
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setEndWorkingHour(LocalTime endWorkingHour) {
-		this.endWorkingHour = endWorkingHour;
-	}
 	public int getGradesCounter() {
 		return gradesCounter;
 	}
@@ -132,8 +128,6 @@ public class SportsObject {
 	public void setEndWorkingHour(String endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
 	}
-	
-
 	
 }
 
