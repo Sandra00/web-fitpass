@@ -27,6 +27,15 @@ public class SportsObjectDAO {
 		return sportsObjects; 
 	}
 	
+	public SportsObject findByName(String name) {
+		for(SportsObject so : sportsObjects) {
+			if(so.getName().equals(name)) {
+				return so;
+			}
+		}
+		return null;
+	}
+	
 	private void loadSportsObjects() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

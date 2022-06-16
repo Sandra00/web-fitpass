@@ -130,7 +130,10 @@
 						</div>
 					</td>-->
 					<td>
-						<button class="btn btn-lg btn-primary btn-block">Prikaži objekat</button>
+						<a v-bind:href="'showObject.html?name=' +object.name">
+						<button class="btn btn-lg btn-primary btn-block">Prikaži objekat
+						</button>
+						</a>
 					</td>
 				</tr>
 			</tbody>
@@ -138,6 +141,7 @@
 	</div>
 	
 	<script src="js/vue.js"></script>
+	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="app/sportsObjects.js"></script>
 	<script src="app/menu.js"></script>

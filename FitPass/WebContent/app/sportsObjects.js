@@ -102,6 +102,16 @@ var app = new Vue({
 				return sportsObject.locationType.match(type);
 			});
 		});
+		},
+		showObject(selectedName) {
+			 axios.get(
+                "rest/objects/showObject",
+                {
+                    name: selectedName
+                }
+            )
+			axios.get('rest/objects/showObject');
+			window.location.href = 'showObject.html';
 		}
 		
 	},
