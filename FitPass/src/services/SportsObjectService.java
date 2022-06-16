@@ -83,10 +83,7 @@ public class SportsObjectService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportsObject currentObject( @Context HttpServletRequest request) {
-		System.out.println("preuzeto " + request.getParameter("name"));
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		System.out.println("tu smo");
-		System.out.println(request.getParameter("name"));
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
 		return sportsObjectDAO.findByName(request.getParameter("name"));
 	}
 }
