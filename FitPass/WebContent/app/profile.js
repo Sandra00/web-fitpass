@@ -1,4 +1,3 @@
-window.onload = function() {
 	const vm = new Vue ({
 		el: '#app1',
 		data: {
@@ -49,4 +48,3 @@ window.onload = function() {
         }
 		}
 	});
-}
