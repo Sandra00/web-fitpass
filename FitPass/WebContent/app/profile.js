@@ -41,6 +41,7 @@
 					)
 					.then( response =>{
                 this.error = 'Profil je uspešno izmenjen';
+                window.location.href = 'index.html';
             })
 					.catch( error => {
                 this.error = 'Postoji korisnik sa unetim korisničkim imenom';

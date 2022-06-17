@@ -80,6 +80,7 @@
 				<td>Opis</td>
 				<td>Trajanje</td>
 				<td>Slika</td>
+				<td></td>
 			</thead>
 
 			<tbody v-for="content in contents">
@@ -88,6 +89,12 @@
 				<td>{{content.description}}</td>
 				<td>{{content.duration}}</td>
 				<td>...</td>
+				<td>
+					<a v-bind:href="'edit_content.html?name=' + content.name">
+						<button class="btn btn-lg btn-primary btn-block">Izmeni sadržaj
+						</button>
+					</a>
+				</td>
 			</tbody>
 		</table>
 		

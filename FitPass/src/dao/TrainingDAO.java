@@ -67,6 +67,7 @@ public class TrainingDAO {
 	}
 	
 	
+
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
