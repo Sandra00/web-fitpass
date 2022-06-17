@@ -87,7 +87,7 @@
 				<td>{{content.duration}}</td>
 				<td>...</td>
 				<td>
-					<a href="edit_content.html">
+					<a v-bind:href="'edit_content.html?name=' + content.name">
 						<button class="btn btn-lg btn-primary btn-block">Izmeni sadržaj
 						</button>
 					</a>
