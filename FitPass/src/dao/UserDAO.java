@@ -63,6 +63,16 @@ public class UserDAO {
 		return manager != null ? manager.getSportsObject() : null;
 	}
 	
+	public List<User> findAllCoaches(){
+		List<User> coaches = new ArrayList<User>();
+		for(User user : users) {
+			if(user.getUserType() == UserType.COACH) {
+				coaches.add(user);
+			}
+		}
+		return coaches;
+	}
+	
 	public boolean newCustomer(User user) {
 		if(!checkExisting(user)) {
 			user.setOldUsername(user.getUsername());
