@@ -27,10 +27,10 @@ public class SportsObjectDAO {
 		return sportsObjects; 
 	}
 	
-	public SportsObject findByName(String name) {
+	public SportsObject findByName(String sportsObjectName) {
 
 		for (SportsObject sportsObject : sportsObjects) {
-			if(sportsObject.getName().equals(name)) {
+			if(sportsObject.getName().equals(sportsObjectName)) {
 				return sportsObject;
 			}
 		}
@@ -45,11 +45,23 @@ public class SportsObjectDAO {
 		return false;
 	}
 	
+	public boolean exists(String sportsObjectName) {
+		for(SportsObject so : sportsObjects) {
+			if(so.getName().equals(sportsObjectName)) return true;
+		}
+		return false;
+	}
+	
 	public boolean newSportObject(SportsObject sportsObject) {
 		if(exists(sportsObject)) return false;
 		sportsObjects.add(sportsObject);
 		saveSportsObjects();
 		return true;
+	}
+	
+	public List<Content> findContents(String sportsObjectName){
+		if(!exists(sportsObjectName)) return null;
+		return findByName(sportsObjectName).getContent();
 	}
 	
 	public boolean addContents(String sportsObjectName, Content content) {

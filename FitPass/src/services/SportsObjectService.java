@@ -173,6 +173,16 @@ public class SportsObjectService {
 			}
 		}
 		return Response.status(401).build(); 
-
+	}
+	
+	@GET
+	@Path("/content/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findContent(@PathParam("name") String sportsObjectName, @Context HttpServletRequest request) {
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
+		return sportsObjectDAO.findContents(sportsObjectName) == null ? 
+				Response.status(400).build() : 
+					Response.ok(sportsObjectDAO.findContents(sportsObjectName), MediaType.APPLICATION_JSON).build();
 	}
 }

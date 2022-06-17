@@ -3,12 +3,17 @@ const vm = new Vue ({
 	data: {
 		sportsObject: null,
 		trainers: null,
-		customers: null
+		customers: null,
+		contents: null
 	},
 	created (){
 		axios.get('rest/objects/managed')
 		.then((response) => {
 			this.sportsObject= response.data;
+			axios.get('rest/objects/content/' + this.sportsObject.name)
+			.then((response) => {
+				this.contents= response.data;
+			});
 		});
 
 		axios.get('rest/objects/trainers')
@@ -20,6 +25,7 @@ const vm = new Vue ({
 		.then((response) => {
 			this.customers= response.data;
 		});
+		
 
 	},
 	methods: {

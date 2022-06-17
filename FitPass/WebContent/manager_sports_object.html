@@ -66,8 +66,31 @@
 				<td>{{trainer.surname}}</td>
 			</tbody>
 		</table>
+		
 		<br>
-		<h3>Posetioci:</h2>
+		
+		<h3>Sadržaj:</h3>
+		<table class="table">
+			<thead>
+				<td>Naziv</td>
+				<td>Tip</td>
+				<td>Opis</td>
+				<td>Trajanje</td>
+				<td>Slika</td>
+			</thead>
+
+			<tbody v-for="content in contents">
+				<td>{{content.name}}</td>
+				<td>{{content.type}}</td>
+				<td>{{content.description}}</td>
+				<td>{{content.duration}}</td>
+				<td>...</td>
+			</tbody>
+		</table>
+		
+		<br>
+		
+		<h3>Posetioci:</h3>
 		<table class="table">
 			<thead>
 				<td>Korisničko ime</td>
