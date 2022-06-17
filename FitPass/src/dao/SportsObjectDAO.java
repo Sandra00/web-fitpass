@@ -64,6 +64,17 @@ public class SportsObjectDAO {
 		return findByName(sportsObjectName).getContent();
 	}
 	
+	public Content findContentByName(String name) {
+		for(SportsObject sportsObject : sportsObjects) {
+			for(Content content : sportsObject.getContent()) {
+				if(content.getName().equals(name)) {
+					return content;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public boolean addContents(String sportsObjectName, Content content) {
 		SportsObject sportsObject = findByName(sportsObjectName);
 		for (Content objectContent : sportsObject.getContent()) {
