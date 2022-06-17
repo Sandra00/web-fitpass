@@ -156,6 +156,18 @@ public class SportsObjectService {
 		return Response.status(401).build(); 
 	}
 	
+	@POST
+	@Path("/editContent")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response editContent(Content content, @Context HttpServletRequest request) {
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		if(sportsObjectDAO.editContent(content)) {
+			return Response.status(200).build();
+		}
+		return Response.status(400).entity("nesto bas i ne radi").build();
+	}
+	
 	@PUT // changed from POST
 	@Path("/add_training")
 	@Consumes(MediaType.APPLICATION_JSON)

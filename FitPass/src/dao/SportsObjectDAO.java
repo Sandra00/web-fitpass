@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportsObject;
+import beans.enums.ContentType;
 import util.PersonalConfig;
 
 public class SportsObjectDAO {
@@ -86,6 +87,28 @@ public class SportsObjectDAO {
 		content.setOldName(content.getName()); //set old name same as name
 		contents.add(content);
 		sportsObject.setContent(contents);
+		saveSportsObjects();
+		return true;
+	}
+	
+	public boolean checkExistingContentName(String name) {
+		for(SportsObject sportsObject : sportsObjects) {
+			for(Content content : sportsObject.getContent()) {
+				if(content.getName().equals(name)) return true;
+			}
+		}
+		return false;
+	}
+	public boolean editContent(Content content) {
+		if(checkExistingContentName(content.getName()) && !content.getName().equals(content.getOldName())) {
+			return false;
+		}
+		Content contentForChange = findContentByName(content.getOldName());
+		contentForChange.setName(content.getName());
+		contentForChange.setOldName(content.getName());
+		contentForChange.setType(content.getType());
+		contentForChange.setDescription(content.getDescription());
+		contentForChange.setDuration(content.getDuration());
 		saveSportsObjects();
 		return true;
 	}

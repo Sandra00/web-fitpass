@@ -6,7 +6,8 @@ var app = new Vue({
 		name: null,
 		contentType: null,
 		description: null,
-		duration: null
+		duration: null,
+		error: null
 	},
 	mounted(){
 		var location = window.location.href.toString();
@@ -29,5 +30,28 @@ var app = new Vue({
 			this.description = this.content.description;
 			this.duration = this.content.duration
 		})
+	},
+	methods: {
+		async editContent(){
+			axios.post(
+				"rest/objects/editContent",
+				{
+					oldName: this.content.oldName,
+					name: this.name,
+					type: this.type,
+					description: this.description,
+					duration: this.duration
+				}
+			)
+			.then(response => {
+				this.error = "Sadržaj je uspešno izmenjen";
+			})
+			.catch(error => {
+				this.error = "Postoji sadržaj sa istim nazivom";
+			})
+		},
+		getFormValues (submitEvent) {
+            	this.editContent();
+        }
 	}
 })
