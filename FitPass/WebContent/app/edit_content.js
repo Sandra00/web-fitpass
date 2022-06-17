@@ -45,6 +45,7 @@ var app = new Vue({
 			)
 			.then(response => {
 				this.error = "Sadržaj je uspešno izmenjen";
+				window.location.href = 'manager_sports_object.html';
 			})
 			.catch(error => {
 				this.error = "Postoji sadržaj sa istim nazivom";
