@@ -3,6 +3,7 @@ package beans;
 import beans.enums.ContentType;
 
 public class Content {
+	private String oldName;
 	private String name;
 	private ContentType type;
 	private String image;
@@ -13,8 +14,9 @@ public class Content {
 		super();
 	}
 	
-	public Content(String name, ContentType type, String image, String description, int duration) {
+	public Content(String oldName, String name, ContentType type, String image, String description, int duration) {
 		super();
+		this.oldName = oldName;
 		this.name = name;
 		this.type = type;
 		this.image = image;
@@ -61,4 +63,14 @@ public class Content {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+
+	public String getOldName() {
+		return oldName;
+	}
+
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+	
+	
 }

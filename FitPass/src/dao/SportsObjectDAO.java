@@ -83,6 +83,7 @@ public class SportsObjectDAO {
 			}
 		}
 		List<Content> contents = sportsObject.getContent();
+		content.setOldName(content.getName()); //set old name same as name
 		contents.add(content);
 		sportsObject.setContent(contents);
 		saveSportsObjects();
