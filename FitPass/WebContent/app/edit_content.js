@@ -38,7 +38,7 @@ var app = new Vue({
 				{
 					oldName: this.content.oldName,
 					name: this.name,
-					type: this.type,
+					type: this.contentType,
 					description: this.description,
 					duration: this.duration
 				}

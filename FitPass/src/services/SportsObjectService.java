@@ -193,7 +193,7 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Content currentContent( @Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
-		return sportsObjectDAO.findContentByName(request.getParameter("name"));
+		return sportsObjectDAO.findContentByName(request.getParameter("name").replace("%20", " "));
 	}
 	
 	@GET
