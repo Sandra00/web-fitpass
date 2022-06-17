@@ -74,14 +74,14 @@ public class SportsObjectService {
 	}
 	
 	@GET
-	@Path("/trainers")
+	@Path("/coaches")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findSportsObjectTrainers(@Context HttpServletRequest request) {
+	public Response findSportsObjectCoaches(@Context HttpServletRequest request) {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		User user = (User) request.getSession().getAttribute("user");
 		if(user != null && user.getUserType() == UserType.MANAGER) {
 			String name = user.getSportsObject();
-			List<String> trainerUsernames = trainingDAO.findTrainersBySportsObjects(name);
+			List<String> trainerUsernames = trainingDAO.findCoachesBySportsObjects(name);
 			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
 			return Response.ok(userDAO.findUsersByUsername(trainerUsernames), MediaType.APPLICATION_JSON).build();
 		}

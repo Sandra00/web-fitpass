@@ -123,6 +123,15 @@ public class UserService {
 		return userDao.getFreeManagers();
 	}
 	
+	@GET
+	@Path("/all-coaches")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllCoaches(){
+		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		return Response.ok(userDao.findAllCoaches(), MediaType.APPLICATION_JSON).build();
+	}
+	
 	@POST
 	@Path("/addSportsObject")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -165,4 +174,6 @@ public class UserService {
 		// error 401: not authorized
 		return Response.status(401).build(); 
 	}
+	
+	
 }

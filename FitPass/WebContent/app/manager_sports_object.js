@@ -2,7 +2,7 @@ const vm = new Vue ({
 	el: '#app',
 	data: {
 		sportsObject: null,
-		trainers: null,
+		coaches: null,
 		customers: null,
 		contents: null
 	},
@@ -16,9 +16,9 @@ const vm = new Vue ({
 			});
 		});
 
-		axios.get('rest/objects/trainers')
+		axios.get('rest/objects/coaches')
 		.then((response) => {
-			this.trainers= response.data;
+			this.coaches= response.data;
 		});
 
 		axios.get('rest/objects/visited')
