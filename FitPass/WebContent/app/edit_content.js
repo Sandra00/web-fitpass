@@ -2,7 +2,11 @@ var app = new Vue({
 	el: '#app',
 	data:{
 		content: null,
-		label:null
+		label:null,
+		name: null,
+		contentType: null,
+		description: null,
+		duration: null
 	},
 	mounted(){
 		var location = window.location.href.toString();
@@ -20,6 +24,10 @@ var app = new Vue({
 		)
 		.then((response) => {
 			this.content = response.data;
+			this.name = this.content.name;
+			this.contentType = this.content.type;
+			this.description = this.content.description;
+			this.duration = this.content.duration
 		})
 	}
 })

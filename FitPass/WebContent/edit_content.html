@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
+		.center {
+  			margin-left: auto;
+  			margin-right: auto;
+		}
+		.form-signin {
+		  width: 100%;
+		  max-width: 330px;
+		  padding: 15px;
+		  margin: 0 auto;
+		}
+		
+	</style>
 </head>
 <body>
 
+	<!--  
 	<div id="app">
 		<label>{{content.name}}</label>
 	</div>
-
+	-->
+	<h1 class="d-flex justify-content-center">Izmena sadržaja</h1>
+	<form id="app" class="form-signin" @submit.prevent="getFormValues">
+		<table>
+			<tr>
+				<td>
+					Naziv: 
+				</td>
+				<td>
+					<input type="text" id="name" v-model="name" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Tip: 
+				</td>
+				<td>
+					<select class="btn btn-secondary dropdown-toggle" v-model="contentType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
+  						<option  class="dropdown-item" style="background-color:white" value="PERSONALTRAINING">Lični trening</option>
+  						<option class="dropdown-item" style="background-color:white" value="GROUPTRAINING">Grupni trening</option>
+  						<option class="dropdown-item" style="background-color:white" value="SAUNA">Sauna</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Opis:
+				</td>
+				<td>
+					<input type="text" id="description" v-model="description" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Trajanje:
+				</td>
+				<td>
+					<input type="number" id="duration" v-model="duration" class="form-control" required>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Izmeni</button>
+				<p class="text-danger">
+				 	{{ error }}
+				</p>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	
+	
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
