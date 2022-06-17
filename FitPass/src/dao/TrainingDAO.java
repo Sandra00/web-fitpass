@@ -46,7 +46,8 @@ public class TrainingDAO {
 	}
 	
 	public boolean addTraining(Training training) {
-		if (exists(training.getTrainingId())) {
+		// modify this if statement if the same name for training in one sports object is not allowed
+		if (exists(training.getTrainingId())) { 
 			return false;
 		}
 		training.setTrainingId(getNewId());
@@ -55,15 +56,16 @@ public class TrainingDAO {
 		return isAdded;
 	}
 	
-	public List<String> findTrainersBySportsObjects(String sportsObjectName){
-		List<String> trainers = new ArrayList<String>();
+	public List<String> findCoachesBySportsObjects(String sportsObjectName){
+		List<String> coaches = new ArrayList<String>();
 		for (Training training : trainings){
-			if (training.getSportsObject().equals(sportsObjectName) && !trainers.contains(training.getTrainer())) {
-				trainers.add(training.getTrainer());
+			if (training.getSportsObject().equals(sportsObjectName) && !coaches.contains(training.getCoach())) {
+				coaches.add(training.getCoach());
 			}
 		}
-		return trainers;
+		return coaches;
 	}
+	
 	
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();

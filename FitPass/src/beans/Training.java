@@ -8,7 +8,7 @@ public class Training {
 	private TrainingType trainingType;
 	private String sportsObject;
 	private int length;
-	private String trainer;
+	private String coach;
 	private String description;
 	private String image;
 	
@@ -16,7 +16,7 @@ public class Training {
 		super();
 	}
 
-	public Training(int trainingId, String name, TrainingType trainingType, String sportsObject, int length, String trainer,
+	public Training(int trainingId, String name, TrainingType trainingType, String sportsObject, int length, String coach,
 			String description, String image) {
 		super();
 		this.trainingId = trainingId;
@@ -24,7 +24,7 @@ public class Training {
 		this.trainingType = trainingType;
 		this.sportsObject = sportsObject;
 		this.length = length;
-		this.trainer = trainer;
+		this.coach = coach;
 		this.description = description;
 		this.image = image;
 	}
@@ -69,12 +69,12 @@ public class Training {
 		this.length = length;
 	}
 
-	public String getTrainer() {
-		return trainer;
+	public String getCoach() {
+		return coach;
 	}
 
-	public void setTrainer(String trainer) {
-		this.trainer = trainer;
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 
 	public String getDescription() {
