@@ -91,13 +91,7 @@ public class SportsObject {
 	}
 
 	public void setLogo(String logo) {
-		ImageDAO imageDAO = ImageDAO.getInstance();
-		if(imageDAO.isBase64(logo)) {
-			this.logo = imageDAO.saveImage(logo);
-		}
-		else {
-			this.logo = logo;
-		}
+		this.logo = logo;
 	}
 
 

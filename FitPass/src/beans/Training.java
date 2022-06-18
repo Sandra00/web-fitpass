@@ -91,13 +91,7 @@ public class Training {
 	}
 
 	public void setImage(String image) {
-		ImageDAO imageDAO = ImageDAO.getInstance();
-		if(imageDAO.isBase64(image)) {
-			this.image = imageDAO.saveImage(image);
-		}
-		else {
-			this.image = image;
-		}
+		this.image = image;
 	}
 
 	

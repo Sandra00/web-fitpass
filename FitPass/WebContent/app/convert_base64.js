@@ -12,3 +12,16 @@ const convertBase64 = (file) => {
 	    };
 	});
 };
+
+const uploadImage = (file) => {
+	return new Promise((resolve, reject) => {
+		axios.post(
+			"rest/image/",
+			{
+				image: file
+			}
+		).then( response => {
+			resolve(response.data);
+		})
+	});
+};

@@ -13,12 +13,14 @@ const vm = new Vue({
 				return ;
 			}
 			
+			imageId = await uploadImage(this.file);
+			
 	        await axios.put(
 	            "rest/objects/add_content",
 	            {
 	                name: this.name,
 	                type: this.type,
-	                image: this.file,
+	                image: imageId,
 	                description: this.description,
 	                duration: this.duration
 	            }

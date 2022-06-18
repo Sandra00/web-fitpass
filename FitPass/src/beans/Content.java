@@ -46,23 +46,11 @@ public class Content {
 	}
 
 	public String getImage() {
-		ImageDAO imageDAO = ImageDAO.getInstance();
-		if(imageDAO.isBase64(image)) {
-			return image;
-		}
-		else {
-			return imageDAO.findImage(image);
-		}
+		return image;
 	}
 
 	public void setImage(String image) {
-		ImageDAO imageDAO = ImageDAO.getInstance();
-		if(imageDAO.isBase64(image)) {
-			this.image = imageDAO.saveImage(image);
-		}
-		else {
-			this.image = image;
-		}
+		this.image = image;
 	}
 
 	public String getDescription() {

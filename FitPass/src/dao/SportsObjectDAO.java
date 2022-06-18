@@ -107,6 +107,7 @@ public class SportsObjectDAO {
 		contentForChange.setName(content.getName());
 		contentForChange.setOldName(content.getName());
 		contentForChange.setType(content.getType());
+		contentForChange.setImage(content.getImage());
 		contentForChange.setDescription(content.getDescription());
 		contentForChange.setDuration(content.getDuration());
 		saveSportsObjects();

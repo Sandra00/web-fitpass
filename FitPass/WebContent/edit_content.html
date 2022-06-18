@@ -99,7 +99,7 @@
 					Opis:
 				</td>
 				<td>
-					<input type="text" id="description" v-model="description" class="form-control" required>
+					<input type="text" id="description" v-model="description" class="form-control">
 				</td>
 			</tr>
 			<tr>
@@ -107,8 +107,12 @@
 					Trajanje:
 				</td>
 				<td>
-					<input type="number" id="duration" v-model="duration" class="form-control" required>
+					<input type="number" id="duration" v-model="duration" class="form-control">
 				</td>
+			</tr>
+			<tr>
+				<td><input type="file" ref="image" class="form-control-file" name="image" accept="image/png, image/jpeg" @change="handleFileUpload( $event )"></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -127,6 +131,7 @@
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
+	<script src="app/convert_base64.js"></script>
 	<script src="app/edit_content.js"></script>
 	<script src="app/menu.js"></script>
 </body>

@@ -7,6 +7,7 @@ var app = new Vue({
 		contentType: null,
 		description: null,
 		duration: null,
+		file: null,
 		error: null
 	},
 	mounted(){
@@ -33,12 +34,15 @@ var app = new Vue({
 	},
 	methods: {
 		async editContent(){
+			imageId = await uploadImage(this.file);
+			
 			axios.post(
 				"rest/objects/editContent",
 				{
 					oldName: this.content.oldName,
 					name: this.name,
 					type: this.contentType,
+					image: imageId,
 					description: this.description,
 					duration: this.duration
 				}
@@ -51,8 +55,11 @@ var app = new Vue({
 				this.error = "Postoji sadržaj sa istim nazivom";
 			})
 		},
+		async handleFileUpload(event){
+			this.file = await convertBase64(event.target.files[0]);
+    	},
 		getFormValues (submitEvent) {
-            	this.editContent();
+            this.editContent();
         }
 	}
 })

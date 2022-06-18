@@ -13,6 +13,10 @@ const vm = new Vue ({
 			axios.get('rest/objects/content/' + this.sportsObject.name)
 			.then((response) => {
 				this.contents= response.data;
+				this.contents.forEach(async item => {
+					item.image = await this.getImage(item.image);
+				});
+				
 			});
 		});
 
@@ -29,6 +33,13 @@ const vm = new Vue ({
 
 	},
 	methods: {
-		
+		getImage(id){
+			return new Promise((resolve, reject) => {
+				axios.get('rest/image/' + id)
+				.then((response) => {
+					resolve(response.data);
+				})
+			});
+		}
 	}
 });
