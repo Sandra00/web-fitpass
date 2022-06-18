@@ -1,44 +1,49 @@
-    const vm = new Vue({
-    el: '#app',
-    data() {
-        return {
-            error: ""
-        };
-    },
-    methods: {
-        async register() {
+const vm = new Vue({
+	el: '#app',
+	data() {
+	    return {
+	        error: "",
+	        file: null
+	    };
+	},
+	methods: {
+	    async register() {
 			if(!this.type){
 				this.error = "Molimo Vas unesite tip sadržaja!";
 				return ;
 			}
 			
-            await axios.put(
-                "rest/objects/add_content",
-                {
-                    name: this.name,
-                    type: this.type,
-                    image: null,
-                    description: this.description,
-                    duration: this.duration
-                }
-            )
-            .then( response =>{
-                window.location.href = 'manager_sports_object.html';
-            })
-            .catch( error => {
+	        await axios.put(
+	            "rest/objects/add_content",
+	            {
+	                name: this.name,
+	                type: this.type,
+	                image: this.file,
+	                description: this.description,
+	                duration: this.duration
+	            }
+	        )
+	        .then( response =>{
+	            window.location.href = 'manager_sports_object.html';
+	        })
+	        .catch( error => {
 				if(error.response.status == 401){
-                	this.error = 'Ti nisi menadžer, kako si uopšte došao ovde?';
-            	}
-            	else if (error.response.status == 400){
+	            	this.error = 'Ti nisi menadžer, kako si uopšte došao ovde?';
+	        	}
+	        	else if (error.response.status == 400){
 					this.error = 'Sadržaj sa istim imenom već postoji!';
 				}
 				else {
 					this.error = 'UPS! Nepredviđena greška: ' + error.response.status;
 				}
-            })
-        },
-        getFormValues (submitEvent) {
-            this.register();
-        }
-    }
+	        })
+	    },
+		async handleFileUpload(event){
+			this.file = await convertBase64(event.target.files[0]);
+    	},
+	    getFormValues (submitEvent) {
+	        this.register();
+	    }
+	}
 });
+

@@ -1,6 +1,10 @@
 package beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import beans.enums.ContentType;
+import dao.ImageDAO;
 
 public class Content {
 	private String oldName;
@@ -9,6 +13,7 @@ public class Content {
 	private String image;
 	private String description;
 	private int duration;
+	
 	
 	public Content() {
 		super();
@@ -41,11 +46,23 @@ public class Content {
 	}
 
 	public String getImage() {
-		return image;
+		ImageDAO imageDAO = ImageDAO.getInstance();
+		if(imageDAO.isBase64(image)) {
+			return image;
+		}
+		else {
+			return imageDAO.findImage(image);
+		}
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		ImageDAO imageDAO = ImageDAO.getInstance();
+		if(imageDAO.isBase64(image)) {
+			this.image = imageDAO.saveImage(image);
+		}
+		else {
+			this.image = image;
+		}
 	}
 
 	public String getDescription() {

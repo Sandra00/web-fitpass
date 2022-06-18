@@ -1,6 +1,7 @@
 package beans;
 
 import beans.enums.*;
+import dao.ImageDAO;
 
 public class Training {
 	private int trainingId;
@@ -90,8 +91,15 @@ public class Training {
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		ImageDAO imageDAO = ImageDAO.getInstance();
+		if(imageDAO.isBase64(image)) {
+			this.image = imageDAO.saveImage(image);
+		}
+		else {
+			this.image = image;
+		}
 	}
+
 	
 	
 }

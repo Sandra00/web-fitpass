@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
 import beans.enums.LocationType;
+import dao.ImageDAO;
 import util.LocalTimeDeserializer;
 
 public class SportsObject {
@@ -90,8 +91,15 @@ public class SportsObject {
 	}
 
 	public void setLogo(String logo) {
-		this.logo = logo;
+		ImageDAO imageDAO = ImageDAO.getInstance();
+		if(imageDAO.isBase64(logo)) {
+			this.logo = imageDAO.saveImage(logo);
+		}
+		else {
+			this.logo = logo;
+		}
 	}
+
 
 	public double getAverageGrade() {
 		return averageGrade;

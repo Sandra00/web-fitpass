@@ -60,7 +60,7 @@
 				</select>
                 <textarea id="description" v-model="description" class="form-control" placeholder="Opis" rows="4"></textarea>
                 <input type="number" id="duration" v-model="duration" min="1" max="1000" class="form-control" placeholder="Trajanje(min)">
-                <button class="btn btn-lg btn-secondary btn-sm">Dodaj sliku</button><br>
+                <input type="file" ref="image" class="form-control-file" name="image" accept="image/png, image/jpeg" @change="handleFileUpload( $event )"><br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Kreiraj</button>
                 <p class="text-danger">
                     {{ error }}
@@ -71,6 +71,7 @@
         <script src="js/vue.js"></script>
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
+        <script src="app/convert_base64.js" ></script> 
         <script src="app/add_content.js" ></script> 
     </body>
 </html>

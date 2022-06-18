@@ -75,20 +75,20 @@
 		<h3>Sadržaj:</h3>
 		<table class="table">
 			<thead>
+				<td>Slika</td>
 				<td>Naziv</td>
 				<td>Tip</td>
 				<td>Opis</td>
 				<td>Trajanje</td>
-				<td>Slika</td>
 				<td></td>
 			</thead>
 
 			<tbody v-for="content in contents">
+				<td><img :src="content.image" style="object-fit:contain; width:200px; height:200px;"></td>
 				<td>{{content.name}}</td>
 				<td>{{content.type}}</td>
 				<td>{{content.description}}</td>
 				<td>{{content.duration}}</td>
-				<td>...</td>
 				<td>
 					<a v-bind:href="'edit_content.html?name=' + content.name">
 						<button class="btn btn-lg btn-primary btn-block">Izmeni sadržaj
