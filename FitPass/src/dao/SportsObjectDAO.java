@@ -56,6 +56,7 @@ public class SportsObjectDAO {
 	public boolean newSportObject(SportsObject sportsObject) {
 		if(exists(sportsObject)) return false;
 		sportsObjects.add(sportsObject);
+		//System.out.println("ide");
 		saveSportsObjects();
 		return true;
 	}

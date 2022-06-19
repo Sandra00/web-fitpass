@@ -120,6 +120,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<User> getFreeManagers(){
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+		//System.out.println(userDao.getFreeManagers().size());
 		return userDao.getFreeManagers();
 	}
 	
