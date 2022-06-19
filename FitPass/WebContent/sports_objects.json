@@ -1,1 +1,116 @@
-[{"name":"Teretana 1","locationType":"GYM","content":[],"status":false,"location":{"longitude":25.0,"latitude":36.0,"address":{"street":"Šekspirova","number":86,"town":"Novi Sad","zipcode":21000}},"logo":null,"averageGrade":0.0,"startWorkingHour":null,"endWorkingHour":null,"gradesCounter":0},{"name":"Teretana 3","locationType":"GYM","content":[{"oldName":"Igranka bez prestanka","name":"Igranka bez prestanka","type":"GROUPTRAINING","image":"1","description":null,"duration":0}],"status":true,"location":{"longitude":65.0,"latitude":42.0,"address":{"street":"Patrijarha Pavla","number":21,"town":"Novi Sad","zipcode":21000}},"logo":null,"averageGrade":0.0,"startWorkingHour":null,"endWorkingHour":null,"gradesCounter":0},{"name":"Novi bazen","locationType":"GYM","content":[],"status":false,"location":{"longitude":3.0,"latitude":8.0,"address":{"street":"Miloša Crnjanskog","number":5,"town":"Novi Sad","zipcode":21000}},"logo":null,"averageGrade":0.0,"startWorkingHour":null,"endWorkingHour":null,"gradesCounter":0},{"name":"Bazen 2","locationType":"POOL","content":[],"status":false,"location":{"longitude":5.0,"latitude":6.0,"address":{"street":"Miloša Crnjanskog","number":5,"town":"Novi Sad","zipcode":21000}},"logo":null,"averageGrade":0.0,"startWorkingHour":"08:23","endWorkingHour":"08:25","gradesCounter":0},{"name":"Novi studio","locationType":"DANCESTUDIO","content":[],"status":true,"location":{"longitude":5.0,"latitude":6.0,"address":{"street":"Zmaj Jovina","number":95,"town":"Novi Sad","zipcode":21000}},"logo":"27","averageGrade":0.0,"startWorkingHour":"21:29","endWorkingHour":"13:26","gradesCounter":0}]
+[
+    {
+        "name": "Teretana 1",
+        "locationType": "GYM",
+        "content": [],
+        "status": false,
+        "location": {
+            "longitude": 25.0,
+            "latitude": 36.0,
+            "address": {
+                "street": "Šekspirova",
+                "number": 86,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": null,
+        "averageGrade": 0.0,
+        "startWorkingHour": null,
+        "endWorkingHour": null,
+        "gradesCounter": 0
+    },
+    {
+        "name": "Teretana 3",
+        "locationType": "GYM",
+        "content": [
+            {
+                "oldName": "Igranka bez prestanka",
+                "name": "Igranka bez prestanka",
+                "type": "GROUPTRAINING",
+                "image": "1",
+                "description": null,
+                "duration": 0
+            }
+        ],
+        "status": true,
+        "location": {
+            "longitude": 65.0,
+            "latitude": 42.0,
+            "address": {
+                "street": "Patrijarha Pavla",
+                "number": 21,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": null,
+        "averageGrade": 0.0,
+        "startWorkingHour": null,
+        "endWorkingHour": null,
+        "gradesCounter": 0
+    },
+    {
+        "name": "Novi bazen",
+        "locationType": "GYM",
+        "content": [],
+        "status": false,
+        "location": {
+            "longitude": 3.0,
+            "latitude": 8.0,
+            "address": {
+                "street": "Miloša Crnjanskog",
+                "number": 5,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": null,
+        "averageGrade": 2.0,
+        "startWorkingHour": null,
+        "endWorkingHour": null,
+        "gradesCounter": 0
+    },
+    {
+        "name": "Bazen 2",
+        "locationType": "POOL",
+        "content": [],
+        "status": false,
+        "location": {
+            "longitude": 5.0,
+            "latitude": 6.0,
+            "address": {
+                "street": "Miloša Crnjanskog",
+                "number": 5,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": null,
+        "averageGrade": 4.0,
+        "startWorkingHour": "08:23",
+        "endWorkingHour": "08:25",
+        "gradesCounter": 0
+    },
+    {
+        "name": "Novi studio",
+        "locationType": "DANCESTUDIO",
+        "content": [],
+        "status": true,
+        "location": {
+            "longitude": 5.0,
+            "latitude": 6.0,
+            "address": {
+                "street": "Zmaj Jovina",
+                "number": 95,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": "27",
+        "averageGrade": 0.0,
+        "startWorkingHour": "21:29",
+        "endWorkingHour": "13:26",
+        "gradesCounter": 0
+    }
+]
