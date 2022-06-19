@@ -1,9 +1,9 @@
 
-    const vm = new Vue({
+    const vm = new Vue({	
     el: '#app',
     data: {
 		name:null,
-		objectType:"GYM",
+		objectType: "GYM",
 		works:false,
 		longitude:null,
 		latitude:null,
@@ -30,31 +30,26 @@
     methods: {
 		
         async register() {
+	
+			
 			//hour = this.startTime.hour
 			//minute = this.startTime.minute
 			//stringFormat = hour.toString() + ":" + minute.toString()
-			if(this.contents.length == 0){
+			/*if(this.contents.length == 0){
 				this.noChecked = "Morate odabrati bar jedan sadržaj";
 				return;
-			}
+			}*/
 			
-			await axios.post(
-				"rest/addSportsObject",
-				{
-					username:this.managerValue,
-					sportsObject: this.name
-				}
-			)
+			
 			imageId = await uploadImage(this.file);
 			
+			addToManager = true;
             await axios.post(
                 "rest/objects/register",
                 {
                     name: this.name,
                     locationType: this.objectType,
-                    contentTypes: this.contents,
                     status:this.works,
-                    image: this.imageId,
                     location:{
 						longitude:this.longitude,
 						latitude:this.latitude,
@@ -65,6 +60,7 @@
 							zipcode:this.postNumber
 						}
 					},
+					logo: imageId,
                     startWorkingHour: this.startTime.toLocaleString(),
                     endWorkingHour: this.endTime.toLocaleString()
                 }
@@ -74,10 +70,21 @@
             })
             .catch( error => {
                 this.error = 'Postoji objekat sa unetim nazivom';
+                addToManager = false;
             })
             
             
+            if(addToManager){
+				await axios.post(
+				"rest/addSportsObject",
+				{
+					username:this.managerValue,
+					sportsObject: this.name
+				}
+				)
+			}
         },
+        
         
         isManagersEmpty: function(){
 			if(this.managers.length == 0){

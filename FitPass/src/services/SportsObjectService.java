@@ -109,6 +109,7 @@ public class SportsObjectService {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
 		if(!sportsObjectDAO.newSportObject(sportsObject)) {
 			//System.out.printlnsportsObjectDAO.findAll());
+			System.out.println("dodje dovde");
 			return Response.status(400).entity("Postoji sportski objekat sa unetim nazivom").build();
 		}
 		//System.out.println(userDao.findAll());

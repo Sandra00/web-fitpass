@@ -6,3 +6,5 @@ public enum LocationType {
 	SPORTSCENTER,
 	DANCESTUDIO
 }
+
+
