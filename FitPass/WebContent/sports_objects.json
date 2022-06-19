@@ -16,8 +16,8 @@
         },
         "logo": null,
         "averageGrade": 0.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null,
+        "startWorkingHour": "08:00",
+        "endWorkingHour": "23:00",
         "gradesCounter": 0
     },
     {
@@ -46,8 +46,8 @@
         },
         "logo": null,
         "averageGrade": 0.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null,
+        "startWorkingHour": "10:00",
+        "endWorkingHour": "19:00",
         "gradesCounter": 0
     },
     {
@@ -67,8 +67,8 @@
         },
         "logo": null,
         "averageGrade": 2.0,
-        "startWorkingHour": null,
-        "endWorkingHour": null,
+        "startWorkingHour": "09:00",
+        "endWorkingHour": "18:00",
         "gradesCounter": 0
     },
     {
