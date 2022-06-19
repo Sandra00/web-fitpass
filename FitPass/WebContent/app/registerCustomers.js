@@ -17,6 +17,10 @@ window.onload = function () {
 				this.error = 'Korisničko ime ne sme sadržati razmake';
 				return;
 			}
+			if(/\s/.test(this.password)){
+				this.error = 'Lozinka ne sme sadržati razmake';
+				return;
+			}
 			if(this.name[0].toUpperCase() != this.name[0]){
 				this.error = 'Ime mora početi velikim slovom';
 				return;
