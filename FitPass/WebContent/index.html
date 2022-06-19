@@ -81,16 +81,17 @@
             <table class="table container">
                 <thead>
                     <tr>
+                    	<th>Logo</th>
                         <th v-on:click="sortSportObjects(1)">Naziv</th>
                         <th>Tip</th>
                         <th v-on:click="sortSportObjects(2)">Lokacija</th>
-                        <th>Logo</th>
                         <th v-on:click="sortSportObjects(3)">Prosecna ocena</th>
                         <th>Radno vreme</th>
                     </tr>
                 </thead>
                 <tbody v-for="object in filteredSportsObjects">
                     <tr>
+                    	<td><img :src="object.image" style="object-fit:contain; width:200px; height:200px;"></td>
                         <td>{{object.name}}</td>
                         <td>{{object.locationType}}</td>
                         <td>
@@ -98,7 +99,6 @@
                                 {{content}}
                             </template>
                         </td>
-                        <td>{{object.logo}}</td>
                         <td>{{object.averageGrade}}</td>
                         <td>
                             {{object.startWorkingHour}} - {{object.endWorkingHour}}

@@ -17,7 +17,8 @@
         noChecked:null,
         managers:[],
         contents:[],
-        managerValue:null
+        managerValue:null,
+        file: null
     },
     mounted(){
 		axios.get('rest/freeManagers')
@@ -44,6 +45,7 @@
 					sportsObject: this.name
 				}
 			)
+			imageId = await uploadImage(this.file);
 			
             await axios.post(
                 "rest/objects/register",
@@ -52,6 +54,7 @@
                     locationType: this.objectType,
                     contentTypes: this.contents,
                     status:this.works,
+                    image: this.imageId,
                     location:{
 						longitude:this.longitude,
 						latitude:this.latitude,
@@ -84,8 +87,13 @@
 			}
 		},
         
+        async handleFileUpload(event){
+			this.file = await convertBase64(event.target.files[0]);
+    	},
+    	
         getFormValues (submitEvent) {
             this.register();
         }
+        
     }
 });
