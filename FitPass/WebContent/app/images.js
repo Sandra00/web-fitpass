@@ -1,0 +1,27 @@
+const convertBase64 = (file) => {
+	return new Promise((resolve, reject) => {
+	    const fileReader = new FileReader();
+	    fileReader.readAsDataURL(file);
+	
+	    fileReader.onload = () => {
+	        resolve(fileReader.result);
+	    };
+	
+	    fileReader.onerror = (error) => {
+	        reject(error);
+	    };
+	});
+};
+
+const uploadImage = (file) => {
+	return new Promise((resolve, reject) => {
+		axios.post(
+			"rest/image/",
+			{
+				image: file
+			}
+		).then( response => {
+			resolve(response.data);
+		})
+	});
+};

@@ -1,41 +1,49 @@
 package beans;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 
-import beans.enums.*;
+import beans.enums.LocationType;
+import dao.ImageDAO;
 import util.LocalTimeDeserializer;
 
 public class SportsObject {
 	private String name;
 	private LocationType locationType;
-	private List<ContentType> contentTypes;
+	private List<Content> content;
 	private boolean status;
-	public Location location;
-	public String logo;
+	private Location location;
+	private String logo;
 	public double averageGrade;
-	private LocalTime startWorkingHour;
-	private LocalTime endWorkingHour;
+	private String startWorkingHour;
+	private String endWorkingHour;
+	private int gradesCounter;
 	
 	public SportsObject() {
 		super();
 	}
 
-	public SportsObject(String name, LocationType locationType, List<ContentType> contentTypes, boolean status,
-			Location location, String logo, double averageGrade, LocalTime startWorkingHour,
-			LocalTime endWorkingHour) {
+
+	public SportsObject(String name, LocationType locationType, List<Content> content, boolean status,
+			Location location, String logo, double averageGrade, String startWorkingHour,
+			String endWorkingHour, int gradesCounter) {
+
 		super();
 		this.name = name;
 		this.locationType = locationType;
-		this.contentTypes = contentTypes;
+		this.content = content;
 		this.status = status;
 		this.location = location;
 		this.logo = logo;
 		this.averageGrade = averageGrade;
 		this.startWorkingHour = startWorkingHour;
 		this.endWorkingHour = endWorkingHour;
+		this.gradesCounter = gradesCounter;
 	}
 
 	public String getName() {
@@ -54,12 +62,12 @@ public class SportsObject {
 		this.locationType = locationType;
 	}
 
-	public List<ContentType> getContentTypes() {
-		return contentTypes;
+	public List<Content> getContent() {
+		return content != null ? content : new ArrayList<Content>();
 	}
 
-	public void setContentTypes(List<ContentType> contentTypes) {
-		this.contentTypes = contentTypes;
+	public void setContent(List<Content> content) {
+		this.content = content;
 	}
 
 	public boolean isStatus() {
@@ -86,6 +94,7 @@ public class SportsObject {
 		this.logo = logo;
 	}
 
+
 	public double getAverageGrade() {
 		return averageGrade;
 	}
@@ -93,26 +102,34 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-	// add serializer class 
-	public LocalTime getStartWorkingHour() {
+	//@JsonSerialize(using = LocalTimeSerializer.class)
+	public String getStartWorkingHour() {
 		return startWorkingHour;
 	}
 
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setStartWorkingHour(LocalTime startWorkingHour) {
+	//@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setStartWorkingHour(String startWorkingHour) {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	// add serializer class 
-	public LocalTime getEndWorkingHour() {
+	//@JsonSerialize(using = LocalTimeSerializer.class)
+	public String getEndWorkingHour() {
 		return endWorkingHour;
 	}
+	
+	public int getGradesCounter() {
+		return gradesCounter;
+	}
 
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
-	public void setEndWorkingHour(LocalTime endWorkingHour) {
+	public void setGradesCounter(int gradesCounter) {
+		this.gradesCounter = gradesCounter;
+	}
+
+
+	//@JsonDeserialize(using = LocalTimeDeserializer.class)
+	public void setEndWorkingHour(String endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
 	}
-	
 	
 }
 

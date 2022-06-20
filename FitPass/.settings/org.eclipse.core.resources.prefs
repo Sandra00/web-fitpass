@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/all_users.html=UTF-8
+encoding//WebContent/profile.html=UTF-8
 encoding//WebContent/registerCustomer.html=UTF-8
+encoding//src/services/UserService.java=UTF-8

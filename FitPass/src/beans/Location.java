@@ -1,37 +1,35 @@
 package beans;
 
-import java.util.List;
-
 public class Location {
 	
-	private List<Integer> name;
-	private List<Integer> latitude;
+	private double longitude;
+	private double latitude;
 	private Address address;
 	
 	public Location() {
 		super();
 	}
 
-	public Location(List<Integer> name, List<Integer> latitude, Address address) {
+	public Location(double longitude, double latitude, Address address) {
 		super();
-		this.name = name;
+		this.longitude = longitude;
 		this.latitude = latitude;
 		this.address = address;
 	}
 
-	public List<Integer> getName() {
-		return name;
+	public double getLongitude() {
+		return longitude;
 	}
 
-	public void setName(List<Integer> name) {
-		this.name = name;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
-	public List<Integer> getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(List<Integer> latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -42,7 +40,5 @@ public class Location {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	
 	
 }

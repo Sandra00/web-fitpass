@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FitPass</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+
+	<div id="menu">
+	    <nav class="navbar navbar-expand-md navbar-light bg-light">
+	        <a class="navbar-brand" href="index.html">FitPass</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+	            <ul class="navbar-nav">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="">Početna</a>
+	                </li>
+	            </ul>
+	            
+	            <ul class="navbar-nav">
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn === false"  href="login.html">Uloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn === true" @click="logout" >Izloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link text-danger" v-if="isAdmin === true" href="all_users.html">Svi korisnici(Admin)</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="profile.html">{{username}}</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </nav>
+	</div>
+	
+	<div id="app" class="container">
+		<i class="bi bi-plus-square-fill"></i><a href="add_content.html">Dodaj novi sadržaj</a><br>
+		<i class="bi bi-plus-square-fill"></i><a href="new_training.html">Dodaj novi trening</a>
+		<h1>{{sportsObject.name}}</h1><br>
+		<b>Tip:</b> {{sportsObject.type}} <br>
+		<b>Status:</b> {{sportsObject.status}} <br>
+		<b>Prosečna ocena:</b> {{sportsObject.averageGrade}} <br>
+		<h3>Treneri:</h2>
+		<table class="table">
+			<thead>
+				<td>Korisničko ime</td>
+				<td>Ime</td>
+				<td>Prezime</td>
+			</thead>
+
+			<tbody v-for="coach in coaches">
+				<td>{{coach.username}}</td>
+				<td>{{coach.name}}</td>
+				<td>{{coach.surname}}</td>
+			</tbody>
+		</table>
+		
+		<br>
+		
+		<h3>Sadržaj:</h3>
+		<table class="table">
+			<thead>
+				<td>Slika</td>
+				<td>Naziv</td>
+				<td>Tip</td>
+				<td>Opis</td>
+				<td>Trajanje</td>
+				<td></td>
+			</thead>
+
+			<tbody v-for="content in contents">
+				<td><img :src="content.image" style="object-fit:contain; width:200px; height:200px;"></td>
+				<td>{{content.name}}</td>
+				<td>{{content.type}}</td>
+				<td>{{content.description}}</td>
+				<td>{{content.duration}}</td>
+				<td>
+					<a v-bind:href="'edit_content.html?name=' + content.name">
+						<button class="btn btn-lg btn-primary btn-block">Izmeni sadržaj
+						</button>
+					</a>
+				</td>
+			</tbody>
+		</table>
+		
+		<br>
+		
+		<h3>Posetioci:</h3>
+		<table class="table">
+			<thead>
+				<td>Korisničko ime</td>
+				<td>Ime</td>
+				<td>Prezime</td>
+				<td>Broj poena</td>
+			</thead>
+
+			<tbody v-for="customer in customers">
+				<td>{{customer.username}}</td>
+				<td>{{customer.name}}</td>
+				<td>{{customer.surname}}</td>
+				<td>{{customer.points}}</td>
+			</tbody>
+		</table>
+	</div>
+	
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/manager_sports_object.js"></script>
+	<script src="app/menu.js"></script>
+	
+	
+</body>
+</html>

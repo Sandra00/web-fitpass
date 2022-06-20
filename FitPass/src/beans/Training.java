@@ -1,14 +1,15 @@
 package beans;
 
 import beans.enums.*;
+import dao.ImageDAO;
 
 public class Training {
 	private int trainingId;
 	private String name;
 	private TrainingType trainingType;
-	private SportsObject sportsObject;
+	private String sportsObject;
 	private int length;
-	private User trainer;
+	private String coach;
 	private String description;
 	private String image;
 	
@@ -16,7 +17,7 @@ public class Training {
 		super();
 	}
 
-	public Training(int trainingId, String name, TrainingType trainingType, SportsObject sportsObject, int length, User trainer,
+	public Training(int trainingId, String name, TrainingType trainingType, String sportsObject, int length, String coach,
 			String description, String image) {
 		super();
 		this.trainingId = trainingId;
@@ -24,7 +25,7 @@ public class Training {
 		this.trainingType = trainingType;
 		this.sportsObject = sportsObject;
 		this.length = length;
-		this.trainer = trainer;
+		this.coach = coach;
 		this.description = description;
 		this.image = image;
 	}
@@ -53,11 +54,11 @@ public class Training {
 		this.trainingType = trainingType;
 	}
 
-	public SportsObject getSportsObject() {
+	public String getSportsObject() {
 		return sportsObject;
 	}
 
-	public void setSportsObject(SportsObject sportsObject) {
+	public void setSportsObject(String sportsObject) {
 		this.sportsObject = sportsObject;
 	}
 
@@ -69,12 +70,12 @@ public class Training {
 		this.length = length;
 	}
 
-	public User getTrainer() {
-		return trainer;
+	public String getCoach() {
+		return coach;
 	}
 
-	public void setTrainer(User trainer) {
-		this.trainer = trainer;
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 
 	public String getDescription() {
@@ -92,6 +93,7 @@ public class Training {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
 	
 	
 }

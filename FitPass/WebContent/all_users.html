@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FitPass | All users(Admin)</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+	<div id="menu">
+	    <nav class="navbar navbar-expand-md navbar-light bg-light">
+	        <a class="navbar-brand" href="index.html">FitPass</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+	            <ul class="navbar-nav">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="index.html">Početna</a>
+	                </li>
+	            </ul>
+	            
+	            <ul class="navbar-nav">
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="username === ''"  href="login.html">Uloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="username === ''" href="registerCustomer.html">Registruj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="username != ''" @click="logout" >Izloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link text-danger" v-if="isAdmin == true" href="all_users.html">Svi korisnici(Admin)</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="">{{username}}</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </nav>
+	</div>
+	
+	<div id="app" class="container">
+		<i class="bi bi-plus-square-fill"></i><a href="new_coach.html" class="text-decoration-none">Dodaj trenera</a><br>
+		<i class="bi bi-plus-square-fill"></i><a href="new_manager.html" class="text-decoration-none">Dodaj menadžera</a>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Korisničko ime</th>
+				<th>Lozinka</th>
+				<th>Tip korisnika</th>
+				<th>Ime</th>
+				<th>Prezime</th>
+				<th>Pol</th>
+				<th>Datum rođenja</th>
+				<th>Poeni</th>
+			</tr>
+			</thead>
+			<tbody v-for="user in allUsers">
+				<tr>
+					<td>{{user.username}}</td>
+					<td>{{user.password}}</td>
+					<td>{{user.userType}}</td>
+					<td>{{user.name}}</td>
+					<td>{{user.surname}}</td>
+					<td>{{user.gender}}</td>
+					<td>{{user.dateOfBirth}}</td>
+					<td>{{user.points}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/menu.js"></script>
+	<script src="app/allUsers.js"></script>
+</body>
+</html>

@@ -1,13 +1,13 @@
 package beans;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import beans.enums.*;
 
 
 public class User {
+	private String oldUsername;
 	private String username;
 	private String password;
 	private String name;
@@ -15,21 +15,23 @@ public class User {
 	private String gender;
 	private String dateOfBirth;
 	private UserType userType;
-	private List<Training> trainings;
+	private List<Integer> trainings;
 	private List<Fee> fee;
-	private SportsObject sportsObject;
-	private List<SportsObject> visitedSportsObjects;
+	private String sportsObject;
+	private List<String> visitedSportsObjects;
 	private int points;
 	private CustomerType customerType;
+	private boolean isDeleted = false;
 	
 	public User() {
 		super();
 	}
 
-	public User(String username, String password, String name, String surname, String gender, String dateOfBirth,
-			UserType userType, List<Training> trainings, List<Fee> fee, SportsObject sportsObject,
-			List<SportsObject> visitedSportsObjects, int points, CustomerType customerType) {
+	public User(String oldUsername, String username, String password, String name, String surname, String gender, String dateOfBirth,
+			UserType userType, List<Integer> trainings, List<Fee> fee, String sportsObject,
+			List<String> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
+		this.oldUsername = oldUsername;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -47,9 +49,10 @@ public class User {
 	
 	
 
-	public User(String username, String name, String surname, String gender,
+	public User(String oldUsername, String username, String name, String surname, String gender,
 			String dateOfBirth, String password) {
 		super();
+		this.oldUsername = oldUsername;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -114,11 +117,11 @@ public class User {
 		this.userType = userType;
 	}
 
-	public List<Training> getTrainings() {
+	public List<Integer> getTrainings() {
 		return trainings;
 	}
 
-	public void setTrainings(List<Training> trainings) {
+	public void setTrainings(List<Integer> trainings) {
 		this.trainings = trainings;
 	}
 
@@ -130,19 +133,19 @@ public class User {
 		this.fee = fee;
 	}
 
-	public SportsObject getSportsObject() {
+	public String getSportsObject() {
 		return sportsObject;
 	}
 
-	public void setSportsObject(SportsObject sportsObject) {
+	public void setSportsObject(String sportsObject) {
 		this.sportsObject = sportsObject;
 	}
 
-	public List<SportsObject> getVisitedSportsObjects() {
-		return visitedSportsObjects;
+	public List<String> getVisitedSportsObjects() {
+		return visitedSportsObjects != null ? visitedSportsObjects : new ArrayList<String>();
 	}
 
-	public void setVisitedSportsObjects(List<SportsObject> visitedSportsObjects) {
+	public void setVisitedSportsObjects(List<String> visitedSportsObjects) {
 		this.visitedSportsObjects = visitedSportsObjects;
 	}
 
@@ -161,6 +164,23 @@ public class User {
 	public void setCustomerType(CustomerType customerType) {
 		this.customerType = customerType;
 	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public String getOldUsername() {
+		return oldUsername;
+	}
+
+	public void setOldUsername(String oldUsername) {
+		this.oldUsername = oldUsername;
+	}
+	
 	
 	
 }

@@ -7,7 +7,9 @@ var app = new Vue({
 		locationSearch:'',
 		gradeSearch:'',
 		sortIndex : null,  //kolona koja se sortira
-		sortDirection: null
+		sortDirection: null,
+		typeFilter: 'allTypes',
+		openFilter: 'allOpenClosed'
 	},
 	mounted(){
 		//axios.get('rest/objects')
@@ -88,8 +90,38 @@ var app = new Vue({
 				}
 			}
 			
-		}
+		},
 		
+		filterType(type){
+			axios.get('rest/objects')
+		.then((response) => {
+			this.sportsObjects = response.data;
+			
+			// sorting sports objects so that the active ones are displayed first
+			this.sportsObjects.filter((sportsObject)=>{
+				return sportsObject.locationType.match(type);
+			});
+		});
+		},
+		showObject(selectedName) {
+			 axios.get(
+                "rest/objects/showObject",
+                {
+                    name: selectedName
+                }
+            )
+			axios.get('rest/objects/showObject');
+			window.location.href = 'showObject.html';
+		},
+		
+		getImage(id){
+			return new Promise((resolve, reject) => {
+				axios.get('rest/image/' + id)
+				.then((response) => {
+					resolve(response.data);
+				})
+			});
+		}
 	},
 	created(){
 		axios.get('rest/objects')
@@ -98,14 +130,25 @@ var app = new Vue({
 			
 			// sorting sports objects so that the active ones are displayed first
 			this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
+			this.sportsObjects.forEach(async item => {
+					item.logo = await this.getImage(item.logo);
+				});
 		});
 	},
 	computed:{
 		filteredSportsObjects:function(){
+			
 			return this.sportsObjects.filter((sportsObject) => {
-				return sportsObject.name.toLowerCase().match(this.nameSearch.toLowerCase()) && sportsObject.locationType.toLowerCase().match(this.typeSearch.toLowerCase()) && sportsObject.averageGrade.toString().toLowerCase().match(this.gradeSearch.toLowerCase())
-				&& (sportsObject.location.address.street.toLowerCase().match(this.locationSearch.toLowerCase()) ||  sportsObject.location.address.number.toString().toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.town.toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.zipcode.toString().toLowerCase().match(this.locationSearch.toLowerCase()));
+				let keep = true;
+				keep = sportsObject.name.toLowerCase().match(this.nameSearch.toLowerCase()) && sportsObject.locationType.toLowerCase().match(this.typeSearch.toLowerCase()) && sportsObject.averageGrade.toString().toLowerCase().match(this.gradeSearch.toLowerCase())
+				&& (sportsObject.location.address.street.toLowerCase().match(this.locationSearch.toLowerCase()) ||  sportsObject.location.address.number.toString().toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.town.toLowerCase().match(this.locationSearch.toLowerCase()) || sportsObject.location.address.zipcode.toString().toLowerCase().match(this.locationSearch.toLowerCase()))
+				&& (sportsObject.locationType.match(this.typeFilter) || this.typeFilter==='allTypes');
+				if(this.openFilter == 'opened'){
+					keep = keep && (sportsObject.status==true);
+				}
+				return keep;
 			})
+			
 		}
 	}
 	
