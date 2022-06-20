@@ -112,8 +112,16 @@ var app = new Vue({
             )
 			axios.get('rest/objects/showObject');
 			window.location.href = 'showObject.html';
-		}
+		},
 		
+		getImage(id){
+			return new Promise((resolve, reject) => {
+				axios.get('rest/image/' + id)
+				.then((response) => {
+					resolve(response.data);
+				})
+			});
+		}
 	},
 	created(){
 		axios.get('rest/objects')
@@ -122,6 +130,9 @@ var app = new Vue({
 			
 			// sorting sports objects so that the active ones are displayed first
 			this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
+			this.sportsObjects.forEach(async item => {
+					item.logo = await this.getImage(item.logo);
+				});
 		});
 	},
 	computed:{
