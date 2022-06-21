@@ -1,10 +1,18 @@
 package services;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
+import beans.TrainingHistory;
+import beans.User;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
 import dao.TrainingHistoryDAO;
@@ -33,5 +41,14 @@ public class TrainingHistoryService {
 		if (ctx.getAttribute("trainingHistoryDAO") == null) {
 			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
 		}
+	}
+	
+	@GET
+	@Path("/find-customer-training-history")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TrainingHistory> findTrainingHistoryForCustomer(User user){
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		return trainingHistoryDAO.findTrainingHistoryForCustomer(user);
 	}
 }

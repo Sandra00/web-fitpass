@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Training;
 import beans.TrainingHistory;
+import beans.User;
 import util.PersonalConfig;
 
 public class TrainingHistoryDAO {
@@ -23,6 +24,15 @@ public class TrainingHistoryDAO {
 		load();
 	}
 	
+	public List<TrainingHistory> findTrainingHistoryForCustomer(User user){
+		List<TrainingHistory> returnList = new ArrayList<TrainingHistory>();
+		for(TrainingHistory trainigHistory : trainingsHistory) {
+			if(trainigHistory.getBuyerUsername().equals(user.getUsername())) {
+				returnList.add(trainigHistory);
+			}
+		}
+		return returnList;
+	}
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
