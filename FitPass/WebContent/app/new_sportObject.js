@@ -45,7 +45,7 @@
 			
 			addToManager = true;
             await axios.post(
-                "rest/objects/register",
+                "rest/admin/register-sports-object",
                 {
                     name: this.name,
                     locationType: this.objectType,

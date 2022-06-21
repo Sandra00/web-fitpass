@@ -1,7 +1,6 @@
 package beans;
 
 import beans.enums.*;
-import dao.ImageDAO;
 
 public class Training {
 	private int trainingId;

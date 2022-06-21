@@ -7,7 +7,7 @@ const vm = new Vue ({
 		contents: null
 	},
 	created (){
-		axios.get('rest/objects/managed')
+		axios.get('rest/manager/managed')
 		.then((response) => {
 			this.sportsObject= response.data;
 			axios.get('rest/objects/content/' + this.sportsObject.name)
@@ -20,12 +20,12 @@ const vm = new Vue ({
 			});
 		});
 
-		axios.get('rest/objects/coaches')
+		axios.get('rest/manager/coaches')
 		.then((response) => {
 			this.coaches= response.data;
 		});
 
-		axios.get('rest/objects/visited')
+		axios.get('rest/manager/visited')
 		.then((response) => {
 			this.customers= response.data;
 		});

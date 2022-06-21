@@ -16,7 +16,7 @@
         async register() {
 
             await axios.put(
-                "rest/objects/add_training",
+                "rest/manager/add-training",
                 {
 					trainingId: null,
                     name: this.name,

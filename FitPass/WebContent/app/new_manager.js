@@ -11,7 +11,7 @@
 			var splittedDate = this.dateOfBirth.split('-');
 			date = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
             await axios.post(
-                "rest/new-manager",
+                "rest/admin/new-manager",
                 {
                     username: this.username,
                     name: this.name,
