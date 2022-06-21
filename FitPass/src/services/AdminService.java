@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import beans.SportsObject;
 import beans.User;
 import beans.enums.UserType;
+import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.UserDAO;
 
@@ -32,6 +33,9 @@ public class AdminService {
 	private void init() {
 		if (ctx.getAttribute("sportsObjectDAO") == null) {
 			ctx.setAttribute("sportsObjectDAO", new SportsObjectDAO());
+		}
+		if (ctx.getAttribute("promoCodeDAO") == null) {
+			ctx.setAttribute("promoCodeDAO", new PromoCodeDAO());
 		}
 	}
 	

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 public class LocalTimeDeserializer extends StdDeserializer<LocalTime> {
-	 protected LocalTimeDeserializer() {
+	 	protected LocalTimeDeserializer() {
 	        super(LocalTime.class);
 	    }
 

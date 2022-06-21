@@ -17,8 +17,9 @@ import javax.ws.rs.core.Response;
 
 
 import beans.Content;
-
+import beans.PromoCode;
 import beans.SportsObject;
+import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;
@@ -44,6 +45,7 @@ public class SportsObjectService {
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
+		PromoCodeDAO pcDAO = new PromoCodeDAO();
 	}
 	
 	
