@@ -107,7 +107,6 @@ public class ManagerService {
 				return Response.ok().build();	
 			}
 			else {
-				// maybe the error code is not appropriate but i could not find a better one
 				return Response.status(400).build(); 
 			}
 		}
@@ -125,7 +124,6 @@ public class ManagerService {
 				return Response.ok().build();
 			}
 			else {
-				// maybe the error code is not appropriate but i could not find a better one
 				return Response.status(400).build(); 
 			}
 		}

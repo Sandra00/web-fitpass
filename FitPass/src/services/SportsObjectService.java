@@ -55,23 +55,7 @@ public class SportsObjectService {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
 		return sportsObjectDAO.findAll();
 	}
-	
-	@POST
-	@Path("/register")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response newSportsObject(SportsObject sportsObject, @Context HttpServletRequest request) {
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		if(!sportsObjectDAO.newSportObject(sportsObject)) {
-			//System.out.printlnsportsObjectDAO.findAll());
-			System.out.println("dodje dovde");
-			return Response.status(400).entity("Postoji sportski objekat sa unetim nazivom").build();
-		}
-		//System.out.println(userDao.findAll());
-		//userDao.newCustomer(user);
-		return Response.status(200).build();
-	}
-	
+		
 
 	@GET
 	@Path("/showObject")
@@ -79,10 +63,7 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportsObject setObject(SportsObject so, @Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		System.out.println("udje ovde");
-		System.out.println(so.getName());
 		request.getSession().setAttribute("object", sportsObjectDAO.findByName(so.getName()));
-		System.out.println(sportsObjectDAO.findByName(so.getName()).getName());
 		return sportsObjectDAO.findByName(so.getName());
 	}
 	
