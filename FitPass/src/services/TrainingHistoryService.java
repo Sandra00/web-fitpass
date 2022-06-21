@@ -72,8 +72,11 @@ public class TrainingHistoryService {
 	@Path("find-history-for-training")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> findHistoryForTraining(int id){
+	public List<String> findHistoryForTraining(@Context HttpServletRequest request){
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
-		return trainingHistoryDAO.findHistoryForTraining(id);
+		//System.out.println("parametar" + request.getParameter("trainingId"));
+		//System.out.println(Integer.parseInt(request.getParameter("trainingId")));
+		//System.out.println(trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId"))).size());
+		return trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId")));
 	}
 }

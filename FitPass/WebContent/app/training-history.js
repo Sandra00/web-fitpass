@@ -2,7 +2,8 @@ const vm = new Vue({
 	el: '#app',
 	data: {
 		customersTrainings: null,
-		currentUsername: null
+		currentUsername: null,
+		dates: []
 	},
 	mounted(){
 		axios.get('rest/currentUser')
@@ -18,8 +19,25 @@ const vm = new Vue({
 				)	
 			.then((response) => {
 				this.customersTrainings = response.data;
+				
 			})
 		})
 		
+	},
+	methods: {
+		findDates(id) {
+			axios.get(
+				'rest/training-history/find-history-for-training',
+				{
+					params: {
+						trainingId: id
+					}
+				}
+				)
+				.then((response) => {
+					this.dates = response.data;
+					return response.data;
+				})
+		}
 	}
 })

@@ -42,6 +42,7 @@ public class TrainingHistoryDAO {
 				startDates.add(trainingHistory.getStartDate());
 			}
 		}
+		//System.out.println(startDates.size());
 		return startDates;
 	}
 	
