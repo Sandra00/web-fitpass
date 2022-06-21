@@ -6,6 +6,7 @@ public class TrainingHistory {
 	private LocalDateTime startDate;
 	private int trainingId;
 	private String buyerUsername;
+	private String coachUsername;
 	
 	
 	public TrainingHistory() {
@@ -13,11 +14,12 @@ public class TrainingHistory {
 	}
 
 
-	public TrainingHistory(LocalDateTime startDate, int trainingId, String buyerUsername) {
+	public TrainingHistory(LocalDateTime startDate, int trainingId, String buyerUsername, String coachUsername) {
 		super();
 		this.startDate = startDate;
 		this.trainingId = trainingId;
 		this.buyerUsername = buyerUsername;
+		this.coachUsername = coachUsername;
 	}
 
 
@@ -48,6 +50,16 @@ public class TrainingHistory {
 
 	public void setBuyerUsername(String buyerUsername) {
 		this.buyerUsername = buyerUsername;
+	}
+
+
+	public String getCoachUsername() {
+		return coachUsername;
+	}
+
+
+	public void setCoachUsername(String coachUsername) {
+		this.coachUsername = coachUsername;
 	}
 	
 	
