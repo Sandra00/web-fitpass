@@ -37,7 +37,7 @@ var app = new Vue({
 			imageId = await uploadImage(this.file);
 			
 			axios.post(
-				"rest/objects/editContent",
+				"rest/manager/edit-content",
 				{
 					oldName: this.content.oldName,
 					name: this.name,
