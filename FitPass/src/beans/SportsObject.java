@@ -1,16 +1,9 @@
 package beans;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-
 import beans.enums.LocationType;
-import dao.ImageDAO;
-import util.LocalTimeDeserializer;
 
 public class SportsObject {
 	private String name;

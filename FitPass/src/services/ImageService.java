@@ -14,9 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.Image;
-import beans.User;
 import dao.ImageDAO;
-import dao.UserDAO;
 
 
 @Path("/image")

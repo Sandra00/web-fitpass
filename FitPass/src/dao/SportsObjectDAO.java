@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Content;
 import beans.SportsObject;
-import beans.enums.ContentType;
 import util.PersonalConfig;
 
 public class SportsObjectDAO {
