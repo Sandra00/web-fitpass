@@ -24,10 +24,11 @@ public class TrainingHistoryDAO {
 		load();
 	}
 	
-	public List<TrainingHistory> findTrainingHistoryForCustomer(User user){
+	public List<TrainingHistory> findTrainingHistoryForCustomer(String username){
 		List<TrainingHistory> returnList = new ArrayList<TrainingHistory>();
+		System.out.println("trenutni korisnik: " + username);
 		for(TrainingHistory trainigHistory : trainingsHistory) {
-			if(trainigHistory.getBuyerUsername().equals(user.getUsername())) {
+			if(trainigHistory.getBuyerUsername().equals(username)) {
 				returnList.add(trainigHistory);
 			}
 		}

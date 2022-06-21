@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -47,8 +48,10 @@ public class TrainingHistoryService {
 	@Path("/find-customer-training-history")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<TrainingHistory> findTrainingHistoryForCustomer(User user){
+	public List<TrainingHistory> findTrainingHistoryForCustomer(@Context HttpServletRequest request){
+		System.out.println("username: " + request.getParameter("username"));
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
-		return trainingHistoryDAO.findTrainingHistoryForCustomer(user);
+		System.out.println("poslat: " + request.getParameter("username"));
+		return trainingHistoryDAO.findTrainingHistoryForCustomer(request.getParameter("username"));
 	}
 }

@@ -2,23 +2,24 @@ const vm = new Vue({
 	el: '#app',
 	data: {
 		customersTrainingHistory: null,
-		currentUser = null
+		currentUsername: null
 	},
 	mounted(){
 		axios.get('rest/currentUser')
-		.then((response) => {
-			this.currentUser = response.data
-		})
-		xios.get(
-			'rest/training-history/find-customer-training-history',
-			{
-				params: {
-					user: this.currentUser
+			.then((response) => {
+				this.currentUsername = response.data.username;
+				axios.get(
+				'rest/training-history/find-customer-training-history',
+				{
+					params: {
+						username: this.currentUsername
+					}
 				}
-			}
-		)
-		.then((response) => {
-			this.customersTraininghistory = response.data;
+				)	
+			.then((response) => {
+				this.customersTrainingHistory = response.data;
+			})
 		})
+		
 	}
 })

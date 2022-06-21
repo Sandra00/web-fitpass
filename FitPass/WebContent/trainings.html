@@ -53,6 +53,7 @@
         </div>
         
         <div id="app" class="container">
+        <label>trenutni korisnik: {{currentUsername}}</label>
 		<table class="table">
 			<thead>
 			<tr>
@@ -61,11 +62,11 @@
 				<th>Datumi treniranja za proteki mesec</th>
 			</tr>
 			</thead>
-			<tbody >
+			<tbody v-for="trainingHistory in customersTrainingHistory">
 				<tr>
 					<td></td>
 					<td></td>
-					<td></td>
+					<td>{{trainingHistory.startDate}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -78,5 +79,6 @@
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
+        <script src="app/training-history.js"></script>
 </body>
 </html>

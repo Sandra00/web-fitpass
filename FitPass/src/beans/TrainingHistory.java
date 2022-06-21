@@ -3,7 +3,7 @@ package beans;
 import java.time.LocalDateTime;
 
 public class TrainingHistory {
-	private LocalDateTime startDate;
+	private String startDate;
 	private int trainingId;
 	private String buyerUsername;
 	private String coachUsername;
@@ -14,7 +14,7 @@ public class TrainingHistory {
 	}
 
 
-	public TrainingHistory(LocalDateTime startDate, int trainingId, String buyerUsername, String coachUsername) {
+	public TrainingHistory(String startDate, int trainingId, String buyerUsername, String coachUsername) {
 		super();
 		this.startDate = startDate;
 		this.trainingId = trainingId;
@@ -23,12 +23,12 @@ public class TrainingHistory {
 	}
 
 
-	public LocalDateTime getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
