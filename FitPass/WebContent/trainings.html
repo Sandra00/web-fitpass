@@ -62,11 +62,11 @@
 				<th>Datumi treniranja za proteki mesec</th>
 			</tr>
 			</thead>
-			<tbody v-for="trainingHistory in customersTrainingHistory">
+			<tbody v-for="training in customersTrainings">
 				<tr>
+					<td>{{training.name}}</td>
+					<td>{{training.sportsObject}}</td>
 					<td></td>
-					<td></td>
-					<td>{{trainingHistory.startDate}}</td>
 				</tr>
 			</tbody>
 		</table>

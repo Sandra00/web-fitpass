@@ -1,7 +1,7 @@
 const vm = new Vue({
 	el: '#app',
 	data: {
-		customersTrainingHistory: null,
+		customersTrainings: null,
 		currentUsername: null
 	},
 	mounted(){
@@ -17,7 +17,7 @@ const vm = new Vue({
 				}
 				)	
 			.then((response) => {
-				this.customersTrainingHistory = response.data;
+				this.customersTrainings = response.data;
 			})
 		})
 		

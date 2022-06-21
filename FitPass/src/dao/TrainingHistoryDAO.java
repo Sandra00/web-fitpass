@@ -26,14 +26,25 @@ public class TrainingHistoryDAO {
 	
 	public List<TrainingHistory> findTrainingHistoryForCustomer(String username){
 		List<TrainingHistory> returnList = new ArrayList<TrainingHistory>();
-		System.out.println("trenutni korisnik: " + username);
 		for(TrainingHistory trainigHistory : trainingsHistory) {
 			if(trainigHistory.getBuyerUsername().equals(username)) {
 				returnList.add(trainigHistory);
 			}
 		}
+		//System.out.println(returnList.size());
 		return returnList;
 	}
+	
+	public List<String> findHistoryForTraining(int id){
+		List<String> startDates = new ArrayList<String>();
+		for(TrainingHistory trainingHistory : trainingsHistory) {
+			if(trainingHistory.getTrainingId() == id) {
+				startDates.add(trainingHistory.getStartDate());
+			}
+		}
+		return startDates;
+	}
+	
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

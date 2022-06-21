@@ -36,6 +36,13 @@ public class TrainingDAO {
 		return max + 1;
 	}
 	
+	public Training findById(int id) {
+		for(Training training : trainings) {
+			if(training.getTrainingId() == id) return training;
+		}
+		return null;
+	}
+	
 	private boolean exists(int trainingId) {
 		for (Training training : trainings) {
 			if (training.getTrainingId() == trainingId) {
