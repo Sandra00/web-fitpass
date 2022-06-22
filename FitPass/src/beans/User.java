@@ -16,7 +16,7 @@ public class User {
 	private String dateOfBirth;
 	private UserType userType;
 	private List<Integer> trainings;
-	private List<Fee> fee;
+	private List<Membership> fee;
 	private String sportsObject;
 	private List<String> visitedSportsObjects;
 	private int points;
@@ -28,7 +28,7 @@ public class User {
 	}
 
 	public User(String oldUsername, String username, String password, String name, String surname, String gender, String dateOfBirth,
-			UserType userType, List<Integer> trainings, List<Fee> fee, String sportsObject,
+			UserType userType, List<Integer> trainings, List<Membership> fee, String sportsObject,
 			List<String> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
 		this.oldUsername = oldUsername;
@@ -125,11 +125,11 @@ public class User {
 		this.trainings = trainings;
 	}
 
-	public List<Fee> getFee() {
+	public List<Membership> getFee() {
 		return fee;
 	}
 
-	public void setFee(List<Fee> fee) {
+	public void setFee(List<Membership> fee) {
 		this.fee = fee;
 	}
 
