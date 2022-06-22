@@ -1,6 +1,6 @@
 package beans.enums;
 
-public enum FeeStatus {
+public enum MembershipStatus {
 	ACTIVE,
 	INACTIVE
 }

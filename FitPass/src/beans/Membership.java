@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 
 import beans.enums.*;
 
-public class Fee {
+public class Membership {
 	private String id;
-	private FeeType feeType;
+	private MembershipType feeType;
 	private LocalDateTime transactionDate;
 	private LocalDateTime dueDate;
 	private double price;
 	private User buyer;
-	private FeeStatus feeStatus;
+	private MembershipStatus feeStatus;
 	private int numberOfTrainings;
 	// promocode
 	
-	public Fee() {
+	public Membership() {
 		super();
 	}
-	public Fee(String id, FeeType feeType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
-			User buyer, FeeStatus feeStatus, int numberOfTrainings) {
+	public Membership(String id, MembershipType feeType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
+			User buyer, MembershipStatus feeStatus, int numberOfTrainings) {
 		super();
 		this.id = id;
 		this.feeType = feeType;
@@ -36,10 +36,10 @@ public class Fee {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public FeeType getFeeType() {
+	public MembershipType getFeeType() {
 		return feeType;
 	}
-	public void setFeeType(FeeType feeType) {
+	public void setFeeType(MembershipType feeType) {
 		this.feeType = feeType;
 	}
 	public LocalDateTime getTransactionDate() {
@@ -66,10 +66,10 @@ public class Fee {
 	public void setBuyer(User buyer) {
 		this.buyer = buyer;
 	}
-	public FeeStatus getFeeStatus() {
+	public MembershipStatus getFeeStatus() {
 		return feeStatus;
 	}
-	public void setFeeStatus(FeeStatus feeStatus) {
+	public void setFeeStatus(MembershipStatus feeStatus) {
 		this.feeStatus = feeStatus;
 	}
 	public int getNumberOfTrainings() {

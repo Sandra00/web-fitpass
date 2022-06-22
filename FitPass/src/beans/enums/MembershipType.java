@@ -1,6 +1,6 @@
 package beans.enums;
 
-public enum FeeType {
+public enum MembershipType {
 	ANNUALLY,
 	MONTHLY,
 	WEEKLY
