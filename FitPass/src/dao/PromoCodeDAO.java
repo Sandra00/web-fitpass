@@ -22,16 +22,27 @@ public class PromoCodeDAO {
 	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\promo_codes.json";
 	
 	public PromoCodeDAO() {
-		System.out.println("I'M HERE!");
 		promoCodes = new ArrayList<PromoCode>();
-		/*
-		LocalDateTime expDate = LocalDateTime.of(2022, 8, 31, 0, 0);
-		PromoCode prc1 = new PromoCode("PROMO1", expDate, 100, 5);
-		promoCodes.add(prc1);*/
 		load();
 	}
 	
+	public boolean newPromoCode(PromoCode promoCode) {
+		if (exists(promoCode.getCode())) {
+			return false;
+		}
+		boolean isSaved = promoCodes.add(promoCode);
+		save();
+		return isSaved;
+	}
 	
+	private boolean exists(String code) {
+		for (PromoCode promoCode : promoCodes) {
+			if(promoCode.getCode().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	private void load() {
 		SimpleModule localDateTimeSerialization = new SimpleModule();

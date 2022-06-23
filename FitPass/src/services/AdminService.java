@@ -12,6 +12,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.PromoCode;
 import beans.SportsObject;
 import beans.User;
 import beans.enums.UserType;
@@ -45,6 +46,18 @@ public class AdminService {
 			return true;
 		}
 		return false;
+	}
+	
+	@GET
+	@Path("/all")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response all(@Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+			return Response.ok(userDao.findAll(), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}
 	
 	@POST
@@ -89,17 +102,19 @@ public class AdminService {
 			}
 			return Response.status(409).build(); 	// 409 - CONFLICT
 		}
-		return Response.status(401).build(); 
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}
 	
-	@GET
-	@Path("/all")
+	@POST
+	@Path("/new-promo-code")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response all(@Context HttpServletRequest request) {
+	public Response newPromoCode(PromoCode promoCode, @Context HttpServletRequest request) {
 		if(isAuthorized(request)) {
-			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-			return Response.ok(userDao.findAll(), MediaType.APPLICATION_JSON).build();
+			PromoCodeDAO promoCodeDAO = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
+			if(promoCodeDAO.newPromoCode(promoCode)) {
+				return Response.ok().build();
+			}
+			return Response.status(409).build(); 	// 409 - CONFLICT
 		}
 		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}

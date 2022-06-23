@@ -45,7 +45,6 @@ public class SportsObjectService {
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
-		PromoCodeDAO pcDAO = new PromoCodeDAO();
 	}
 	
 	
