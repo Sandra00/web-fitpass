@@ -56,10 +56,35 @@
         </div>
 
 
+		<div id="app" class="container">
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Naziv</th>
+				<th>Sportski objekat</th>
+				<th>Datum</th>
+				<th>Cena</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody v-for="">
+				<tr>
+					<td></td>
+					<td></td>
+					<td> nesto1
+						<template v-for="date in findDates(training.trainingId)">
+							nesto
+						</template>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 		<script src="js/vue.js"></script>
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
-        <script src="app/training-history.js"></script>
+        <script src="app/coach-trainings.js"></script>
 </body>
 </html>
