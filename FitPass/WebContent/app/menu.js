@@ -6,7 +6,8 @@ window.onload = function() {
 			isLoggedIn: false,
 			isAdmin: false,
 			isManager: false,
-			isNotAdmin: false
+			isCustomer: false,
+			isCoach: false
 		},
 		created(){
 			axios.get('rest/currentUser')
@@ -19,9 +20,11 @@ window.onload = function() {
 					this.isAdmin = true;
 				} else if(response.data.userType == 'MANAGER'){
 					this.isManager = true;
+				}else if(response.data.userType == 'COACH'){
+					this.isCoach = true;
 				}
-				if(response.data.userType == 'MANAGER' || response.data.userType == 'CUSTOMER' || response.data.userType == 'COACH'){
-					this.isNotAdmin = true;
+				if(response.data.userType == 'CUSTOMER'){
+					this.isCustomer = true;
 				}
 			});
 		},

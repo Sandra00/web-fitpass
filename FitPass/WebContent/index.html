@@ -42,7 +42,10 @@
                             <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" v-if="isNotAdmin === true" href="trainings.html">Treninzi</a>
+                            <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">{{username}}</a>
