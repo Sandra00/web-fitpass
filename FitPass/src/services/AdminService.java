@@ -119,6 +119,7 @@ public class AdminService {
 	@POST
 	@Path("/new-promo-code")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response newPromoCode(PromoCode promoCode, @Context HttpServletRequest request) {
 		if(isAuthorized(request)) {
 			PromoCodeDAO promoCodeDAO = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
