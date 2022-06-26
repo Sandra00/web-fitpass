@@ -58,6 +58,20 @@ public class TrainingHistoryDAO {
 		return startDates;
 	}
 	
+	public TrainingHistory findById(int id) {
+		for(TrainingHistory tr : trainingsHistory) {
+			if(tr.getId() == id) {
+				return tr;
+			}
+		}
+		return null;
+	}
+	public void removeTraining(int id) {
+		TrainingHistory training = findById(id);
+		trainingsHistory.remove(training);
+		save();
+	}
+	
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

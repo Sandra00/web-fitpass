@@ -1,17 +1,13 @@
 [
     {
-        "startDate": "2000-06-14",
-        "trainingId": 1,
-        "buyerUsername": "dejana",
-        "coachUsername": "njegos"
-    },
-    {
+        "id": 2,
         "startDate": "2000-07-14",
         "trainingId": 1,
         "buyerUsername": "dejana",
         "coachUsername": "njegos"
     },
     {
+        "id": 3,
         "startDate": "2000-07-14",
         "trainingId": 2,
         "buyerUsername": "dejana",

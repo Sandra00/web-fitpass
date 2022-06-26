@@ -2,7 +2,7 @@
     {
         "trainingId": 1,
         "name": "Cross fit",
-        "trainingType": "GROUP",
+        "trainingType": "PERSONAL",
         "sportsObject": "Teretana 3",
         "length": 120,
         "coach": "njegos",
