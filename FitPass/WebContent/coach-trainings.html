@@ -70,11 +70,15 @@
 			</thead>
 			<tbody v-for="coachTraining in coachTrainings">
 				<tr>
-					<td>{{findTraining(coachTraining.trainingId)}}</td>
-					<td>{{coachTraining.trainingId}}</td>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.name}}
+					</td>
+					<td></td>
 					<td>{{coachTraining.startDate}}</td>
-					<td></td>
-					<td></td>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.price}}
+					</td>
+					
 				</tr>
 			</tbody>
 		</table>

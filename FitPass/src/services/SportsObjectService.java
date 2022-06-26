@@ -106,8 +106,9 @@ public class SportsObjectService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Training findTrainig(@Context HttpServletRequest request){
-		System.out.println(request.getAttribute("trainingId"));
+		//System.out.println(request.getParameter("trainingId"));
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		//System.out.println("prinadjen" + trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId"))).getTrainingId());
 		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
 	}
 	
