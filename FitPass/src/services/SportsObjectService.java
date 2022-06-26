@@ -19,6 +19,8 @@ import javax.ws.rs.core.Response;
 import beans.Content;
 import beans.PromoCode;
 import beans.SportsObject;
+import beans.Training;
+import beans.User;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
@@ -98,4 +100,15 @@ public class SportsObjectService {
 				Response.status(400).build() : 
 					Response.ok(sportsObjectDAO.findContents(sportsObjectName), MediaType.APPLICATION_JSON).build();
 	}
+	
+	@GET
+	@Path("/training")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Training findTrainig(@Context HttpServletRequest request){
+		System.out.println(request.getAttribute("trainingId"));
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
+	}
+	
 }

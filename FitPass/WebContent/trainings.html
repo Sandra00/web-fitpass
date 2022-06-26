@@ -66,11 +66,10 @@
 				<tr>
 					<td>{{training.name}}</td>
 					<td>{{training.sportsObject}}</td>
-					<td> nesto1
-						<template v-for="date in findDates(training.trainingId)">
-							nesto
-						</template>
+					<td v-for="date in findDates(training.trainingId)" > 
+						{{date.dates.toString()}}
 					</td>
+					
 				</tr>
 			</tbody>
 		</table>

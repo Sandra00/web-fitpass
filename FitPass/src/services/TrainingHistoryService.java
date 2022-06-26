@@ -76,7 +76,18 @@ public class TrainingHistoryService {
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
 		//System.out.println("parametar" + request.getParameter("trainingId"));
 		//System.out.println(Integer.parseInt(request.getParameter("trainingId")));
-		//System.out.println(trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId"))).size());
+		System.out.println(trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId"))).size());
 		return trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId")));
+	}
+	
+	@GET
+	@Path("/trainings/coach")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TrainingHistory> findCoachsTrainigs(@Context HttpServletRequest request){
+		//System.out.println(request.getParameter("username"));
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		//System.out.println(trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username")).size());
+		return trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username"));
 	}
 }

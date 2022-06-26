@@ -3,7 +3,7 @@ const vm = new Vue({
 	data: {
 		customersTrainings: null,
 		currentUsername: null,
-		dates: []
+		datesMap: []
 	},
 	mounted(){
 		axios.get('rest/currentUser')
@@ -19,25 +19,36 @@ const vm = new Vue({
 				)	
 			.then((response) => {
 				this.customersTrainings = response.data;
-				
+				for(let i = 0; i < this.customersTrainings.length; i++){
+					axios.get(
+					'rest/training-history/find-history-for-training',
+					{
+						params: {
+							trainingId: this.customersTrainings[i].trainingId
+						}
+					}
+					)
+					.then((response) => {
+						//this.dates = response.data.toString();
+						returnValue = response.data.toString();
+						this.datesMap.push({id: this.customersTrainings[i].trainingId, dates:response.data});
+						
+					})
+				}
 			})
 		})
 		
 	},
 	methods: {
 		findDates(id) {
-			axios.get(
-				'rest/training-history/find-history-for-training',
-				{
-					params: {
-						trainingId: id
-					}
-				}
-				)
-				.then((response) => {
-					this.dates = response.data;
-					return response.data;
-				})
+			return this.datesMap.filter(function(date){
+				return date.id == id;
+			})
+			/*
+			return this.datesMap.filter(function(date){
+				return date.id == id;
+			})*/
 		}
+		
 	}
 })

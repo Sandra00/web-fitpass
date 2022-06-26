@@ -1,1 +1,24 @@
-[{"trainingId":1,"name":"Cross fit","trainingType":"GROUP","sportsObject":"Teretana 3","length":120,"coach":"njegos","description":"Cross fit za pocetnike","image":null},{"trainingId":2,"name":"Cross fit","trainingType":"GROUP","sportsObject":"Teretana 3","length":120,"coach":"njegos","description":"Cross fit za pocetnike","image":null}]
+[
+    {
+        "trainingId": 1,
+        "name": "Cross fit",
+        "trainingType": "GROUP",
+        "sportsObject": "Teretana 3",
+        "length": 120,
+        "coach": "njegos",
+        "description": "Cross fit za pocetnike",
+        "image": null,
+        "price": 500
+    },
+    {
+        "trainingId": 2,
+        "name": "Cross fit 1",
+        "trainingType": "GROUP",
+        "sportsObject": "Teretana 3",
+        "length": 120,
+        "coach": "njegos",
+        "description": "Cross fit za pocetnike",
+        "image": null,
+        "price": 200
+    }
+]

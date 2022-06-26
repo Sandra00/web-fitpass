@@ -57,6 +57,7 @@
 
 
 		<div id="app" class="container">
+		<label>trenutni korisnik: {{currentUsername}}</label>
 		<table class="table">
 			<thead>
 			<tr>
@@ -67,15 +68,13 @@
 				<th></th>
 			</tr>
 			</thead>
-			<tbody v-for="">
+			<tbody v-for="coachTraining in coachTrainings">
 				<tr>
+					<td>{{findTraining(coachTraining.trainingId)}}</td>
+					<td>{{coachTraining.trainingId}}</td>
+					<td>{{coachTraining.startDate}}</td>
 					<td></td>
 					<td></td>
-					<td> nesto1
-						<template v-for="date in findDates(training.trainingId)">
-							nesto
-						</template>
-					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -85,6 +84,6 @@
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
-        <script src="app/coach-trainings.js"></script>
+        <script src="app/coach-trainigns.js"></script>
 </body>
 </html>
