@@ -1,15 +1,15 @@
 package beans;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 
 public class PromoCode {
 	private String code;
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimeFormatter.ISO_DATE_TIME)
 	private LocalDateTime expirationDate;
 	private int usesLeft;
 	private double discountPercentage;
@@ -31,11 +31,12 @@ public class PromoCode {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	//@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
 	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
 	}
