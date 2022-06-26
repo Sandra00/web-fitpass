@@ -49,13 +49,24 @@ public class AdminService {
 	}
 	
 	@GET
-	@Path("/all")
+	@Path("/all-users")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response all(@Context HttpServletRequest request) {
 		if(isAuthorized(request)) {
 			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 			return Response.ok(userDao.findAll(), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@GET
+	@Path("/all-promo-codes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response allPromoCodes(@Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			PromoCodeDAO promoCodeDAO = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
+			return Response.ok(promoCodeDAO.findAll(), MediaType.APPLICATION_JSON).build();
 		}
 		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}

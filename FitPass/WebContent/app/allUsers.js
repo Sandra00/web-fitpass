@@ -5,7 +5,7 @@ window.onload = function() {
 			allUsers: []
 		},
 		mounted(){
-			axios.get('rest/admin/all')
+			axios.get('rest/admin/all-users')
 			.then((response) => {
 				this.allUsers= response.data;
 			});

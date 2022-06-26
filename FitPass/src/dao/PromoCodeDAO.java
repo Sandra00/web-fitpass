@@ -35,6 +35,10 @@ public class PromoCodeDAO {
 		return isSaved;
 	}
 	
+	public List<PromoCode> findAll() {
+		return promoCodes;
+	}
+	
 	private boolean exists(String code) {
 		for (PromoCode promoCode : promoCodes) {
 			if(promoCode.getCode().equals(code)) {
