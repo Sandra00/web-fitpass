@@ -35,6 +35,18 @@ public class TrainingHistoryDAO {
 		return returnList;
 	}
 	
+	public List<TrainingHistory> findCoachsTrainigs(String username){
+		List<TrainingHistory> trainingsCoach = new ArrayList<TrainingHistory>();
+		System.out.println(username);
+		for(TrainingHistory training : trainingsHistory) {
+			//System.out.println(training.getCoachUsername());
+			if(training.getCoachUsername().equals(username)) {
+				trainingsCoach.add(training);
+			}
+		}
+		return trainingsCoach;
+	}
+	
 	public List<String> findHistoryForTraining(int id){
 		List<String> startDates = new ArrayList<String>();
 		for(TrainingHistory trainingHistory : trainingsHistory) {

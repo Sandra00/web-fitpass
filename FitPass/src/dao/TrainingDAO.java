@@ -73,7 +73,15 @@ public class TrainingDAO {
 		return coaches;
 	}
 	
-	
+	public List<Training> findCoachsTrainigs(String username){
+		List<Training> trainingsCoach = new ArrayList<Training>();
+		for(Training training : trainings) {
+			if(training.getCoach().equals(username)) {
+				trainingsCoach.add(training);
+			}
+		}
+		return trainingsCoach;
+	}
 
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();

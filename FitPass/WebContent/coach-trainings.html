@@ -10,7 +10,7 @@
     
 </head>
 <body>
-	<div id="menu">
+		<div id="menu">
             <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <a class="navbar-brand" href="#">FitPass</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -42,7 +42,10 @@
                             <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" v-if="isNotAdmin === true" href="trainings.html">Treninzi</a>
+                            <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">{{username}}</a>
@@ -51,37 +54,42 @@
                 </div>
 			</nav>
         </div>
-        
-        <div id="app" class="container">
-        <label>trenutni korisnik: {{currentUsername}}</label>
+
+
+		<div id="app" class="container">
+		<label>trenutni korisnik: {{currentUsername}}</label>
 		<table class="table">
 			<thead>
 			<tr>
 				<th>Naziv</th>
 				<th>Sportski objekat</th>
-				<th>Datumi treniranja za proteki mesec</th>
+				<th>Datum</th>
+				<th>Cena</th>
+				<th></th>
 			</tr>
 			</thead>
-			<tbody v-for="training in customersTrainings">
+			<tbody v-for="coachTraining in coachTrainings">
 				<tr>
-					<td>{{training.name}}</td>
-					<td>{{training.sportsObject}}</td>
-					<td v-for="date in findDates(training.trainingId)" > 
-						{{date.dates.toString()}}
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.name}}
+					</td>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.sportsObject}}
+					</td>
+					<td>{{coachTraining.startDate}}</td>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.price}}
 					</td>
 					
 				</tr>
 			</tbody>
 		</table>
 	</div>
-        
-        
-        
-        
-        <script src="js/vue.js"></script>
+	
+		<script src="js/vue.js"></script>
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
-        <script src="app/training-history.js"></script>
+        <script src="app/coach-trainigns.js"></script>
 </body>
 </html>

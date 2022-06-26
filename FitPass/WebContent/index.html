@@ -8,6 +8,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    	
+    
     </head>
     <body>
         <div id="menu">
@@ -42,7 +44,10 @@
                             <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" v-if="isNotAdmin === true" href="trainings.html">Treninzi</a>
+                            <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">{{username}}</a>
