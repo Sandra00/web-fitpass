@@ -66,6 +66,7 @@
 				<th>Datum</th>
 				<th>Cena</th>
 				<th></th>
+				<th></th>
 			</tr>
 			</thead>
 			<tbody v-for="coachTraining in coachTrainings">
@@ -80,8 +81,10 @@
 					<td v-for="training in findTraining(coachTraining.trainingId)">
 						{{training.training.price}}
 					</td>
-					<td>
-						<button v-on:click = "removeTraining(coachTraining.id)" class="btn btn-lg btn-primary btn-block">Otkaži</button>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						<div v-if="training.training.trainingType == 'PERSONAL'">
+							<button v-on:click = "removeTraining(training.training.trainingId)" class="btn btn-lg btn-primary btn-block">Otkaži</button>
+						</div>
 					</td>
 					
 				</tr>
