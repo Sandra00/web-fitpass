@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -89,5 +90,14 @@ public class TrainingHistoryService {
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
 		//System.out.println(trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username")).size());
 		return trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username"));
+	}
+	
+	@DELETE
+	@Path("/trainings/coach-remove-training")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void removeTraining(@Context HttpServletRequest request) {
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		trainingHistoryDAO.removeTraining(Integer.parseInt(request.getParameter("trainingHistoryId")));
 	}
 }

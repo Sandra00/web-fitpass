@@ -53,20 +53,18 @@ const vm = new Vue({
 			return this.trainingsMap.filter(function(trainingId){
 				return trainingId.id == id;
 			})
-			/*
-			axios.get(
-				'rest/objects/training',
-				{
-					params: {
-						trainingId: id
-					}
-				}
-				)
-				.then((response) => {
-					//this.dates = response.data;
-					return response.data;
-				})
-				*/
+		},
+		removeTraining(id) {
+			
+			axios.delete(
+						'rest/training-history/trainings/coach-remove-training',
+						{
+							params:{
+								trainingHistoryId: id
+							}
+						}
+					)
+			window.location.reload()
 		}
 	}
 })
