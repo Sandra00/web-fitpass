@@ -10,6 +10,7 @@
     
 </head>
 <body>
+
 	<div id="menu">
             <nav class="navbar navbar-expand-md navbar-light bg-light">
                 <a class="navbar-brand" href="#">FitPass</a>
@@ -33,7 +34,7 @@
                             <a class="nav-link" v-if="isLoggedIn === true" @click="logout" >Izloguj se</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" v-if="isAdmin === true" href="all_users.html">Svi korisnici(Admin)</a>
+                            <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Svi korisnici(Admin)</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi sportski objekat</a>
@@ -42,7 +43,13 @@
                             <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" v-if="isNotAdmin === true" href="trainings.html">Treninzi</a>
+                            <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" v-if="isManager === true" href="manager-trainings.html" >Treninzi sportskog objekta</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">{{username}}</a>
@@ -53,25 +60,28 @@
         </div>
         
         <div id="app" class="container">
-        <label>trenutni korisnik: {{currentUsername}}</label>
+		<label>trenutni korisnik: {{currentUsername}}</label>
 		<table class="table">
 			<thead>
 			<tr>
 				<th>Naziv</th>
 				<th>Sportski objekat</th>
-				<th>Datumi treniranja za proteki mesec</th>
+				<th>Datum</th>
+				<th>Cena</th>
 			</tr>
 			</thead>
-			<tbody v-for="training in customersTrainings">
-				<tr>
-					<td>{{training.name}}</td>
-					<td>{{training.sportsObject}}</td>
-					<td v-for="date in findDates(training.trainingId)" > 
-						<div v-for="oneDate in date.dates">
-							{{oneDate.dayOfMonth}}.{{oneDate.monthValue}}.{{oneDate.year}}.
-						</div>
+			<tbody>
+				<tr v-for="managerTraining in managerTrainings">
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.name}}
 					</td>
-					
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.sportsObject}}
+					</td>
+					<td>{{managerTraining.startDate[2]}}.{{managerTraining.startDate[1]}}.{{managerTraining.startDate[0]}}</td>
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.price}}
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -84,6 +94,6 @@
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
-        <script src="app/training-history.js"></script>
+        <script src="app/manager-trainings.js"></script>
 </body>
 </html>

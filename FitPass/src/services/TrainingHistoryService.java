@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class TrainingHistoryService {
 	@Path("find-history-for-training")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> findHistoryForTraining(@Context HttpServletRequest request){
+	public List<LocalDateTime> findHistoryForTraining(@Context HttpServletRequest request){
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
 		//System.out.println("parametar" + request.getParameter("trainingId"));
 		//System.out.println(Integer.parseInt(request.getParameter("trainingId")));

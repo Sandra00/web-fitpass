@@ -1,10 +1,16 @@
 package beans;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class TrainingHistory {
 	private int id;
-	private String startDate;
+	private LocalDateTime startDate;
 	private int trainingId;
 	private String buyerUsername;
 	private String coachUsername;
@@ -15,7 +21,7 @@ public class TrainingHistory {
 	}
 
 
-	public TrainingHistory(int id, String startDate, int trainingId, String buyerUsername, String coachUsername) {
+	public TrainingHistory(int id, LocalDateTime startDate, int trainingId, String buyerUsername, String coachUsername) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -24,13 +30,13 @@ public class TrainingHistory {
 		this.coachUsername = coachUsername;
 	}
 
-
-	public String getStartDate() {
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-
-	public void setStartDate(String startDate) {
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 

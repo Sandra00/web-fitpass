@@ -1,14 +1,26 @@
 [
     {
         "id": 2,
-        "startDate": "2000-07-14",
+        "startDate": [
+            2022,
+            8,
+            31,
+            0,
+            0
+        ],
         "trainingId": 1,
         "buyerUsername": "dejana",
         "coachUsername": "njegos"
     },
     {
         "id": 3,
-        "startDate": "2000-07-14",
+        "startDate": [
+            2022,
+            9,
+            30,
+            0,
+            0
+        ],
         "trainingId": 2,
         "buyerUsername": "dejana",
         "coachUsername": "njegos"
