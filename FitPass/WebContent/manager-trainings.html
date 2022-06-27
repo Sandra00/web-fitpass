@@ -72,10 +72,16 @@
 			</thead>
 			<tbody>
 				<tr v-for="managerTraining in managerTrainings">
-					<td>ima</td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.name}}
+					</td>
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.sportsObject}}
+					</td>
+					<td>{{managerTraining.startDate}}</td>
+					<td v-for="training in findTraining(managerTraining.trainingId)">
+						{{training.training.price}}
+					</td>
 				</tr>
 			</tbody>
 		</table>

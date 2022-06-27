@@ -2,7 +2,8 @@ const vm = new Vue({
 	el: '#app',
 	data: {
 		currentUsername: null,
-		managerTrainings: []
+		managerTrainings: [],
+		trainingsMap: []
 	},
 	mounted(){
 		axios.get('rest/currentUser')
@@ -18,7 +19,39 @@ const vm = new Vue({
 			)
 			.then((response) => {
 				this.managerTrainings = response.data;
+				for(let i = 0; i < this.managerTrainings.length; i++){
+					axios.get(
+						'rest/objects/training',
+						{
+							params:{
+								trainingId: this.managerTrainings[i].trainingId
+							}
+						}
+					)
+					.then((response) => {
+						
+						let add = true;
+						for(let i = 0; i < this.trainingsMap.length; i++){
+							if(this.trainingsMap[i].id == response.data.trainingId){
+								add = false;
+							}
+						}
+						if(add){
+							this.trainingsMap.push({id: this.managerTrainings[i].trainingId, training:response.data})
+						}
+						
+						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
+					})
+					
+				}
 			})
 		})
+	},
+	methods: {
+		findTraining(id) {
+			return this.trainingsMap.filter(function(trainingId){
+				return trainingId.id == id;
+			})
+		}
 	}
 })
