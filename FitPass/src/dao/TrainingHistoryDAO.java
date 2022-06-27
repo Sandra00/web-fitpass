@@ -66,6 +66,10 @@ public class TrainingHistoryDAO {
 		}
 		return null;
 	}
+	
+	public List<TrainingHistory> findAll(){
+		return trainingsHistory;
+	}
 	public void removeTraining(int id) {
 		TrainingHistory training = findById(id);
 		trainingsHistory.remove(training);

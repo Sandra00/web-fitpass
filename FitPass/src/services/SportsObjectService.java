@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,10 +21,12 @@ import beans.Content;
 import beans.PromoCode;
 import beans.SportsObject;
 import beans.Training;
+import beans.TrainingHistory;
 import beans.User;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
+import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 
 @Path("/objects")
@@ -46,6 +49,9 @@ public class SportsObjectService {
 		}
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
+		}
+		if (ctx.getAttribute("trainingHistoryDAO") == null) {
+			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
 		}
 	}
 	
@@ -109,6 +115,25 @@ public class SportsObjectService {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		//System.out.println("prinadjen" + trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId"))).getTrainingId());
 		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
+	}
+	
+	@GET
+	@Path("/training-history-manager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TrainingHistory> findObjectsTrainings(@Context HttpServletRequest request){
+		List<TrainingHistory> trainings = new ArrayList<TrainingHistory>();
+		String name = request.getParameter("objectName");
+		
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		for(TrainingHistory trainingHistory : trainingHistoryDAO.findAll()) {
+			Training training = trainingDAO.findById(trainingHistory.getTrainingId());
+			if(training.getSportsObject().equals(name)) {
+				trainings.add(trainingHistory);
+			}
+		}
+		return trainings;
 	}
 	
 }

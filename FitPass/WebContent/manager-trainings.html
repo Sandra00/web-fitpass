@@ -59,7 +59,27 @@
 			</nav>
         </div>
         
-        
+        <div id="app" class="container">
+		<label>trenutni korisnik: {{currentUsername}}</label>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Naziv</th>
+				<th>Sportski objekat</th>
+				<th>Datum</th>
+				<th>Cena</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr v-for="managerTraining in managerTrainings">
+					<td>ima</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
         
         
         
@@ -68,6 +88,6 @@
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/menu.js"></script>
-        <script src="app/coach-trainigns.js"></script>
+        <script src="app/manager-trainings.js"></script>
 </body>
 </html>
