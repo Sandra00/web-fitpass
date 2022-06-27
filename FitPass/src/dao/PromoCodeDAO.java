@@ -49,11 +49,7 @@ public class PromoCodeDAO {
 	}
 	
 	private void load() {
-		SimpleModule localDateTimeSerialization = new SimpleModule();
-		localDateTimeSerialization.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-		localDateTimeSerialization.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(localDateTimeSerialization);
 		try {
 			promoCodes = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), PromoCode[].class)));
 		} catch (JsonParseException e) {
@@ -66,11 +62,7 @@ public class PromoCodeDAO {
 	}
 	
 	private void save() {
-		SimpleModule localDateTimeSerialization = new SimpleModule();
-		localDateTimeSerialization.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-		localDateTimeSerialization.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(localDateTimeSerialization);
 		try {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), promoCodes);
 		} catch (JsonParseException e) {

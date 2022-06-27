@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import beans.User;
 import beans.enums.UserType;
+import dao.MembershipDAO;
 import dao.UserDAO;
 
 @Path("")
@@ -30,6 +31,9 @@ public class UserService {
 	private void init() {
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
+		}
+		if (ctx.getAttribute("membershipDAO") == null) {
+			ctx.setAttribute("membershipDAO", new MembershipDAO());
 		}
 	}
 	
@@ -115,6 +119,15 @@ public class UserService {
 	public Response getAllCoaches(){
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
 		return Response.ok(userDao.findAllCoaches(), MediaType.APPLICATION_JSON).build();
+	}
+	
+	@GET
+	@Path("/memberships")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllMemberships(){
+		MembershipDAO membershipDAO = (MembershipDAO) ctx.getAttribute("membershipDAO");
+		return Response.ok(membershipDAO.findAll(), MediaType.APPLICATION_JSON).build();
 	}
 	
 	@POST

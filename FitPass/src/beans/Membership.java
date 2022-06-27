@@ -2,55 +2,71 @@ package beans;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 import beans.enums.*;
 
 public class Membership {
 	private String id;
-	private MembershipType feeType;
+	private MembershipType membershipType;
 	private LocalDateTime transactionDate;
 	private LocalDateTime dueDate;
 	private double price;
-	private User buyer;
-	private MembershipStatus feeStatus;
+	private MembershipStatus membershipStatus;
 	private int numberOfTrainings;
-	// promocode
 	
 	public Membership() {
 		super();
 	}
-	public Membership(String id, MembershipType feeType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
-			User buyer, MembershipStatus feeStatus, int numberOfTrainings) {
+	public Membership(String id, MembershipType membershipType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
+			MembershipStatus membershipStatus, int numberOfTrainings) {
 		super();
 		this.id = id;
-		this.feeType = feeType;
+		this.membershipType = membershipType;
 		this.transactionDate = transactionDate;
 		this.dueDate = dueDate;
 		this.price = price;
-		this.buyer = buyer;
-		this.feeStatus = feeStatus;
+		this.membershipStatus = membershipStatus;
 		this.numberOfTrainings = numberOfTrainings;
 	}
+	public Membership(Membership membership) {
+		this.id = membership.id;
+		this.membershipStatus = membership.membershipStatus;
+		this.transactionDate = membership.transactionDate;
+		this.dueDate = membership.dueDate;
+		this.price = membership.price;
+		this.membershipStatus = membership.membershipStatus;
+		this.numberOfTrainings = membership.numberOfTrainings;
+	}
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public MembershipType getFeeType() {
-		return feeType;
+	public MembershipType getMembershipType() {
+		return membershipType;
 	}
-	public void setFeeType(MembershipType feeType) {
-		this.feeType = feeType;
+	public void setMembershipType(MembershipType membershipStatus) {
+		this.membershipType = membershipStatus;
 	}
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	public LocalDateTime getTransactionDate() {
 		return transactionDate;
 	}
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	public void setTransactionDate(LocalDateTime transactionDate) {
 		this.transactionDate = transactionDate;
 	}
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	public LocalDateTime getDueDate() {
 		return dueDate;
 	}
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
@@ -60,17 +76,11 @@ public class Membership {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public User getBuyer() {
-		return buyer;
+	public MembershipStatus getMembershipStatus() {
+		return membershipStatus;
 	}
-	public void setBuyer(User buyer) {
-		this.buyer = buyer;
-	}
-	public MembershipStatus getFeeStatus() {
-		return feeStatus;
-	}
-	public void setFeeStatus(MembershipStatus feeStatus) {
-		this.feeStatus = feeStatus;
+	public void setMembershipStatus(MembershipStatus membershipStatus) {
+		this.membershipStatus = membershipStatus;
 	}
 	public int getNumberOfTrainings() {
 		return numberOfTrainings;

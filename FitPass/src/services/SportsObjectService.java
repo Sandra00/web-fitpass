@@ -21,6 +21,7 @@ import beans.PromoCode;
 import beans.SportsObject;
 import beans.Training;
 import beans.User;
+import dao.MembershipDAO;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;

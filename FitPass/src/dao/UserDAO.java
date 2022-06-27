@@ -9,10 +9,10 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.Membership;
 import beans.User;
 import beans.enums.UserType;
 import util.PersonalConfig;
-
 
 public class UserDAO {
 	private List<User> users;
@@ -103,6 +103,23 @@ public class UserDAO {
 			users.add(user);
 			saveUsers();
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean setMembership(String username, Membership membership) {
+		if(exists(username)) {
+			return false;
+		}
+		findUserByUsername(username).setMembership(membership);
+		return true;
+	}
+	
+	private boolean exists(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				return true;
+			}
 		}
 		return false;
 	}

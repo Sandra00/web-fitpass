@@ -35,7 +35,6 @@ public class PromoCode {
 	public LocalDateTime getExpirationDate() {
 		return expirationDate;
 	}
-	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	public void setExpirationDate(LocalDateTime expirationDate) {
 		this.expirationDate = expirationDate;
