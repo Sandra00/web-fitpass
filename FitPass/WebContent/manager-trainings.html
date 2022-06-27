@@ -78,7 +78,7 @@
 					<td v-for="training in findTraining(managerTraining.trainingId)">
 						{{training.training.sportsObject}}
 					</td>
-					<td>{{managerTraining.startDate}}</td>
+					<td>{{managerTraining.startDate[2]}}.{{managerTraining.startDate[1]}}.{{managerTraining.startDate[0]}}</td>
 					<td v-for="training in findTraining(managerTraining.trainingId)">
 						{{training.training.price}}
 					</td>
