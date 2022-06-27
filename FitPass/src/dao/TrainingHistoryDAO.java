@@ -2,6 +2,7 @@ package dao;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,8 +48,8 @@ public class TrainingHistoryDAO {
 		return trainingsCoach;
 	}
 	
-	public List<String> findHistoryForTraining(int id){
-		List<String> startDates = new ArrayList<String>();
+	public List<LocalDateTime> findHistoryForTraining(int id){
+		List<LocalDateTime> startDates = new ArrayList<LocalDateTime>();
 		for(TrainingHistory trainingHistory : trainingsHistory) {
 			if(trainingHistory.getTrainingId() == id) {
 				startDates.add(trainingHistory.getStartDate());

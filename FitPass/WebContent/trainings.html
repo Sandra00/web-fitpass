@@ -67,7 +67,9 @@
 					<td>{{training.name}}</td>
 					<td>{{training.sportsObject}}</td>
 					<td v-for="date in findDates(training.trainingId)" > 
-						{{date.dates.toString()}}
+						<div v-for="oneDate in date.dates">
+							{{oneDate.dayOfMonth}}.{{oneDate.monthValue}}.{{oneDate.year}}.
+						</div>
 					</td>
 					
 				</tr>
