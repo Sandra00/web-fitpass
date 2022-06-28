@@ -54,6 +54,36 @@
         
         <div id="app" class="container">
         <label>trenutni korisnik: {{currentUsername}}</label>
+        
+        <div class="bg-dark text-dark py-4">
+				<div class="container">
+					<div id="row ">
+						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSportObjectSearch" id="ameSportObjectSearch" name="ameSportObjectSearch" placeholder="Naziv sportskog objekta..."></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="priceSearch" id="priceSearch" name="priceSearch" placeholder="Cena..."></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="startDateSearch" id="startDateSearch" name="startDateSearch" placeholder="Od..." ></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="endDateSearch" id="endDateSearch" name="endDateSearch" placeholder="Do..."></div>
+						
+						<div class="col-md-2">
+							<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="sportObjectTypeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<option class="dropdown-item" value="all">Svi</option>
+								<option class="dropdown-item" value="GYM">Teretana</option>
+								<option class="dropdown-item" value="POOL">Bazen</option>
+								<option class="dropdown-item" value="SPORTSCENTER">Sportski centar</option>
+								<option class="dropdown-item" value="DANCESTUDIO">Plesni studio</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+						<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="trainingTypeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<option class="dropdown-item" value="allTypes">Tip</option>
+							<option class="dropdown-item" value="PERSONAL">Lični</option>
+							<option class="dropdown-item" value="GROUP">Grupni</option>
+							<option class="dropdown-item" value="GYM">Teretana</option>
+						</select>
+						</div>
+					</div>
+				</div>
+			</div>
+        
 		<table class="table">
 			<thead>
 			<tr>
