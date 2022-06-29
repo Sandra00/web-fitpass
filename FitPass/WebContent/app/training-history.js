@@ -12,7 +12,8 @@ const vm = new Vue({
 		startDateSearch: null,
 		endDateSearch: null,
 		sportObjectTypeFilter: "all",
-		trainingTypeFilter: "all"
+		trainingTypeFilter: "all",
+		sortIndex: null
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -57,6 +58,57 @@ const vm = new Vue({
 			return this.datesMap.filter(function(date){
 				return date.id == id;
 			})*/
+		},
+		sortTrainings(index){
+			if(this.sortIndex === index){
+				switch(this.sortDirection){
+					case null:
+					this.sortDirection = 'asc';
+					break;
+					case 'asc':
+					this.sortDirection = 'desc';
+					break;
+					case 'desc':
+					this.sortDirection = null;
+					break;
+				}
+			}else{
+				this.sortDirection = 'asc';
+			}
+			
+			this.sortIndex = index;
+			
+			if(this.sortIndex == 1){
+				if(this.sortDirection == 'asc'){
+					this.customersTrainings = this.customersTrainings.sort(
+						(rowA, rowB) => {
+						return rowA.sportsObject.localeCompare(rowB.sportsObject)
+						}
+					)
+				}else{
+					this.cusomersTrainings = this.customersTrainings.sort(
+						(rowA, rowB) => {
+							return rowB.sportsObject.localeCompare(rowA.sportsObject)
+						}
+					)
+				}
+				
+			}else if(this.sortIndex == 2){
+				if(this.sortDirection == 'asc'){
+					this.cusomersTrainings = this.customersTrainings.sort(
+						(rowA, rowB) => {
+						return rowA.price.toString().localeCompare(rowB.price.toString());
+						}
+					)
+				}else{
+					this.cusomersTrainings = this.customersTrainings.sort(
+						(rowA, rowB) => {
+						return rowB.price.toString().localeCompare(rowA.price.toString());
+						}
+					)
+				}
+				
+			}
 		}
 		
 	},
