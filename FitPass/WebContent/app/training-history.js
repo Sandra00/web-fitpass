@@ -13,7 +13,8 @@ const vm = new Vue({
 		endDateSearch: null,
 		sportObjectTypeFilter: "all",
 		trainingTypeFilter: "all",
-		sortIndex: null
+		sortIndex: null,
+		sportsObject: null
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -131,8 +132,9 @@ const vm = new Vue({
 				if(this.trainingTypeFilter != "all"){
 					keep = keep && (training.trainingType == this.trainingTypeFilter);
 				}
+				let sportsObject;
 				if(this.sportObjectTypeFilter != "all"){
-					let sportsObject;
+					
 					axios.get(
 						'rest/objects/currentObject',
 						{
@@ -142,12 +144,13 @@ const vm = new Vue({
 						}
 					)
 					.then(response => {
-						sportsObject = response.data;
-						keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
-						if(keep == false) return keep;
+						this.sportsObject = response.data;
+						//keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
+						//if(keep == false) return keep;
 					})
-					
+					keep = keep && (this.sportObjectTypeFilter == this.sportsObject.locationType);
 				}
+				//keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
 				
 				
 				return keep;
