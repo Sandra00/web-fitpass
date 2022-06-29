@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -128,6 +129,15 @@ public class UserService {
 	public Response getAllMemberships(){
 		MembershipDAO membershipDAO = (MembershipDAO) ctx.getAttribute("membershipDAO");
 		return Response.ok(membershipDAO.findAll(), MediaType.APPLICATION_JSON).build();
+	}
+	
+	@GET
+	@Path("/membership/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMembershipById(@PathParam("id") String membershipId){
+		MembershipDAO membershipDAO = (MembershipDAO) ctx.getAttribute("membershipDAO");
+		return Response.ok(membershipDAO.findById(membershipId), MediaType.APPLICATION_JSON).build();
 	}
 	
 	@POST

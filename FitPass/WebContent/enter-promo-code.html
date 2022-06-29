@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FitPass | Unesi promo kod</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+	<div id="menu">
+	    <nav class="navbar navbar-expand-md navbar-light bg-light">
+	        <a class="navbar-brand" href="index.html">FitPass</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+	            <ul class="navbar-nav">
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="index.html">Početna</a>
+	                </li>
+	            </ul>
+	            
+	            <ul class="navbar-nav">
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn == false"  href="login.html">Uloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn == false" href="registerCustomer.html">Registruj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" v-if="isLoggedIn == true" @click="logout" >Izloguj se</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj nalog</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="">{{username}}</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </nav>
+	</div>
+	
+	<div id="app" class="container">
+		<h2>Unesi promo kod:</h2>
+			<form class="form-inline" @submit.prevent="checkPromoCode">
+				<input type="text" id="promoCode" v-model="promoCode"  placeholder="Promo kod" class="form-control">
+				<button type="submit" class="btn btn-primary">Proveri</button>
+			</form>
+		<h3>Cena članarine: {{price}}</h3>
+		
+		<form class="form-inline" @submit.prevent="confirm">
+			<button type="submit" class="btn btn-success">Potvrdi</button>
+		</form>
+	</div>
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/menu.js"></script>
+	<script src="app/enter-promo-code.js"></script>
+</body>
+</html>

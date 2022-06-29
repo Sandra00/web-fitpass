@@ -30,7 +30,9 @@ public class MembershipDAO {
 	
 	public Membership findById(String membershipId) {
 		for(Membership membership : memberships) {
-			return membership;
+			if(membership.getId().equals(membershipId)) {
+				return membership;
+			}
 		}
 		return null;
 	}

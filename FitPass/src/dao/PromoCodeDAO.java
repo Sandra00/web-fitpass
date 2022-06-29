@@ -26,6 +26,25 @@ public class PromoCodeDAO {
 		load();
 	}
 	
+	public PromoCode findByCode(String code) {
+		if(code == null) {
+			return null;
+		}
+		for (PromoCode promoCode : promoCodes) {
+			if(promoCode.getCode().equals(code)) {
+				return promoCode;
+			}
+		}
+		return null;
+	}
+	
+	public void decrementUsesLeft(PromoCode promoCode) {
+		int usesLeft = promoCode.getUsesLeft();
+		usesLeft--;
+		promoCode.setUsesLeft(usesLeft);
+		save();
+	}
+	
 	public boolean newPromoCode(PromoCode promoCode) {
 		if (exists(promoCode.getCode())) {
 			return false;

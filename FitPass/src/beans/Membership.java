@@ -34,7 +34,7 @@ public class Membership {
 	}
 	public Membership(Membership membership) {
 		this.id = membership.id;
-		this.membershipStatus = membership.membershipStatus;
+		this.membershipType = membership.membershipType;
 		this.transactionDate = membership.transactionDate;
 		this.dueDate = membership.dueDate;
 		this.price = membership.price;

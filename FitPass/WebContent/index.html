@@ -35,7 +35,7 @@
                             <a class="nav-link" v-if="isLoggedIn === true" @click="logout" >Izloguj se</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Svi korisnici(Admin)</a>
+                            <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi sportski objekat</a>
@@ -49,6 +49,9 @@
                         <li class="nav-item">
                             <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
                         </li>
+                        <li class="nav-item">
+	                    	<a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj nalog</a>
+	                	</li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">{{username}}</a>
                         </li>

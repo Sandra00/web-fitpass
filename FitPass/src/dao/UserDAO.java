@@ -108,10 +108,11 @@ public class UserDAO {
 	}
 	
 	public boolean setMembership(String username, Membership membership) {
-		if(exists(username)) {
+		if(!exists(username)) {
 			return false;
 		}
 		findUserByUsername(username).setMembership(membership);
+		saveUsers();
 		return true;
 	}
 	
