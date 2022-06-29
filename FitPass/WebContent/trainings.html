@@ -61,8 +61,8 @@
 						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSportObjectSearch" id="nameSportObjectSearch" name="nameSportObjectSearch" placeholder="Naziv sportskog objekta..."></div>
 						<div class="col-md-2"><input type="text" class="w-100" v-model="startPriceSearch" id="startPriceSearch" name="startPriceSearch" placeholder="Cena od..."></div>
 						<div class="col-md-2"><input type="text" class="w-100" v-model="endPriceSearch" id="endPriceSearch" name="endPriceSearch" placeholder="Cena do..."></div>
-						<div class="col-md-2"><input type="text" class="w-100" v-model="startDateSearch" id="startDateSearch" name="startDateSearch" placeholder="Od..." ></div>
-						<div class="col-md-2"><input type="text" class="w-100" v-model="endDateSearch" id="endDateSearch" name="endDateSearch" placeholder="Do..."></div>
+						<div class="col-md-2"><input type="date" class="w-100" v-model="startDateSearch" id="startDateSearch" name="startDateSearch" placeholder="Od..." ></div>
+						<div class="col-md-2"><input type="date" class="w-100" v-model="endDateSearch" id="endDateSearch" name="endDateSearch" placeholder="Do..."></div>
 						
 						<div class="col-md-2">
 							<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="sportObjectTypeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,7 +91,7 @@
 				<th>Naziv</th>
 				<th>Sportski objekat</th>
 				<th>Cena</th>
-				<th>Datumi treniranja za proteki mesec</th>
+				<th>Datumi treniranja za protekli mesec</th>
 			</tr>
 			</thead>
 			<tbody v-for="training in filteredCustomersTrainings">
