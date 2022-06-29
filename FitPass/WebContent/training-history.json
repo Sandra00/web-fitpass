@@ -24,5 +24,20 @@
         "trainingId": 2,
         "buyerUsername": "dejana",
         "coachUsername": "njegos"
+    },
+    {
+        "id": 4,
+        "startDate": [
+            2022,
+            6,
+            29,
+            17,
+            51,
+            26,
+            418650600
+        ],
+        "trainingId": 1,
+        "buyerUsername": "dejana",
+        "coachUsername": "njegos"
     }
 ]

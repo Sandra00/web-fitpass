@@ -35,6 +35,22 @@ public class TrainingHistoryDAO {
 		return returnList;
 	}
 	
+	public void addTrainingHistory(TrainingHistory trainingHistory) {
+		trainingHistory.setId(findMax() + 1);
+		trainingsHistory.add(trainingHistory);
+		save();
+	}
+	
+	private int findMax() {
+		int max = 0;
+		for(TrainingHistory trainigHistory : trainingsHistory) {
+			if(trainigHistory.getId() > max) {
+				max = trainigHistory.getId();
+			}
+		}
+		return max;
+	}
+	
 	public List<TrainingHistory> findCoachsTrainigs(String username){
 		List<TrainingHistory> trainingsCoach = new ArrayList<TrainingHistory>();
 		System.out.println(username);
