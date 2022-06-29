@@ -58,7 +58,7 @@
         <div class="bg-dark text-dark py-4">
 				<div class="container">
 					<div id="row ">
-						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSportObjectSearch" id="ameSportObjectSearch" name="ameSportObjectSearch" placeholder="Naziv sportskog objekta..."></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSportObjectSearch" id="nameSportObjectSearch" name="nameSportObjectSearch" placeholder="Naziv sportskog objekta..."></div>
 						<div class="col-md-2"><input type="text" class="w-100" v-model="priceSearch" id="priceSearch" name="priceSearch" placeholder="Cena..."></div>
 						<div class="col-md-2"><input type="text" class="w-100" v-model="startDateSearch" id="startDateSearch" name="startDateSearch" placeholder="Od..." ></div>
 						<div class="col-md-2"><input type="text" class="w-100" v-model="endDateSearch" id="endDateSearch" name="endDateSearch" placeholder="Do..."></div>
@@ -92,7 +92,7 @@
 				<th>Datumi treniranja za proteki mesec</th>
 			</tr>
 			</thead>
-			<tbody v-for="training in customersTrainings">
+			<tbody v-for="training in filteredCustomersTrainings">
 				<tr>
 					<td>{{training.name}}</td>
 					<td>{{training.sportsObject}}</td>

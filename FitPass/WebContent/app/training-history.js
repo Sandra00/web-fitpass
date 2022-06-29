@@ -1,11 +1,13 @@
 const vm = new Vue({
 	el: '#app',
 	data: {
-		customersTrainings: null,
+		customersTrainings: [],
 		currentUsername: null,
-		datesMap: []
+		datesMap: [],
+		nameSportObjectSearch: '',
+		price: null
 	},
-	mounted(){
+	created(){
 		axios.get('rest/currentUser')
 			.then((response) => {
 				this.currentUsername = response.data.username;
@@ -50,5 +52,16 @@ const vm = new Vue({
 			})*/
 		}
 		
+	},
+	computed:{
+		filteredCustomersTrainings:function(){
+			
+			return this.customersTrainings.filter((training) => {
+				let keep = true;
+				keep = training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase());
+				return keep;
+			})
+			
+		}
 	}
 })
