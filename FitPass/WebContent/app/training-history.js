@@ -5,7 +5,8 @@ const vm = new Vue({
 		currentUsername: null,
 		datesMap: [],
 		nameSportObjectSearch: '',
-		priceSearch: ''
+		startPriceSearch: null,
+		endPriceSearch: null
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -58,8 +59,13 @@ const vm = new Vue({
 			
 			return this.customersTrainings.filter((training) => {
 				let keep = true;
+				let maxPrice = 10000;
+				if(this.endPriceSearch != null){
+					maxPrice = this.endPriceSearch;
+				}
 				keep = training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase())
-				&& training.price.toString().match(this.priceSearch);
+				&& (Number(training.price) >= Number(this.startPriceSearch))
+				&& (Number(training.price) <= maxPrice); //training.price.toString().match(this.startPriceSearch);
 				return keep;
 			})
 			
