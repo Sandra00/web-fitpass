@@ -8,7 +8,11 @@ const vm = new Vue({
 		startPriceSearch: null,
 		endPriceSearch: null,
 		startDateSearch: null,
-		endDateSearch: null
+		endDateSearch: null,
+		startDateSearch: null,
+		endDateSearch: null,
+		sportObjectTypeFilter: "all",
+		trainingTypeFilter: "all"
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -71,6 +75,29 @@ const vm = new Vue({
 				keep = training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase())
 				&& (Number(training.price) >= Number(this.startPriceSearch))
 				&& (Number(training.price) <= maxPrice); //training.price.toString().match(this.startPriceSearch);
+				//trainingDates = findDates(training.id);
+				if(this.trainingTypeFilter != "all"){
+					keep = keep && (training.trainingType == this.trainingTypeFilter);
+				}
+				if(this.sportObjectTypeFilter != "all"){
+					let sportsObject;
+					axios.get(
+						'rest/objects/currentObject',
+						{
+							params:{
+								name: training.sportsObject
+							}	
+						}
+					)
+					.then(response => {
+						sportsObject = response.data;
+						keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
+						if(keep == false) return keep;
+					})
+					
+				}
+				
+				
 				return keep;
 			})
 			
