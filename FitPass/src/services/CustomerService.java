@@ -109,7 +109,7 @@ public class CustomerService {
 	}
 	
 	@PUT
-	@Path("/check-in/{name}") // add parameter for training, add training to training history here
+	@Path("/check-in") // add parameter for training, add training to training history here
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response sportsObjectCheckIn(	@QueryParam("sportsObjectName") String sportsObjectName, 
