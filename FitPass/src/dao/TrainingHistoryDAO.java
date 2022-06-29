@@ -32,7 +32,6 @@ public class TrainingHistoryDAO {
 				returnList.add(trainigHistory);
 			}
 		}
-		//System.out.println(returnList.size());
 		return returnList;
 	}
 	
