@@ -182,6 +182,28 @@ const vm = new Vue({
 					)
 				}
 				
+			}else{
+				if(this.sortDirection == 'asc'){
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							a = rowA.startDate;
+							b = rowB.startDate;
+						return a.toString().localeCompare(b.toString())
+						}
+					)
+				}else{
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							a = rowA.startDate;
+							b = rowB.startDate;
+						return b.toString().localeCompare(a.toString())
+						}
+					)
+				}
 			}
 		}
 	},
