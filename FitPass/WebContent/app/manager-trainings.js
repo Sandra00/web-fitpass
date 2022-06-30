@@ -3,9 +3,22 @@ const vm = new Vue({
 	data: {
 		currentUsername: null,
 		managerTrainings: [],
-		trainingsMap: []
+		trainingsMap: [],
+		nameSportObjectSearch: '',
+		startPriceSearch: null,
+		endPriceSearch: null,
+		startDateSearch: new Date(2000, 1, 1),
+		endDateSearch: null,
+		sportObjectTypeFilter: "all",
+		trainingTypeFilter: "all",
+		sortIndex: null,
+		sportsObject: null,
+		training: null,
+		price: null,
+		date: null,
+		trainingF: null
 	},
-	mounted(){
+	created(){
 		axios.get('rest/currentUser')
 		.then((response) => {
 			this.currentUsername = response.data.username;
@@ -51,6 +64,14 @@ const vm = new Vue({
 		findTraining(id) {
 			return this.trainingsMap.filter(function(trainingId){
 				return trainingId.id == id;
+			})
+		}
+	},
+	computed:{
+		filteredManagerTrainings:function(){
+			return this.managerTrainings.filter((trainingH) => {
+				keep = true;
+				return true;
 			})
 		}
 	}
