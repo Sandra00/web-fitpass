@@ -15,7 +15,8 @@ const vm = new Vue({
 		sportsObject: null,
 		training: null,
 		price: null,
-		date: null
+		date: null,
+		trainingF: null
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -41,7 +42,7 @@ const vm = new Vue({
 						}
 					)
 					.then((response) => {
-						
+						this.trainingF = response.data;
 						let add = true;
 						for(let i = 0; i < this.trainingsMap.length; i++){
 							if(this.trainingsMap[i].id == response.data.trainingId){
@@ -49,7 +50,21 @@ const vm = new Vue({
 							}
 						}
 						if(add){
-							this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
+							axios.get(
+						'rest/objects/currentObject',
+						{
+							params:{
+								name: response.data.sportsObject
+							}	
+						}
+					)
+					.then(response => {
+						this.sportsObject = response.data;
+						//keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
+						//if(keep == false) return keep;
+						this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
+					})
+							//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
 						}
 						
 						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
@@ -123,6 +138,10 @@ const vm = new Vue({
 								 && (Number(this.training.price) <= maxPrice)
 								 && this.date >= startDate
 								 && this.date <= endDate;
+								 
+							if(this.sportObjectTypeFilter != "all"){
+								keep = keep && (this.sportObjectTypeFilter == this.trainingsMap[i].sportsObject.locationType);
+							}
 							break;
 						}
 					}
