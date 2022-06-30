@@ -58,18 +58,48 @@
 
 		<div id="app" class="container">
 		<label>trenutni korisnik: {{currentUsername}}</label>
+		
+		<div class="bg-dark text-dark py-4">
+				<div class="container">
+					<div id="row ">
+						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSportObjectSearch" id="nameSportObjectSearch" name="nameSportObjectSearch" placeholder="Naziv sportskog objekta..."></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="startPriceSearch" id="startPriceSearch" name="startPriceSearch" placeholder="Cena od..."></div>
+						<div class="col-md-2"><input type="text" class="w-100" v-model="endPriceSearch" id="endPriceSearch" name="endPriceSearch" placeholder="Cena do..."></div>
+						<div class="col-md-2"><input type="date" class="w-100" v-model="startDateSearch" id="startDateSearch" name="startDateSearch" placeholder="Od..." ></div>
+						<div class="col-md-2"><input type="date" class="w-100" v-model="endDateSearch" id="endDateSearch" name="endDateSearch" placeholder="Do..."></div>
+						
+						<div class="col-md-2">
+							<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="sportObjectTypeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<option class="dropdown-item" value="all">Svi</option>
+								<option class="dropdown-item" value="GYM">Teretana</option>
+								<option class="dropdown-item" value="POOL">Bazen</option>
+								<option class="dropdown-item" value="SPORTSCENTER">Sportski centar</option>
+								<option class="dropdown-item" value="DANCESTUDIO">Plesni studio</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+						<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="trainingTypeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<option class="dropdown-item" value="all">Svi</option>
+							<option class="dropdown-item" value="PERSONAL">Lični</option>
+							<option class="dropdown-item" value="GROUP">Grupni</option>
+							<option class="dropdown-item" value="GYM">Teretana</option>
+						</select>
+						</div>
+					</div>
+				</div>
+			</div>
 		<table class="table">
 			<thead>
 			<tr>
 				<th>Naziv</th>
-				<th>Sportski objekat</th>
-				<th>Datum</th>
-				<th>Cena</th>
+				<th v-on:click="sortTrainings(1)">Sportski objekat</th>
+				<th v-on:click="sortTrainings(2)">Datum</th>
+				<th v-on:click="sortTrainings(3)">Cena</th>
 				<th></th>
 				<th></th>
 			</tr>
 			</thead>
-			<tbody v-for="coachTraining in coachTrainings">
+			<tbody v-for="coachTraining in filteredCoachTrainings">
 				<tr>
 					<td v-for="training in findTraining(coachTraining.trainingId)">
 						{{training.training.name}}
