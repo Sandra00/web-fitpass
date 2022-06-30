@@ -50,6 +50,7 @@ const vm = new Vue({
 							}
 						}
 						if(add){
+							/*
 							axios.get(
 						'rest/objects/currentObject',
 						{
@@ -63,8 +64,8 @@ const vm = new Vue({
 						//keep = keep && (this.sportObjectTypeFilter == sportsObject.locationType);
 						//if(keep == false) return keep;
 						this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
-					})
-							//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
+					})*/
+							this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
 						}
 						
 						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
@@ -138,10 +139,10 @@ const vm = new Vue({
 								 && (Number(this.training.price) <= maxPrice)
 								 && this.date >= startDate
 								 && this.date <= endDate;
-								 
+							/*
 							if(this.sportObjectTypeFilter != "all"){
 								keep = keep && (this.sportObjectTypeFilter == this.trainingsMap[i].sportsObject.locationType);
-							}
+							}*/
 							break;
 						}
 					}
