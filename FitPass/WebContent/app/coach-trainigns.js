@@ -141,7 +141,9 @@ const vm = new Vue({
 								 && (Number(this.training.price) <= maxPrice)
 								 && this.date >= startDate
 								 && this.date <= endDate;
-							
+							if(this.trainingTypeFilter != "all"){
+								keep = keep && (this.trainingTypeFilter == this.trainingsMap[i].training.trainingType);
+							}
 							if(this.sportObjectTypeFilter != "all"){
 								keep = keep && (this.sportObjectTypeFilter == this.trainingsMap[i].sportsObject.locationType);
 							}
@@ -154,41 +156,5 @@ const vm = new Vue({
 			
 		}
 	}
-	/*
-	computed:{
-		filteredCoachTrainings:function(){
-			
-			return this.coachTrainings.filter((trainingHistory) => {
-				let keep = true;
-				axios.get(
-						'rest/objects/training',
-						{
-							params:{
-								trainingId: trainingHistory.trainingId
-							}
-						}
-					)
-					.then((response) => {
-						this.training = response.data;
-						this.sportsObject = response.data.sportsObject;
-						//keep = keep && this.training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase())
-					})
-					let maxPrice = 10000;
-					if(this.endPriceSearch != null || this.endPriceSearch == ""){
-						maxPrice = this.endPriceSearch;
-					}
-					if(maxPrice == ""){
-						maxPrice = 10000;
-					}
-					if(this.training != null){
-						keep = keep && this.training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase())
-						    && (Number(this.training.price) >= Number(this.startPriceSearch));
-							//&& (Number(this.training.price) <= maxPrice); //training.price.toString().match(this.startPriceSearch);
-					}
-				return keep;
-			})
-			
-		}
-	}
-	*/
+	
 })
