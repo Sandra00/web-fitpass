@@ -70,8 +70,49 @@ const vm = new Vue({
 	computed:{
 		filteredManagerTrainings:function(){
 			return this.managerTrainings.filter((trainingH) => {
-				keep = true;
-				return true;
+				let keep = true;
+				let maxPrice = 10000;
+				if(this.endPriceSearch != null || this.endPriceSearch == ""){
+					maxPrice = this.endPriceSearch;
+				}
+				if(maxPrice == ""){
+					maxPrice = 10000;
+				}
+				for(let i = 0; i < this.trainingsMap.length; ++i){
+						if(this.trainingsMap[i].id == trainingH.trainingId){
+							this.training = this.trainingsMap[i].training;
+							this.price = this.trainingsMap[i].training.price;
+							var yearTraining = trainingH.startDate[0];
+							var monthTraining = trainingH.startDate[1];
+							var dayTraining = trainingH.startDate[2];
+							this.date = new Date(yearTraining, monthTraining, dayTraining);
+							
+							if(this.startDateSearch != null){
+								var d = new Date(this.startDateSearch);
+								startDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
+							}else{
+								startDate = new Date(2000, 1, 1);
+							}
+							
+							if(this.endDateSearch != null){
+								var d = new Date(this.endDateSearch);
+								endDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
+							}else{
+								endDate = new Date(2100, 1, 1);
+							}
+							
+							keep = keep && (Number(this.training.price) >= Number(this.startPriceSearch))
+								 && (Number(this.training.price) <= maxPrice)
+								 && this.date >= startDate
+								 && this.date <= endDate;
+							if(this.trainingTypeFilter != "all"){
+								keep = keep && (this.trainingTypeFilter == this.trainingsMap[i].training.trainingType);
+							}
+							
+							break;
+						}
+					}
+				return keep;
 			})
 		}
 	}
