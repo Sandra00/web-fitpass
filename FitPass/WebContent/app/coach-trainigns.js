@@ -123,7 +123,8 @@ const vm = new Vue({
 							for(let i = 0; i < this.trainingsMap.length; i++){
 								if(this.trainingsMap[i].id == rowA.trainingId){
 									a = this.trainingsMap[i].sportsObject.name;
-								}else if(this.trainingsMap[i].id == rowB.trainingId){
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
 									b = this.trainingsMap[i].sportsObject.name;
 								}
 							}
@@ -138,7 +139,8 @@ const vm = new Vue({
 							for(let i = 0; i < this.trainingsMap.length; i++){
 								if(this.trainingsMap[i].id == rowA.trainingId){
 									a = this.trainingsMap[i].sportsObject.name;
-								}else if(this.trainingsMap[i].id == rowB.trainingId){
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
 									b = this.trainingsMap[i].sportsObject.name;
 								}
 							}
@@ -156,7 +158,8 @@ const vm = new Vue({
 							for(let i = 0; i < this.trainingsMap.length; i++){
 								if(this.trainingsMap[i].id == rowA.trainingId){
 									a = this.trainingsMap[i].training.price;
-								}else if(this.trainingsMap[i].id == rowB.trainingId){
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
 									b = this.trainingsMap[i].training.price;
 								}
 							}
@@ -171,7 +174,8 @@ const vm = new Vue({
 							for(let i = 0; i < this.trainingsMap.length; i++){
 								if(this.trainingsMap[i].id == rowA.trainingId){
 									a = this.trainingsMap[i].training.price;
-								}else if(this.trainingsMap[i].id == rowB.trainingId){
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
 									b = this.trainingsMap[i].training.price;
 								}
 							}
