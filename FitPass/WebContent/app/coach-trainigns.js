@@ -46,13 +46,11 @@ const vm = new Vue({
 						let add = true;
 						for(let i = 0; i < this.trainingsMap.length; i++){
 							if(this.trainingsMap[i].id == response.data.trainingId){
-								//add = false;
+								add = false;
 							}
 						}
 						if(add){
 							
-						
-						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
 						this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
 						for(let i = 0; i != this.trainingsMap.length; i++){
 							axios.get(
@@ -70,7 +68,7 @@ const vm = new Vue({
 						}
 						}
 						
-						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
+
 					})
 					
 					
@@ -224,7 +222,6 @@ const vm = new Vue({
 						if(this.trainingsMap[i].id == trainingH.trainingId){
 							this.training = this.trainingsMap[i].training;
 							this.price = this.trainingsMap[i].training.price;
-							//this.date = new Date(trainingH[0], trainingH[1], trainingH[2]);
 							var yearTraining = trainingH.startDate[0];
 							var monthTraining = trainingH.startDate[1];
 							var dayTraining = trainingH.startDate[2];
@@ -233,7 +230,6 @@ const vm = new Vue({
 							if(this.startDateSearch != null){
 								var d = new Date(this.startDateSearch);
 								startDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
-								//this.startDateSearch = startDate;
 							}else{
 								startDate = new Date(2000, 1, 1);
 							}
@@ -241,7 +237,6 @@ const vm = new Vue({
 							if(this.endDateSearch != null){
 								var d = new Date(this.endDateSearch);
 								endDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
-								//this.startDateSearch = startDate;
 							}else{
 								endDate = new Date(2100, 1, 1);
 							}
