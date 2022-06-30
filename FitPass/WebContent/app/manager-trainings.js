@@ -65,6 +65,84 @@ const vm = new Vue({
 			return this.trainingsMap.filter(function(trainingId){
 				return trainingId.id == id;
 			})
+		},
+		sortTrainings(index){
+			if(this.sortIndex === index){
+				switch(this.sortDirection){
+					case null:
+					this.sortDirection = 'asc';
+					break;
+					case 'asc':
+					this.sortDirection = 'desc';
+					break;
+					case 'desc':
+					this.sortDirection = null;
+					break;
+				}
+			}else{
+				this.sortDirection = 'asc';
+			}
+			
+			this.sortIndex = index;
+			
+			if(this.sortIndex == 3){
+				if(this.sortDirection == 'asc'){
+					this.managerTrainings = this.managerTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].training.price;
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].training.price;
+								}
+							}
+						return a.toString().localeCompare(b.toString())
+						}
+					)
+				}else{
+					this.managerTrainings = this.managerTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].training.price;
+								}
+								if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].training.price;
+								}
+							}
+						return b.toString().localeCompare(a.toString())
+						}
+					)
+				}
+				
+			}else{
+				if(this.sortDirection == 'asc'){
+					this.managerTrainings = this.managerTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							a = rowA.startDate;
+							b = rowB.startDate;
+						return a.toString().localeCompare(b.toString())
+						}
+					)
+				}else{
+					this.managerTrainings = this.managerTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							a = rowA.startDate;
+							b = rowB.startDate;
+						return b.toString().localeCompare(a.toString())
+						}
+					)
+				}
+			}
 		}
 	},
 	computed:{
