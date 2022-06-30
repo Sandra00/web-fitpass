@@ -19,12 +19,16 @@ import javax.ws.rs.core.Response;
 
 import beans.Membership;
 import beans.PromoCode;
+import beans.Training;
+import beans.TrainingHistory;
 import beans.User;
 import beans.enums.MembershipType;
 import beans.enums.UserType;
 import dao.MembershipDAO;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
+import dao.TrainingDAO;
+import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 
 @Path("/customer")
@@ -46,6 +50,15 @@ public class CustomerService {
 		}
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
+		}
+		if (ctx.getAttribute("trainingHistoryDAO") == null) {
+			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
+		}
+		if (ctx.getAttribute("trainingDAO") == null) {
+			ctx.setAttribute("trainingDAO", new TrainingDAO());
+		}
+		if (ctx.getAttribute("sportsObjectDAO") == null) {
+			ctx.setAttribute("sportsObjectDAO", new SportsObjectDAO());
 		}
 	}
 	
@@ -108,8 +121,20 @@ public class CustomerService {
 		return Response.status(401).build();
 	}
 	
+	
+	/*
+	 * check if authorized -- works
+	 * check if user has membership -- works
+	 * check if sports object exists -- works
+	 * check if training exists -- works
+	 * check if membership has sufficient number of trainings -- works
+	 * check if membership is not expired -- works
+	 * decrement number of trainings in users membership -- works
+	 * add sports object to visited sports object set in user -- works
+	 * add training to training history -- works
+	 */
 	@PUT
-	@Path("/check-in") // add parameter for training, add training to training history here
+	@Path("/check-in")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response sportsObjectCheckIn(	@QueryParam("sportsObjectName") String sportsObjectName, 
@@ -117,14 +142,32 @@ public class CustomerService {
 											@Context HttpServletRequest request ) {
 		if(isAuthorized(request)) {
 			User user = (User) request.getSession().getAttribute("user");
-			if(user.getMembership() != null) {
-				int numberOfTrainings = user.getMembership().getNumberOfTrainings();
-				if(numberOfTrainings >= 1) {
-					numberOfTrainings--;
-					user.getMembership().setNumberOfTrainings(numberOfTrainings);
-					user.getVisitedSportsObjects().add(sportsObjectName);
-					return Response.ok().build();
-				}
+			TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+			SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+			TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+			User databaseUser = userDAO.findUserByUsername(user.getUsername());
+			int trainingIdNum;
+			try {
+				trainingIdNum = Integer.parseInt(trainingId);
+			}
+			catch(Exception ex) {
+				return Response.status(405).build();
+			}
+			Training training = trainingDAO.findById(trainingIdNum);
+			if(databaseUser.getMembership() != null && 
+					databaseUser.getMembership().getDueDate().isAfter(LocalDateTime.now()) && 
+						training != null &&
+							sportsObjectDAO.exists(sportsObjectName) &&
+								databaseUser.getMembership().getNumberOfTrainings() >= 1) {
+				int numberOfTrainings = databaseUser.getMembership().getNumberOfTrainings();
+				numberOfTrainings--;
+				databaseUser.getMembership().setNumberOfTrainings(numberOfTrainings);
+				databaseUser.getVisitedSportsObjects().add(sportsObjectName);
+				TrainingHistory trainingHistory = new TrainingHistory(0, LocalDateTime.now(), trainingIdNum, databaseUser.getUsername(), training.getCoach());
+				trainingHistoryDAO.addTrainingHistory(trainingHistory);
+				userDAO.saveUsers();
+				return Response.ok().build();
 			}
 			return Response.status(405).build();
 		}

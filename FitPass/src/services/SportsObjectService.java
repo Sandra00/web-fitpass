@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 
@@ -116,6 +117,15 @@ public class SportsObjectService {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		//System.out.println("prinadjen" + trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId"))).getTrainingId());
 		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
+	}
+	
+	@GET
+	@Path("/trainings/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findSportsObjectTrainings(@PathParam("name") String sportsObjectName, @Context HttpServletRequest request){
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		return Response.ok(trainingDAO.findTrainingsBySportsObject(sportsObjectName), MediaType.APPLICATION_JSON).build();
 	}
 	
 	@GET

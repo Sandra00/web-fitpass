@@ -125,7 +125,7 @@ public class UserDAO {
 		return false;
 	}
 	
-	private void saveUsers() {
+	public void saveUsers() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), users);
