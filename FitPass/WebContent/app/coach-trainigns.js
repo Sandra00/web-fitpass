@@ -44,14 +44,15 @@ const vm = new Vue({
 					.then((response) => {
 						this.trainingF = response.data;
 						let add = true;
-						//for(let i = 0; i < this.trainingsMap.length; i++){
-							//if(this.trainingsMap[i].id == response.data.trainingId){
+						for(let i = 0; i < this.trainingsMap.length; i++){
+							if(this.trainingsMap[i].id == response.data.trainingId){
 								//add = false;
-							//}
-						//}
-						//if(add){
+							}
+						}
+						if(add){
 							
 						
+						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
 						this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
 						for(let i = 0; i != this.trainingsMap.length; i++){
 							axios.get(
@@ -67,7 +68,7 @@ const vm = new Vue({
 						this.trainingsMap[i].sportsObject = this.sportsObject;
 					})
 						}
-						//}
+						}
 						
 						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
 					})
@@ -95,6 +96,60 @@ const vm = new Vue({
 						}
 					)
 			window.location.reload()
+		},
+		sortTrainings(index){
+			if(this.sortIndex === index){
+				switch(this.sortDirection){
+					case null:
+					this.sortDirection = 'asc';
+					break;
+					case 'asc':
+					this.sortDirection = 'desc';
+					break;
+					case 'desc':
+					this.sortDirection = null;
+					break;
+				}
+			}else{
+				this.sortDirection = 'asc';
+			}
+			
+			this.sortIndex = index;
+			
+			if(this.sortIndex == 1){
+				if(this.sortDirection == 'asc'){
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].sportsObject.name;
+								}else if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].sportsObject.name;
+								}
+							}
+						return a.localeCompare(b)
+						}
+					)
+				}else{
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].sportsObject.name;
+								}else if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].sportsObject.name;
+								}
+							}
+						return b.localeCompare(a)
+						}
+					)
+				}
+				
+			}
 		}
 	},
 	computed:{
