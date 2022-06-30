@@ -119,11 +119,34 @@
 		</form>
 		
 		
-		<div>
+		<div class="container">
 			<h2>Komentari</h2>
 		</div>
-		<div>
+		<div class="container" v-if="isCustomer == true">
 			<h2>Treninzi</h2>
+			<p class="text-danger">{{error}}</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Ime treninga</th>
+						<th>Tip treninga</th>
+						<th>Trener</th>
+						<th>Opis</th>
+						<th>Trajanje</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody v-for="training in trainings">
+					<tr>
+						<td>{{training.name}}</td>
+						<td>{{training.trainingType}}</td>
+						<td>{{training.coach}}</td>
+						<td>{{training.description}}</td>
+						<td>{{training.length}}</td>
+						<td><button class="btn btn-success" @click="activate(training.trainingId)">Aktiviraj</button></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 		

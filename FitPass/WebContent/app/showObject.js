@@ -6,7 +6,10 @@ var app = new Vue({
 		type: null,
 		status: null,
 		location: null,
-		avgGrade: null
+		avgGrade: null,
+		trainings: null,
+		isCustomer: false,
+		error: ''
 	},
 	mounted(){
 		var location = window.location.href.toString();
@@ -14,6 +17,21 @@ var app = new Vue({
 		var value = params[1].split("=")[1];
 		value = value.replace('%20', ' ');
 		this.labela = value.toString()
+		
+		
+		axios.get('rest/currentUser')
+		.then((response) => {
+			if(response.data.userType == 'CUSTOMER'){
+				this.isCustomer = true;
+			}
+		});
+		
+		axios.get('rest/objects/trainings/' + this.labela)
+		.then((response) => {
+			this.trainings = response.data;
+		});
+		
+		
 		axios.get(
 			'rest/objects/currentObject',
 			{
@@ -54,6 +72,28 @@ var app = new Vue({
 		});
 		
 	},
-
+	methods: {
+		
+		async activate(trainingId) {
+			await axios.put(
+	            'rest/customer/check-in?sportsObjectName=' + this.labela + '&trainingId=' + trainingId, {}
+	        )
+	        .then( response =>{
+	            window.location.href = 'index.html';
+	        })
+	        .catch( error => {
+				if(error.response.status == 401){
+	            	this.error = 'Ti nisi kupac, kako si uopšte došao ovde?';
+	        	}
+	        	else if (error.response.status == 405){
+					this.error = 'Nazalost nismo mogli da te prijavimo!';
+				}
+				else {
+					this.error = 'UPS! Nepredviđena greška: ' + error.response.status;
+				}
+	        })
+		}
+		
+	}
 	
 });

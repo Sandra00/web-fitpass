@@ -149,7 +149,7 @@ public class CustomerService {
 			User databaseUser = userDAO.findUserByUsername(user.getUsername());
 			int trainingIdNum;
 			try {
-				trainingIdNum = Integer.parseInt(trainingId); // surround with try catch
+				trainingIdNum = Integer.parseInt(trainingId);
 			}
 			catch(Exception ex) {
 				return Response.status(405).build();

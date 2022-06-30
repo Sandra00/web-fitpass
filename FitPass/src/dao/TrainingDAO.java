@@ -62,6 +62,16 @@ public class TrainingDAO {
 		save();
 		return isAdded;
 	}
+
+	public List<Training> findTrainingsBySportsObject(String sportsObjectName){
+		List<Training> trainingList = new ArrayList<Training>();
+		for (Training training : trainings){
+			if (training.getSportsObject().equals(sportsObjectName)) {
+				trainingList.add(training);
+			}
+		}
+		return trainingList;
+	}
 	
 	public List<String> findCoachesBySportsObjects(String sportsObjectName){
 		List<String> coaches = new ArrayList<String>();
