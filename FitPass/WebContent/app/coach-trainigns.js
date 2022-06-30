@@ -149,6 +149,39 @@ const vm = new Vue({
 					)
 				}
 				
+			}else if(this.sortIndex == 3){
+				if(this.sortDirection == 'asc'){
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].training.price;
+								}else if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].training.price;
+								}
+							}
+						return a.toString().localeCompare(b.toString())
+						}
+					)
+				}else{
+					this.coachTrainings = this.coachTrainings.sort(
+						(rowA, rowB) => {
+							var a;
+							var b;
+							for(let i = 0; i < this.trainingsMap.length; i++){
+								if(this.trainingsMap[i].id == rowA.trainingId){
+									a = this.trainingsMap[i].training.price;
+								}else if(this.trainingsMap[i].id == rowB.trainingId){
+									b = this.trainingsMap[i].training.price;
+								}
+							}
+						return b.toString().localeCompare(a.toString())
+						}
+					)
+				}
+				
 			}
 		}
 	},
