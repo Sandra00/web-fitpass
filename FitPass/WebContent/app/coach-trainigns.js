@@ -7,16 +7,15 @@ const vm = new Vue({
 		nameSportObjectSearch: '',
 		startPriceSearch: null,
 		endPriceSearch: null,
-		startDateSearch: null,
-		endDateSearch: null,
-		startDateSearch: null,
+		startDateSearch: new Date(2000, 1, 1),
 		endDateSearch: null,
 		sportObjectTypeFilter: "all",
 		trainingTypeFilter: "all",
 		sortIndex: null,
 		sportsObject: null,
 		training: null,
-		price: null
+		price: null,
+		date: null
 	},
 	created(){
 		axios.get('rest/currentUser')
@@ -96,10 +95,34 @@ const vm = new Vue({
 					for(let i = 0; i < this.trainingsMap.length; ++i){
 						if(this.trainingsMap[i].id == trainingH.trainingId){
 							this.training = this.trainingsMap[i].training;
-							this.price = this.trainingsMap[i].price;
+							this.price = this.trainingsMap[i].training.price;
+							//this.date = new Date(trainingH[0], trainingH[1], trainingH[2]);
+							var yearTraining = trainingH.startDate[0];
+							var monthTraining = trainingH.startDate[1];
+							var dayTraining = trainingH.startDate[2];
+							this.date = new Date(yearTraining, monthTraining, dayTraining);
+							
+							if(this.startDateSearch != null){
+								var d = new Date(this.startDateSearch);
+								startDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
+								//this.startDateSearch = startDate;
+							}else{
+								startDate = new Date(2000, 1, 1);
+							}
+							
+							if(this.endDateSearch != null){
+								var d = new Date(this.endDateSearch);
+								endDate = new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()); 
+								//this.startDateSearch = startDate;
+							}else{
+								endDate = new Date(2100, 1, 1);
+							}
+							
 							keep = keep && this.training.sportsObject.toLowerCase().match(this.nameSportObjectSearch.toLowerCase())
 								 && (Number(this.training.price) >= Number(this.startPriceSearch))
-								 && (Number(this.training.price) <= maxPrice);
+								 && (Number(this.training.price) <= maxPrice)
+								 && this.date >= startDate
+								 && this.date <= endDate;
 							break;
 						}
 					}
