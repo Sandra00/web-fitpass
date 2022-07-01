@@ -63,6 +63,18 @@ public class TrainingHistoryDAO {
 		return trainingsCoach;
 	}
 	
+	public List<TrainingHistory> findCustomersTrainigs(String username){
+		List<TrainingHistory> trainingsCustomer = new ArrayList<TrainingHistory>();
+		System.out.println(username);
+		for(TrainingHistory training : trainingsHistory) {
+			//System.out.println(training.getCoachUsername());
+			if(training.getBuyerUsername().equals(username)) {
+				trainingsCustomer.add(training);
+			}
+		}
+		return trainingsCustomer;
+	}
+	
 	public List<LocalDateTime> findHistoryForTraining(int id){
 		List<LocalDateTime> startDates = new ArrayList<LocalDateTime>();
 		for(TrainingHistory trainingHistory : trainingsHistory) {

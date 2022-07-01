@@ -93,6 +93,17 @@ public class TrainingHistoryService {
 		return trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username"));
 	}
 	
+	@GET
+	@Path("/trainings/customer")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TrainingHistory> findCustomersTrainigs(@Context HttpServletRequest request){
+		//System.out.println(request.getParameter("username"));
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		//System.out.println(trainingHistoryDAO.findCoachsTrainigs(request.getParameter("username")).size());
+		return trainingHistoryDAO.findCustomersTrainigs(request.getParameter("username"));
+	}
+	
 	@DELETE
 	@Path("/trainings/coach-remove-training")
 	@Consumes(MediaType.APPLICATION_JSON)

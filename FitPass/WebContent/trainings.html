@@ -90,19 +90,22 @@
 			<tr>
 				<th>Naziv</th>
 				<th v-on:click="sortTrainings(1)">Sportski objekat</th>
-				<th  v-on:click="sortTrainings(2)">Cena</th>
-				<th>Datumi treniranja za protekli mesec</th>
+				<th v-on:click="sortTrainings(2)">Datum</th>
+				<th  v-on:click="sortTrainings(3)">Cena</th>
+				
 			</tr>
 			</thead>
-			<tbody v-for="training in filteredCustomersTrainings">
+			<tbody v-for="customerTraining in filteredCustomerTrainings">
 				<tr>
-					<td>{{training.name}}</td>
-					<td>{{training.sportsObject}}</td>
-					<td>{{training.price}}</td>
-					<td v-for="date in findDates(training.trainingId)" > 
-						<div v-for="oneDate in date.dates">
-							{{oneDate.dayOfMonth}}.{{oneDate.monthValue}}.{{oneDate.year}}.
-						</div>
+					<td v-for="training in findTraining(customerTraining.trainingId)">
+						{{training.training.name}}
+					</td>
+					<td v-for="training in findTraining(customerTraining.trainingId)">
+						{{training.training.sportsObject}}
+					</td>
+					<td>{{customerTraining.startDate[2]}}.{{customerTraining.startDate[1]}}.{{customerTraining.startDate[0]}}</td>
+					<td v-for="training in findTraining(customerTraining.trainingId)">
+						{{training.training.price}}
 					</td>
 					
 				</tr>
