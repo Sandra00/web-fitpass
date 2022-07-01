@@ -68,7 +68,7 @@ public class TrainingHistoryDAO {
 		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
 			//System.out.println(training.getCoachUsername());
-			if(training.getBuyerUsername().equals(username)) {
+			if(training.getBuyerUsername().equals(username) && LocalDateTime.now().minusMonths(1).isBefore(training.getStartDate())) {
 				trainingsCustomer.add(training);
 			}
 		}
