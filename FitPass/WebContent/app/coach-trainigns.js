@@ -95,6 +95,19 @@ const vm = new Vue({
 					)
 			window.location.reload()
 		},
+		checkTwoDates: function(trainingH){
+			var yearTraining = trainingH.startDate[0];
+			var monthTraining = trainingH.startDate[1] - 1;
+			var dayTraining = trainingH.startDate[2] - 2;
+			trainingDate2 = new Date(yearTraining, monthTraining, dayTraining);
+			todaysDate = new Date()
+			todaysDateFormat = new Date(todaysDate.getFullYear(), todaysDate.getMonth(), todaysDate.getDate());
+			if(todaysDateFormat < trainingDate2){
+				return true;
+			}else{
+				return false;
+			}
+		},
 		sortTrainings(index){
 			if(this.sortIndex === index){
 				switch(this.sortDirection){
