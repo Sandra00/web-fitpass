@@ -1,22 +1,24 @@
 package beans;
 
+import beans.enums.CommentStatus;
+
 public class Comment {
 	private String customerUsername;
 	private String sportsObjectName;
 	private String text;
 	private int grade;
-	private boolean approved;
+	private CommentStatus status;
 	
 	public Comment() {
 		super();
 	}
-	public Comment(String customerUsername, String sportsObjectName, String text, int grade, boolean approved) {
+	public Comment(String customerUsername, String sportsObjectName, String text, int grade, CommentStatus status) {
 		super();
 		this.customerUsername = customerUsername;
 		this.sportsObjectName = sportsObjectName;
 		this.text = text;
 		this.grade = grade;
-		this.approved = approved;
+		this.status = status;
 	}
 	public String getCustomerUsername() {
 		return customerUsername;
@@ -44,11 +46,11 @@ public class Comment {
 			this.grade = grade;
 		}
 	}
-	public boolean isApproved() {
-		return approved;
+	public CommentStatus getStatus() {
+		return status;
 	}
-	public void setApproved(boolean approved) {
-		this.approved = approved;
+	public void setStatus(CommentStatus status) {
+		this.status = status;
 	}
 	
 	

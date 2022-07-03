@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Comment;
+import beans.enums.CommentStatus;
 import util.PersonalConfig;
 
 public class CommentDAO {
@@ -39,7 +40,7 @@ public class CommentDAO {
 	public List<Comment> findApprovedCommentsBySportsObject(String sportsObjectName){
 		List<Comment> sportsObjectComments = new ArrayList<Comment>();
 		for(Comment comment : comments) {
-			if(comment.getSportsObjectName().equals(sportsObjectName) && comment.isApproved()) {
+			if(comment.getSportsObjectName().equals(sportsObjectName) && comment.getStatus() == CommentStatus.APPROVED) {
 				sportsObjectComments.add(comment);
 			}
 		}
