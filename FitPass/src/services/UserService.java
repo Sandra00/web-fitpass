@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import beans.User;
 import beans.enums.UserType;
+import dao.CommentDAO;
 import dao.MembershipDAO;
 import dao.UserDAO;
 
@@ -35,6 +36,9 @@ public class UserService {
 		}
 		if (ctx.getAttribute("membershipDAO") == null) {
 			ctx.setAttribute("membershipDAO", new MembershipDAO());
+		}
+		if (ctx.getAttribute("commentDAO") == null) {
+			ctx.setAttribute("commentDAO", new CommentDAO());
 		}
 	}
 	

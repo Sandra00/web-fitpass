@@ -1,25 +1,28 @@
 package beans;
 
 public class Comment {
-	private String buyerUsername;
+	private String customerUsername;
 	private String sportsObjectName;
 	private String text;
 	private int grade;
+	private boolean approved;
+	
 	public Comment() {
 		super();
 	}
-	public Comment(String buyerUsername, String sportsObjectName, String text, int grade) {
+	public Comment(String customerUsername, String sportsObjectName, String text, int grade, boolean approved) {
 		super();
-		this.buyerUsername = buyerUsername;
+		this.customerUsername = customerUsername;
 		this.sportsObjectName = sportsObjectName;
 		this.text = text;
 		this.grade = grade;
+		this.approved = approved;
 	}
-	public String getBuyerUsername() {
-		return buyerUsername;
+	public String getCustomerUsername() {
+		return customerUsername;
 	}
-	public void setBuyerUsername(String buyerUsername) {
-		this.buyerUsername = buyerUsername;
+	public void setCustomerUsername(String customerUsername) {
+		this.customerUsername = customerUsername;
 	}
 	public String getSportsObjectName() {
 		return sportsObjectName;
@@ -40,6 +43,12 @@ public class Comment {
 		if(grade >= 1 && grade <= 5) {
 			this.grade = grade;
 		}
+	}
+	public boolean isApproved() {
+		return approved;
+	}
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	
 	
