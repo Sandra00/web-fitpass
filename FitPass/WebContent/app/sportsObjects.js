@@ -11,16 +11,6 @@ var app = new Vue({
 		typeFilter: 'allTypes',
 		openFilter: 'allOpenClosed'
 	},
-	mounted(){
-		//axios.get('rest/objects')
-		//.then((response) => {
-			//this.sportsObjects = response.data;
-			
-			// sorting sports objects so that the active ones are displayed first
-			//this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
-		//});
-		
-	},
 	methods: {
 		sortSportObjects(index){
 			if(this.sortIndex === index){
@@ -94,10 +84,8 @@ var app = new Vue({
 		
 		filterType(type){
 			axios.get('rest/objects')
-		.then((response) => {
+			.then((response) => {
 			this.sportsObjects = response.data;
-			
-			// sorting sports objects so that the active ones are displayed first
 			this.sportsObjects.filter((sportsObject)=>{
 				return sportsObject.locationType.match(type);
 			});
