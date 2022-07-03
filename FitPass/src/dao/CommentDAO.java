@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Comment;
-import beans.Membership;
 import util.PersonalConfig;
 
 public class CommentDAO {
@@ -24,6 +23,7 @@ public class CommentDAO {
 	
 	public void addComment(Comment comment) {
 		comments.add(comment);
+		save();
 	}
 	
 	public List<Comment> findCommentsBySportsObject(String sportsObjectName){

@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.User;
-import beans.enums.UserType;
 import dao.CommentDAO;
 import dao.MembershipDAO;
 import dao.UserDAO;

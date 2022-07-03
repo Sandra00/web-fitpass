@@ -2,7 +2,6 @@ package dao;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,11 +9,8 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import beans.PromoCode;
-import util.LocalDateTimeDeserializer;
-import util.LocalDateTimeSerializer;
 import util.PersonalConfig;
 
 public class PromoCodeDAO {

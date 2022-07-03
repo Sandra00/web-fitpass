@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Training;
 import beans.TrainingHistory;
-import beans.User;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
 import dao.TrainingHistoryDAO;

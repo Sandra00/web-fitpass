@@ -19,7 +19,6 @@ import beans.Content;
 import beans.Training;
 import beans.User;
 import beans.enums.UserType;
-import dao.MembershipDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
 import dao.UserDAO;

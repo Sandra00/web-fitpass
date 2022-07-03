@@ -11,9 +11,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import beans.Training;
 import beans.TrainingHistory;
-import beans.User;
 import util.PersonalConfig;
 
 public class TrainingHistoryDAO {
