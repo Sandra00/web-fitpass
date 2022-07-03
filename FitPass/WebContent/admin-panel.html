@@ -62,14 +62,16 @@
 
 					<div class="col-md-2">
 						<select v-model="typeFilter" class="w-100 btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<option class="dropdown-item" value="ALL">Status</option>
-							<option class="dropdown-item" value="opened">Otvoreni</option>
+							<option class="dropdown-item" value="ALL" selected="selected">Status</option>
+							<option class="dropdown-item" value="BRONZE">Bronzani</option>
+							<option class="dropdown-item" value="SILVER">Srebrni</option>
+							<option class="dropdown-item" value="GOLD">Zlatni</option>
 						</select>
 					</div>
 
 					<div class="col-md-2">
 						<select v-model="roleFilter" class="w-100 btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<option class="dropdown-item" value="ALL">Tip</option>
+							<option class="dropdown-item" value="ALL" selected>Tip</option>
 							<option class="dropdown-item" value="CUSTOMER">Kupac</option>
 							<option class="dropdown-item" value="COACH">Trener</option>
 							<option class="dropdown-item" value="MANAGER">Menadžer</option>
@@ -83,14 +85,15 @@
 		<table class="table container">
 			<thead>
 			<tr>
-				<th>Korisničko ime</th>
+				<th v-on:click="sort(1)"><i class="bi bi-arrow-down-up"></i>Korisničko ime</th>
 				<th>Lozinka</th>
 				<th>Tip korisnika</th>
-				<th>Ime</th>
-				<th>Prezime</th>
+				<th v-on:click="sort(2)"><i class="bi bi-arrow-down-up"></i>Ime</th>
+				<th v-on:click="sort(3)"><i class="bi bi-arrow-down-up"></i>Prezime</th>
 				<th>Pol</th>
 				<th>Datum rođenja</th>
-				<th>Poeni</th>
+				<th>Tip kupca</th>
+				<th  v-on:click="sort(4)"><i class="bi bi-arrow-down-up"></i>Poeni</th>
 			</tr>
 			</thead>
 			<tbody v-for="user in filteredUsers">
@@ -102,6 +105,7 @@
 					<td>{{user.surname}}</td>
 					<td>{{user.gender}}</td>
 					<td>{{user.dateOfBirth}}</td>
+					<td>{{user.customerType}}</td>
 					<td>{{user.points}}</td>
 				</tr>
 			</tbody>

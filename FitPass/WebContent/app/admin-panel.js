@@ -7,7 +7,8 @@ const vm = new Vue ({
 		firstNameSearch: '',
 		lastNameSearch: '',
 		roleFilter: '',
-		typeFilter: ''
+		typeFilter: '',
+		isAsc: true
 	},
 	created(){
 		axios.get('rest/admin/all-users')
@@ -25,18 +26,57 @@ const vm = new Vue ({
 	},
 	methods: {
 		
-		/*
-		filterType(type){
-			axios.get('rest/admin/all-users')
-			.then((response) => {
-				this.allUsers = response.data;
-				this.allUsers.filter((allUsers)=>{
-					return allUsers.userType.match(type);
-				});
-			});
+		sort(index){
+			this.isAsc = !this.isAsc;
+			
+			if(index == 1){
+				if(this.isAsc){
+					this.allUsers.sort((a, b) => {
+						return a.username.localeCompare(b.username);
+					});
+				} else{
+					this.allUsers.sort((a, b) => {
+						return b.username.localeCompare(a.username);
+					});
+				}
+			}
+			else if(index == 2){
+				if(this.isAsc){
+					this.allUsers.sort((a, b) => {
+						return a.name.localeCompare(b.name);
+					});
+				} else{
+					this.allUsers.sort((a, b) => {
+						return b.name.localeCompare(a.name);
+					});
+				}
+			}
+			else if(index == 3){
+				if(this.isAsc){
+					this.allUsers.sort((a, b) => {
+						return a.surname.localeCompare(b.surname);
+					});
+				} else{
+					this.allUsers.sort((a, b) => {
+						return b.surname.localeCompare(a.surname);
+					});
+				}
+			}
+			else if(index == 4){
+				if(this.isAsc){
+					this.allUsers.sort((a, b) => {
+						return a.points > b.points ? -1 : 1;
+					});
+				} else{
+					this.allUsers.sort((a, b) => {
+						return a.points < b.points ? -1 : 1;
+					});
+				}
+			}
 		},
-		*/
-		formatDateTime(date) {
+		
+		
+		formatDateTime(date) { 
 			if(date[3] < 10){
 				date[3] = '0' + date[3];
 			}
@@ -52,13 +92,28 @@ const vm = new Vue ({
 	computed: {
 
 		filteredUsers: function(){
-			return this.allUsers.filter((user) => {					
+			return this.allUsers.filter((user) => {
+				if(!user.username){
+					user.username = '';
+				}
+				if(!user.name){
+					user.name = '';
+				}
+				if(!user.surname){
+					user.surname = '';
+				}
+				if(!user.userType){
+					user.userType = '';
+				}
+				if(!user.customerType){
+					user.customerType = '';
+				}
 				let show = true;
 				show &= user.username.toLowerCase().search(this.usernameSearch.toLowerCase()) >= 0;
 				show &= user.name.toLowerCase().search(this.firstNameSearch.toLowerCase()) >= 0;
 				show &= user.surname.toLowerCase().search(this.lastNameSearch.toLowerCase()) >= 0;
 				show &= user.userType.search(this.roleFilter) >= 0 || this.roleFilter == 'ALL' || this.roleFilter == '';
-				//show &= user.lastName.toLowerCase().search(this.lastNameSearch.toLowerCase()) >= 0;
+				show &= user.customerType || user.customerType.search(this.typeFilter) >= 0 || this.typeFilter == 'ALL' || this.typeFilter == '';
 				
 				return show;
 			});
