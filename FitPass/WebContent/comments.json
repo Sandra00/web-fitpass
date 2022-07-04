@@ -1,1 +1,10 @@
-[{"customerUsername":"dejana","sportsObjectName":"Teretana 3","text":"super je","grade":5,"status":"APPROVED"},{"customerUsername":"dejana","sportsObjectName":"Teretana 3","text":"jako dobro","grade":3,"status":"WAITING"},{"customerUsername":"dejana","sportsObjectName":"Teretana 3","text":"lose je","grade":1,"status":"WAITING"}]
+[
+    {
+        "id": 1,
+        "sportsObjectName": "Teretana 3",
+        "text": "super je",
+        "grade": 5,
+        "status": "WAITING",
+        "customerUsername": "dejana"
+    }
+]

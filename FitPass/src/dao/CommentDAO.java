@@ -57,6 +57,27 @@ public class CommentDAO {
 		return sportsObjectComments;
 	}
 	
+	private Comment findById(int id) {
+		for(Comment comment : comments) {
+			if(comment.getId() == id) {
+				return comment;
+			}
+		}
+		return null;
+	}
+	
+	public void setApproved(int id) {
+		Comment comment = findById(id);
+		comment.setStatus(CommentStatus.APPROVED);
+		System.out.println("promeni " + comment.getStatus().toString());
+		save();
+	}
+	
+	public void setRejected(int id) {
+		Comment comment = findById(id);
+		comment.setStatus(CommentStatus.REJECTED);
+		save();
+	}
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

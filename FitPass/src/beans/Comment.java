@@ -3,6 +3,7 @@ package beans;
 import beans.enums.CommentStatus;
 
 public class Comment {
+	private int id;
 	private String customerUsername;
 	private String sportsObjectName;
 	private String text;
@@ -12,8 +13,9 @@ public class Comment {
 	public Comment() {
 		super();
 	}
-	public Comment(String customerUsername, String sportsObjectName, String text, int grade, CommentStatus status) {
+	public Comment(int id, String customerUsername, String sportsObjectName, String text, int grade, CommentStatus status) {
 		super();
+		this.id = id;
 		this.customerUsername = customerUsername;
 		this.sportsObjectName = sportsObjectName;
 		this.text = text;
@@ -51,6 +53,12 @@ public class Comment {
 	}
 	public void setStatus(CommentStatus status) {
 		this.status = status;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
