@@ -9,6 +9,9 @@ var app = new Vue({
 		avgGrade: null,
 		trainings: null,
 		isCustomer: false,
+		customerComments: [],
+		commentText: '',
+		commentGrade: 0,
 		error: ''
 	},
 	mounted(){
@@ -31,6 +34,10 @@ var app = new Vue({
 			this.trainings = response.data;
 		});
 		
+		axios.get('rest/customer/comments/' + this.labela)
+		.then((response) => {
+			this.customerComments = response.data;
+		});
 		
 		axios.get(
 			'rest/objects/currentObject',
@@ -91,7 +98,36 @@ var app = new Vue({
 				else {
 					this.error = 'UPS! Nepredviđena greška: ' + error.response.status;
 				}
+	        });
+		},
+		
+		submitComment(){
+			if(!this.commentText || this.commentText === '' || this.commentGrade < 1 || this.commentGrade > 5){
+				alert("Morate ostaviti tekst komentara i ocenu!");
+				return;
+			}
+			
+			axios.post('rest/customer/leave-comment',
+			{
+				text: this.commentText,
+			    grade: this.commentGrade,
+			    sportsObjectName: this.labela
+			})
+			.then( response =>{
+	            alert("Tvoj komentar je sačuvan, biće vidljiv kada ga administrator odobri!");
 	        })
+	        .catch( error => {
+				if(error.response.status == 401){
+	            	alert('Ti nisi kupac, kako si uopšte došao ovde?');
+	        	}
+	        	else if (error.response.status == 400){
+					alert('Nije moguće postaviti komentar!');
+				}
+				else {
+					alert('UPS! Nepredviđena greška: ' + error.response.status);
+				}
+	        });
+			
 		}
 		
 	}
