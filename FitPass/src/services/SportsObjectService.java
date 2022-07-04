@@ -15,11 +15,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+import beans.Comment;
 import beans.Content;
 import beans.SportsObject;
 import beans.Training;
 import beans.TrainingHistory;
+import dao.CommentDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
 import dao.TrainingHistoryDAO;
@@ -48,6 +49,9 @@ public class SportsObjectService {
 		}
 		if (ctx.getAttribute("trainingHistoryDAO") == null) {
 			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
+		}
+		if (ctx.getAttribute("commentDAO") == null) {
+			ctx.setAttribute("commentDAO", new CommentDAO());
 		}
 	}
 	
@@ -139,6 +143,17 @@ public class SportsObjectService {
 			}
 		}
 		return trainings;
+	}
+	
+	@GET
+	@Path("/all-comments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> findAllComments(@Context HttpServletRequest request){
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		//System.out.println("prosledjen " + request.getParameter("name"));
+		//System.out.println(commentDAO.findCommentsBySportsObject(request.getParameter("name")).size());
+		return commentDAO.findCommentsBySportsObject(request.getParameter("name"));
 	}
 	
 }

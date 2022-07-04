@@ -121,6 +121,26 @@
 		
 		<div class="container">
 			<h2>Komentari</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Korisnik</th>
+						<th>Sadržaj</th>
+						<th>Ocena</th>
+						<th v-if='isAdmin == true || isManager == true'>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody v-for="comment in comments">
+					<tr>
+						<td>{{comment.customerUsername}}</td>
+						<td>{{comment.text}}</td>
+						<td>{{comment.grade}}</td>
+						<td v-if='isAdmin == true || isManager == true'>{{comment.status}}</td>
+						<!--  <td><button class="btn btn-success" @click="activate(training.trainingId)">Aktiviraj</button></td>-->
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<div class="container" v-if="isCustomer == true">
 			<h2>Treninzi</h2>
