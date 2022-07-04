@@ -9,7 +9,10 @@ var app = new Vue({
 		avgGrade: null,
 		trainings: null,
 		isCustomer: false,
-		error: ''
+		isAdmin: false,
+		isManager: false,
+		error: '',
+		comments: []
 	},
 	mounted(){
 		var location = window.location.href.toString();
@@ -23,6 +26,36 @@ var app = new Vue({
 		.then((response) => {
 			if(response.data.userType == 'CUSTOMER'){
 				this.isCustomer = true;
+			}
+			if(response.data.userType == 'MANAGER'){
+				this.isManager = true;
+				axios.get(
+				'rest/objects/all-comments',
+				{
+					params: {
+						name: this.labela
+				}
+				
+				}
+				)
+				.then((response) => {
+					this.comments = response.data;
+				})
+			}
+			if(response.data.userType == 'ADMIN'){
+				this.isAdmin = true;
+				axios.get(
+				'rest/objects/all-comments',
+				{
+					params: {
+						name: this.labela
+				}
+				
+				}
+				)
+				.then((response) => {
+					this.comments = response.data;
+				})
 			}
 		});
 		
@@ -70,6 +103,8 @@ var app = new Vue({
 				this.avgGrade = this.object.averageGrade;
 			}
 		});
+
+		
 		
 	},
 	methods: {
@@ -92,6 +127,20 @@ var app = new Vue({
 					this.error = 'UPS! Nepredviđena greška: ' + error.response.status;
 				}
 	        })
+		},
+		approve(commentId){
+			axios.post(
+						'rest/objects/approve-comment',
+						{
+							params:{
+								commentId: commentId
+							}
+						}
+					)
+			window.location.reload()
+		},
+		reject(commentId){
+			
 		}
 		
 	}
