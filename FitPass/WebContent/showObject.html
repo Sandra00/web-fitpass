@@ -120,7 +120,6 @@
 		
 		
 		<div class="container">
-			<h2>Komentari</h2>
 			<table class="table">
 				<thead>
 					<tr>
@@ -169,7 +168,7 @@
 				</tbody>
 			</table>
 			
-			
+			<h2>Komentari</h2>
 			<table class="table">
 				<thead>
 					<tr>
@@ -184,7 +183,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<form class="form-signin" @submit.prevent="submitComment">
+			<form class="form-signin" @submit.prevent="submitComment" v-if="visitedSportsObject === true">
 				<textarea v-model="commentText" rows="5" class="form-control"></textarea>
 				<input type="number" v-model="commentGrade" min="1" max="5" class="form-control">
 				<button class="btn btn-success" type="submit">Pošalji komentar</button>

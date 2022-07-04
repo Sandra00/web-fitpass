@@ -9,17 +9,15 @@ var app = new Vue({
 		avgGrade: null,
 		trainings: null,
 		isCustomer: false,
-<<<<<<< HEAD
 		customerComments: [],
 		commentText: '',
 		commentGrade: 0,
-		error: ''
-=======
+		error: '',
 		isAdmin: false,
 		isManager: false,
 		error: '',
+		visitedSportsObject: false,
 		comments: []
->>>>>>> develop
 	},
 	mounted(){
 		var location = window.location.href.toString();
@@ -64,6 +62,14 @@ var app = new Vue({
 					this.comments = response.data;
 				})
 			}
+		});
+		
+		axios.get('rest/customer/has-visited/' + this.labela)
+		.then((response) => {
+			this.visitedSportsObject = true;
+		})
+		.catch((error) => {
+			this.visitedSportsObject = false;
 		});
 		
 		axios.get('rest/objects/trainings/' + this.labela)
@@ -167,6 +173,7 @@ var app = new Vue({
 				}
 	        });
 		},
+		
 		approve(commentId){
 			axios.post(
 						'rest/objects/approve-comment',
@@ -178,6 +185,7 @@ var app = new Vue({
 					)
 			window.location.reload()
 		},
+		
 		reject(commentId){
 			
 		}
