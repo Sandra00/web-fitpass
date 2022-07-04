@@ -103,23 +103,7 @@ var app = new Vue({
 				this.avgGrade = this.object.averageGrade;
 			}
 		});
-		
-		/*
-		if(this.isManager == true || this.isAdmin == true){
-			axios.get(
-			'rest/objects/all-comments',
-			{
-				params: {
-					name: this.labela
-				}
-				
-			}
-			)
-			.then((response) => {
-				this.comments = response.data;
-			})
-		}
-		*/
+
 		
 		
 	},
@@ -144,10 +128,18 @@ var app = new Vue({
 				}
 	        })
 		},
-		approve(comment){
-			
+		approve(commentId){
+			axios.post(
+						'rest/objects/approve-comment',
+						{
+							params:{
+								commentId: commentId
+							}
+						}
+					)
+			window.location.reload()
 		},
-		dismiss(comment){
+		reject(commentId){
 			
 		}
 		
