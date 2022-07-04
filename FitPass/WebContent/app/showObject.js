@@ -143,6 +143,12 @@ var app = new Vue({
 					this.error = 'UPS! Nepredviđena greška: ' + error.response.status;
 				}
 	        })
+		},
+		approve(comment){
+			
+		},
+		dismiss(comment){
+			
 		}
 		
 	}
