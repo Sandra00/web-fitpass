@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -16,12 +17,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Comment;
 import beans.Membership;
 import beans.PromoCode;
 import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
+import beans.enums.CommentStatus;
 import beans.enums.UserType;
+import dao.CommentDAO;
 import dao.MembershipDAO;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
@@ -57,6 +61,9 @@ public class CustomerService {
 		}
 		if (ctx.getAttribute("sportsObjectDAO") == null) {
 			ctx.setAttribute("sportsObjectDAO", new SportsObjectDAO());
+		}
+		if (ctx.getAttribute("commentDAO") == null) {
+			ctx.setAttribute("commentDAO", new CommentDAO());
 		}
 	}
 	
@@ -168,6 +175,59 @@ public class CustomerService {
 				return Response.ok().build();
 			}
 			return Response.status(405).build();
+		}
+		return Response.status(401).build();
+	}
+	
+	@GET
+	@Path("/has-visited/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response hasVisited(@PathParam("name") String sportsObjectName, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			User user = (User) request.getSession().getAttribute("user");
+			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+			User databaseUser = userDAO.findUserByUsername(user.getUsername());
+			if(databaseUser.getVisitedSportsObjects().contains(sportsObjectName)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
+		}
+		return Response.status(401).build();
+	}
+	
+	@GET
+	@Path("/comments/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sportsObjectComments(@PathParam("name") String sportsObjectName, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+			return Response.ok(commentDAO.findApprovedCommentsBySportsObject(sportsObjectName), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(401).build();
+	}
+	
+	@POST
+	@Path("/leave-comment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response leaveComment(Comment comment, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			User user = (User) request.getSession().getAttribute("user");
+			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+			User databaseUser = userDAO.findUserByUsername(user.getUsername());
+			if(databaseUser.getVisitedSportsObjects().contains(comment.getSportsObjectName())) {
+				CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+				comment.setStatus(CommentStatus.WAITING);
+				comment.setCustomerUsername(databaseUser.getUsername());
+				if(comment.getGrade() >= 1 && comment.getGrade() <= 5) {
+					commentDAO.addComment(comment);
+					return Response.ok().build();
+				}
+				return Response.status(400).build();
+			}
+			return Response.status(400).build();
 		}
 		return Response.status(401).build();
 	}
