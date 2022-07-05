@@ -1,10 +1,34 @@
 [
     {
         "id": 1,
+        "customerUsername": "dejana",
         "sportsObjectName": "Teretana 3",
         "text": "super je",
         "grade": 5,
-        "status": "WAITING",
-        "customerUsername": "dejana"
+        "status": "APPROVED"
+    },
+    {
+        "id": 2,
+        "customerUsername": "dejana",
+        "sportsObjectName": "Teretana 3",
+        "text": "lose",
+        "grade": 5,
+        "status": "REJECTED"
+    },
+    {
+        "id": 3,
+        "customerUsername": "dejana",
+        "sportsObjectName": "Teretana 3",
+        "text": "super je",
+        "grade": 5,
+        "status": "WAITING"
+    },
+    {
+        "id": 4,
+        "customerUsername": "dejana",
+        "sportsObjectName": "Teretana 3",
+        "text": "super je",
+        "grade": 5,
+        "status": "WAITING"
     }
 ]
