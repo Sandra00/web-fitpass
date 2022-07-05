@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -157,24 +158,24 @@ public class SportsObjectService {
 		return commentDAO.findCommentsBySportsObject(request.getParameter("name"));
 	}
 	
-	@POST
+	@GET
 	@Path("/approve-comment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public void setApproved(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
-		System.out.println("posalje " + request.getParameter("commentId"));
-		//commentDAO.setApproved(Integer.parseInt(request.getParameter("commentId")));
+		//System.out.println("posalje " + request.getParameter("id"));
+		commentDAO.setApproved(Integer.parseInt(request.getParameter("id")));
 	}
 	
-	@POST
+	@GET
 	@Path("/reject-comment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public void setRejected(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
-		System.out.println("posalje " + request.getParameter("commentId"));
-		//commentDAO.setRejected(Integer.parseInt(request.getParameter("commentId")));
+		//System.out.println("posalje " + request.getParameter("id"));
+		commentDAO.setRejected(Integer.parseInt(request.getParameter("id")));
 	}
 	
 }

@@ -175,11 +175,11 @@ var app = new Vue({
 		},
 		
 		approve(commentId){
-			axios.post(
+			axios.get(
 						'rest/objects/approve-comment',
 						{
 							params:{
-								commentId: commentId
+								id: commentId
 							}
 						}
 					)
@@ -187,7 +187,15 @@ var app = new Vue({
 		},
 		
 		reject(commentId){
-			
+			axios.get(
+						'rest/objects/reject-comment',
+						{
+							params:{
+								id: commentId
+							}
+						}
+					)
+			window.location.reload()
 		}
 		
 	}
