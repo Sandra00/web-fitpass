@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FitPass | Sportski objekat</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<style>
 		.center {
@@ -120,7 +120,6 @@
 		
 		
 		<div class="container">
-			<h2>Komentari</h2>
 			<table class="table">
 				<thead>
 					<tr>
@@ -168,6 +167,27 @@
 					</tr>
 				</tbody>
 			</table>
+			
+			<h2>Komentari</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Komentar</th>
+						<th>Ocena</th>
+					</tr>
+				</thead>
+				<tbody v-for="comment in customerComments">
+					<tr>
+						<td>{{comment.text}}</td>
+						<td>{{comment.grade}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<form class="form-signin" @submit.prevent="submitComment" v-if="visitedSportsObject === true">
+				<textarea v-model="commentText" rows="5" class="form-control"></textarea>
+				<input type="number" v-model="commentGrade" min="1" max="5" class="form-control">
+				<button class="btn btn-success" type="submit">Pošalji komentar</button>
+			</form>
 		</div>
 	</div>
 		
