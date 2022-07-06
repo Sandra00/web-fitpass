@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+.map {
+  border-radius: 15px;
+  opacity: 0.6;
+  border: 1px solid transparent;
+  transition: 0.3s;
+  filter: drop-shadow(16px 16px 20px rgba(255, 255, 255, 0.1));
+  @extend %basic-white-component;
+}
+
+#map-create {
+  height: 10em;
+  width: 25em;
+}
