@@ -321,7 +321,9 @@
             ],
             "price": 1425.0,
             "membershipStatus": "ACTIVE",
-            "numberOfTrainings": 0
+            "numberOfTrainings": 20,
+            "trainingsUsed": 1,
+            "calculatedPoints": false
         },
         "sportsObject": null,
         "visitedSportsObjects": [

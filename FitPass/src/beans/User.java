@@ -148,6 +148,21 @@ public class User {
 	}
 
 	public int getPoints() {
+		if(this.membership != null && this.membership.getMembershipStatus() == MembershipStatus.INACTIVE && !this.membership.isCalculatedPoints()) {
+			double usedTrainingsPercentage = (double) this.membership.getTrainingsUsed() / (double) this.membership.getNumberOfTrainings();
+			if(usedTrainingsPercentage < 0.3) {
+				double lostPoints = this.membership.getPrice() / 1000 * 133 * 4;
+				this.points -= (int) lostPoints;
+				return this.points;
+			}
+			else {
+				double wonPoints = this.membership.getPrice() / 1000 * this.membership.getTrainingsUsed();
+				this.points += (int) wonPoints;
+			}
+		}
+		else {
+			return this.points;
+		}
 		return points;
 	}
 

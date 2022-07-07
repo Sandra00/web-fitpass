@@ -17,12 +17,14 @@ public class Membership {
 	private double price;
 	private MembershipStatus membershipStatus;
 	private int numberOfTrainings;
+	private int trainingsUsed;
+	private boolean calculatedPoints;
 	
 	public Membership() {
 		super();
 	}
 	public Membership(String id, MembershipType membershipType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
-			MembershipStatus membershipStatus, int numberOfTrainings) {
+			MembershipStatus membershipStatus, int numberOfTrainings, int trainingsUsed, boolean calculatedPoints) {
 		super();
 		this.id = id;
 		this.membershipType = membershipType;
@@ -31,6 +33,8 @@ public class Membership {
 		this.price = price;
 		this.membershipStatus = membershipStatus;
 		this.numberOfTrainings = numberOfTrainings;
+		this.trainingsUsed = trainingsUsed;
+		this.calculatedPoints = calculatedPoints;
 	}
 	public Membership(Membership membership) {
 		this.id = membership.id;
@@ -40,6 +44,8 @@ public class Membership {
 		this.price = membership.price;
 		this.membershipStatus = membership.membershipStatus;
 		this.numberOfTrainings = membership.numberOfTrainings;
+		this.trainingsUsed = 0;
+		this.calculatedPoints = false;
 	}
 	
 	public String getId() {
@@ -77,7 +83,14 @@ public class Membership {
 		this.price = price;
 	}
 	public MembershipStatus getMembershipStatus() {
-		return membershipStatus;
+		if(dueDate != null && dueDate.isBefore(LocalDateTime.now())) {
+			this.membershipStatus = MembershipStatus.INACTIVE;
+			return this.membershipStatus;
+		}
+		else {
+			this.membershipStatus = MembershipStatus.ACTIVE;
+			return this.membershipStatus;
+		}
 	}
 	public void setMembershipStatus(MembershipStatus membershipStatus) {
 		this.membershipStatus = membershipStatus;
@@ -88,6 +101,16 @@ public class Membership {
 	public void setNumberOfTrainings(int numberOfTrainings) {
 		this.numberOfTrainings = numberOfTrainings;
 	}
-	
-	
+	public int getTrainingsUsed() {
+		return trainingsUsed;
+	}
+	public void setTrainingsUsed(int trainingsUsed) {
+		this.trainingsUsed = trainingsUsed;
+	}
+	public boolean isCalculatedPoints() {
+		return calculatedPoints;
+	}
+	public void setCalculatedPoints(boolean calculatedPoints) {
+		this.calculatedPoints = calculatedPoints;
+	}
 }

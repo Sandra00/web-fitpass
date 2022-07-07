@@ -2,22 +2,11 @@
     {
         "id": "asdasdsd",
         "membershipType": "MONTHLY",
-        "transactionDate": [
-            2022,
-            7,
-            26,
-            15,
-            0
-        ],
-        "dueDate": [
-            2022,
-            8,
-            26,
-            15,
-            0
-        ],
+        "transactionDate": null,
+        "dueDate": null,
         "price": 1500.0,
         "membershipStatus": "ACTIVE",
-        "numberOfTrainings": 20
+        "numberOfTrainings": 20,
+        "trainingsUsed": 0
     }
 ]

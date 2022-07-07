@@ -24,6 +24,7 @@ import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
 import beans.enums.CommentStatus;
+import beans.enums.CustomerType;
 import beans.enums.UserType;
 import dao.CommentDAO;
 import dao.MembershipDAO;
@@ -111,7 +112,19 @@ public class CustomerService {
 					if(promoCode.getExpirationDate().isAfter(LocalDateTime.now()) && promoCode.getUsesLeft() >= 1)
 					{
 						promoCodeDAO.decrementUsesLeft(promoCode);
-						calculateDiscountPrice(membership, promoCode.getDiscountPercentage());
+						int memberDiscount = 0;
+						switch(user.getCustomerType()) {
+						case BRONZE:
+							memberDiscount = 1;
+							break;
+						case GOLD:
+							memberDiscount = 5;
+							break;
+						case SILVER:
+							memberDiscount = 10;
+							break;
+						}
+						calculateDiscountPrice(membership, promoCode.getDiscountPercentage() + memberDiscount);
 						setMembershipDates(membership);
 						userDAO.setMembership(user.getUsername(), membership);
 						return Response.ok().build();
@@ -153,21 +166,24 @@ public class CustomerService {
 			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
 			User databaseUser = userDAO.findUserByUsername(user.getUsername());
 			int trainingIdNum;
+			
 			try {
 				trainingIdNum = Integer.parseInt(trainingId);
 			}
 			catch(Exception ex) {
 				return Response.status(405).build();
 			}
+			
 			Training training = trainingDAO.findById(trainingIdNum);
 			if(databaseUser.getMembership() != null && 
 					databaseUser.getMembership().getDueDate().isAfter(LocalDateTime.now()) && 
 						training != null &&
 							sportsObjectDAO.exists(sportsObjectName) &&
-								databaseUser.getMembership().getNumberOfTrainings() >= 1) {
-				int numberOfTrainings = databaseUser.getMembership().getNumberOfTrainings();
-				numberOfTrainings--;
-				databaseUser.getMembership().setNumberOfTrainings(numberOfTrainings);
+								databaseUser.getMembership().getTrainingsUsed() < databaseUser.getMembership().getNumberOfTrainings()) {
+				
+				int numberOfTrainings = databaseUser.getMembership().getTrainingsUsed();
+				numberOfTrainings++;
+				databaseUser.getMembership().setTrainingsUsed(numberOfTrainings);
 				databaseUser.getVisitedSportsObjects().add(sportsObjectName);
 				TrainingHistory trainingHistory = new TrainingHistory(0, LocalDateTime.now(), trainingIdNum, databaseUser.getUsername(), training.getCoach());
 				trainingHistoryDAO.addTrainingHistory(trainingHistory);
