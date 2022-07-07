@@ -187,7 +187,7 @@ public class CustomerService {
 				databaseUser.getVisitedSportsObjects().add(sportsObjectName);
 				TrainingHistory trainingHistory = new TrainingHistory(0, LocalDateTime.now(), trainingIdNum, databaseUser.getUsername(), training.getCoach());
 				trainingHistoryDAO.addTrainingHistory(trainingHistory);
-				userDAO.saveUsers();
+				userDAO.save();
 				return Response.ok().build();
 			}
 			return Response.status(405).build();

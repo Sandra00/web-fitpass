@@ -20,13 +20,13 @@ public class UserDAO {
 	
 	public UserDAO() {
 		users = new ArrayList<User>();
-		loadUsers();
+		load();
 	}
 	
 	
 	public User findUserByUsername(String username) {
 		for(User user : users) {
-			if(user.getUsername().equals(username)) {
+			if(user.getUsername().equals(username) && !user.isDeleted()) {
 				return user;
 			}
 		}
@@ -42,7 +42,14 @@ public class UserDAO {
 	}
 	
 	public List<User> findAll(){
-		return users;
+		List<User> allUsers = new ArrayList<User>();
+		for(User user : users)
+		{
+			if(!user.isDeleted()) {
+				allUsers.add(user);
+			}
+		}
+		return allUsers;
 	}
 	
 	
@@ -50,7 +57,7 @@ public class UserDAO {
 		List<User> userList = new ArrayList<User>();
 		for (User user : users) {
 			for (String sportsObject : user.getVisitedSportsObjects()) {
-				if(sportsObject.equals(sportsObjectName) && !userList.contains(user)) {
+				if(sportsObject.equals(sportsObjectName) && !userList.contains(user) && !user.isDeleted()) {
 					userList.add(user);
 				}
 			}
@@ -66,7 +73,7 @@ public class UserDAO {
 	public List<User> findAllCoaches(){
 		List<User> coaches = new ArrayList<User>();
 		for(User user : users) {
-			if(user.getUserType() == UserType.COACH) {
+			if(user.getUserType() == UserType.COACH && !user.isDeleted()) {
 				coaches.add(user);
 			}
 		}
@@ -78,10 +85,10 @@ public class UserDAO {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.CUSTOMER);
 			users.add(user);
-			saveUsers();
+			save();
 			return true;
 		}
-		saveUsers();
+		save();
 		return false;
 	}
 	
@@ -90,7 +97,7 @@ public class UserDAO {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.MANAGER);
 			users.add(user);
-			saveUsers();
+			save();
 			return true;
 		}
 		return false;
@@ -101,7 +108,7 @@ public class UserDAO {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.COACH);
 			users.add(user);
-			saveUsers();
+			save();
 			return true;
 		}
 		return false;
@@ -112,20 +119,20 @@ public class UserDAO {
 			return false;
 		}
 		findUserByUsername(username).setMembership(membership);
-		saveUsers();
+		save();
 		return true;
 	}
 	
 	private boolean exists(String username) {
 		for(User user : users) {
-			if(user.getUsername().equals(username)) {
+			if(user.getUsername().equals(username) && !user.isDeleted()) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void saveUsers() {
+	public void save() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), users);
@@ -138,7 +145,7 @@ public class UserDAO {
 		}
 	}
 	
-	private void loadUsers() {
+	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 
@@ -155,7 +162,9 @@ public class UserDAO {
 	
 	public boolean checkExisting(User user) {
 		for(User u : users) {
-			if(u.getUsername().equals(user.getUsername())) return true;
+			if(u.getUsername().equals(user.getUsername()) && !u.isDeleted()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -172,7 +181,7 @@ public class UserDAO {
 		userForChange.setGender(user.getGender());
 		userForChange.setDateOfBirth(user.getDateOfBirth());
 		userForChange.setPassword(user.getPassword());
-		saveUsers();
+		save();
 		return true;
 	}
 	
@@ -187,6 +196,6 @@ public class UserDAO {
 	public void addSportsObject(User user) {
 		User manager = findUserByUsername(user.getUsername());
 		manager.setSportsObject(user.getSportsObject());
-		saveUsers();
+		save();
 	}
 }

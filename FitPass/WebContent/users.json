@@ -269,7 +269,7 @@
         "visitedSportsObjects": [],
         "points": 0,
         "customerType": null,
-        "deleted": false
+        "deleted": true
     },
     {
         "oldUsername": "milica",
@@ -313,7 +313,7 @@
             "dueDate": [
                 2022,
                 7,
-                29,
+                5,
                 13,
                 18,
                 39,
@@ -329,6 +329,23 @@
         "visitedSportsObjects": [
             "Teretana 3"
         ],
+        "points": 0,
+        "customerType": null,
+        "deleted": false
+    },
+    {
+        "oldUsername": "milosina",
+        "username": "milosina",
+        "password": "123",
+        "name": "Milos",
+        "surname": "Milosevic",
+        "gender": "false",
+        "dateOfBirth": "2000-05-05",
+        "userType": "CUSTOMER",
+        "trainings": null,
+        "membership": null,
+        "sportsObject": null,
+        "visitedSportsObjects": [],
         "points": 0,
         "customerType": null,
         "deleted": false

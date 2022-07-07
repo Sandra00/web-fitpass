@@ -18,13 +18,6 @@ public class MembershipDAO {
 	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\memberships.json";
 	
 	public MembershipDAO(){
-		/*System.out.println("IM HERE!");
-		LocalDateTime transactionDate = LocalDateTime.of(2022, 7, 26, 15, 0);
-		LocalDateTime dueDate = LocalDateTime.of(2022, 8, 26, 15, 0);
-		Membership membership1 = new Membership("asdasdsd", MembershipType.MONTHLY, transactionDate, dueDate, 1500, MembershipStatus.ACTIVE, 20);
-		memberships = new ArrayList<Membership>();
-		memberships.add(membership1);
-		save();*/
 		load();
 	}
 	

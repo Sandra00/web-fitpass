@@ -22,7 +22,7 @@ public class User {
 	private Set<String> visitedSportsObjects;
 	private int points;
 	private CustomerType customerType;
-	private boolean isDeleted = false;
+	private boolean isDeleted;
 	
 	public User() {
 		super();
@@ -153,17 +153,19 @@ public class User {
 			if(usedTrainingsPercentage < 0.3) {
 				double lostPoints = this.membership.getPrice() / 1000 * 133 * 4;
 				this.points -= (int) lostPoints;
+				this.membership.setCalculatedPoints(true);
 				return this.points;
 			}
 			else {
 				double wonPoints = this.membership.getPrice() / 1000 * this.membership.getTrainingsUsed();
 				this.points += (int) wonPoints;
+				this.membership.setCalculatedPoints(true);
+				return this.points;
 			}
 		}
 		else {
 			return this.points;
 		}
-		return points;
 	}
 
 	public void setPoints(int points) {
