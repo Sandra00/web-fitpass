@@ -1,136 +1,150 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>FitPass</title>
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    	
-    
-    </head>
-    <body>
-        <div id="menu">
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar-brand" href="#">FitPass</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Početna</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isLoggedIn === false"  href="login.html">Uloguj se</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isLoggedIn === true" @click="logout" >Izloguj se</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi sportski objekat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" v-if="isManager === true" href="manager-trainings.html" >Treninzi sportskog objekta</a>
-                        </li>
-                        <li>
-	                    	<a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj nalog</a>
-	                	</li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.html">{{username}}</a>
-                        </li>
-                    </ul>
-                </div>
-			</nav>
-        </div>
-		
-		<img src="banner.jpg" class="img-fluid w-100">
 
-        <div id="app">
-			<div class="bg-dark text-dark py-4">
-				<div class="container">
-					<div id="row ">
-						<div class="col-md-2"><input type="text" class="w-100" v-model="nameSearch" id="nameSearch" name="nameSearch" placeholder="Naziv..."></div>
-						<div class="col-md-2"><input type="text" class="w-100" v-model="typeSearch" id="typeSearch" name="typeSearch" placeholder="Tip..."></div>
-						<div class="col-md-2"><input type="text" class="w-100" v-model="locationSearch" id="locationSearch" name="locationSearch" placeholder="Lokacija..." ></div>
-						<div class="col-md-2"><input type="text" class="w-100" v-model="gradeSearch" id="gradeSearch" name="gradeSearch" placeholder="Ocena..."></div>
-						
-						<div class="col-md-2">
-							<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="openFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<option class="dropdown-item" value="allOpenClosed">Status</option>
-								<option class="dropdown-item" value="opened">Otvoreni</option>
-							</select>
-						</div>
-						<div class="col-md-2">
-						<select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="typeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<option class="dropdown-item" value="allTypes">Tip</option>
-							<option class="dropdown-item" value="GYM">Teretana</option>
-							<option class="dropdown-item" value="POOL">Bazen</option>
-							<option class="dropdown-item" value="SPORTSCENTER">Sportski centar</option>
-							<option class="dropdown-item" value="DANCESTUDIO">Plesni studio</option>
-						</select>
-						</div>
-					</div>
-				</div>
-			</div>
-            <table class="table container">
-                <thead>
-                    <tr>
-                    	<th>Logo</th>
-                        <th v-on:click="sortSportObjects(1)">Naziv</th>
-                        <th>Tip</th>
-                        <th v-on:click="sortSportObjects(2)">Lokacija</th>
-                        <th v-on:click="sortSportObjects(3)">Prosecna ocena</th>
-                        <th>Radno vreme</th>
-                    </tr>
-                </thead>
-                <tbody v-for="object in filteredSportsObjects">
-                    <tr>
-                    	<td><img :src="object.logo" style="object-fit:contain; width:200px; height:200px;"></td>
-                        <td>{{object.name}}</td>
-                        <td>{{object.locationType}}</td>
-                        <td>
-                            <template v-for="content in object.location.address">
-                                {{content}}
-                            </template>
-                        </td>
-                        <td>{{object.averageGrade}}</td>
-                        <td>
-                            {{object.startWorkingHour}} - {{object.endWorkingHour}}
-                        </td>
-                        <td>
-                            <a v-bind:href="'showObject.html?name=' +object.name">
+<head>
+    <meta charset="UTF-8">
+    <title>FitPass</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+    <div id="menu">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="#">FitPass</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Početna</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="login.html">Uloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === true" @click="logout">Izloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi
+                            sportski objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html">Moj sportski
+                            objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager-trainings.html">Treninzi sportskog
+                            objekta</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj
+                            nalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">{{username}}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <img src="banner.jpg" class="img-fluid w-100">
+
+    <div id="app">
+        <div class="bg-dark text-dark py-4">
+            <div class="container">
+                <div id="row ">
+                    <div class="col-md-2"><input type="text" class="w-100" v-model="nameSearch" id="nameSearch"
+                            name="nameSearch" placeholder="Naziv..."></div>
+                    <div class="col-md-2"><input type="text" class="w-100" v-model="typeSearch" id="typeSearch"
+                            name="typeSearch" placeholder="Tip..."></div>
+                    <div class="col-md-2"><input type="text" class="w-100" v-model="locationSearch" id="locationSearch"
+                            name="locationSearch" placeholder="Lokacija..."></div>
+                    <div class="col-md-2"><input type="text" class="w-100" v-model="gradeSearch" id="gradeSearch"
+                            name="gradeSearch" placeholder="Ocena..."></div>
+
+                    <div class="col-md-2">
+                        <select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="openFilter"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <option class="dropdown-item" value="allOpenClosed">Status</option>
+                            <option class="dropdown-item" value="opened">Otvoreni</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="w-100 btn btn-light btn-sm dropdown-toggle" v-model="typeFilter"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <option class="dropdown-item" value="allTypes">Tip</option>
+                            <option class="dropdown-item" value="GYM">Teretana</option>
+                            <option class="dropdown-item" value="POOL">Bazen</option>
+                            <option class="dropdown-item" value="SPORTSCENTER">Sportski centar</option>
+                            <option class="dropdown-item" value="DANCESTUDIO">Plesni studio</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table container">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th v-on:click="sortSportObjects(1)">Naziv</th>
+                    <th>Tip</th>
+                    <th v-on:click="sortSportObjects(2)">Lokacija</th>
+                    <th v-on:click="sortSportObjects(3)">Prosecna ocena</th>
+                    <th>Radno vreme</th>
+                </tr>
+            </thead>
+            <tbody v-for="object in filteredSportsObjects">
+                <tr>
+                    <td><img :src="object.logo" style="object-fit:contain; width:200px; height:200px;"></td>
+                    <td>{{object.name}}</td>
+                    <td>{{object.locationType}}</td>
+                    <td>
+                        <template v-for="content in object.location.address">
+                            {{content}}
+                        </template>
+                    </td>
+                    <td>{{object.averageGrade}}</td>
+                    <td>
+                        {{object.startWorkingHour}} - {{object.endWorkingHour}}
+                    </td>
+                    <td>
+                        <a v-bind:href="'showObject.html?name=' +object.name">
                             <button class="btn btn-lg btn-primary btn-block">Prikaži objekat
                             </button>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <script src="js/vue.js"></script>
-        <script src="js/vue-router.js"></script>
-        <script src="js/axios.js"></script>
-        <script src="app/sportsObjects.js"></script>
-        <script src="app/menu.js"></script>
-    </body>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="app/sportsObjects.js"></script>
+    <script src="app/menu.js"></script>
+</body>
+
 </html>

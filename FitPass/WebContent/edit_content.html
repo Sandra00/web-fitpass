@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<style>
 		.center {
-  			margin-left: auto;
-  			margin-right: auto;
+			margin-left: auto;
+			margin-right: auto;
 		}
+
 		.form-signin {
-		  width: 100%;
-		  max-width: 330px;
-		  padding: 15px;
-		  margin: 0 auto;
+			width: 100%;
+			max-width: 330px;
+			padding: 15px;
+			margin: 0 auto;
 		}
-		
 	</style>
 </head>
-<body>
 
-	<!--  
-	<div id="app">
-		<label>{{content.name}}</label>
-	</div>
-	-->
+<body>
 	<div id="menu">
-	    <nav class="navbar navbar-expand-md navbar-light bg-light">
-	        <a class="navbar-brand" href="#">FitPass</a>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
-	        <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
-	            <ul class="navbar-nav">
-	                <li class="nav-item active">
-	                    <a class="nav-link" href="index.html">Početna</a>
-	                </li>
-	            </ul>
-	            
-	            <ul class="navbar-nav">
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="isLoggedIn === false"  href="login.html">Uloguj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="isLoggedIn === true" @click="logout" >Izloguj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link text-danger" v-if="isAdmin === true" href="all_users.html">Svi korisnici(Admin)</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi sportski objekat</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html" >Moj sportski objekat</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="profile.html">{{username}}</a>
-	                </li>
-	            </ul>
-	        </div>
-	    </nav>
+		<nav class="navbar navbar-expand-md navbar-light bg-light">
+			<a class="navbar-brand" href="#">FitPass</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="index.html">Početna</a>
+					</li>
+				</ul>
+
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" v-if="isLoggedIn === false" href="login.html">Uloguj se</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" v-if="isLoggedIn === true" @click="logout">Izloguj se</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-danger" v-if="isAdmin === true" href="all_users.html">Svi
+							korisnici(Admin)</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi
+							sportski objekat</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" v-if="isManager === true" href="manager_sports_object.html">Moj sportski
+							objekat</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="profile.html">{{username}}</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 	</div>
-	
-	
+
+
 	<h1 class="d-flex justify-content-center">Izmena sadržaja</h1>
 	<form id="app" class="form-signin" @submit.prevent="getFormValues">
 		<table>
 			<tr>
 				<td>
-					Naziv: 
+					Naziv:
 				</td>
 				<td>
 					<input type="text" id="name" v-model="name" class="form-control" required>
@@ -84,13 +84,16 @@
 			</tr>
 			<tr>
 				<td>
-					Tip: 
+					Tip:
 				</td>
 				<td>
-					<select class="btn btn-secondary dropdown-toggle" v-model="contentType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float:right">
-  						<option  class="dropdown-item" style="background-color:white" value="PERSONALTRAINING">Lični trening</option>
-  						<option class="dropdown-item" style="background-color:white" value="GROUPTRAINING">Grupni trening</option>
-  						<option class="dropdown-item" style="background-color:white" value="SAUNA">Sauna</option>
+					<select class="btn btn-secondary dropdown-toggle" v-model="contentType" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false" style="float:right">
+						<option class="dropdown-item" style="background-color:white" value="PERSONALTRAINING">Lični
+							trening</option>
+						<option class="dropdown-item" style="background-color:white" value="GROUPTRAINING">Grupni
+							trening</option>
+						<option class="dropdown-item" style="background-color:white" value="SAUNA">Sauna</option>
 					</select>
 				</td>
 			</tr>
@@ -111,23 +114,24 @@
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" ref="image" class="form-control-file" name="image" accept="image/png, image/jpeg" @change="handleFileUpload( $event )"></td>
+				<td><input type="file" ref="image" class="form-control-file" name="image" accept="image/png, image/jpeg"
+						@change="handleFileUpload( $event )"></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Izmeni</button>
-				<p class="text-danger">
-				 	{{ error }}
-				</p>
+					<p class="text-danger">
+						{{ error }}
+					</p>
 				</td>
 			</tr>
 		</table>
 	</form>
-	
-	
-	
+
+
+
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
@@ -135,4 +139,5 @@
 	<script src="app/images.js"></script>
 	<script src="app/menu.js"></script>
 </body>
+
 </html>
