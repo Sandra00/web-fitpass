@@ -23,31 +23,46 @@ public class MembershipDAO {
 	
 	public Membership findById(String membershipId) {
 		for(Membership membership : memberships) {
-			if(membership.getId().equals(membershipId)) {
+			if(membership.getId().equals(membershipId) && !membership.isDeleted()) {
 				return membership;
 			}
 		}
 		return null;
 	}
 	
-	public boolean newMembership(Membership promoCode) {
-		if (exists(promoCode.getId())) {
+	public boolean newMembership(Membership membership) {
+		if (exists(membership.getId())) {
 			return false;
 		}
-		boolean isSaved = memberships.add(promoCode);
+		membership.setDeleted(false);
+		boolean isSaved = memberships.add(membership);
 		save();
 		return isSaved;
 	}
 	
 	public List<Membership> findAll() {
-		return memberships;
+		List<Membership> existingMemberships = new ArrayList<Membership>();
+		for (Membership membership : memberships) {
+			if(!membership.isDeleted()) {
+				existingMemberships.add(membership);
+			}
+		}
+		return existingMemberships;
 	}
 	
 	private boolean exists(String id) {
 		for (Membership membership : memberships) {
-			if(membership.getId().equals(id)) {
+			if(membership.getId().equals(id) && !membership.isDeleted()) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	public boolean delete(String id) {
+		if(findById(id) != null) {
+			findById(id).setDeleted(true);
+			return true;
 		}
 		return false;
 	}

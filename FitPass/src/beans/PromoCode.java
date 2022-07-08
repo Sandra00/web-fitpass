@@ -13,17 +13,19 @@ public class PromoCode {
 	private LocalDateTime expirationDate;
 	private int usesLeft;
 	private double discountPercentage;
+	private boolean deleted;
 	
 	public PromoCode() {
 		super();
 	}
 	
-	public PromoCode(String code, LocalDateTime expirationDate, int usesLeft, double discountPercentage) {
+	public PromoCode(String code, LocalDateTime expirationDate, int usesLeft, double discountPercentage, boolean deleted) {
 		super();
 		this.code = code;
 		this.expirationDate = expirationDate;
 		this.usesLeft = usesLeft;
 		this.discountPercentage = discountPercentage;
+		this.deleted = deleted;
 	}
 	public String getCode() {
 		return code;
@@ -51,6 +53,10 @@ public class PromoCode {
 	public void setDiscountPercentage(double discountPercentage) {
 		this.discountPercentage = discountPercentage;
 	}
-	
-	
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 }

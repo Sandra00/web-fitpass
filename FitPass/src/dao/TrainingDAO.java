@@ -38,14 +38,16 @@ public class TrainingDAO {
 	
 	public Training findById(int id) {
 		for(Training training : trainings) {
-			if(training.getTrainingId() == id) return training;
+			if(training.getTrainingId() == id && !training.isDeleted()) {
+				return training;
+			}
 		}
 		return null;
 	}
 	
 	private boolean exists(int trainingId) {
 		for (Training training : trainings) {
-			if (training.getTrainingId() == trainingId) {
+			if (training.getTrainingId() == trainingId && !training.isDeleted()) {
 				return true;
 			} 
 		}
@@ -58,6 +60,7 @@ public class TrainingDAO {
 			return false;
 		}
 		training.setTrainingId(getNewId());
+		training.setDeleted(false);
 		boolean isAdded = trainings.add(training);
 		save();
 		return isAdded;
@@ -66,7 +69,7 @@ public class TrainingDAO {
 	public List<Training> findTrainingsBySportsObject(String sportsObjectName){
 		List<Training> trainingList = new ArrayList<Training>();
 		for (Training training : trainings){
-			if (training.getSportsObject().equals(sportsObjectName)) {
+			if (training.getSportsObject().equals(sportsObjectName) && !training.isDeleted()) {
 				trainingList.add(training);
 			}
 		}
@@ -76,7 +79,7 @@ public class TrainingDAO {
 	public List<String> findCoachesBySportsObjects(String sportsObjectName){
 		List<String> coaches = new ArrayList<String>();
 		for (Training training : trainings){
-			if (training.getSportsObject().equals(sportsObjectName) && !coaches.contains(training.getCoach())) {
+			if (training.getSportsObject().equals(sportsObjectName) && !training.isDeleted() && !coaches.contains(training.getCoach())) {
 				coaches.add(training.getCoach());
 			}
 		}
@@ -86,11 +89,19 @@ public class TrainingDAO {
 	public List<Training> findCoachsTrainigs(String username){
 		List<Training> trainingsCoach = new ArrayList<Training>();
 		for(Training training : trainings) {
-			if(training.getCoach().equals(username)) {
+			if(training.getCoach().equals(username) && !training.isDeleted()) {
 				trainingsCoach.add(training);
 			}
 		}
 		return trainingsCoach;
+	}
+	
+	public boolean delete(int id) {
+		if(findById(id) != null) {
+			findById(id).setDeleted(true);
+			return true;
+		}
+		return false;
 	}
 
 	private void load() {

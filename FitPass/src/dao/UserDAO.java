@@ -23,7 +23,6 @@ public class UserDAO {
 		load();
 	}
 	
-	
 	public User findUserByUsername(String username) {
 		for(User user : users) {
 			if(user.getUsername().equals(username) && !user.isDeleted()) {
@@ -96,6 +95,7 @@ public class UserDAO {
 		if(!checkExisting(user)) {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.MANAGER);
+			user.setDeleted(false);
 			users.add(user);
 			save();
 			return true;
@@ -107,6 +107,7 @@ public class UserDAO {
 		if(!checkExisting(user)) {
 			user.setOldUsername(user.getUsername());
 			user.setUserType(UserType.COACH);
+			user.setDeleted(false);
 			users.add(user);
 			save();
 			return true;
@@ -121,6 +122,14 @@ public class UserDAO {
 		findUserByUsername(username).setMembership(membership);
 		save();
 		return true;
+	}
+	
+	public boolean delete(String username) {
+		if(findUserByUsername(username) != null) {
+			findUserByUsername(username).setDeleted(true);
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean exists(String username) {
@@ -188,7 +197,7 @@ public class UserDAO {
 	public ArrayList<User> getFreeManagers(){
 		ArrayList<User> managers = new ArrayList<User>();
 		for(User user : users) {
-			if(user.getUserType() == UserType.MANAGER && user.getSportsObject() == null) managers.add(user);
+			if(user.getUserType() == UserType.MANAGER && !user.isDeleted() && user.getSportsObject() == null) managers.add(user);
 		}
 		return managers;
 	}

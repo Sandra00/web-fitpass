@@ -27,7 +27,7 @@ public class PromoCodeDAO {
 			return null;
 		}
 		for (PromoCode promoCode : promoCodes) {
-			if(promoCode.getCode().equals(code)) {
+			if(promoCode.getCode().equals(code) && !promoCode.isDeleted()) {
 				return promoCode;
 			}
 		}
@@ -45,18 +45,33 @@ public class PromoCodeDAO {
 		if (exists(promoCode.getCode())) {
 			return false;
 		}
+		promoCode.setDeleted(false);
 		boolean isSaved = promoCodes.add(promoCode);
 		save();
 		return isSaved;
 	}
 	
 	public List<PromoCode> findAll() {
-		return promoCodes;
+		List<PromoCode> existingPromoCodes = new ArrayList<PromoCode>();
+		for(PromoCode promoCode : promoCodes) {
+			if(!promoCode.isDeleted()) {
+				existingPromoCodes.add(promoCode);
+			}
+		}
+		return existingPromoCodes;
+	}
+	
+	public boolean delete(String promoCode) {
+		if(findByCode(promoCode) != null) {
+			findByCode(promoCode).setDeleted(true);
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean exists(String code) {
 		for (PromoCode promoCode : promoCodes) {
-			if(promoCode.getCode().equals(code)) {
+			if(promoCode.getCode().equals(code) && !promoCode.isDeleted()) {
 				return true;
 			}
 		}

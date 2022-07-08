@@ -19,12 +19,13 @@ public class Membership {
 	private int numberOfTrainings;
 	private int trainingsUsed;
 	private boolean calculatedPoints;
+	private boolean deleted;
 	
 	public Membership() {
 		super();
 	}
 	public Membership(String id, MembershipType membershipType, LocalDateTime transactionDate, LocalDateTime dueDate, double price,
-			MembershipStatus membershipStatus, int numberOfTrainings, int trainingsUsed, boolean calculatedPoints) {
+			MembershipStatus membershipStatus, int numberOfTrainings, int trainingsUsed, boolean calculatedPoints, boolean deleted) {
 		super();
 		this.id = id;
 		this.membershipType = membershipType;
@@ -35,6 +36,7 @@ public class Membership {
 		this.numberOfTrainings = numberOfTrainings;
 		this.trainingsUsed = trainingsUsed;
 		this.calculatedPoints = calculatedPoints;
+		this.deleted = deleted;
 	}
 	public Membership(Membership membership) {
 		this.id = membership.id;
@@ -46,6 +48,7 @@ public class Membership {
 		this.numberOfTrainings = membership.numberOfTrainings;
 		this.trainingsUsed = 0;
 		this.calculatedPoints = false;
+		this.deleted = false;
 	}
 	
 	public String getId() {
@@ -113,4 +116,11 @@ public class Membership {
 	public void setCalculatedPoints(boolean calculatedPoints) {
 		this.calculatedPoints = calculatedPoints;
 	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 }

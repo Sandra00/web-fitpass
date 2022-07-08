@@ -16,6 +16,7 @@ public class SportsObject {
 	private String startWorkingHour;
 	private String endWorkingHour;
 	private int gradesCounter;
+	private boolean deleted;
 	
 	public SportsObject() {
 		super();
@@ -24,7 +25,7 @@ public class SportsObject {
 
 	public SportsObject(String name, LocationType locationType, List<Content> content, boolean status,
 			Location location, String logo, double averageGrade, String startWorkingHour,
-			String endWorkingHour, int gradesCounter) {
+			String endWorkingHour, int gradesCounter, boolean deleted) {
 
 		super();
 		this.name = name;
@@ -37,6 +38,7 @@ public class SportsObject {
 		this.startWorkingHour = startWorkingHour;
 		this.endWorkingHour = endWorkingHour;
 		this.gradesCounter = gradesCounter;
+		this.deleted = deleted;
 	}
 
 	public String getName() {
@@ -95,17 +97,15 @@ public class SportsObject {
 	public void setAverageGrade(double averageGrade) {
 		this.averageGrade = averageGrade;
 	}
-	//@JsonSerialize(using = LocalTimeSerializer.class)
+	
 	public String getStartWorkingHour() {
 		return startWorkingHour;
 	}
 
-	//@JsonDeserialize(using = LocalTimeDeserializer.class)
 	public void setStartWorkingHour(String startWorkingHour) {
 		this.startWorkingHour = startWorkingHour;
 	}
 
-	//@JsonSerialize(using = LocalTimeSerializer.class)
 	public String getEndWorkingHour() {
 		return endWorkingHour;
 	}
@@ -118,10 +118,16 @@ public class SportsObject {
 		this.gradesCounter = gradesCounter;
 	}
 
-
-	//@JsonDeserialize(using = LocalTimeDeserializer.class)
 	public void setEndWorkingHour(String endWorkingHour) {
 		this.endWorkingHour = endWorkingHour;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }

@@ -20,43 +20,52 @@ public class SportsObjectDAO {
 	
 	public SportsObjectDAO() {
 		sportsObjects = new ArrayList<SportsObject>();
-		loadSportsObjects();
+		load();
 	}
 	
 	public List<SportsObject> findAll(){
-		return sportsObjects; 
+		List<SportsObject> existingSportsObjects = new ArrayList<SportsObject>();
+		for (SportsObject sportsObject : sportsObjects) {
+			if(!sportsObject.isDeleted()) {
+				existingSportsObjects.add(sportsObject);
+			}
+		}
+		return existingSportsObjects; 
 	}
 	
 	public SportsObject findByName(String sportsObjectName) {
 
 		for (SportsObject sportsObject : sportsObjects) {
-			if(sportsObject.getName().equals(sportsObjectName)) {
+			if(sportsObject.getName().equals(sportsObjectName) && !sportsObject.isDeleted()) {
 				return sportsObject;
 			}
 		}
 		return null;
 	}
 	
-
 	public boolean exists(SportsObject sportsObject) {
 		for(SportsObject so : sportsObjects) {
-			if(so.getName().equals(sportsObject.getName())) return true;
+			if(so.getName().equals(sportsObject.getName()) && !so.isDeleted()) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public boolean exists(String sportsObjectName) {
 		for(SportsObject so : sportsObjects) {
-			if(so.getName().equals(sportsObjectName)) return true;
+			if(so.getName().equals(sportsObjectName) && !so.isDeleted()) {
+				return true;
+			}
 		}
 		return false;
 	}
 	
 	public boolean newSportObject(SportsObject sportsObject) {
 		if(exists(sportsObject)) return false;
+		sportsObject.setDeleted(false);
 		sportsObjects.add(sportsObject);
-		//System.out.println("ide");
-		saveSportsObjects();
+		save();
 		return true;
 	}
 	
@@ -87,7 +96,7 @@ public class SportsObjectDAO {
 		content.setOldName(content.getName()); //set old name same as name
 		contents.add(content);
 		sportsObject.setContent(contents);
-		saveSportsObjects();
+		save();
 		return true;
 	}
 	
@@ -110,42 +119,41 @@ public class SportsObjectDAO {
 		contentForChange.setImage(content.getImage());
 		contentForChange.setDescription(content.getDescription());
 		contentForChange.setDuration(content.getDuration());
-		saveSportsObjects();
+		save();
 		return true;
 	}
 	
+	public boolean delete(String sportsObjectName) {
+		if(findByName(sportsObjectName) != null) {
+			findByName(sportsObjectName).setDeleted(true);
+			return true;
+		}
+		return false;
+	}
 	
-	
-	
-	private void loadSportsObjects() {
+	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			sportsObjects = new ArrayList<>(Arrays.asList(mapper.readValue(Paths.get(pathToFile).toFile(), SportsObject[].class)));
 		} catch (JsonParseException e) {
 			e.printStackTrace();
-			System.out.println("greska1");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
-			System.out.println("greska2 s");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("greska3");
 		}
 	}
 	
-	private void saveSportsObjects() {
+	private void save() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			mapper.writeValue(Paths.get(pathToFile).toFile(), sportsObjects);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
-			System.out.println("greska 1 upis");
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
-			System.out.println("greska 2 upis");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("greska 3 upis");
 		}
 	}
 }
