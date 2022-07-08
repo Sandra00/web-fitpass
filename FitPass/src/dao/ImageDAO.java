@@ -15,7 +15,7 @@ import util.PersonalConfig;
 
 public class ImageDAO {
 	private List<Image> images;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\images.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\images.json";
 	private static ImageDAO instance = null;
 	
 	private ImageDAO() {

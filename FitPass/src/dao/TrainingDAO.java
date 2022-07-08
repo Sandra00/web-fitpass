@@ -15,7 +15,7 @@ import util.PersonalConfig;
 
 public class TrainingDAO {
 	private List<Training> trainings;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\trainings.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\trainings.json";
 	
 	public TrainingDAO() {
 		trainings = new ArrayList<Training>();

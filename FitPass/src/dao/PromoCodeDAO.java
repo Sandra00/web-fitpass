@@ -15,7 +15,7 @@ import util.PersonalConfig;
 
 public class PromoCodeDAO {
 	private List<PromoCode> promoCodes;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\promo_codes.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\promo_codes.json";
 	
 	public PromoCodeDAO() {
 		promoCodes = new ArrayList<PromoCode>();

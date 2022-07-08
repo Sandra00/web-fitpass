@@ -15,7 +15,7 @@ import util.PersonalConfig;
 
 public class MembershipDAO {
 	private List<Membership> memberships;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\memberships.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\memberships.json";
 	
 	public MembershipDAO(){
 		load();

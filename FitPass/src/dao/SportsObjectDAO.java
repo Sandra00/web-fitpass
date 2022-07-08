@@ -16,7 +16,7 @@ import util.PersonalConfig;
 
 public class SportsObjectDAO {
 	private List<SportsObject> sportsObjects;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\sports_objects.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\sports_objects.json";
 	
 	public SportsObjectDAO() {
 		sportsObjects = new ArrayList<SportsObject>();

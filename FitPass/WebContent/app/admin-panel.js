@@ -113,10 +113,12 @@ const vm = new Vue ({
 				show &= user.name.toLowerCase().search(this.firstNameSearch.toLowerCase()) >= 0;
 				show &= user.surname.toLowerCase().search(this.lastNameSearch.toLowerCase()) >= 0;
 				show &= user.userType.search(this.roleFilter) >= 0 || this.roleFilter == 'ALL' || this.roleFilter == '';
-				show &= user.customerType || user.customerType.search(this.typeFilter) >= 0 || this.typeFilter == 'ALL' || this.typeFilter == '';
+				show &= user.customerType.search(this.typeFilter) >= 0 || this.typeFilter == 'ALL' || this.typeFilter == '';
 				
 				return show;
 			});
 		}
+		
+		
 	}
 });

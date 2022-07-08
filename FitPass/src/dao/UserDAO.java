@@ -16,7 +16,7 @@ import util.PersonalConfig;
 
 public class UserDAO {
 	private List<User> users;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\users.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\users.json";
 	
 	public UserDAO() {
 		users = new ArrayList<User>();
