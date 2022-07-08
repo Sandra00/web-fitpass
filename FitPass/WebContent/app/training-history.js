@@ -44,28 +44,29 @@ const vm = new Vue({
 					.then((response) => {
 						this.trainingF = response.data;
 						let add = true;
+						
 						for(let i = 0; i < this.trainingsMap.length; i++){
 							if(this.trainingsMap[i].id == response.data.trainingId){
 								add = false;
 							}
 						}
+						
 						if(add){
-							
-						this.trainingsMap.push({id: this.customerTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
-						for(let i = 0; i != this.trainingsMap.length; i++){
-							axios.get(
-								'rest/objects/currentObject',
-							{
-								params:{
-									name: this.trainingF.sportsObject
-								}	
-							}		
-						)
-						.then(response => {
-						this.sportsObject = response.data;
-						this.trainingsMap[i].sportsObject = this.sportsObject;
-					})
-						}
+							this.trainingsMap.push({id: this.customerTrainings[i].trainingId, training:this.trainingF, sportsObject:this.sportsObject})
+							for(let i = 0; i != this.trainingsMap.length; i++){
+								axios.get(
+									'rest/objects/currentObject',
+								{
+									params:{
+										name: this.trainingF.sportsObject
+									}	
+								}		
+							)
+							.then(response => {
+								this.sportsObject = response.data;
+								this.trainingsMap[i].sportsObject = this.sportsObject;
+							});
+							}
 						}
 						
 
@@ -78,11 +79,15 @@ const vm = new Vue({
 		
 	},
 	methods: {
+		
+		
 		findTraining(id) {
 			return this.trainingsMap.filter(function(trainingId){
 				return trainingId.id == id;
 			})
 		},
+		
+		
 		sortTrainings(index){
 			if(this.sortIndex === index){
 				switch(this.sortDirection){
@@ -196,6 +201,8 @@ const vm = new Vue({
 				}
 			}
 		}
+		
+		
 	},
 	computed:{
 		filteredCustomerTrainings:function(){

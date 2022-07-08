@@ -6,8 +6,6 @@ const vm = new Vue ({
 		membershipId: ''
 	},
 	mounted(){
-		
-		
 		var location = window.location.href;
 		uri = decodeURI(location);
 		this.membershipId = uri.split("=")[1];

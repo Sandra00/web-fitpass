@@ -25,10 +25,10 @@
 		axios.get('rest/freeManagers')
 		.then((response) => {
 			this.managers = response.data;
-			//this.managerValue = this.managers[0].username;
 		})
 	},
     methods: {
+	
 	
 		displayMap: function () {
 
@@ -60,6 +60,8 @@
                 this.mapClicked = true;
             })
         },
+        
+        
         reverseGeocode: function (coords) {
             fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + coords[0] + '&lat=' + coords[1])
                 .then(function (response) {
@@ -89,6 +91,8 @@
 
             });
         },
+        
+        
         geocode: async function (street, city) {
             await fetch('http://nominatim.openstreetmap.org/search?format=json&street=' + street + '&city=' + city + '&country=srbija')
                 .then(function (response) {
@@ -99,17 +103,6 @@
                 });
         },
         async register() {
-	
-			
-			//hour = this.startTime.hour
-			//minute = this.startTime.minute
-			//stringFormat = hour.toString() + ":" + minute.toString()
-			/*if(this.contents.length == 0){
-				this.noChecked = "Morate odabrati bar jedan sadržaj";
-				return;
-			}*/
-			
-			
 			imageId = await uploadImage(this.file);
 			
 			addToManager = true;
@@ -163,9 +156,11 @@
 			}
 		},
         
+        
         async handleFileUpload(event){
 			this.file = await convertBase64(event.target.files[0]);
     	},
+    	
     	
         getFormValues (submitEvent) {
             this.register();

@@ -26,6 +26,8 @@
 		});
 		},
 		methods: {
+			
+			
 			async editProfile(){
 				axios.post(
 					"rest/editUser",
@@ -47,8 +49,12 @@
                 this.error = 'Postoji korisnik sa unetim korisničkim imenom';
             })
 			},
+			
+			
 			getFormValues (submitEvent) {
             	this.editProfile();
-        }
+        	}
+        	
+        	
 		}
 	});

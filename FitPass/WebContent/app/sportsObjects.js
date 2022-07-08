@@ -12,6 +12,8 @@ var app = new Vue({
 		openFilter: 'allOpenClosed'
 	},
 	methods: {
+		
+		
 		sortSportObjects(index){
 			if(this.sortIndex === index){
 				switch(this.sortDirection){
@@ -82,15 +84,18 @@ var app = new Vue({
 			
 		},
 		
+		
 		filterType(type){
 			axios.get('rest/objects')
 			.then((response) => {
-			this.sportsObjects = response.data;
-			this.sportsObjects.filter((sportsObject)=>{
-				return sportsObject.locationType.match(type);
+				this.sportsObjects = response.data;
+				this.sportsObjects.filter((sportsObject)=>{
+					return sportsObject.locationType.match(type);
+				});
 			});
-		});
 		},
+		
+		
 		showObject(selectedName) {
 			 axios.get(
                 "rest/objects/showObject",
@@ -102,6 +107,7 @@ var app = new Vue({
 			window.location.href = 'showObject.html';
 		},
 		
+		
 		getImage(id){
 			return new Promise((resolve, reject) => {
 				axios.get('rest/image/' + id)
@@ -110,17 +116,18 @@ var app = new Vue({
 				})
 			});
 		}
+		
+		
 	},
 	created(){
 		axios.get('rest/objects')
 		.then((response) => {
 			this.sportsObjects = response.data;
 			
-			// sorting sports objects so that the active ones are displayed first
 			this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
 			this.sportsObjects.forEach(async item => {
-					item.logo = await this.getImage(item.logo);
-				});
+				item.logo = await this.getImage(item.logo);
+			});
 		});
 	},
 	computed:{

@@ -18,10 +18,12 @@ import beans.PromoCode;
 import beans.SportsObject;
 import beans.User;
 import beans.enums.UserType;
+import dao.CommentDAO;
 import dao.MembershipDAO;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
+import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 
 @Path("/admin")
@@ -41,6 +43,21 @@ public class AdminService {
 		}
 		if (ctx.getAttribute("promoCodeDAO") == null) {
 			ctx.setAttribute("promoCodeDAO", new PromoCodeDAO());
+		}
+		if (ctx.getAttribute("commentDAO") == null) {
+			ctx.setAttribute("commentDAO", new CommentDAO());
+		}
+		if (ctx.getAttribute("membershipDAO") == null) {
+			ctx.setAttribute("membershipDAO", new MembershipDAO());
+		}
+		if (ctx.getAttribute("trainingHistoryDAO") == null) {
+			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
+		}
+		if (ctx.getAttribute("trainingDAO") == null) {
+			ctx.setAttribute("trainingDAO", new TrainingDAO());
+		}
+		if (ctx.getAttribute("userDAO") == null) {
+			ctx.setAttribute("userDAO", new UserDAO());
 		}
 	}
 	

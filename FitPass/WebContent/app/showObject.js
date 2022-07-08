@@ -126,6 +126,7 @@ var app = new Vue({
 	},
 	methods: {
 		
+		
 		async activate(trainingId) {
 			await axios.put(
 	            'rest/customer/check-in?sportsObjectName=' + this.labela + '&trainingId=' + trainingId, {}
@@ -145,6 +146,7 @@ var app = new Vue({
 				}
 	        });
 		},
+		
 		
 		submitComment(){
 			if(!this.commentText || this.commentText === '' || this.commentGrade < 1 || this.commentGrade > 5){
@@ -174,6 +176,7 @@ var app = new Vue({
 	        });
 		},
 		
+		
 		approve(commentId){
 			axios.get(
 						'rest/objects/approve-comment',
@@ -186,6 +189,7 @@ var app = new Vue({
 			window.location.reload()
 		},
 		
+		
 		reject(commentId){
 			axios.get(
 						'rest/objects/reject-comment',
@@ -197,6 +201,7 @@ var app = new Vue({
 					)
 			window.location.reload()
 		}
+		
 		
 	}
 	

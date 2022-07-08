@@ -6,6 +6,8 @@
         };
     },
     methods: {
+	
+	
         async register() {
 			var date = new Date(this.dateOfBirth)
 			var splittedDate = this.dateOfBirth.split('-');
@@ -36,11 +38,17 @@
 				}
             })
         },
+        
+        
         onChange(event) {
               let gender = event.target.value;
-          },
+        },
+        
+        
         getFormValues (submitEvent) {
             this.register();
         }
+        
+        
     }
 });

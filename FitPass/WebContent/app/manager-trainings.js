@@ -53,7 +53,6 @@ const vm = new Vue({
 							this.trainingsMap.push({id: this.managerTrainings[i].trainingId, training:response.data})
 						}
 						
-						//this.trainingsMap.push({id: this.coachTrainings[i].trainingId, training:response.data})
 					})
 					
 				}

@@ -54,7 +54,6 @@ public class TrainingHistoryDAO {
 		List<TrainingHistory> trainingsCoach = new ArrayList<TrainingHistory>();
 		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
-			//System.out.println(training.getCoachUsername());
 			if(training.getCoachUsername().equals(username) && !training.isDeleted()) {
 				trainingsCoach.add(training);
 			}

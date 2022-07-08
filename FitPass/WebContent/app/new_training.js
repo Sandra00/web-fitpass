@@ -13,6 +13,8 @@
 		})
 	},
     methods: {
+	
+	
         async register() {
 
             await axios.put(
@@ -43,8 +45,12 @@
 				}
             })
         },
+        
+        
         getFormValues (submitEvent) {
             this.register();
         }
+        
+        
     }
 });

@@ -6,6 +6,8 @@ const vm = new Vue({
 	    };
 	},
 	methods: {
+		
+		
 	    async register() {
 			
 			dateTokens = this.expirationDate.split('-');
@@ -43,9 +45,13 @@ const vm = new Vue({
 				}
 	        })
 	    },
+	    
+	    
 	    getFormValues (submitEvent) {
 	        this.register();
 	    }
+	    
+	    
 	}
 });
 

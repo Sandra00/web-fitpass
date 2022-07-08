@@ -33,6 +33,8 @@ const vm = new Vue ({
 
 	},
 	methods: {
+		
+		
 		getImage(id){
 			return new Promise((resolve, reject) => {
 				axios.get('rest/image/' + id)
@@ -41,5 +43,7 @@ const vm = new Vue ({
 				})
 			});
 		}
+		
+		
 	}
 });
