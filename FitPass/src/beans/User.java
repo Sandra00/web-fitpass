@@ -173,6 +173,16 @@ public class User {
 	}
 
 	public CustomerType getCustomerType() {
+		if(this.points >= 1000 && this.points <= 2000) {
+			this.customerType = CustomerType.BRONZE;
+		} else if(this.points > 1000 && this.points <= 3000) {
+			this.customerType = CustomerType.SILVER;
+		} else if(this.points > 3000) {
+			this.customerType = CustomerType.GOLD;
+		}
+		else {
+			this.customerType = null;
+		}
 		return customerType;
 	}
 

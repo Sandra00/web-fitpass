@@ -10,8 +10,8 @@ const vm = new Vue({
             await axios.post(
                 "rest/login",
                 {
-                    username: this.username,
-                    password: this.password
+                    username: this.username.trim(),
+                    password: this.password.trim()
                 }
             )
             .then( response =>{

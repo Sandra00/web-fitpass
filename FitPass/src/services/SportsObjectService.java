@@ -156,18 +156,20 @@ public class SportsObjectService {
 	@Path("/approve-comment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void setApproved(@Context HttpServletRequest request) {
+	public Response setApproved(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
 		commentDAO.setApproved(Integer.parseInt(request.getParameter("id")));
+		return Response.ok().build();
 	}
 	
 	@GET
 	@Path("/reject-comment")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void setRejected(@Context HttpServletRequest request) {
+	public Response setRejected(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
 		commentDAO.setRejected(Integer.parseInt(request.getParameter("id")));
+		return Response.ok().build();
 	}
 	
 }
