@@ -3,7 +3,12 @@ const vm = new Vue({
 	data() {
 	    return {
 	        error: "",
-	        file: null
+	        file: null,
+	        name: null,
+	        type: null,
+	        content: null,
+	        duration: null,
+	        description: null
 	    };
 	},
 	methods: {

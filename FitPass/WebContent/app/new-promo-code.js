@@ -2,7 +2,12 @@ const vm = new Vue({
 	el: '#app',
 	data() {
 	    return {
-	        error: ""
+	        error: "",
+	        code: null,
+	        expirationDate: null,
+	        usesLeft: null,
+	        discountPercentage: null,
+	        expirationTime: null
 	    };
 	},
 	methods: {

@@ -3,7 +3,12 @@
     data() {
         return {
             error: "",
-            coaches: null
+            coaches: null,
+            name: null,
+            trainingType: null,
+            length: null,
+            coach: null,
+            description: null
         };
     },
     created() {

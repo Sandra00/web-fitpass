@@ -48,7 +48,7 @@
 							objekat</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" v-if="isNotAdmin === true" href="trainings.html">Treninzi</a>
+						<a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="profile.html">{{username}}</a>
@@ -59,7 +59,7 @@
 	</div>
 
 	<div id="app" class="container">
-		<label>trenutni korisnik: {{currentUsername}}</label>
+		<label>Trenutni korisnik: {{currentUsername}}</label>
 
 		<div class="bg-dark text-dark py-4">
 			<div class="container">

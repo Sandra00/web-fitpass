@@ -9,10 +9,10 @@ const vm = new Vue ({
 	created (){
 		axios.get('rest/manager/managed')
 		.then((response) => {
-			this.sportsObject= response.data;
+			this.sportsObject = response.data;
 			axios.get('rest/objects/content/' + this.sportsObject.name)
 			.then((response) => {
-				this.contents= response.data;
+				this.contents = response.data;
 				this.contents.forEach(async item => {
 					item.image = await this.getImage(item.image);
 				});

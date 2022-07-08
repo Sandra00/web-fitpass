@@ -2,7 +2,13 @@
     el: '#app',
     data() {
         return {
-            error: ""
+            error: "",
+            username: null,
+            name: null,
+            surname: null,
+            gender: null,
+            dateOfBirth: null,
+            password: null
         };
     },
     methods: {
