@@ -126,6 +126,7 @@ public class SportsObjectDAO {
 	public boolean delete(String sportsObjectName) {
 		if(findByName(sportsObjectName) != null) {
 			findByName(sportsObjectName).setDeleted(true);
+			save();
 			return true;
 		}
 		return false;

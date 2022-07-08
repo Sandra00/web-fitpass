@@ -4,9 +4,11 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,8 +18,10 @@ import beans.PromoCode;
 import beans.SportsObject;
 import beans.User;
 import beans.enums.UserType;
+import dao.MembershipDAO;
 import dao.PromoCodeDAO;
 import dao.SportsObjectDAO;
+import dao.TrainingDAO;
 import dao.UserDAO;
 
 @Path("/admin")
@@ -127,6 +131,71 @@ public class AdminService {
 				return Response.ok().build();
 			}
 			return Response.status(409).build(); 	// 409 - CONFLICT
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@DELETE
+	@Path("/delete/user/{id}")
+	public Response deleteUser(@PathParam("id") String id, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
+			if(userDAO.delete(id)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+
+	@DELETE
+	@Path("/delete/sports-object/{id}")
+	public Response deleteSportsObject(@PathParam("id") String id, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+			if(sportsObjectDAO.delete(id)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@DELETE
+	@Path("/delete/membership/{id}")
+	public Response deleteMembership(@PathParam("id") String id, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			MembershipDAO membershipDAO = (MembershipDAO) ctx.getAttribute("membershipDAO");
+			if(membershipDAO.delete(id)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@DELETE
+	@Path("/delete/promo-code/{id}")
+	public Response deletePromoCode(@PathParam("id") String id, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			PromoCodeDAO promoCodeDAO = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
+			if(promoCodeDAO.delete(id)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@DELETE
+	@Path("/delete/training/{id}")
+	public Response deleteTraining(@PathParam("id") int id, @Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+			if(trainingDAO.delete(id)) {
+				return Response.ok().build();
+			}
+			return Response.status(400).build();
 		}
 		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}

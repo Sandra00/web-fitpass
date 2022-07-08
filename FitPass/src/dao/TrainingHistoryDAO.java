@@ -26,7 +26,7 @@ public class TrainingHistoryDAO {
 	public List<TrainingHistory> findTrainingHistoryForCustomer(String username){
 		List<TrainingHistory> returnList = new ArrayList<TrainingHistory>();
 		for(TrainingHistory trainigHistory : trainingsHistory) {
-			if(trainigHistory.getBuyerUsername().equals(username)) {
+			if(trainigHistory.getBuyerUsername().equals(username) && !trainigHistory.isDeleted()) {
 				returnList.add(trainigHistory);
 			}
 		}
@@ -35,6 +35,7 @@ public class TrainingHistoryDAO {
 	
 	public void addTrainingHistory(TrainingHistory trainingHistory) {
 		trainingHistory.setId(findMax() + 1);
+		trainingHistory.setDeleted(false);
 		trainingsHistory.add(trainingHistory);
 		save();
 	}
@@ -54,7 +55,7 @@ public class TrainingHistoryDAO {
 		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
 			//System.out.println(training.getCoachUsername());
-			if(training.getCoachUsername().equals(username)) {
+			if(training.getCoachUsername().equals(username) && !training.isDeleted()) {
 				trainingsCoach.add(training);
 			}
 		}
@@ -65,8 +66,7 @@ public class TrainingHistoryDAO {
 		List<TrainingHistory> trainingsCustomer = new ArrayList<TrainingHistory>();
 		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
-			//System.out.println(training.getCoachUsername());
-			if(training.getBuyerUsername().equals(username) && LocalDateTime.now().minusMonths(1).isBefore(training.getStartDate())) {
+			if(training.getBuyerUsername().equals(username) && LocalDateTime.now().minusMonths(1).isBefore(training.getStartDate()) && !training.isDeleted()) {
 				trainingsCustomer.add(training);
 			}
 		}
@@ -76,17 +76,16 @@ public class TrainingHistoryDAO {
 	public List<LocalDateTime> findHistoryForTraining(int id){
 		List<LocalDateTime> startDates = new ArrayList<LocalDateTime>();
 		for(TrainingHistory trainingHistory : trainingsHistory) {
-			if(trainingHistory.getTrainingId() == id) {
+			if(trainingHistory.getTrainingId() == id && !trainingHistory.isDeleted()) {
 				startDates.add(trainingHistory.getStartDate());
 			}
 		}
-		//System.out.println(startDates.size());
 		return startDates;
 	}
 	
 	public TrainingHistory findById(int id) {
 		for(TrainingHistory tr : trainingsHistory) {
-			if(tr.getId() == id) {
+			if(tr.getId() == id && !tr.isDeleted()) {
 				return tr;
 			}
 		}
@@ -94,12 +93,21 @@ public class TrainingHistoryDAO {
 	}
 	
 	public List<TrainingHistory> findAll(){
-		return trainingsHistory;
+		List<TrainingHistory> existingTrainingHistories = new ArrayList<TrainingHistory>();
+		for(TrainingHistory tr : trainingsHistory) {
+			if(!tr.isDeleted()) {
+				existingTrainingHistories.add(tr);
+			}
+		}
+		return existingTrainingHistories;
 	}
-	public void removeTraining(int id) {
-		TrainingHistory training = findById(id);
-		trainingsHistory.remove(training);
-		save();
+	public boolean delete(int id) {
+		if(findById(id) != null) {
+			findById(id).setDeleted(true);
+			save();
+			return true;
+		}
+		return false;
 	}
 	
 	private void load() {

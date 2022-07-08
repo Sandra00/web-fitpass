@@ -99,6 +99,7 @@ public class TrainingDAO {
 	public boolean delete(int id) {
 		if(findById(id) != null) {
 			findById(id).setDeleted(true);
+			save();
 			return true;
 		}
 		return false;

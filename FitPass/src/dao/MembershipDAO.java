@@ -62,6 +62,7 @@ public class MembershipDAO {
 	public boolean delete(String id) {
 		if(findById(id) != null) {
 			findById(id).setDeleted(true);
+			save();
 			return true;
 		}
 		return false;

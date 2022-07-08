@@ -64,6 +64,7 @@ public class PromoCodeDAO {
 	public boolean delete(String promoCode) {
 		if(findByCode(promoCode) != null) {
 			findByCode(promoCode).setDeleted(true);
+			save();
 			return true;
 		}
 		return false;

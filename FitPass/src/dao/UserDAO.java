@@ -127,6 +127,7 @@ public class UserDAO {
 	public boolean delete(String username) {
 		if(findUserByUsername(username) != null) {
 			findUserByUsername(username).setDeleted(true);
+			save();
 			return true;
 		}
 		return false;

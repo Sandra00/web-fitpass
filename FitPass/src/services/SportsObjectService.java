@@ -8,8 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -113,9 +111,7 @@ public class SportsObjectService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Training findTrainig(@Context HttpServletRequest request){
-		//System.out.println(request.getParameter("trainingId"));
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
-		//System.out.println("prinadjen" + trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId"))).getTrainingId());
 		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
 	}
 	
@@ -153,8 +149,6 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Comment> findAllComments(@Context HttpServletRequest request){
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
-		//System.out.println("prosledjen " + request.getParameter("name"));
-		//System.out.println(commentDAO.findCommentsBySportsObject(request.getParameter("name")).size());
 		return commentDAO.findCommentsBySportsObject(request.getParameter("name"));
 	}
 	
@@ -164,7 +158,6 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void setApproved(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
-		//System.out.println("posalje " + request.getParameter("id"));
 		commentDAO.setApproved(Integer.parseInt(request.getParameter("id")));
 	}
 	
@@ -174,7 +167,6 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void setRejected(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
-		//System.out.println("posalje " + request.getParameter("id"));
 		commentDAO.setRejected(Integer.parseInt(request.getParameter("id")));
 	}
 	

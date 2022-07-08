@@ -13,20 +13,20 @@ public class TrainingHistory {
 	private int trainingId;
 	private String buyerUsername;
 	private String coachUsername;
-	
+	private boolean deleted;
 	
 	public TrainingHistory() {
 		super();
 	}
 
-
-	public TrainingHistory(int id, LocalDateTime startDate, int trainingId, String buyerUsername, String coachUsername) {
+	public TrainingHistory(int id, LocalDateTime startDate, int trainingId, String buyerUsername, String coachUsername, boolean deleted) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.trainingId = trainingId;
 		this.buyerUsername = buyerUsername;
 		this.coachUsername = coachUsername;
+		this.deleted = deleted;
 	}
 
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -78,7 +78,13 @@ public class TrainingHistory {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 	
 }

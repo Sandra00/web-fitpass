@@ -24,7 +24,6 @@ import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
 import beans.enums.CommentStatus;
-import beans.enums.CustomerType;
 import beans.enums.UserType;
 import dao.CommentDAO;
 import dao.MembershipDAO;
@@ -185,7 +184,7 @@ public class CustomerService {
 				numberOfTrainings++;
 				databaseUser.getMembership().setTrainingsUsed(numberOfTrainings);
 				databaseUser.getVisitedSportsObjects().add(sportsObjectName);
-				TrainingHistory trainingHistory = new TrainingHistory(0, LocalDateTime.now(), trainingIdNum, databaseUser.getUsername(), training.getCoach());
+				TrainingHistory trainingHistory = new TrainingHistory(0, LocalDateTime.now(), trainingIdNum, databaseUser.getUsername(), training.getCoach(), false);
 				trainingHistoryDAO.addTrainingHistory(trainingHistory);
 				userDAO.save();
 				return Response.ok().build();
