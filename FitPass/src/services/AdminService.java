@@ -59,6 +59,9 @@ public class AdminService {
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
+		if (ctx.getAttribute("trainingHistoryDAO") == null) {
+			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
+		}
 	}
 	
 	private boolean isAuthorized(HttpServletRequest request) {
@@ -231,7 +234,8 @@ public class AdminService {
 	public Response deleteTraining(@PathParam("id") int id, @Context HttpServletRequest request) {
 		if(isAuthorized(request)) {
 			TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
-			if(trainingDAO.delete(id)) {
+			TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+			if(trainingDAO.delete(id) && trainingHistoryDAO.deleteByTrainingId(id)) {
 				return Response.ok().build();
 			}
 			return Response.status(400).build();

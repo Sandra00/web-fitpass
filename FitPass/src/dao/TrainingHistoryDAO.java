@@ -109,6 +109,16 @@ public class TrainingHistoryDAO {
 		return false;
 	}
 	
+	public boolean deleteByTrainingId(int id) {
+		for(TrainingHistory trainingHistory : trainingsHistory) {
+			if(trainingHistory.getTrainingId() == id) {
+				trainingHistory.setDeleted(true);
+			}
+		}
+		save();
+		return true;
+	}
+	
 	private void load() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
