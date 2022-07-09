@@ -105,6 +105,7 @@
 					<th>Datum rođenja</th>
 					<th>Tip kupca</th>
 					<th v-on:click="sort(4)"><i class="bi bi-arrow-down-up"></i>Poeni</th>
+					<th>Akcija</th>
 				</tr>
 			</thead>
 			<tbody v-for="user in filteredUsers">
@@ -118,9 +119,15 @@
 					<td>{{user.dateOfBirth}}</td>
 					<td>{{user.customerType}}</td>
 					<td>{{user.points}}</td>
+					<td>
+						<form v-if="user.userType != 'ADMIN'" @submit.prevent="deleteUser(user.username)">
+                        	<input type="submit" value="Obriši" class="btn btn-danger">
+                        </form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+
 
 		<table class="table container">
 			<thead>
@@ -129,6 +136,7 @@
 					<th>Datum i vreme isteka</th>
 					<th>Broj preostalih kodova</th>
 					<th>Procenat popusta</th>
+					<th>Akcija</th>
 				</tr>
 			</thead>
 			<tbody v-for="promoCode in promoCodes">
@@ -137,6 +145,67 @@
 					<td>{{promoCode.expirationDate}}</td>
 					<td>{{promoCode.usesLeft}}</td>
 					<td>{{promoCode.discountPercentage}}</td>
+					<td>
+						<form @submit.prevent="deletePromoCode(promoCode.code)">
+                        	<input type="submit" value="Obriši" class="btn btn-danger">
+                        </form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		<table class="table container">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Tip</th>
+					<th>Cena</th>
+					<th>Broj treninga</th>
+				</tr>
+			</thead>
+			<tbody v-for="membership in memberships">
+				<tr>
+					<td>{{membership.id}}</td>
+					<td>{{membership.membershipType}}</td>
+					<td>{{membership.price}}</td>
+					<td>{{membership.numberOfTrainings}}</td>
+					<td>
+						<form @submit.prevent="deleteMembership(membership.id)">
+                        	<input type="submit" value="Obriši" class="btn btn-danger">
+                        </form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		<table class="table container">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Tip</th>
+					<th>Ime</th>
+					<th>Sportski objekat</th>
+					<th>Trener</th>
+					<th>Trajanje</th>
+					<th>Opis</th>
+				</tr>
+			</thead>
+			<tbody v-for="training in trainings">
+				<tr>
+					<td>{{training.trainingId}}</td>
+					<td>{{training.trainingType}}</td>
+					<td>{{training.name}}</td>
+					<td>{{training.sportsObject}}</td>
+					<td>{{training.coach}}</td>
+					<td>{{training.length}}</td>
+					<td>{{training.description}}</td>
+					<td>
+						<form @submit.prevent="deleteTraining(training.trainingId)">
+                        	<input type="submit" value="Obriši" class="btn btn-danger">
+                        </form>
+					</td>
 				</tr>
 			</tbody>
 		</table>

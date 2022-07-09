@@ -136,7 +136,7 @@ public class SportsObjectService {
 		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		for(TrainingHistory trainingHistory : trainingHistoryDAO.findAll()) {
 			Training training = trainingDAO.findById(trainingHistory.getTrainingId());
-			if(training.getSportsObject().equals(name)) {
+			if(training != null && training.getSportsObject().equals(name)) {
 				trainings.add(trainingHistory);
 			}
 		}

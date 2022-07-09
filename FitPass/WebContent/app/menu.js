@@ -20,10 +20,9 @@ window.onload = function() {
 					this.isAdmin = true;
 				} else if(response.data.userType == 'MANAGER'){
 					this.isManager = true;
-				}else if(response.data.userType == 'COACH'){
+				} else if(response.data.userType == 'COACH'){
 					this.isCoach = true;
-				}
-				if(response.data.userType == 'CUSTOMER'){
+				} else if(response.data.userType == 'CUSTOMER'){
 					this.isCustomer = true;
 				}
 			});
@@ -36,6 +35,9 @@ window.onload = function() {
 				this.isLoggedIn = false;
 				this.isAdmin = false;
 				this.isManager = false;
+				this.isCustomer = false;
+				this.isCoach = false;
+				window.location.href = 'index.html';
 			}
 			
 		}

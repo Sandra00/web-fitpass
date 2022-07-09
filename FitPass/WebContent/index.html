@@ -114,6 +114,7 @@
                     <th v-on:click="sortSportObjects(2)">Lokacija</th>
                     <th v-on:click="sortSportObjects(3)">Prosecna ocena</th>
                     <th>Radno vreme</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody v-for="object in filteredSportsObjects">
@@ -131,10 +132,14 @@
                         {{object.startWorkingHour}} - {{object.endWorkingHour}}
                     </td>
                     <td>
-                        <a v-bind:href="'showObject.html?name=' +object.name">
+                        <a v-bind:href="'showObject.html?name=' + object.name">
                             <button class="btn btn-lg btn-primary btn-block">Prikaži objekat
                             </button>
                         </a>
+                        
+                        <form v-if="isAdmin === true" @submit.prevent="deleteSportsObject(object.name)">
+                        	<input type="submit" value="Obriši" class="btn btn-danger">
+                        </form>
                     </td>
                 </tr>
             </tbody>

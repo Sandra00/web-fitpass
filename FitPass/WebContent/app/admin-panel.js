@@ -8,21 +8,33 @@ const vm = new Vue ({
 		lastNameSearch: '',
 		roleFilter: '',
 		typeFilter: '',
-		isAsc: true
+		isAsc: true,
+		memberships: [],
+		trainings: []
 	},
 	created(){
 		axios.get('rest/admin/all-users')
 		.then((response) => {
-			this.allUsers= response.data;
+			this.allUsers = response.data;
 		});
 		
 		axios.get('rest/admin/all-promo-codes')
 		.then((response) => {
-			this.promoCodes= response.data;
+			this.promoCodes = response.data;
 			this.promoCodes.forEach(async item => {
 				item.expirationDate = await this.formatDateTime(item.expirationDate);
 			});
-		});	
+		});
+		
+		axios.get('rest/admin/all-memberships')
+		.then((response) => {
+			this.memberships = response.data;
+		});
+		
+		axios.get('rest/admin/all-trainings')
+		.then((response) => {
+			this.trainings = response.data;
+		});
 	},
 	methods: {
 		
@@ -73,6 +85,50 @@ const vm = new Vue ({
 					});
 				}
 			}
+		},
+		
+		
+		deleteUser(username) {
+			axios.delete('rest/admin/delete/user/' + username)
+			.then( (response) => {
+				window.location.href = 'admin-panel.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati korisnika!");
+			});
+		},
+		
+		
+		deletePromoCode(code) {
+			axios.delete('rest/admin/delete/promo-code/' + code)
+			.then( (response) => {
+				window.location.href = 'admin-panel.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati promo kod!");
+			});
+		},
+		
+		
+		deleteMembership(id) {
+			axios.delete('rest/admin/delete/membership/' + id)
+			.then( (response) => {
+				window.location.href = 'admin-panel.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati članarinu!");
+			});
+		},
+		
+		
+		deleteTraining(id) {
+			axios.delete('rest/admin/delete/training/' + id)
+			.then( (response) => {
+				window.location.href = 'admin-panel.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati trening!");
+			});
 		},
 		
 		

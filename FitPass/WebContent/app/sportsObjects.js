@@ -9,7 +9,8 @@ var app = new Vue({
 		sortIndex : null,  //kolona koja se sortira
 		sortDirection: null,
 		typeFilter: 'allTypes',
-		openFilter: 'allOpenClosed'
+		openFilter: 'allOpenClosed',
+		isAdmin: false
 	},
 	methods: {
 		
@@ -108,6 +109,17 @@ var app = new Vue({
 		},
 		
 		
+		deleteSportsObject(name) {
+			axios.delete('rest/admin/delete/sports-object/' + name)
+			.then( (response) => {
+				window.location.href = 'index.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati objekat!");
+			});
+		},
+		
+		
 		getImage(id){
 			return new Promise((resolve, reject) => {
 				axios.get('rest/image/' + id)
@@ -120,6 +132,9 @@ var app = new Vue({
 		
 	},
 	created(){
+		axios.get('rest/currentUser')
+		.then((response) => this.isAdmin = response.data.userType === 'ADMIN');
+		
 		axios.get('rest/objects')
 		.then((response) => {
 			this.sportsObjects = response.data;

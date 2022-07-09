@@ -92,6 +92,28 @@ public class AdminService {
 		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
 	}
 	
+	@GET
+	@Path("/all-memberships")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response allMemberships(@Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			MembershipDAO membershipDAO = (MembershipDAO) ctx.getAttribute("membershipDAO");
+			return Response.ok(membershipDAO.findAll(), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
+	@GET
+	@Path("/all-trainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response allTrainings(@Context HttpServletRequest request) {
+		if(isAuthorized(request)) {
+			TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+			return Response.ok(trainingDAO.findAll(), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(401).build(); 		// 401 - NOT AUTHORIZED
+	}
+	
 	@POST
 	@Path("/register-sports-object")
 	@Consumes(MediaType.APPLICATION_JSON)

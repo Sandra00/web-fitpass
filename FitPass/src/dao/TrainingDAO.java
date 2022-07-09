@@ -23,7 +23,13 @@ public class TrainingDAO {
 	}
 	
 	public List<Training> findAll(){
-		return trainings;
+		List<Training> existingTrainings = new ArrayList<Training>();
+		for(Training training : trainings) {
+			if(!training.isDeleted()) {
+				existingTrainings.add(training);
+			}
+		}
+		return existingTrainings;
 	}
 	
 	private int getNewId() {

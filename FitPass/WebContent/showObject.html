@@ -132,6 +132,7 @@
 						<th>Ocena</th>
 						<th v-if='isAdmin == true || isManager == true'>Status</th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody v-for="comment in comments">
@@ -140,10 +141,10 @@
 						<td>{{comment.text}}</td>
 						<td>{{comment.grade}}</td>
 						<td v-if='isAdmin == true || isManager == true'>{{comment.status}}</td>
-						<td v-if='isAdmin == true && comment.status == "WAITING"'><button class="btn btn-success"
-								@click="approve(comment.id)">Odobri</button></td>
-						<td v-if='isAdmin == true && comment.status == "WAITING"'><button class="btn btn-success"
-								@click="reject(comment.id)">Ukloni</button></td>
+						<td v-if='isAdmin == true && comment.status == "WAITING"'>
+							<button class="btn btn-success" @click="approve(comment.id)">Odobri</button>
+							<button class="btn btn-danger" @click="reject(comment.id)">Ukloni</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
