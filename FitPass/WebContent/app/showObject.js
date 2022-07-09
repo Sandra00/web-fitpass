@@ -24,8 +24,12 @@ var app = new Vue({
 		var params = location.split("?");
 		var value = params[1].split("=")[1];
 		value = value.replace('%20', ' ');
-		this.labela = value.toString()
+		this.labela = value.toString();
 		
+
+		
+
+
 		
 		axios.get('rest/currentUser')
 		.then((response) => {
@@ -93,6 +97,31 @@ var app = new Vue({
 		)
 		.then((response) => {
 			this.object = response.data;
+			
+			//display map
+		let lon = this.object.location.longitude;
+			let lat = this.object.location.latitude;
+			
+            let map = new ol.Map({
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    })
+                ],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([lon, lat]),
+                    zoom: 18
+                })
+            });
+
+            setTimeout(() => {
+                if (map) {
+                    map.setTarget("map-create");
+                    let c = document.getElementById("map-create").childNodes;
+                    c[0].style.borderRadius = '15px';
+                }
+            }, 50);
+			
 			if(this.object.locationType == "GYM"){
 				this.type = "teretana";
 			}else if (this.object.locationTtype == "POOL"){
