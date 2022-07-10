@@ -128,7 +128,12 @@
                 }
             )
             .then( response =>{
-                window.location.href = 'index.html';
+				if (!this.managerValue) {
+					window.location.href = 'new_manager.html?sportsObjectName=' + this.name;
+				}
+				else {
+                	window.location.href = 'index.html';
+                }
             })
             .catch( error => {
                 this.error = 'Postoji objekat sa unetim nazivom';
@@ -140,10 +145,9 @@
 				await axios.post(
 				"rest/addSportsObject",
 				{
-					username:this.managerValue,
+					username: this.managerValue,
 					sportsObject: this.name
-				}
-				)
+				});
 			}
         },
         

@@ -8,9 +8,15 @@
             name: null,
             surname: null,
             gender: null,
-            dateOfBirth: null
+            dateOfBirth: null,
+            sportsObjectName: null
         };
     },
+    mounted(){
+		var location = window.location.href;
+		uri = decodeURI(location);
+		this.sportsObjectName = uri.split("=")[1];
+	},
     methods: {
 	
 	
@@ -29,7 +35,15 @@
                     password: this.password
                 }
             )
-            .then( response =>{
+            .then( response => {
+				if(this.sportsObjectName) {
+					axios.post(
+					'rest/addSportsObject',
+					{
+						username: this.username,
+						sportsObject: this.sportsObjectName
+					});
+				}
                 window.location.href = 'index.html';
             })
             .catch( error => {

@@ -107,21 +107,23 @@ public class CustomerService {
 				Membership membership = new Membership(membershipDAO.findById(membershipId));
 				PromoCode promoCode = promoCodeDAO.findByCode(promoId);
 				if(promoCode != null) {
-					
+
 					if(promoCode.getExpirationDate().isAfter(LocalDateTime.now()) && promoCode.getUsesLeft() >= 1)
 					{
 						promoCodeDAO.decrementUsesLeft(promoCode);
 						int memberDiscount = 0;
-						switch(user.getCustomerType()) {
-						case BRONZE:
-							memberDiscount = 1;
-							break;
-						case GOLD:
-							memberDiscount = 5;
-							break;
-						case SILVER:
-							memberDiscount = 10;
-							break;
+						if(user.getCustomerType() != null) {
+							switch(user.getCustomerType()) {
+							case BRONZE:
+								memberDiscount = 1;
+								break;
+							case GOLD:
+								memberDiscount = 5;
+								break;
+							case SILVER:
+								memberDiscount = 10;
+								break;
+							}
 						}
 						calculateDiscountPrice(membership, promoCode.getDiscountPercentage() + memberDiscount);
 						setMembershipDates(membership);
