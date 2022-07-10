@@ -173,6 +173,9 @@ public class User {
 	}
 
 	public CustomerType getCustomerType() {
+		if(userType != UserType.CUSTOMER) {
+			return null;
+		}
 		if(this.points >= 1000 && this.points <= 2000) {
 			this.customerType = CustomerType.BRONZE;
 		} else if(this.points > 2000 && this.points <= 3000) {
