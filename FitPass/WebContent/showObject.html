@@ -139,15 +139,6 @@
 
 			<div class="row">
 				<div class="col">
-					<label>Logo :</label>
-				</div>
-				<div class="col">
-					<label>bice nekad</label>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col">
 					<label>Prosečna ocena :</label>
 				</div>
 				<div class="col">
@@ -158,6 +149,25 @@
 
 		
 		<div class="map" id="map-create" style="z-index: 5"></div>
+		
+		<h3>Sadržaj:</h3>
+		<table class="table">
+			<thead>
+				<td>Slika</td>
+				<td>Naziv</td>
+				<td>Tip</td>
+				<td>Opis</td>
+				<td>Trajanje</td>
+			</thead>
+
+			<tbody v-for="content in object.content">
+				<td><img :src="content.image" style="object-fit:contain; width:200px; height:200px;"></td>
+				<td>{{content.name}}</td>
+				<td>{{content.type}}</td>
+				<td>{{content.description}}</td>
+				<td>{{content.duration}}</td>
+			</tbody>
+		</table>
 		
 		<div class="container">
 			<table class="table">

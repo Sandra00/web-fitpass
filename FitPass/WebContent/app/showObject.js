@@ -25,12 +25,7 @@ var app = new Vue({
 		var value = params[1].split("=")[1];
 		value = value.replace('%20', ' ');
 		this.labela = value.toString();
-		
-
-		
-
-
-		
+	
 		axios.get('rest/currentUser')
 		.then((response) => {
 			if(response.data.userType == 'CUSTOMER'){
@@ -98,6 +93,7 @@ var app = new Vue({
 		.then((response) => {
 			this.object = response.data;
 			
+			
 			//display map
 		let lon = this.object.location.longitude;
 			let lat = this.object.location.latitude;
@@ -148,6 +144,10 @@ var app = new Vue({
 			}else{
 				this.avgGrade = this.object.averageGrade;
 			}
+			
+			this.object.content.forEach(async item => {
+				item.image = await this.getImage(item.image);
+			});
 		});
 
 		
@@ -206,15 +206,25 @@ var app = new Vue({
 		},
 		
 		
+		getImage(id){
+			return new Promise((resolve, reject) => {
+				axios.get('rest/image/' + id)
+				.then((response) => {
+					resolve(response.data);
+				});
+			});
+		},
+		
+		
 		approve(commentId){
 			axios.get(
-						'rest/objects/approve-comment',
-						{
-							params:{
-								id: commentId
-							}
-						}
-					)
+			'rest/objects/approve-comment',
+			{
+				params:{
+					id: commentId
+				}
+			}
+		)
 			window.location.reload()
 		},
 		
