@@ -70,7 +70,6 @@ public class TrainingHistoryService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<LocalDateTime> findHistoryForTraining(@Context HttpServletRequest request){
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
-		System.out.println(trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId"))).size());
 		return trainingHistoryDAO.findHistoryForTraining(Integer.parseInt(request.getParameter("trainingId")));
 	}
 	

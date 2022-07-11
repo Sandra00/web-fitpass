@@ -11,39 +11,59 @@
 
 <body>
 	<div id="menu">
-		<nav class="navbar navbar-expand-md navbar-light bg-light">
-			<a class="navbar-brand" href="index.html">FitPass</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item active">
-						<a class="nav-link" href="index.html">Početna</a>
-					</li>
-				</ul>
-
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" v-if="isLoggedIn == false" href="login.html">Uloguj se</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" v-if="isLoggedIn == false" href="registerCustomer.html">Registruj se</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" v-if="isLoggedIn == true" @click="logout">Izloguj se</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj
-							nalog</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="">{{username}}</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="index.html">FitPass</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Početna</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="login.html">Uloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === true" @click="logout">Izloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi
+                            sportski objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html">Moj sportski
+                            objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager-trainings.html">Treninzi sportskog
+                            objekta</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj
+                            nalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">{{username}}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 	<div id="app">
 		<div class="container">

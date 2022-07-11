@@ -52,7 +52,6 @@ public class TrainingHistoryDAO {
 	
 	public List<TrainingHistory> findCoachsTrainigs(String username){
 		List<TrainingHistory> trainingsCoach = new ArrayList<TrainingHistory>();
-		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
 			if(training.getCoachUsername().equals(username) && !training.isDeleted()) {
 				trainingsCoach.add(training);
@@ -63,7 +62,6 @@ public class TrainingHistoryDAO {
 	
 	public List<TrainingHistory> findCustomersTrainigs(String username){
 		List<TrainingHistory> trainingsCustomer = new ArrayList<TrainingHistory>();
-		System.out.println(username);
 		for(TrainingHistory training : trainingsHistory) {
 			if(training.getBuyerUsername().equals(username) && LocalDateTime.now().minusMonths(1).isBefore(training.getStartDate()) && !training.isDeleted()) {
 				trainingsCustomer.add(training);

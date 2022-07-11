@@ -16,7 +16,7 @@
 
     <div id="menu">
         <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <a class="navbar-brand" href="#">FitPass</a>
+            <a class="navbar-brand" href="index.html">FitPass</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,8 +37,7 @@
                         <a class="nav-link" v-if="isLoggedIn === true" @click="logout">Izloguj se</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Svi
-                            korisnici(Admin)</a>
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi
@@ -57,6 +56,10 @@
                     <li class="nav-item">
                         <a class="nav-link" v-if="isManager === true" href="manager-trainings.html">Treninzi sportskog
                             objekta</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj
+                            nalog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.html">{{username}}</a>
