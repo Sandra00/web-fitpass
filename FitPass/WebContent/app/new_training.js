@@ -9,6 +9,7 @@
             length: null,
             coach: null,
             description: null,
+            price: 0,
             file: null
         };
     },
@@ -37,7 +38,8 @@
                     length: this.length,
                     coach: this.coach,
                     description: this.description,
-                    image: imageId
+                    image: imageId,
+                    price: this.price
                 }
             )
             .then( response =>{

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Comment;
+import beans.TrainingHistory;
 import beans.enums.CommentStatus;
 import util.PersonalConfig;
 
@@ -23,8 +24,19 @@ public class CommentDAO {
 	}
 	
 	public void addComment(Comment comment) {
+		comment.setId(findMax() + 1);
 		comments.add(comment);
 		save();
+	}
+	
+	private int findMax() {
+		int max = 0;
+		for(Comment comment : comments) {
+			if(comment.getId() > max) {
+				max = comment.getId();
+			}
+		}
+		return max;
 	}
 	
 	public List<Comment> findCommentsBySportsObject(String sportsObjectName){

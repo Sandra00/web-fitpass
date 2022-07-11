@@ -73,9 +73,9 @@
             </select>
             <input type="number" id="duration" v-model="length" min="1" max="360" class="form-control"
                 placeholder="Trajanje(min)">
+            <input type="number" id="price" v-model="price" min="0" max="15000" class="form-control" placeholder="Cena">
             <select class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" v-model="coach" required>
-                <option class="dropdown-item" v-for="coach in coaches" :value="coach.username"
-                    style="background-color:white">{{coach.name}} {{coach.surname}}</option>
+                <option class="dropdown-item" v-for="coach in coaches" :value="coach.username">{{coach.name}} {{coach.surname}}</option>
             </select>
 
             <textarea id="description" v-model="description" class="form-control" placeholder="Opis"

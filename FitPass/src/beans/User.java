@@ -140,7 +140,10 @@ public class User {
 	}
 
 	public Set<String> getVisitedSportsObjects() {
-		return visitedSportsObjects != null ? visitedSportsObjects : new HashSet<String>();
+		if(visitedSportsObjects == null) {
+			visitedSportsObjects = new HashSet<String>();
+		}
+		return visitedSportsObjects;
 	}
 
 	public void setVisitedSportsObjects(Set<String> visitedSportsObjects) {
