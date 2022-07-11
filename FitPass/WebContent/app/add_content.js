@@ -18,7 +18,10 @@ const vm = new Vue({
 				return ;
 			}
 			
-			imageId = await uploadImage(this.file);
+			imageId = null;
+			if(this.file){
+				imageId = await uploadImage(this.file);
+			}
 			
 	        await axios.put(
 	            "rest/manager/add-content",

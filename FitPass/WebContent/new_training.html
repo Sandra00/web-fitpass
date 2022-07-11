@@ -80,7 +80,8 @@
 
             <textarea id="description" v-model="description" class="form-control" placeholder="Opis"
                 rows="4"></textarea>
-            <button class="btn btn-lg btn-secondary btn-sm">Dodaj sliku</button><br>
+            <input type="file" ref="image" class="form-control-file" name="image" accept="image/png, image/jpeg"
+                @change="handleFileUpload( $event )"><br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Kreiraj</button>
             <p class="text-danger">
                 {{ error }}

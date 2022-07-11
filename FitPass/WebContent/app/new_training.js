@@ -8,7 +8,8 @@
             trainingType: null,
             length: null,
             coach: null,
-            description: null
+            description: null,
+            file: null
         };
     },
     created() {
@@ -21,7 +22,11 @@
 	
 	
         async register() {
-
+			imageId = null;
+			if(this.file){
+				imageId = await uploadImage(this.file);
+			}
+			
             await axios.put(
                 "rest/manager/add-training",
                 {
@@ -32,7 +37,7 @@
                     length: this.length,
                     coach: this.coach,
                     description: this.description,
-                    image: null
+                    image: imageId
                 }
             )
             .then( response =>{
@@ -50,6 +55,11 @@
 				}
             })
         },
+        
+        
+        async handleFileUpload(event){
+			this.file = await convertBase64(event.target.files[0]);
+    	},
         
         
         getFormValues (submitEvent) {
