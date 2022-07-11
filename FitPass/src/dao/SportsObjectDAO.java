@@ -43,6 +43,15 @@ public class SportsObjectDAO {
 		return null;
 	}
 	
+	public void addGradeToSportsObject(String sportsObjectName, int grade) {
+		SportsObject sportsObject = findByName(sportsObjectName);
+		int numberOfGrades = sportsObject.getGradesCounter();
+		double averageGrade = ((sportsObject.getAverageGrade() * numberOfGrades) + grade) / ++numberOfGrades;
+		sportsObject.setAverageGrade(averageGrade);
+		sportsObject.setGradesCounter(numberOfGrades);
+		save();
+	}
+	
 	public boolean exists(SportsObject sportsObject) {
 		for(SportsObject so : sportsObjects) {
 			if(so.getName().equals(sportsObject.getName()) && !so.isDeleted()) {

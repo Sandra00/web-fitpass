@@ -69,7 +69,7 @@ public class CommentDAO {
 		return sportsObjectComments;
 	}
 	
-	private Comment findById(int id) {
+	public Comment findById(int id) {
 		for(Comment comment : comments) {
 			if(comment.getId() == id) {
 				return comment;

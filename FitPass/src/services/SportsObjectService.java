@@ -158,6 +158,9 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response setApproved(@Context HttpServletRequest request) {
 		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		Comment comment = commentDAO.findById(Integer.parseInt(request.getParameter("id")));
+		sportsObjectDAO.addGradeToSportsObject(comment.getSportsObjectName(), comment.getGrade());
 		commentDAO.setApproved(Integer.parseInt(request.getParameter("id")));
 		return Response.ok().build();
 	}
