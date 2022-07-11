@@ -115,9 +115,10 @@
 					<th>Naziv</th>
 					<th v-on:click="sortTrainings(1)">Sportski objekat</th>
 					<th v-on:click="sortTrainings(2)">Datum</th>
+					<th>Tip treninga</th>
 					<th v-on:click="sortTrainings(3)">Cena</th>
-					<th></th>
-					<th></th>
+					
+					
 				</tr>
 			</thead>
 			<tbody v-for="coachTraining in filteredCoachTrainings">
@@ -129,6 +130,9 @@
 						{{training.training.sportsObject}}
 					</td>
 					<td>{{coachTraining.startDate[2]}}.{{coachTraining.startDate[1]}}.{{coachTraining.startDate[0]}}.
+					</td>
+					<td v-for="training in findTraining(coachTraining.trainingId)">
+						{{training.training.trainingType}}
 					</td>
 					<td v-for="training in findTraining(coachTraining.trainingId)">
 						{{training.training.price}}
