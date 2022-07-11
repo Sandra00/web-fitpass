@@ -97,6 +97,7 @@ public class TrainingHistoryService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void removeTraining(@Context HttpServletRequest request) {
 		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		System.out.println("pronadjen trening " +  request.getParameter("trainingHistoryId"));
 		trainingHistoryDAO.delete(Integer.parseInt(request.getParameter("trainingHistoryId")));
 	}
 }
