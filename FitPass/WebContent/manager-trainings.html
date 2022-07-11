@@ -102,6 +102,7 @@
                     <th>Naziv</th>
                     <th>Sportski objekat</th>
                     <th v-on:click="sortTrainings(2)">Datum</th>
+                    <th>Tip treninga</th>
                     <th v-on:click="sortTrainings(3)">Cena</th>
                 </tr>
             </thead>
@@ -114,6 +115,9 @@
                         {{training.training.sportsObject}}
                     </td>
                     <td>{{managerTraining.startDate[2]}}.{{managerTraining.startDate[1]}}.{{managerTraining.startDate[0]}}.
+                    </td>
+                    <td v-for="training in findTraining(managerTraining.trainingId)">
+                        {{training.training.trainingType}}
                     </td>
                     <td v-for="training in findTraining(managerTraining.trainingId)">
                         {{training.training.price}}
