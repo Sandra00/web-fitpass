@@ -7,12 +7,12 @@ const vm = new Vue ({
 		contents: null
 	},
 	created (){
-		axios.get('rest/objects/managed')
+		axios.get('rest/manager/managed')
 		.then((response) => {
-			this.sportsObject= response.data;
+			this.sportsObject = response.data;
 			axios.get('rest/objects/content/' + this.sportsObject.name)
 			.then((response) => {
-				this.contents= response.data;
+				this.contents = response.data;
 				this.contents.forEach(async item => {
 					item.image = await this.getImage(item.image);
 				});
@@ -20,12 +20,12 @@ const vm = new Vue ({
 			});
 		});
 
-		axios.get('rest/objects/coaches')
+		axios.get('rest/manager/coaches')
 		.then((response) => {
 			this.coaches= response.data;
 		});
 
-		axios.get('rest/objects/visited')
+		axios.get('rest/manager/visited')
 		.then((response) => {
 			this.customers= response.data;
 		});
@@ -33,6 +33,8 @@ const vm = new Vue ({
 
 	},
 	methods: {
+		
+		
 		getImage(id){
 			return new Promise((resolve, reject) => {
 				axios.get('rest/image/' + id)
@@ -41,5 +43,7 @@ const vm = new Vue ({
 				})
 			});
 		}
+		
+		
 	}
 });

@@ -15,7 +15,7 @@ import util.PersonalConfig;
 
 public class ImageDAO {
 	private List<Image> images;
-	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\WebContent\\images.json";
+	private String pathToFile = PersonalConfig.PROJECT_FOLDER_PATH + "\\data\\images.json";
 	private static ImageDAO instance = null;
 	
 	private ImageDAO() {
@@ -54,6 +54,7 @@ public class ImageDAO {
 		Pattern pattern = Pattern.compile(base64pattern);
 		Matcher matcher = pattern.matcher(content);
 		System.out.print("Is base 64: " + matcher.matches());*/
+		// the logic behind this is too primitive, consider upgrading the logic
 		if(content == null)
 			return false;
 		return content.length() > 20;

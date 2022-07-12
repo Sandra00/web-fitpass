@@ -34,10 +34,13 @@ var app = new Vue({
 	},
 	methods: {
 		async editContent(){
-			imageId = await uploadImage(this.file);
+			imageId = null;
+			if(this.file){
+				imageId = await uploadImage(this.file);
+			}
 			
 			axios.post(
-				"rest/objects/editContent",
+				"rest/manager/edit-content",
 				{
 					oldName: this.content.oldName,
 					name: this.name,

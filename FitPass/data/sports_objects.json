@@ -1,0 +1,251 @@
+[
+    {
+        "name": "Teretana 3",
+        "locationType": "GYM",
+        "content": [
+            {
+                "oldName": "Igranka bez prestanka",
+                "name": "Igranka bez prestanka",
+                "type": "GROUPTRAINING",
+                "image": "31",
+                "description": null,
+                "duration": 50
+            },
+            {
+                "oldName": "Dizanje tegova",
+                "name": "Dizanje tegova",
+                "type": "PERSONALTRAINING",
+                "image": null,
+                "description": "tegovidfsdfsdfsdf",
+                "duration": 60
+            },
+            {
+                "oldName": "Dizanje tegova 5",
+                "name": "Dizanje tegova 5",
+                "type": "GROUPTRAINING",
+                "image": "32",
+                "description": "dizemo tegove bas jako",
+                "duration": 45
+            }
+        ],
+        "status": true,
+        "location": {
+            "longitude": 65.0,
+            "latitude": 42.0,
+            "address": {
+                "street": "Patrijarha Pavla",
+                "number": 21,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": null,
+        "averageGrade": 3.5,
+        "startWorkingHour": "10:00",
+        "endWorkingHour": "19:00",
+        "gradesCounter": 2,
+        "deleted": false
+    },
+    {
+        "name": "Novi studio",
+        "locationType": "DANCESTUDIO",
+        "content": [],
+        "status": true,
+        "location": {
+            "longitude": 5.0,
+            "latitude": 6.0,
+            "address": {
+                "street": "Zmaj Jovina",
+                "number": 95,
+                "town": "Novi Sad",
+                "zipcode": 21000
+            }
+        },
+        "logo": "27",
+        "averageGrade": 0.0,
+        "startWorkingHour": "21:29",
+        "endWorkingHour": "13:26",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "Teretana Gym",
+        "locationType": "GYM",
+        "content": [],
+        "status": true,
+        "location": {
+            "longitude": 1.0,
+            "latitude": 1.0,
+            "address": {
+                "street": "asd",
+                "number": 1,
+                "town": "sd",
+                "zipcode": 23
+            }
+        },
+        "logo": "28",
+        "averageGrade": 0.0,
+        "startWorkingHour": "00:00",
+        "endWorkingHour": "22:00",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "Teretana 5",
+        "locationType": "GYM",
+        "content": [],
+        "status": false,
+        "location": {
+            "longitude": 19.0,
+            "latitude": 45.0,
+            "address": {
+                "street": "Bulevar oslobodjenja",
+                "number": 119,
+                "town": "Novi Sad City",
+                "zipcode": 21000
+            }
+        },
+        "logo": "34",
+        "averageGrade": 0.0,
+        "startWorkingHour": "14:15",
+        "endWorkingHour": "14:17",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "Teretana 6",
+        "locationType": "GYM",
+        "content": [],
+        "status": false,
+        "location": {
+            "longitude": 19.83992524543354,
+            "latitude": 45.24119421466986,
+            "address": {
+                "street": "Narodnog fronta",
+                "number": 14,
+                "town": "Novi Sad City",
+                "zipcode": 21102
+            }
+        },
+        "logo": "35",
+        "averageGrade": 0.0,
+        "startWorkingHour": "14:29",
+        "endWorkingHour": "14:31",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "Fitness 24h",
+        "locationType": "GYM",
+        "content": [],
+        "status": true,
+        "location": {
+            "longitude": 19.84225320352851,
+            "latitude": 45.24381743196321,
+            "address": {
+                "street": "Bulevar Cara Lazara",
+                "number": 44,
+                "town": "Novi Sad City",
+                "zipcode": 21102
+            }
+        },
+        "logo": "40",
+        "averageGrade": 0.0,
+        "startWorkingHour": "00:00",
+        "endWorkingHour": "00:00",
+        "gradesCounter": 0,
+        "deleted": true
+    },
+    {
+        "name": "Fitness 24h",
+        "locationType": "GYM",
+        "content": [
+            {
+                "oldName": "Dizanje tegova",
+                "name": "Dizanje tegova",
+                "type": "PERSONALTRAINING",
+                "image": "42",
+                "description": "Dizemo teg",
+                "duration": 60
+            }
+        ],
+        "status": true,
+        "location": {
+            "longitude": 19.84338317285296,
+            "latitude": 45.24156379834792,
+            "address": {
+                "street": "Narodnog fronta",
+                "number": 44,
+                "town": "Novi Sad City",
+                "zipcode": 210000
+            }
+        },
+        "logo": "41",
+        "averageGrade": 0.0,
+        "startWorkingHour": "00:00",
+        "endWorkingHour": "00:00",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "Sajam",
+        "locationType": "GYM",
+        "content": [],
+        "status": true,
+        "location": {
+            "longitude": 19.82260137086524,
+            "latitude": 45.25882292793383,
+            "address": {
+                "street": "Hajduk Veljkova",
+                "number": 6,
+                "town": "Novi Sad City",
+                "zipcode": 21000
+            }
+        },
+        "logo": "43",
+        "averageGrade": 0.0,
+        "startWorkingHour": "00:00",
+        "endWorkingHour": "00:00",
+        "gradesCounter": 0,
+        "deleted": false
+    },
+    {
+        "name": "BestFit 24h",
+        "locationType": "GYM",
+        "content": [
+            {
+                "oldName": "Dizanje tegova",
+                "name": "Dizanje tegova",
+                "type": "PERSONALTRAINING",
+                "image": "45",
+                "description": "fgdfgdfgdfg",
+                "duration": 53
+            },
+            {
+                "oldName": "Dizanje tegova 54",
+                "name": "Dizanje tegova 54",
+                "type": "PERSONALTRAINING",
+                "image": null,
+                "description": "asdads",
+                "duration": 33
+            }
+        ],
+        "status": true,
+        "location": {
+            "longitude": 19.84219640891086,
+            "latitude": 45.2436852731867,
+            "address": {
+                "street": "Bulevar Cara Lazara",
+                "number": 21,
+                "town": "Novi Sad City",
+                "zipcode": 21102
+            }
+        },
+        "logo": "44",
+        "averageGrade": 0.0,
+        "startWorkingHour": "00:00",
+        "endWorkingHour": "00:00",
+        "gradesCounter": 0,
+        "deleted": false
+    }
+]

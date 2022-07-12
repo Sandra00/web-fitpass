@@ -1,136 +1,260 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>FitPass | Sportski objekat</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css" type="text/css">
+    
 	<style>
 		.center {
-  			margin-left: auto;
-  			margin-right: auto;
+			margin-left: auto;
+			margin-right: auto;
 		}
+
 		.form-signin {
-		  width: 100%;
-		  max-width: 330px;
-		  padding: 15px;
-		  margin: 0 auto;
+			width: 100%;
+			max-width: 330px;
+			padding: 15px;
+			margin: 0 auto;
 		}
-		
+		.map {
+            border-radius: 15px;
+            opacity: 0.6;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            filter: drop-shadow(16px 16px 20px rgba(255, 255, 255, 0.1));
+            @extend %basic-white-component;
+        }
+
+        #map-create {
+            height: 20em;
+            width: 50em;
+        }
 	</style>
 </head>
+
 <body>
-<div id="menu">
-	    <nav class="navbar navbar-expand-md navbar-light bg-light">
-	        <a class="navbar-brand" href="#">FitPass</a>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-	            <span class="navbar-toggler-icon"></span>
-	        </button>
-	        <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
-	            <ul class="navbar-nav">
-	                <li class="nav-item active">
-	                    <a class="nav-link" href="index.html">Početna</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="#">O nama</a>
-	                </li>
-	            </ul>
-	            
-	            <ul class="navbar-nav">
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="username === ''"  href="login.html">Uloguj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="username === ''" href="registerCustomer.html">Registruj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" v-if="username != ''" @click="logout" >Izloguj se</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link text-danger" v-if="isAdmin == true" href="all_users.html">Svi korisnici(Admin)</a>
-	                </li>
-	                <li class="nav-item">
-	                    <a class="nav-link" href="">{{username}}</a>
-	                </li>
-	            </ul>
-	        </div>
-	    </nav>
-	</div>
+	<div id="menu">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="navbar-brand" href="index.html">FitPass</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Početna</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="login.html">Uloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === false" href="registerCustomer.html">Registruj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isLoggedIn === true" @click="logout">Izloguj se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="admin-panel.html">Admin panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" v-if="isAdmin === true" href="new_sportObject.html">Novi
+                            sportski objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager_sports_object.html">Moj sportski
+                            objekat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCustomer === true" href="trainings.html">Treninzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isCoach === true" href="coach-trainings.html">Treninzi trenera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" v-if="isManager === true" href="manager-trainings.html">Treninzi sportskog
+                            objekta</a>
+                    </li>
+                    <li>
+                        <a class="nav-link text-danger" v-if="isCustomer == true" href="customer-panel.html">Moj
+                            nalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">{{username}}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 	<div id="app" class="container-fluid">
 		<h1 class="d-flex justify-content-center">Objekat: {{object.name}}</h1>
-		<form class="form-signin">
 		
-			<div class="row">
-				<div class="col">
-					<label>Naziv :</label>
-				</div>
-				<div class="col">
-					<label>{{object.name}}</label>
-				</div>
+		<div class="form-signin">
+		<div class="row">
+			<div class="col">
+				<img :src="object.logo" style="object-fit:contain; width:100px; height:100px; border-radius: 50%;">
 			</div>
-			
-			<div class="row">
-				<div class="col">
-					<label>Tip :</label>
-				</div>
-				<div class="col">
-					<label>{{type}}</label>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">
-					<label>Status :</label>
-				</div>
-				<div class="col">
-					<label>{{status}}</label>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">
-					<label>Lokacija :</label>
-				</div>
-				<div class="col">
-					<label>{{location}}</label>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">
-					<label>Logo :</label>
-				</div>
-				<div class="col">
-					<label>bice nekad</label>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">
-					<label>Prosečna ocena :</label>
-				</div>
-				<div class="col">
-					<label>{{avgGrade}}</label>
-				</div>
-			</div>
-		</form>
-		
-		
-		<div>
-			<h2>Komentari</h2>
 		</div>
-		<div>
+
+		<div class="row">
+			<div class="col">
+				<label>Naziv :</label>
+			</div>
+			<div class="col">
+				<label>{{object.name}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Tip :</label>
+			</div>
+			<div class="col">
+				<label>{{type}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Status :</label>
+			</div>
+			<div class="col">
+				<label>{{status}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Lokacija :</label>
+			</div>
+			<div class="col">
+				<label>{{location}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Prosečna ocena :</label>
+			</div>
+			<div class="col">
+				<label>{{avgGrade}}</label>
+			</div>
+		</div>
+		</div>
+		
+		<div class="map" id="map-create" style="z-index: 5"></div>
+		
+		<h3>Sadržaj:</h3>
+		<table class="table">
+			<thead>
+				<td>Slika</td>
+				<td>Naziv</td>
+				<td>Tip</td>
+				<td>Opis</td>
+				<td>Trajanje</td>
+			</thead>
+
+			<tbody v-for="content in object.content">
+				<td><img :src="content.image" style="object-fit:contain; width:200px; height:200px;"></td>
+				<td>{{content.name}}</td>
+				<td>{{content.type}}</td>
+				<td>{{content.description}}</td>
+				<td>{{content.duration}}</td>
+			</tbody>
+		</table>
+		
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Korisnik</th>
+						<th>Sadržaj</th>
+						<th>Ocena</th>
+						<th v-if='isAdmin == true || isManager == true'>Status</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody v-for="comment in comments">
+					<tr>
+						<td>{{comment.customerUsername}}</td>
+						<td>{{comment.text}}</td>
+						<td>{{comment.grade}}</td>
+						<td v-if='isAdmin == true || isManager == true'>{{comment.status}}</td>
+						<td v-if='isAdmin == true && comment.status == "WAITING"'>
+							<button class="btn btn-success" @click="approve(comment.id)">Odobri</button>
+							<button class="btn btn-danger" @click="reject(comment.id)">Ukloni</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="container" v-if="isCustomer == true">
 			<h2>Treninzi</h2>
+			<p class="text-danger">{{error}}</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Ime treninga</th>
+						<th>Tip treninga</th>
+						<th>Trener</th>
+						<th>Opis</th>
+						<th>Trajanje</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody v-for="training in trainings">
+					<tr>
+						<td>{{training.name}}</td>
+						<td>{{training.trainingType}}</td>
+						<td>{{training.coach}}</td>
+						<td>{{training.description}}</td>
+						<td>{{training.length}}</td>
+						<td><button class="btn btn-success" @click="activate(training.trainingId)">Aktiviraj</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Komentari</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Komentar</th>
+						<th>Ocena</th>
+					</tr>
+				</thead>
+				<tbody v-for="comment in customerComments">
+					<tr>
+						<td>{{comment.text}}</td>
+						<td>{{comment.grade}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<form class="form-signin" @submit.prevent="submitComment" v-if="visitedSportsObject === true">
+				<textarea v-model="commentText" rows="5" class="form-control"></textarea>
+				<input type="number" v-model="commentGrade" min="1" max="5" class="form-control">
+				<button class="btn btn-success" type="submit">Pošalji komentar</button>
+			</form>
 		</div>
 	</div>
-		
+
 	<script src="js/vue.js"></script>
 	<script src="js/vue-router.js"></script>
 	<script src="js/axios.js"></script>
 	<script src="app/menu.js"></script>
 	<script src="app/showObject.js"></script>
 </body>
+
 </html>

@@ -8,6 +8,8 @@ window.onload = function () {
         gender: false
     },
     methods: {
+	
+	
         async register() {
 			var date = new Date(this.dateOfBirth)
 			var splittedDate = this.dateOfBirth.split('-');
@@ -59,12 +61,18 @@ window.onload = function () {
                 this.error = 'Postoji korisnik sa unetim korisničkim imenom';
             })
         },
+        
+        
         onChange(event) {
               let gender = event.target.value;
-          },
+        },
+        
+        
         getFormValues (submitEvent) {
             this.register();
         }
+        
+        
     }
 });
 }

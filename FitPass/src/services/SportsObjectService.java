@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,8 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,15 +15,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+import beans.Comment;
 import beans.Content;
-
 import beans.SportsObject;
 import beans.Training;
-import beans.User;
-import beans.enums.UserType;
+import beans.TrainingHistory;
+import dao.CommentDAO;
 import dao.SportsObjectDAO;
 import dao.TrainingDAO;
+import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 
 @Path("/objects")
@@ -48,6 +47,12 @@ public class SportsObjectService {
 		if (ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO());
 		}
+		if (ctx.getAttribute("trainingHistoryDAO") == null) {
+			ctx.setAttribute("trainingHistoryDAO", new TrainingHistoryDAO());
+		}
+		if (ctx.getAttribute("commentDAO") == null) {
+			ctx.setAttribute("commentDAO", new CommentDAO());
+		}
 	}
 	
 	
@@ -59,64 +64,7 @@ public class SportsObjectService {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
 		return sportsObjectDAO.findAll();
 	}
-	
-	@GET
-	@Path("/managed")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response findManagersSportsObject(@Context HttpServletRequest request) {
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		User user = (User) request.getSession().getAttribute("user");
-		if(user != null && user.getUserType() == UserType.MANAGER) {
-			String sportsObjectName = user.getSportsObject();
-			return Response.ok(sportsObjectDAO.findByName(sportsObjectName), MediaType.APPLICATION_JSON).build();
-		}
-		return Response.status(401).build(); 
-	}
-	
-	@GET
-	@Path("/coaches")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response findSportsObjectCoaches(@Context HttpServletRequest request) {
-		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
-		User user = (User) request.getSession().getAttribute("user");
-		if(user != null && user.getUserType() == UserType.MANAGER) {
-			String name = user.getSportsObject();
-			List<String> trainerUsernames = trainingDAO.findCoachesBySportsObjects(name);
-			UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
-			return Response.ok(userDAO.findUsersByUsername(trainerUsernames), MediaType.APPLICATION_JSON).build();
-		}
-		return Response.status(401).build(); 
-	}
-	
-	@GET
-	@Path("/visited")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response findUsersVisited(@Context HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
-		if(user != null && user.getUserType() == UserType.MANAGER) {
-			String name = user.getSportsObject();
-			return Response.ok(userDAO.findUsersVisitedSportsObject(name), MediaType.APPLICATION_JSON).build();
-		}
-		return Response.status(401).build(); 
-	}
-	
-	@POST
-	@Path("/register")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response newSportsObject(SportsObject sportsObject, @Context HttpServletRequest request) {
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		if(!sportsObjectDAO.newSportObject(sportsObject)) {
-			//System.out.printlnsportsObjectDAO.findAll());
-			System.out.println("dodje dovde");
-			return Response.status(400).entity("Postoji sportski objekat sa unetim nazivom").build();
-		}
-		//System.out.println(userDao.findAll());
-		//userDao.newCustomer(user);
-		return Response.status(200).build();
-	}
-	
+		
 
 	@GET
 	@Path("/showObject")
@@ -124,10 +72,7 @@ public class SportsObjectService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public SportsObject setObject(SportsObject so, @Context HttpServletRequest request) {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		System.out.println("udje ovde");
-		System.out.println(so.getName());
 		request.getSession().setAttribute("object", sportsObjectDAO.findByName(so.getName()));
-		System.out.println(sportsObjectDAO.findByName(so.getName()).getName());
 		return sportsObjectDAO.findByName(so.getName());
 	}
 	
@@ -139,54 +84,7 @@ public class SportsObjectService {
 		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO"); 
 		return sportsObjectDAO.findByName(request.getParameter("name"));
 	}
-	@PUT
-	@Path("/add_content")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addContent(Content content,@Context HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		if(user != null && user.getUserType() == UserType.MANAGER) {
-			if (sportsObjectDAO.addContents(user.getSportsObject(), content)){
-				return Response.ok().build();
-			}
-			else {
-				// maybe the error code is not appropriate but i could not find a better one
-				return Response.status(400).build(); 
-			}
-		}
-		return Response.status(401).build(); 
-	}
 	
-	@POST
-	@Path("/editContent")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response editContent(Content content, @Context HttpServletRequest request) {
-		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
-		if(sportsObjectDAO.editContent(content)) {
-			return Response.status(200).build();
-		}
-		return Response.status(400).entity("nesto bas i ne radi").build();
-	}
-	
-	@PUT // changed from POST
-	@Path("/add_training")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addTraining(Training training, @Context HttpServletRequest request) {
-		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
-		User user = (User) request.getSession().getAttribute("user");
-		if(user != null && user.getUserType() == UserType.MANAGER) {
-			training.setSportsObject(user.getSportsObject());
-			if(trainingDAO.addTraining(training)) {
-				return Response.ok().build();	
-			}
-			else {
-				// maybe the error code is not appropriate but i could not find a better one
-				return Response.status(400).build(); 
-			}
-		}
-		return Response.status(401).build(); 
-	}
 	
 	@GET
 	@Path("/currentContent")
@@ -207,4 +105,74 @@ public class SportsObjectService {
 				Response.status(400).build() : 
 					Response.ok(sportsObjectDAO.findContents(sportsObjectName), MediaType.APPLICATION_JSON).build();
 	}
+	
+	@GET
+	@Path("/training")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Training findTrainig(@Context HttpServletRequest request){
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		return trainingDAO.findById(Integer.parseInt(request.getParameter("trainingId")));
+	}
+	
+	@GET
+	@Path("/trainings/{name}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response findSportsObjectTrainings(@PathParam("name") String sportsObjectName, @Context HttpServletRequest request){
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		return Response.ok(trainingDAO.findTrainingsBySportsObject(sportsObjectName), MediaType.APPLICATION_JSON).build();
+	}
+	
+	@GET
+	@Path("/training-history-manager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TrainingHistory> findObjectsTrainings(@Context HttpServletRequest request){
+		List<TrainingHistory> trainings = new ArrayList<TrainingHistory>();
+		String name = request.getParameter("objectName");
+		
+		TrainingHistoryDAO trainingHistoryDAO = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		TrainingDAO trainingDAO = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		for(TrainingHistory trainingHistory : trainingHistoryDAO.findAll()) {
+			Training training = trainingDAO.findById(trainingHistory.getTrainingId());
+			if(training != null && training.getSportsObject().equals(name)) {
+				trainings.add(trainingHistory);
+			}
+		}
+		return trainings;
+	}
+	
+	@GET
+	@Path("/all-comments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> findAllComments(@Context HttpServletRequest request){
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		return commentDAO.findCommentsBySportsObject(request.getParameter("name"));
+	}
+	
+	@GET
+	@Path("/approve-comment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response setApproved(@Context HttpServletRequest request) {
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		SportsObjectDAO sportsObjectDAO = (SportsObjectDAO) ctx.getAttribute("sportsObjectDAO");
+		Comment comment = commentDAO.findById(Integer.parseInt(request.getParameter("id")));
+		sportsObjectDAO.addGradeToSportsObject(comment.getSportsObjectName(), comment.getGrade());
+		commentDAO.setApproved(Integer.parseInt(request.getParameter("id")));
+		return Response.ok().build();
+	}
+	
+	@GET
+	@Path("/reject-comment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response setRejected(@Context HttpServletRequest request) {
+		CommentDAO commentDAO = (CommentDAO) ctx.getAttribute("commentDAO");
+		commentDAO.setRejected(Integer.parseInt(request.getParameter("id")));
+		return Response.ok().build();
+	}
+	
 }

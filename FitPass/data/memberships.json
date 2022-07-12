@@ -1,0 +1,12 @@
+[
+    {
+        "id": "asdasdsd",
+        "membershipType": "MONTHLY",
+        "transactionDate": null,
+        "dueDate": null,
+        "price": 1500.0,
+        "membershipStatus": "ACTIVE",
+        "numberOfTrainings": 20,
+        "trainingsUsed": 0
+    }
+]

@@ -1,7 +1,8 @@
 package beans;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import beans.enums.*;
 
@@ -16,20 +17,20 @@ public class User {
 	private String dateOfBirth;
 	private UserType userType;
 	private List<Integer> trainings;
-	private List<Fee> fee;
+	private Membership membership;
 	private String sportsObject;
-	private List<String> visitedSportsObjects;
+	private Set<String> visitedSportsObjects;
 	private int points;
 	private CustomerType customerType;
-	private boolean isDeleted = false;
+	private boolean isDeleted;
 	
 	public User() {
 		super();
 	}
 
 	public User(String oldUsername, String username, String password, String name, String surname, String gender, String dateOfBirth,
-			UserType userType, List<Integer> trainings, List<Fee> fee, String sportsObject,
-			List<String> visitedSportsObjects, int points, CustomerType customerType) {
+			UserType userType, List<Integer> trainings, Membership membership, String sportsObject,
+			Set<String> visitedSportsObjects, int points, CustomerType customerType) {
 		super();
 		this.oldUsername = oldUsername;
 		this.username = username;
@@ -40,15 +41,12 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		this.userType = userType;
 		this.trainings = trainings;
-		this.fee = fee;
+		this.membership = membership;
 		this.sportsObject = sportsObject;
 		this.visitedSportsObjects = visitedSportsObjects;
 		this.points = points;
 		this.customerType = customerType;
 	}
-	
-	
-
 	public User(String oldUsername, String username, String name, String surname, String gender,
 			String dateOfBirth, String password) {
 		super();
@@ -125,12 +123,12 @@ public class User {
 		this.trainings = trainings;
 	}
 
-	public List<Fee> getFee() {
-		return fee;
+	public Membership getMembership() {
+		return membership;
 	}
 
-	public void setFee(List<Fee> fee) {
-		this.fee = fee;
+	public void setMembership(Membership membership) {
+		this.membership = membership;
 	}
 
 	public String getSportsObject() {
@@ -141,16 +139,36 @@ public class User {
 		this.sportsObject = sportsObject;
 	}
 
-	public List<String> getVisitedSportsObjects() {
-		return visitedSportsObjects != null ? visitedSportsObjects : new ArrayList<String>();
+	public Set<String> getVisitedSportsObjects() {
+		if(visitedSportsObjects == null) {
+			visitedSportsObjects = new HashSet<String>();
+		}
+		return visitedSportsObjects;
 	}
 
-	public void setVisitedSportsObjects(List<String> visitedSportsObjects) {
+	public void setVisitedSportsObjects(Set<String> visitedSportsObjects) {
 		this.visitedSportsObjects = visitedSportsObjects;
 	}
 
 	public int getPoints() {
-		return points;
+		if(this.membership != null && this.membership.getMembershipStatus() == MembershipStatus.INACTIVE && !this.membership.isCalculatedPoints()) {
+			double usedTrainingsPercentage = (double) this.membership.getTrainingsUsed() / (double) this.membership.getNumberOfTrainings();
+			if(usedTrainingsPercentage < 0.3) {
+				double lostPoints = this.membership.getPrice() / 1000 * 133 * 4;
+				this.points -= (int) lostPoints;
+				this.membership.setCalculatedPoints(true);
+				return this.points;
+			}
+			else {
+				double wonPoints = this.membership.getPrice() / 1000 * this.membership.getTrainingsUsed();
+				this.points += (int) wonPoints;
+				this.membership.setCalculatedPoints(true);
+				return this.points;
+			}
+		}
+		else {
+			return this.points;
+		}
 	}
 
 	public void setPoints(int points) {
@@ -158,6 +176,19 @@ public class User {
 	}
 
 	public CustomerType getCustomerType() {
+		if(userType != UserType.CUSTOMER) {
+			return null;
+		}
+		if(this.points >= 1000 && this.points <= 2000) {
+			this.customerType = CustomerType.BRONZE;
+		} else if(this.points > 2000 && this.points <= 3000) {
+			this.customerType = CustomerType.SILVER;
+		} else if(this.points > 3000) {
+			this.customerType = CustomerType.GOLD;
+		}
+		else {
+			this.customerType = null;
+		}
 		return customerType;
 	}
 
@@ -180,7 +211,4 @@ public class User {
 	public void setOldUsername(String oldUsername) {
 		this.oldUsername = oldUsername;
 	}
-	
-	
-	
 }

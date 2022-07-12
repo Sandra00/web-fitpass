@@ -1,10 +1,6 @@
 package beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import beans.enums.ContentType;
-import dao.ImageDAO;
 
 public class Content {
 	private String oldName;

@@ -9,19 +9,12 @@ var app = new Vue({
 		sortIndex : null,  //kolona koja se sortira
 		sortDirection: null,
 		typeFilter: 'allTypes',
-		openFilter: 'allOpenClosed'
-	},
-	mounted(){
-		//axios.get('rest/objects')
-		//.then((response) => {
-			//this.sportsObjects = response.data;
-			
-			// sorting sports objects so that the active ones are displayed first
-			//this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
-		//});
-		
+		openFilter: 'allOpenClosed',
+		isAdmin: false
 	},
 	methods: {
+		
+		
 		sortSportObjects(index){
 			if(this.sortIndex === index){
 				switch(this.sortDirection){
@@ -92,17 +85,18 @@ var app = new Vue({
 			
 		},
 		
+		
 		filterType(type){
 			axios.get('rest/objects')
-		.then((response) => {
-			this.sportsObjects = response.data;
-			
-			// sorting sports objects so that the active ones are displayed first
-			this.sportsObjects.filter((sportsObject)=>{
-				return sportsObject.locationType.match(type);
+			.then((response) => {
+				this.sportsObjects = response.data;
+				this.sportsObjects.filter((sportsObject)=>{
+					return sportsObject.locationType.match(type);
+				});
 			});
-		});
 		},
+		
+		
 		showObject(selectedName) {
 			 axios.get(
                 "rest/objects/showObject",
@@ -114,6 +108,18 @@ var app = new Vue({
 			window.location.href = 'showObject.html';
 		},
 		
+		
+		deleteSportsObject(name) {
+			axios.delete('rest/admin/delete/sports-object/' + name)
+			.then( (response) => {
+				window.location.href = 'index.html';
+			})
+			.catch( (error) => {
+				alert("Nije bilo moguće obrisati objekat!");
+			});
+		},
+		
+		
 		getImage(id){
 			return new Promise((resolve, reject) => {
 				axios.get('rest/image/' + id)
@@ -122,17 +128,21 @@ var app = new Vue({
 				})
 			});
 		}
+		
+		
 	},
 	created(){
+		axios.get('rest/currentUser')
+		.then((response) => this.isAdmin = response.data.userType === 'ADMIN');
+		
 		axios.get('rest/objects')
 		.then((response) => {
 			this.sportsObjects = response.data;
 			
-			// sorting sports objects so that the active ones are displayed first
 			this.sportsObjects.sort((x, y) => { return (x.status === y.status)? 0 : x.status? -1 : 1; });
 			this.sportsObjects.forEach(async item => {
-					item.logo = await this.getImage(item.logo);
-				});
+				item.logo = await this.getImage(item.logo);
+			});
 		});
 	},
 	computed:{

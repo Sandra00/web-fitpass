@@ -1,7 +1,6 @@
 package beans;
 
 import beans.enums.*;
-import dao.ImageDAO;
 
 public class Training {
 	private int trainingId;
@@ -12,13 +11,15 @@ public class Training {
 	private String coach;
 	private String description;
 	private String image;
+	private int price;
+	private boolean deleted;
 	
 	public Training() {
 		super();
 	}
 
 	public Training(int trainingId, String name, TrainingType trainingType, String sportsObject, int length, String coach,
-			String description, String image) {
+			String description, String image, int price, boolean deleted) {
 		super();
 		this.trainingId = trainingId;
 		this.name = name;
@@ -28,6 +29,8 @@ public class Training {
 		this.coach = coach;
 		this.description = description;
 		this.image = image;
+		this.price = price;	
+		this.deleted = deleted;
 	}
 
 	public int getTrainingId() {
@@ -94,6 +97,19 @@ public class Training {
 		this.image = image;
 	}
 
-	
-	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 }

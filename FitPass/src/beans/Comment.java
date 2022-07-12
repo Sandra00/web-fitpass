@@ -1,25 +1,32 @@
 package beans;
 
+import beans.enums.CommentStatus;
+
 public class Comment {
-	private String buyerUsername;
+	private int id;
+	private String customerUsername;
 	private String sportsObjectName;
 	private String text;
 	private int grade;
+	private CommentStatus status;
+	
 	public Comment() {
 		super();
 	}
-	public Comment(String buyerUsername, String sportsObjectName, String text, int grade) {
+	public Comment(int id, String customerUsername, String sportsObjectName, String text, int grade, CommentStatus status) {
 		super();
-		this.buyerUsername = buyerUsername;
+		this.id = id;
+		this.customerUsername = customerUsername;
 		this.sportsObjectName = sportsObjectName;
 		this.text = text;
 		this.grade = grade;
+		this.status = status;
 	}
-	public String getBuyerUsername() {
-		return buyerUsername;
+	public String getCustomerUsername() {
+		return customerUsername;
 	}
-	public void setBuyerUsername(String buyerUsername) {
-		this.buyerUsername = buyerUsername;
+	public void setCustomerUsername(String customerUsername) {
+		this.customerUsername = customerUsername;
 	}
 	public String getSportsObjectName() {
 		return sportsObjectName;
@@ -40,6 +47,18 @@ public class Comment {
 		if(grade >= 1 && grade <= 5) {
 			this.grade = grade;
 		}
+	}
+	public CommentStatus getStatus() {
+		return status;
+	}
+	public void setStatus(CommentStatus status) {
+		this.status = status;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

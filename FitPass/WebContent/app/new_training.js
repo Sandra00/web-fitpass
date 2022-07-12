@@ -3,7 +3,14 @@
     data() {
         return {
             error: "",
-            coaches: null
+            coaches: null,
+            name: null,
+            trainingType: null,
+            length: null,
+            coach: null,
+            description: null,
+            price: 0,
+            file: null
         };
     },
     created() {
@@ -13,10 +20,16 @@
 		})
 	},
     methods: {
+	
+	
         async register() {
-
+			imageId = null;
+			if(this.file){
+				imageId = await uploadImage(this.file);
+			}
+			
             await axios.put(
-                "rest/objects/add_training",
+                "rest/manager/add-training",
                 {
 					trainingId: null,
                     name: this.name,
@@ -25,7 +38,8 @@
                     length: this.length,
                     coach: this.coach,
                     description: this.description,
-                    image: null
+                    image: imageId,
+                    price: this.price
                 }
             )
             .then( response =>{
@@ -43,8 +57,17 @@
 				}
             })
         },
+        
+        
+        async handleFileUpload(event){
+			this.file = await convertBase64(event.target.files[0]);
+    	},
+        
+        
         getFormValues (submitEvent) {
             this.register();
         }
+        
+        
     }
 });

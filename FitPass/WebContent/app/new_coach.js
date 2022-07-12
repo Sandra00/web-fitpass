@@ -2,16 +2,24 @@
     el: '#app',
     data() {
         return {
-            error: ""
+            error: "",
+            username: null,
+            name: null,
+            surname: null,
+            gender: null,
+            dateOfBirth: null,
+            password: null
         };
     },
     methods: {
+	
+	
         async register() {
 			var date = new Date(this.dateOfBirth)
 			var splittedDate = this.dateOfBirth.split('-');
 			date = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
             await axios.post(
-                "rest/new-coach",
+                "rest/admin/new-coach",
                 {
                     username: this.username,
                     name: this.name,
@@ -36,11 +44,17 @@
 				}
             })
         },
+        
+        
         onChange(event) {
               let gender = event.target.value;
-          },
+        },
+        
+        
         getFormValues (submitEvent) {
             this.register();
         }
+        
+        
     }
 });

@@ -3,7 +3,12 @@ const vm = new Vue({
 	data() {
 	    return {
 	        error: "",
-	        file: null
+	        file: null,
+	        name: null,
+	        type: null,
+	        content: null,
+	        duration: null,
+	        description: null
 	    };
 	},
 	methods: {
@@ -13,10 +18,13 @@ const vm = new Vue({
 				return ;
 			}
 			
-			imageId = await uploadImage(this.file);
+			imageId = null;
+			if(this.file){
+				imageId = await uploadImage(this.file);
+			}
 			
 	        await axios.put(
-	            "rest/objects/add_content",
+	            "rest/manager/add-content",
 	            {
 	                name: this.name,
 	                type: this.type,
