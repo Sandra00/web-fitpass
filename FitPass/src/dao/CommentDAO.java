@@ -81,7 +81,6 @@ public class CommentDAO {
 	public void setApproved(int id) {
 		Comment comment = findById(id);
 		comment.setStatus(CommentStatus.APPROVED);
-		System.out.println("promeni " + comment.getStatus().toString());
 		save();
 	}
 	

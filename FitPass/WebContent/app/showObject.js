@@ -95,7 +95,7 @@ var app = new Vue({
 			
 			
 			//display map
-		let lon = this.object.location.longitude;
+			let lon = this.object.location.longitude;
 			let lat = this.object.location.latitude;
 			
             let map = new ol.Map({
@@ -148,12 +148,18 @@ var app = new Vue({
 			this.object.content.forEach(async item => {
 				item.image = await this.getImage(item.image);
 			});
+			this.setLogo();
 		});
-
+		
 		
 		
 	},
 	methods: {
+		
+		
+		async setLogo(){
+			this.object.logo = await this.getImage(this.object.logo);
+		},
 		
 		
 		async activate(trainingId) {

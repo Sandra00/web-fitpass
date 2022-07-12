@@ -99,54 +99,59 @@
     </div>
 	<div id="app" class="container-fluid">
 		<h1 class="d-flex justify-content-center">Objekat: {{object.name}}</h1>
-		<form class="form-signin">
-
-			<div class="row">
-				<div class="col">
-					<label>Naziv :</label>
-				</div>
-				<div class="col">
-					<label>{{object.name}}</label>
-				</div>
+		
+		<div class="form-signin">
+		<div class="row">
+			<div class="col">
+				<img :src="object.logo" style="object-fit:contain; width:100px; height:100px; border-radius: 50%;">
 			</div>
+		</div>
 
-			<div class="row">
-				<div class="col">
-					<label>Tip :</label>
-				</div>
-				<div class="col">
-					<label>{{type}}</label>
-				</div>
+		<div class="row">
+			<div class="col">
+				<label>Naziv :</label>
 			</div>
-
-			<div class="row">
-				<div class="col">
-					<label>Status :</label>
-				</div>
-				<div class="col">
-					<label>{{status}}</label>
-				</div>
+			<div class="col">
+				<label>{{object.name}}</label>
 			</div>
+		</div>
 
-			<div class="row">
-				<div class="col">
-					<label>Lokacija :</label>
-				</div>
-				<div class="col">
-					<label>{{location}}</label>
-				</div>
+		<div class="row">
+			<div class="col">
+				<label>Tip :</label>
 			</div>
-
-			<div class="row">
-				<div class="col">
-					<label>Prosečna ocena :</label>
-				</div>
-				<div class="col">
-					<label>{{avgGrade}}</label>
-				</div>
+			<div class="col">
+				<label>{{type}}</label>
 			</div>
-		</form>
+		</div>
 
+		<div class="row">
+			<div class="col">
+				<label>Status :</label>
+			</div>
+			<div class="col">
+				<label>{{status}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Lokacija :</label>
+			</div>
+			<div class="col">
+				<label>{{location}}</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<label>Prosečna ocena :</label>
+			</div>
+			<div class="col">
+				<label>{{avgGrade}}</label>
+			</div>
+		</div>
+		</div>
 		
 		<div class="map" id="map-create" style="z-index: 5"></div>
 		
