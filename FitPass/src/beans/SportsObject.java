@@ -58,7 +58,10 @@ public class SportsObject {
 	}
 
 	public List<Content> getContent() {
-		return content != null ? content : new ArrayList<Content>();
+		if(content == null) {
+			content = new ArrayList<Content>();
+		}
+		return content;
 	}
 
 	public void setContent(List<Content> content) {

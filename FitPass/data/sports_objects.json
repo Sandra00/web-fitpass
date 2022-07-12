@@ -69,28 +69,6 @@
         "deleted": false
     },
     {
-        "name": "Teretana Gym",
-        "locationType": "GYM",
-        "content": [],
-        "status": true,
-        "location": {
-            "longitude": 1.0,
-            "latitude": 1.0,
-            "address": {
-                "street": "asd",
-                "number": 1,
-                "town": "sd",
-                "zipcode": 23
-            }
-        },
-        "logo": "28",
-        "averageGrade": 0.0,
-        "startWorkingHour": "00:00",
-        "endWorkingHour": "22:00",
-        "gradesCounter": 0,
-        "deleted": false
-    },
-    {
         "name": "Teretana 5",
         "locationType": "GYM",
         "content": [],
